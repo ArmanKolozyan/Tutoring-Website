@@ -11,6 +11,7 @@ import Compose from "./pages/Compose"
 import Post from "./pages/Post"
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import "./style.scss"
 
 // Using an Outlet component of React to avoid
 // duplication of Navbar and Footer at every page
