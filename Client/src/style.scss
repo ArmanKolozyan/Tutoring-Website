@@ -6,7 +6,7 @@ $backgroundColor: #7171f3;
         
         // Login & Register pages
 
-        .auth{
+        .auth{ // if you go to the "Login" and "Register" React component you will see "className='auth'", it creates a link between those pages/components and this layout
             display: flex;
             flex-direction: column;
             align-items: center;

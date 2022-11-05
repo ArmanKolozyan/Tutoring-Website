@@ -34,11 +34,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />
+        element: <Home/>
 
       },
       {
-        path: "/post/:id",
+        path: "/post/:id", // if you type "localhost:"portNumber"/post/1345" in the url bar, where 1345 is some id number you will trigger the "Post" React component
         element: <Post/>
       },
       {
