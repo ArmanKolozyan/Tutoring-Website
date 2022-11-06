@@ -11,8 +11,8 @@ import Compose from "./pages/Compose"
 import Post from "./pages/Post"
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Trademark from "./components/Trademark";
 import "./style.scss"
-import Logo from "./components/Logo";
 
 // Using an Outlet component of React to avoid
 // duplication of Navbar and Footer at every page
@@ -30,7 +30,7 @@ function Layout1() {
 function Layout2() {
   return (
     <>
-      <Logo />
+      <Trademark />
       <Outlet />
     </>
   )

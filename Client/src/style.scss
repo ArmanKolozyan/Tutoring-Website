@@ -1,3 +1,5 @@
+$ourBlue: #1e328d;
+
 .app{
 
 
@@ -9,9 +11,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            padding-top: 30px;
             height: 100vh;
-            background-color: blue;
+            background-color: $ourBlue;
         }
 
         h1{
@@ -32,8 +34,8 @@
             input{
                 padding: 10px;
                 border: none;
-                color: blue;
-                border-bottom: 1px solid blue;
+                color: $ourBlue;
+                border-bottom: 1px solid $ourBlue;
             }
 
             button{
@@ -58,6 +60,22 @@
                 text-align: center;
             }
 
+        }
+
+        // Logo
+
+        .trademark{
+            .container{ // ALEXANDRE, VRAAG VOOR ASSISTENT OF TEAM LEDEN: Als ik dit ".container" stukje weg doe, dan werkt onze code nog maar als ik de div "container" in "Trademark.jsx" weg doe, dan werkt mijn code niet meer, ook al voeg ik het daarna terug, ik moet dit ".container" stukje terug toevoegen zodat mijn code werkt 
+                .logo{
+                    display: flex;
+                    padding-top: 20px;
+                    justify-content: center;
+                    background-color: $ourBlue;
+                    img{
+                        width: 200px;
+                    }
+                }
+            }
         }
     }
 }
