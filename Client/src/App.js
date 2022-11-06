@@ -12,11 +12,12 @@ import Post from "./pages/Post"
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import "./style.scss"
+import Logo from "./components/Logo";
 
 // Using an Outlet component of React to avoid
 // duplication of Navbar and Footer at every page
 // that needs a navbar and a footer.
-function Layout() {
+function Layout1() {
   return (
     <>
       <Navbar />
@@ -26,11 +27,20 @@ function Layout() {
   )
 }
 
+function Layout2() {
+  return (
+    <>
+      <Logo />
+      <Outlet />
+    </>
+  )
+}
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout/>,
+    element: <Layout1/>,
     children: [
       {
         path: "/",
@@ -48,12 +58,18 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/register",
-    element: <Register/>,
-  },
-  {
-    path: "/login",
-    element: <Login/>,
+    path: "/",
+    element: <Layout2/>,
+    children: [
+      {
+        path: "/register",
+        element: <Register/>,
+      },
+      { 
+        path: "/login",
+        element: <Login/>,
+      },
+    ],
   },
 ]);
 
