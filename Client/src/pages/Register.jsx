@@ -6,12 +6,13 @@ const Register = () => {
     <div className='auth'>
     <h1>Register</h1>
     <form>
-      <input required type="text" placeholder="username" ></input>
-      <input required type="email" placeholder="email" ></input>
-      <input required type="password" placeholder="password" ></input>
-      <button> Register</button>
+      <input required type="text" placeholder="username"></input>
+      <input required type="email" placeholder="email"></input>
+      <input required type="password" placeholder="password"></input>
+      <button>Register</button>
       <p>Possible error will be shown here!</p>
-      <span> Already have an account? <Link to= "/login">Login </Link></span>  
+      <span>Already have an account?</span>
+      <Link className="linkStyle" to="/login">Login</Link> 
     </form>
     </div>
   )

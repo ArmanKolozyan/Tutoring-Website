@@ -6,7 +6,7 @@ const Trademark = () => {
     <div className="trademark">
         <div className="container">
             <div className="logo">
-              <img src={Logo} alt="" />
+              <img src={Logo} alt=""/>
             </div>
         </div>
     </div>

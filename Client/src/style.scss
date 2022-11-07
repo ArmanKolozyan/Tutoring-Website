@@ -10,7 +10,7 @@ $ourOrange: #fc3e03;
 
         .auth{ // if you go to the "Login" and "Register" React component you will see "className='auth'", it creates a link between those pages/components and this layout
             display: flex;
-            flex-direction: column;
+            flex-direction: column; // zorgt ervoor dat alle elementen onder mekaar komen te staan
             align-items: center;
             padding-top: 30px;
             height: 100vh;
@@ -35,8 +35,8 @@ $ourOrange: #fc3e03;
             input{
                 padding: 10px;
                 border: none;
-                color: $ourBlue;
                 border-bottom: 1px solid $ourBlue;
+                color: $ourBlue;
             }
 
             button{
@@ -50,17 +50,21 @@ $ourOrange: #fc3e03;
             p{
                 font-size: 12px;
                 font-weight: 500; // zorgt ervoor dat de weergegeven tekst dikker is
-                color: red;
                 text-align: center;
+                margin-bottom: -10px;
+                color: red;
             }
 
             span{
-                display: flex;
-                flex-direction: column;
                 font-size: 12px;
                 text-align: center;
+                margin-bottom: -20px;
             }
 
+            .linkStyle{
+                font-size: 12px;
+                margin: auto;
+            }
         }
 
         // Logo
