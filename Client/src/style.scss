@@ -1,4 +1,5 @@
 $ourBlue: #1e328d;
+$ourOrange: #fc3e03;
 
 .app{
 
@@ -41,7 +42,7 @@ $ourBlue: #1e328d;
             button{
                 padding: 10px;
                 border: none;
-                background-color: orangered;
+                background-color: $ourOrange;
                 color: white;
                 cursor: pointer; 
             }
