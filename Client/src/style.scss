@@ -51,7 +51,7 @@ $ourOrange: #fc3e03;
                 font-size: 12px;
                 font-weight: 500; // zorgt ervoor dat de weergegeven tekst dikker is
                 text-align: center;
-                margin-bottom: -10px;
+                margin-bottom: -10px; // aantal px negatief om de standaard margin van de form tegen te werken
                 color: red;
             }
 
