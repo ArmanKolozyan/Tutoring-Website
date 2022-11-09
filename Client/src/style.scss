@@ -3,6 +3,9 @@ $ourOrange: #fc3e03;
 
 .app {
   .container {
+    padding-left: 0%;
+    padding-right: 0%;
+    max-width: 100%;
     .link {
       text-decoration: none;
       color: inherit;
@@ -33,6 +36,7 @@ $ourOrange: #fc3e03;
       width: 200px;
       gap: 20px;
       border-radius: 35px;
+      box-sizing: content-box;
 
       input {
         padding: 10px;
@@ -185,7 +189,7 @@ $ourOrange: #fc3e03;
     
     
     .navbar {
-      background-color: $ourOrange;
+      background-color: $ourBlue;
       height: 10vh;
     }
 
@@ -198,7 +202,7 @@ $ourOrange: #fc3e03;
     }
 
     .nav-link{
-      color: $ourBlue;
+      color: white;
       margin-inline: 15px;
     }
 
