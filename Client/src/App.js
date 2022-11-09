@@ -3,15 +3,15 @@ import {
   RouterProvider,
   Outlet,
 } from "react-router-dom";
-import Home from "./pages/Home"
-import Register from "./pages/Register"
-import Login from "./pages/Login"
-import Compose from "./pages/Compose"
-import Post from "./pages/Post"
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Compose from "./pages/Compose";
+import Post from "./pages/Post";
 import Footer from "./components/Footer";
 import Trademark from "./components/Trademark";
-import "./style.scss"
 import Navigationbar from "./components/Navigationbar";
+import "./style.scss";
 
 // Using an Outlet component of React to avoid
 // duplication of Navbar and Footer at every page
@@ -19,9 +19,9 @@ import Navigationbar from "./components/Navigationbar";
 function Layout1() {
   return (
     <>
-      <Navigationbar />
-      <Outlet />
-      <Footer />
+      <Navigationbar/>
+      <Outlet/>
+      <Footer/>
     </>
   )
 }
@@ -29,8 +29,8 @@ function Layout1() {
 function Layout2() {
   return (
     <>
-      <Trademark />
-      <Outlet />
+      <Trademark/>
+      <Outlet/>
     </>
   )
 }
