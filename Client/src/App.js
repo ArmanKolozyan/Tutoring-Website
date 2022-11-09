@@ -8,10 +8,10 @@ import Register from "./pages/Register"
 import Login from "./pages/Login"
 import Compose from "./pages/Compose"
 import Post from "./pages/Post"
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Trademark from "./components/Trademark";
 import "./style.scss"
+import Navigationbar from "./components/Navigationbar";
 
 // Using an Outlet component of React to avoid
 // duplication of Navbar and Footer at every page
@@ -19,7 +19,7 @@ import "./style.scss"
 function Layout1() {
   return (
     <>
-      <Navbar />
+      <Navigationbar />
       <Outlet />
       <Footer />
     </>
