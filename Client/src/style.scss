@@ -2,11 +2,12 @@ $ourBlue: #1e328d;
 $ourOrange: #fc3e03;
 
 .app {
-  .container {
+  .container1 {
     .link {
       text-decoration: none;
       color: inherit;
     }
+
     // Login & Register pages
 
     .auth {
@@ -72,7 +73,7 @@ $ourOrange: #fc3e03;
     // Logo
 
     .trademark {
-      .container {
+      .container1 {
         // ALEXANDRE, VRAAG VOOR ASSISTENT OF TEAM LEDEN: Als ik dit ".container" stukje weg doe, dan werkt onze code nog maar als ik de div "container" in "Trademark.jsx" weg doe, dan werkt mijn code niet meer, ook al voeg ik het daarna terug, ik moet dit ".container" stukje terug toevoegen zodat mijn code werkt
         .logo {
           display: flex;
@@ -185,7 +186,7 @@ $ourOrange: #fc3e03;
     
     
     .navbar {
-      background-color: $ourOrange;
+      background-color: $ourBlue;
       height: 10vh;
     }
 
@@ -198,7 +199,7 @@ $ourOrange: #fc3e03;
     }
 
     .nav-link{
-      color: $ourBlue;
+      color: white;
       margin-inline: 15px;
     }
 
