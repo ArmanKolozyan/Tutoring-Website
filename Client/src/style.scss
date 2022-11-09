@@ -10,6 +10,7 @@ $ourOrange: #fc3e03;
       text-decoration: none;
       color: inherit;
     }
+
     // Login & Register pages
 
     .auth {
@@ -76,7 +77,7 @@ $ourOrange: #fc3e03;
     // Logo
 
     .trademark {
-      .container {
+      .container1 {
         // ALEXANDRE, VRAAG VOOR ASSISTENT OF TEAM LEDEN: Als ik dit ".container" stukje weg doe, dan werkt onze code nog maar als ik de div "container" in "Trademark.jsx" weg doe, dan werkt mijn code niet meer, ook al voeg ik het daarna terug, ik moet dit ".container" stukje terug toevoegen zodat mijn code werkt
         .logo {
           display: flex;

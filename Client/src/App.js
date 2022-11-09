@@ -19,9 +19,9 @@ import "./style.scss";
 function Layout1() {
   return (
     <>
-      <Navigationbar />
-      <Outlet />
-      <Footer />
+      <Navigationbar/>
+      <Outlet/>
+      <Footer/>
     </>
   )
 }
@@ -29,8 +29,8 @@ function Layout1() {
 function Layout2() {
   return (
     <>
-      <Trademark />
-      <Outlet />
+      <Trademark/>
+      <Outlet/>
     </>
   )
 }
@@ -76,7 +76,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="app"> 
-      <div className="container">
+      <div className="container1">
       <RouterProvider router={router} />
       </div>
     </div>
