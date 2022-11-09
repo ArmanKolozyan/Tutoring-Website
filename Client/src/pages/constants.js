@@ -1,4 +1,4 @@
-export const posts = [
+export const promotedUsers = [
     {
       id: 1,
       title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",

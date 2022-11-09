@@ -1,20 +1,49 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import {useState} from 'react'
 
 const Login = () => {
-  return (
-    <div className='auth'>
-    <h1>Login</h1>
-    <form>
-      <input required type="text" placeholder="username"></input>
-      <input required type="password" placeholder="password"></input>
-      <button> Login</button>
-      <p>Possible error will be shown here!</p>
-      <span>Don't have an account?</span>
-      <Link className="linkStyle" to="/register">Register</Link>
-    </form>
-    </div>
-  )
-}
+  const [loginUsername, setLoginUsername] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
-export default Login
+  const handleSubmit = () => {
+    axios({
+      method: "post",
+      data: {
+        username: loginUsername,
+        password: loginPassword,
+      },
+      withCredentials: true,
+      url: "http://localhost:8800/login",
+    }).then((res) => console.log(res));
+  };
+
+  return (
+    <div className="auth">
+      <h1>Login</h1>
+      <form>
+        <input
+          required
+          type="text"
+          placeholder="username"
+          onChange={(e) => setLoginUsername(e.target.value)}
+        />
+        <input
+          required
+          type="password"
+          placeholder="password"
+          onChange={(e) => setLoginPassword(e.target.value)}
+        />
+        <button onClick={handleSubmit()}> Login</button>
+        <p>Possible error will be shown here!</p>
+        <span>Don't have an account?</span>
+        <Link className="linkStyle" to="/register">
+          Register
+        </Link>
+      </form>
+    </div>
+  );
+};
+
+export default Login;
