@@ -97,6 +97,7 @@ $ourOrange: #fc3e03;
   .home {
     display: flex;
     justify-content: center;
+
     .posts {
       width: 1000px;
       margin-top: 50px;
@@ -111,7 +112,7 @@ $ourOrange: #fc3e03;
         &:nth-child(2n + 1) {
           flex-direction: row-reverse;
         }
-        
+
         .img {
           flex: 2;
           position: relative;
@@ -182,35 +183,31 @@ $ourOrange: #fc3e03;
     h1 {
       font-size: 25px;
       color: rgb(0, 0, 0);
-      margin-bottom: 20px;
     }
   }
 
-  .navigationbar{
-
-    
-    
+  .navigationbar {
     .navbar {
       background-color: $ourBlue;
       height: 10vh;
+      position: relative;
     }
 
     .navbar-brand {
       height: 100%;
       color: white;
-      img{
+      img {
         height: 100%;
       }
     }
 
-    .nav-link{
+    .nav-link {
       color: white;
       margin-inline: 15px;
     }
 
-    .right_aligned{
+    .right_aligned {
       justify-content: flex-end;
     }
-    
   }
 }
