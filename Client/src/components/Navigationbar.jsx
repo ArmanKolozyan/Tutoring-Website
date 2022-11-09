@@ -17,7 +17,7 @@ const Navigationbar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
 
-        <Nav.Link href="#Study_together" > <Icon.People size={20} /> Study Together</Nav.Link>
+        <Nav.Link href="#Study_together" className="ms-auto"> <Icon.People size={20} /> Study Together</Nav.Link>
         <Nav.Link href="#Tutoring"> <Icon.PersonVideo3 size={20} /> Tutoring</Nav.Link>
         <Nav.Link href="#Summeries"> <Icon.JournalBookmarkFill size={20} /> Summeries</Nav.Link>
         <Nav.Link href="#Search"><Icon.Search size={20} /> Search</Nav.Link>
