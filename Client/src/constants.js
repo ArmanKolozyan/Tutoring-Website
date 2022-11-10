@@ -15,12 +15,12 @@ export const promotedUsers = [
       id: 3,
       title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
       desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-      img: "https://cdn.gelestatic.it/deejay/sites/2/2022/04/Giorgio_Petrosyan.jpg",
+      img: "https://www.startpeople.be/thumbnail/cta-list/3142/student-laptop-shutterstock-1188733387.jpg",
     },
     {
       id: 4,
       title: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
       desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A possimus excepturi aliquid nihil cumque ipsam facere aperiam at! Ea dolorem ratione sit debitis deserunt repellendus numquam ab vel perspiciatis corporis!",
-      img: "https://mmadna.nl/wp-content/uploads/2019/09/Schermafbeelding-2019-09-17-om-10.06.38.png",
+      img: "https://content.gallup.com/origin/gallupinc/GallupSpaces/Production/Cms/EDUCMS/tz7n-7vqceaq86dprdnzag.jpg",
     },
   ];

@@ -15,11 +15,10 @@ $ourOrange: #fc3e03;
     // Login & Register pages
 
     .auth {
-      // if you go to the "Login" and "Register" React component you will see "className='auth'", it creates a link between those pages/components and this layout
       display: flex;
-      flex-direction: column; // zorgt ervoor dat alle elementen onder mekaar komen te staan
+      flex-direction: column; // zorgt ervoor dat alle elementen onder elkaar komen te staan
       align-items: center;
-      padding-top: 30px;
+      padding-top: 2%;
       height: 100vh;
       background-color: $ourBlue;
     }
@@ -27,28 +26,27 @@ $ourOrange: #fc3e03;
     h1 {
       font-size: 25px;
       color: white;
-      margin-bottom: 20px;
     }
 
     form {
       display: flex;
       flex-direction: column;
-      padding: 50px;
+      padding: 3.5%;
       background-color: white;
-      width: 200px;
-      gap: 20px;
-      border-radius: 35px;
+      width: 14%;
+      gap: 2.5vh;
+      border-radius: 10%;
       box-sizing: content-box;
 
       input {
-        padding: 10px;
+        padding: 5%;
         border: none;
         border-bottom: 1px solid $ourBlue;
         color: $ourBlue;
       }
 
       button {
-        padding: 10px;
+        padding: 5%;
         border: none;
         background-color: $ourOrange;
         color: white;
@@ -59,14 +57,14 @@ $ourOrange: #fc3e03;
         font-size: 12px;
         font-weight: 500; // zorgt ervoor dat de weergegeven tekst dikker is
         text-align: center;
-        margin-bottom: -10px; // aantal px negatief om de standaard margin van de form tegen te werken
+        margin-bottom: -4%; // aantal px negatief om de standaard margin van de form tegen te werken
         color: red;
       }
 
       span {
         font-size: 12px;
         text-align: center;
-        margin-bottom: -20px;
+        margin-bottom: -10%;
       }
 
       .linkStyle {
@@ -82,11 +80,11 @@ $ourOrange: #fc3e03;
         // ALEXANDRE, VRAAG VOOR ASSISTENT OF TEAM LEDEN: Als ik dit ".container" stukje weg doe, dan werkt onze code nog maar als ik de div "container" in "Trademark.jsx" weg doe, dan werkt mijn code niet meer, ook al voeg ik het daarna terug, ik moet dit ".container" stukje terug toevoegen zodat mijn code werkt
         .logo {
           display: flex;
-          padding-top: 20px;
+          padding-top: 1.5%;
           justify-content: center;
           background-color: $ourBlue;
           img {
-            width: 200px;
+            width: 15%;
           }
         }
       }
@@ -153,10 +151,6 @@ $ourOrange: #fc3e03;
             }
           }
 
-          h1 {
-            font-size: 40px;
-          }
-
           p {
             font-size: 20px;
           }
@@ -178,11 +172,6 @@ $ourOrange: #fc3e03;
           }
         }
       }
-    }
-
-    h1 {
-      font-size: 25px;
-      color: rgb(0, 0, 0);
     }
   }
 
@@ -208,6 +197,7 @@ $ourOrange: #fc3e03;
 
     .right_aligned {
       justify-content: flex-end;
+      float: right;
     }
   }
 }

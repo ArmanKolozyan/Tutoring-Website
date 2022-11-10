@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {promotedUsers} from "./constants"
+import {promotedUsers} from "../constants"
 
 const Home = () => {
   return (
@@ -17,7 +17,7 @@ const Home = () => {
             </div>
             <div className="content">
               <Link className="link" to={`/user/${post.id}`}>
-                <h1>{post.title}</h1>
+                <h1 style={{color: "black"}}>{post.title}</h1>
               </Link>
               <div className="stars">
                 <span class="fa fa-star checked fa-2x"></span>
