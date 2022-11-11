@@ -19,6 +19,7 @@ const Register = () => {
         email: registerEmail,
       },
       withCredentials: true,
+      credentials: "same-origin",
       url: "http://localhost:8800/register",
     }).then((res) => console.log(res));
   };
@@ -29,7 +30,7 @@ const Register = () => {
       <input required type="text" placeholder="username" onChange={(e) => setRegsiterUsername(e.target.value)}></input>
       <input required type="email" placeholder="email" onChange={(e) => setRegisterEmail(e.target.value)}></input>
       <input required type="password" placeholder="password" onChange={(e) => setRegisterPassword(e.target.value)}></input>
-      <button onClick={handleSubmit()}>Register</button>
+      <button onClick={handleSubmit}>Register</button>
       <p>Possible error will be shown here!</p>
       <span>Already have an account?</span>
       <Link className="linkStyle" to="/login">Login</Link> 
