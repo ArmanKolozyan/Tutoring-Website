@@ -9,7 +9,7 @@ import "../style.scss";
 const Navigationbar = () => {
   return (
     <div className="navigationbar">
-      <Navbar class="navbar" fixed="top" expand="lg">
+      <Navbar class="navbar float:right" fixed="top" expand="lg">
         <Navbar.Brand href="#">
           <img src={logo} />
           Home
@@ -33,7 +33,7 @@ const Navigationbar = () => {
 
         
         <Nav.Link href="#Profile"> <Icon.PersonBoundingBox size={30} /> My Profile</Nav.Link>
-        <Nav.Link href="/Login"><Icon.BoxArrowRight size={20} /> Login</Nav.Link>
+        <Nav.Link href="/Login"><Icon.BoxArrowRight size={20} /> Logout</Nav.Link>
 
 
         </Navbar.Collapse>
