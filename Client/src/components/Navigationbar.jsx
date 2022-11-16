@@ -9,13 +9,13 @@ import "../style.scss";
 const Navigationbar = () => {
   return (
     <div className="navigationbar">
-      <Navbar class="navbar float:right" fixed="top" expand="lg">
+      <Navbar class="navbar" fixed="top" expand="lg">
         <Navbar.Brand href="#">
           <img src={logo} />
           Home
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav" className="text-end">
 
         <Nav.Link href="#Study_together" className="ms-auto"> <Icon.People size={20} /> Study Together</Nav.Link>
         <Nav.Link href="#Find_tutors"> <Icon.PersonVideo3 size={20} /> Find tutors</Nav.Link>
