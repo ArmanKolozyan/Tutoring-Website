@@ -4,12 +4,15 @@ import axios from "axios";
 export const PasswordContext = createContext();
 
 export const AuthConfig = ({ children }) => {
+  // the currentUser contains the user info of the logged in user
+  // if no user is logged in, it is null
+  // this currentUser can be used in the entire application
+  // (see <AuthConfig> in index.js)
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
   );
 
   const login = async (loginUsername, loginPassword) => {
-    console.log("newdya");
     const res = await axios({
       method: "post",
       data: {
@@ -19,7 +22,6 @@ export const AuthConfig = ({ children }) => {
       withCredentials: true,
       url: "http://localhost:8800/login",
     })
-    console.log("then");
     setCurrentUser(res.data);
   };
 
@@ -29,7 +31,6 @@ export const AuthConfig = ({ children }) => {
       withCredentials: true,
       url: "http://localhost:8800/logout",
     })
-    console.log("thanki");
     setCurrentUser(null);
   };
 

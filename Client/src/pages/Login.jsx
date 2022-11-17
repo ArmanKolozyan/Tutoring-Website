@@ -29,7 +29,6 @@ const Login = () => {
       headers: {"Content-Type": "application/json" }, 
       url: "http://localhost:8800/user",
     }).then((res) => {
-      console.log(res.data);
       setData(res.data);
     });
   };
@@ -57,11 +56,6 @@ const Login = () => {
           Register
         </Link>
       </form>
-      {
-          currentUser ?       <div>
-        <button onClick={(event) => handleSubmit(event)}>Log out</button>
-      </div> : ""
-        }
     </div>
   );
 };
