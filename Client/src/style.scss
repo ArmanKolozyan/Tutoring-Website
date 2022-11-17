@@ -180,7 +180,6 @@ $ourOrange: #fc3e03;
       background-color: $ourBlue;
       height: 10vh;
       position: relative;
-      min-height: 60px;
     }
 
     .navbar-brand {
@@ -193,7 +192,6 @@ $ourOrange: #fc3e03;
 
     .nav-link {
       color: white;
-      margin-inline: 15px;
       background-color: $ourBlue;
       max-width: 200px;
       margin-left: auto;
