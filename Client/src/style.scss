@@ -203,4 +203,40 @@ $ourOrange: #fc3e03;
       float: right;
     }
   }
+
+  footer{
+    background-color: lighten($ourBlue, 10%);
+    color: $ourOrange;
+    padding-left: 20vw;
+
+    a{
+      color: $ourOrange;
+      text-decoration: none;
+    }
+
+    .copyrightbox{
+      background-color: $ourBlue;
+    }
+
+    .sloganbox{
+      background-color: $ourBlue;
+    }
+
+    .contentbox{
+      margin-top: 5vh;
+    }
+
+    hr{
+
+      width: 30%;
+      border-top: 0.2em solid;
+      opacity: 1;
+      margin: 0;
+    }
+
+    p{
+      margin: 0;
+      margin-top: 1%;
+    }
+  }
 }
