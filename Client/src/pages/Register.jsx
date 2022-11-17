@@ -18,8 +18,6 @@ const Register = () => {
         password: registerPassword,
         email: registerEmail,
       },
-      withCredentials: true,
-      credentials: "same-origin",
       url: "http://localhost:8800/register",
     }).then((res) => console.log(res));
   };

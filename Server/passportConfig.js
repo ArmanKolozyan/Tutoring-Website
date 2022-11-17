@@ -32,7 +32,6 @@ export const config = (passport) => {
   });
   
   passport.deserializeUser(function(id, cb) {
-    console.log("EINNDEELIJK");
     db.query('SELECT * FROM users WHERE id = ?', [ id ], function(err, user) {
       if (err) { return cb(err); }
       return cb(null, user);

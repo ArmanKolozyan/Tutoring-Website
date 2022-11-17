@@ -39,12 +39,14 @@ app.post(
     failureMessage: true,
   }),
   function (req, res) {
-    res.redirect("/~" + req.user.username);
+    console.log("testabc");
+    res.send(req.user);
   }
 );
 
 app.post("/register", (req, res) => {
   //CHECK EXISTING USER
+  console.log("yes");
   const q = "SELECT * FROM users WHERE email = ? OR username = ?";
 
   db.query(q, [req.body.email, req.body.username], (err, data) => {
@@ -69,12 +71,22 @@ app.post("/register", (req, res) => {
 globalThis.app = app;
 
 app.get("/user", (req, res) => {
-  console.log("faynayte");
+  console.log("1");
   console.log(req.user);
-  console.log("finito");
+  console.log("2");
   res.send(req.user);
+});
+
+app.post('/logout', function(req, res, next){
+  console.log("ah aight");
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.send("logged out");
+  });
 });
 
 app.listen(8800, () => {
   console.log("Hey Guys!");
 });
+
+
