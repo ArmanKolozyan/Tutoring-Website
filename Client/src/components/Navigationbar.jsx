@@ -5,8 +5,13 @@ import "bootstrap/dist/css/bootstrap.css"; // HIER IS EEN PROBLEEM
 import {Nav, Navbar, NavDropdown} from "react-bootstrap";
 import * as Icon from 'react-bootstrap-icons';
 import "../style.scss";
+import { useContext } from "react";
+import { PasswordContext } from "../context/PasswordContext";
 
 const Navigationbar = () => {
+
+  const {currentUser} = useContext(PasswordContext);
+   
   return (
     <div className="navigationbar">
       <Navbar class="navbar" fixed="top" expand="lg">
@@ -32,8 +37,17 @@ const Navigationbar = () => {
         </NavDropdown>
 
         
-        <Nav.Link href="#Profile"> <Icon.PersonBoundingBox size={30} /> My Profile</Nav.Link>
-        <Nav.Link href="/Login"><Icon.BoxArrowRight size={20} /> Logout</Nav.Link>
+        <Nav.Link href="#Profile"> <Icon.PersonBoundingBox size={30} /> 
+
+        <span>
+        {
+          currentUser ? currentUser.username : "My Profile"
+        }
+        </span>
+        </Nav.Link>
+        <Nav.Link href= "/Login"><Icon.BoxArrowRight size={20} />         {
+          currentUser ? "Logout" : "Login"
+        }</Nav.Link>
 
 
         </Navbar.Collapse>

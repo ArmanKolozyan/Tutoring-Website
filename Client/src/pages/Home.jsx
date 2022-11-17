@@ -28,7 +28,7 @@ const Home = () => {
               </div>
               <p>{post.desc}</p>
               <Link className="link" to={`/user/${post.id}`}>
-                <button>Read more</button>
+                <button>Visit profile</button>
               </Link>
             </div>
           </div>
