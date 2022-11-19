@@ -10,7 +10,7 @@ const Footer = () => {
 <footer class="text-center text-lg-start" fixed="bottem">
 
   <div class="sloganbox p-3">
-  Learning from Students, as Students, made easy by Students
+  Where Students meet Tutors
   </div>
 
   <div class="contentbox">

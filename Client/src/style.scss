@@ -2,10 +2,9 @@ $ourBlue: #1e328d;
 $ourOrange: #fc3e03;
 
 .app {
-  width: 100%;
+  overflow-x: hidden;
   .container {
-    padding-left: 0%;
-    padding-right: 0%;
+    padding: 0;
     max-width: 100%;
     .link {
       text-decoration: none;
@@ -18,57 +17,57 @@ $ourOrange: #fc3e03;
       display: flex;
       flex-direction: column; // zorgt ervoor dat alle elementen onder elkaar komen te staan
       align-items: center;
-      padding-top: 2%;
+      padding-top: 4vh;
       height: 100vh;
       background-color: $ourBlue;
     }
 
     h1 {
-      font-size: 25px;
+      font-size: 4.5vh;
       color: white;
     }
 
     form {
       display: flex;
       flex-direction: column;
-      padding: 3.5%;
+      padding: 7vh;
       background-color: white;
-      width: 14%;
+      width: 14vw;
       gap: 2.5vh;
-      border-radius: 10%;
+      border-radius: 5vh;
       box-sizing: content-box;
 
       input {
-        padding: 5%;
+        font-size: 2.2vh;
+        padding: 1.5vh;
         border: none;
         border-bottom: 1px solid $ourBlue;
         color: $ourBlue;
       }
 
       button {
-        padding: 5%;
+        padding: 1.5vh;
         border: none;
         background-color: $ourOrange;
         color: white;
-        cursor: pointer;
       }
 
       p {
-        font-size: 12px;
+        font-size: 2.2vh;
         font-weight: 500; // zorgt ervoor dat de weergegeven tekst dikker is
         text-align: center;
-        margin-bottom: -4%; // aantal px negatief om de standaard margin van de form tegen te werken
+        margin-bottom: -1vh; // negatief aantal om de standaard margin van de form tegen te werken
         color: red;
       }
 
       span {
-        font-size: 12px;
+        font-size: 2.2vh;
         text-align: center;
-        margin-bottom: -10%;
+        margin-bottom: -3vh;
       }
 
       .linkStyle {
-        font-size: 12px;
+        font-size: 2.2vh;
         margin: auto;
       }
     }
@@ -77,14 +76,13 @@ $ourOrange: #fc3e03;
 
     .trademark {
       .container {
-        // ALEXANDRE, VRAAG VOOR ASSISTENT OF TEAM LEDEN: Als ik dit ".container" stukje weg doe, dan werkt onze code nog maar als ik de div "container" in "Trademark.jsx" weg doe, dan werkt mijn code niet meer, ook al voeg ik het daarna terug, ik moet dit ".container" stukje terug toevoegen zodat mijn code werkt
         .logo {
           display: flex;
-          padding-top: 1.5%;
+          padding-top: 3vh;
           justify-content: center;
           background-color: $ourBlue;
           img {
-            width: 15%;
+            width: 15vw;
           }
         }
       }
@@ -92,49 +90,40 @@ $ourOrange: #fc3e03;
   }
 
   // HOME
+  
   .home {
     display: flex;
     justify-content: center;
 
     .posts {
-      width: 1000px;
-      margin-top: 50px;
+      width: 80vw;
+      margin: 8vh;
       display: flex;
       flex-direction: column;
-      gap: 100px;
+      gap: 18vh;
 
       .post {
         display: flex;
-        gap: 10px;
+        gap: 1.8vh;
 
         &:nth-child(2n + 1) {
           flex-direction: row-reverse;
         }
 
         .img {
-          flex: 2;
-          position: relative;
-
           img {
-            border: 5px solid rgb(2, 23, 17);
-            width: 100%;
-            height: 100%;
-            height: 250px;
+            width: 35vw;
+            height: 45vh;
             object-fit: cover;
-            border-radius: 25px;
-            box-shadow: rgba(1, 251, 247, 0.4) -5px 5px,
-              rgba(1, 251, 247, 0.3) -10px 10px,
-              rgba(1, 251, 247, 0.2) -15px 15px,
-              rgba(1, 251, 247, 0.1) -20px 20px,
-              rgba(1, 251, 247, 0.05) -25px 25px;
-            --x: 10px;
-            --y: 20px;
-            margin: 30px;
-            transform-origin: left;
+            border-radius: 3vh;
+            box-shadow:
+              rgba(1, 251, 247, 0.4) -0.5vh 0.5vh,
+              rgba(1, 251, 247, 0.3) -1.0vh 1.0vh,
+              rgba(1, 251, 247, 0.2) -1.5vh 1.5vh,
+              rgba(1, 251, 247, 0.1) -2.0vh 2.0vh,
+              rgba(1, 251, 247, 0.05) -2.5vh 2.5vh;
+            margin: 3vh;
             transform: perspective(10000px) rotateY(40deg);
-          }
-          img:hover {
-            box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
           }
         }
 
@@ -152,22 +141,21 @@ $ourOrange: #fc3e03;
           }
 
           p {
-            font-size: 20px;
+            font-size: 3vh;
           }
 
-          button {
-            width: max-content;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            background-color: white;
-            border: 1px solid $ourBlue;
-            color: $ourBlue;
-
-            &:hover {
-              border: 1px solid white;
-              background-color: rgba(1, 251, 247, 0.4);
-              color: black;
+          .myButton{
+            button {
+              padding: 1.8vh 2vw;
+              background-color: white;
+              border: 1px solid $ourBlue;
+              color: $ourBlue;
+  
+              &:hover {
+                border: 1px solid white;
+                background-color: $ourBlue;
+                color: white;
+              }
             }
           }
         }
@@ -180,36 +168,34 @@ $ourOrange: #fc3e03;
       background-color: $ourBlue;
       height: 10vh;
       position: relative;
+      min-height: 60px; // bewust met px's gewerkt om te vermijden dat de navigation bar te klein wordt
     }
 
     .navbar-brand {
       height: 100%;
-      color: white;
       img {
         height: 100%;
       }
+      padding-left: 1vw;
     }
 
-    .nav-link {
+    .nav-link { // van toepassing wanneer de navigation bar a.d.h.v. een hamburger wordt getoond
       color: white;
       background-color: $ourBlue;
-      max-width: 200px;
+      max-width: 200px; // bewust met px's gewerkt om te vermijden dat het dropdown menu te klein wordt
       margin-left: auto;
-      //margin-right: 0%;
-    }
-
-    .right_aligned {
-      justify-content: flex-end;
+      padding-right: 2vw;
     }
   }
 
   footer{
     background-color: lighten($ourBlue, 10%);
-    color: $ourOrange;
-    padding-left: 20vw;
+    color: white;
+    padding-left: 3vw;
+    padding-right: 3vw;
 
     a{
-      color: $ourOrange;
+      color: white;
       text-decoration: none;
     }
 
@@ -222,20 +208,19 @@ $ourOrange: #fc3e03;
     }
 
     .contentbox{
-      margin-top: 5vh;
+      margin-top: 3vh;
+      margin-bottom: 3vh;
     }
 
-    hr{
-
-      width: 30%;
-      border-top: 0.2em solid;
+    hr{ // commentaar voor horizontale streep
+      border-top: 0.4vh solid;
+      color: orangered;
       opacity: 1;
       margin: 0;
     }
 
     p{
-      margin: 0;
-      margin-top: 1%;
+      margin-top: 1vh;
     }
   }
 }
