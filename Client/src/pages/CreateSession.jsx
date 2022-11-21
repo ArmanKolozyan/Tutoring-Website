@@ -8,15 +8,15 @@ import Button from 'react-bootstrap/Button';
 import "bootstrap/dist/css/bootstrap.css";
 import "../style.scss";
 
-const CreateLesson = () => {
+const CreateSession = () => {
   return (
-    <div className="create-lesson">
+    <div className="create-session">
       <Form>
         <Row className="justify-content-md-center">
           <Col md="auto">
             <Row className="">
               <Col md="auto">
-                <h3> Creating a new course </h3>
+                <h3> Creating a new session </h3>
               </Col>
             </Row>
             <Row className="">
@@ -89,4 +89,4 @@ const CreateLesson = () => {
   );
 };
 
-export default CreateLesson;
+export default CreateSession;
