@@ -239,4 +239,23 @@ $ourOrange: #fc3e03;
       margin-top: 1%;
     }
   }
+
+  .create-lesson{
+    background-color: $ourOrange;
+    form{
+      width: auto;
+
+      input{
+        padding: 0%;
+        border: 1px solid $ourBlue;
+      }
+      
+      button{
+        width: 40vw;
+        height: 10vh;
+      }
+    }
+
+
+  }
 }
