@@ -1,28 +1,42 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import {useState} from 'react'
+import { useState } from "react";
+import { PasswordContext } from "../context/PasswordContext";
+import { useContext } from "react";
+
+
 
 const Login = () => {
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [data, setData] = useState(null);
 
-  const handleSubmit = () => {
+  const {login} = useContext(PasswordContext);
+  const {currentUser} = useContext(PasswordContext);
+  const {logout} = useContext(PasswordContext);
+
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    currentUser ? logout() : login(loginUsername,loginPassword)};
+
+  const getUser = () => {
     axios({
-      method: "post",
-      data: {
-        username: loginUsername,
-        password: loginPassword,
-      },
+      method: "get",
       withCredentials: true,
-      url: "http://localhost:8800/login",
-    }).then((res) => console.log(res));
+      headers: {"Content-Type": "application/json" }, 
+      url: "http://localhost:8800/user",
+    }).then((res) => {
+      setData(res.data);
+    });
   };
 
   return (
     <div className="auth">
       <h1>Login</h1>
-      <form>
+      <form onSubmit={(event) => handleSubmit(event)}>
         <input
           required
           type="text"
@@ -35,7 +49,7 @@ const Login = () => {
           placeholder="password"
           onChange={(e) => setLoginPassword(e.target.value)}
         />
-        <button onClick={handleSubmit()}> Login</button>
+        <button type="submit">Login</button>
         <p>Possible error will be shown here!</p>
         <span>Don't have an account?</span>
         <Link className="linkStyle" to="/register">

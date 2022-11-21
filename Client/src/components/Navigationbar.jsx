@@ -5,14 +5,18 @@ import "bootstrap/dist/css/bootstrap.css"; // HIER IS EEN PROBLEEM
 import {Nav, Navbar, NavDropdown} from "react-bootstrap";
 import * as Icon from 'react-bootstrap-icons';
 import "../style.scss";
+import { useContext } from "react";
+import { PasswordContext } from "../context/PasswordContext";
 
 const Navigationbar = () => {
+
+  const {currentUser} = useContext(PasswordContext);
+   
   return (
     <div className="navigationbar">
       <Navbar class="navbar" fixed="top" expand="lg">
         <Navbar.Brand href="#">
           <img src={logo} />
-          Home
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="text-end">
@@ -23,7 +27,7 @@ const Navigationbar = () => {
         <Nav.Link href="#Search"><Icon.Search size={20} /> Search</Nav.Link>
 
         
-        <NavDropdown className="ms-auto" title=<Icon.Bell size={25} /> id="collasible-nav-dropdown">
+        <NavDropdown id="collasible-nav-dropdown" className="ms-auto" title=<Icon.Bell size={25} />>
           <NavDropdown.Item href="#action/dummienoti1clicked">Dummie Notification1</NavDropdown.Item>
           <NavDropdown.Item href="#action/dummienoti2clicked">Dummie Notification2</NavDropdown.Item>
           <NavDropdown.Item href="#action/dummienoti3clicked">Dummie Notification3</NavDropdown.Item>
@@ -32,8 +36,17 @@ const Navigationbar = () => {
         </NavDropdown>
 
         
-        <Nav.Link href="#Profile"> <Icon.PersonBoundingBox size={30} /> My Profile</Nav.Link>
-        <Nav.Link href="/Login"><Icon.BoxArrowRight size={20} /> Logout</Nav.Link>
+        <Nav.Link href="#Profile"> <Icon.PersonBoundingBox size={30} /> 
+
+        <span>
+        {
+          currentUser ? currentUser.username : "My Profile"
+        }
+        </span>
+        </Nav.Link>
+        <Nav.Link href= "/Login"><Icon.BoxArrowRight size={20} />         {
+          currentUser ? "Logout" : "Login"
+        }</Nav.Link>
 
 
         </Navbar.Collapse>
