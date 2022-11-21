@@ -5,7 +5,7 @@ import passport from "passport";
 import cookieParser from "cookie-parser"; // to parse cookies for authentication
 import session from "express-session";
 import { config } from "./passportConfig.js";
-import { authRoutes } from "./authentication.js";
+import { authRoutes } from "./Routes/authRoutes.js";
 
 
 const app = express(); // to have web server
@@ -30,6 +30,10 @@ app.use(cookieParser("secretcode"));
 app.use(passport.initialize());
 app.use(passport.session());
 config(passport);
+
+
+
+
 authRoutes(app, passport);
 
 
