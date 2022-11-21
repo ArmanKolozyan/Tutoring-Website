@@ -10,6 +10,9 @@ import { PasswordContext } from "../context/PasswordContext";
 
 const Navigationbar = () => {
 
+
+  const {logout} = useContext(PasswordContext);
+
   const {currentUser} = useContext(PasswordContext);
    
   return (
@@ -44,9 +47,15 @@ const Navigationbar = () => {
         }
         </span>
         </Nav.Link>
-        <Nav.Link href= "/Login"><Icon.BoxArrowRight size={20} />         {
-          currentUser ? "Logout" : "Login"
+       {currentUser ? 
+        <Nav.Link onClick={logout}><Icon.BoxArrowRight size={20} />         {
+          "Logout"
         }</Nav.Link>
+        :
+        <Nav.Link href= "/Login"><Icon.BoxArrowRight size={20} />         {
+          "Login"
+        }</Nav.Link>
+       }
 
 
         </Navbar.Collapse>
