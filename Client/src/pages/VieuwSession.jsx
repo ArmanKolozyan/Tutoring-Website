@@ -2,25 +2,25 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import LessonInfo from "../components/LessonInfo";
-import TeacherInfo from "../components/TeacherCard";
-import LessonDescription from "../components/LessonDescription";
+import SessionInfo from "../components/SessionInfo";
+import TutorInfo from "../components/TutorCard";
+import SessionDescription from "../components/SessionDescription";
 import Button from 'react-bootstrap/Button';
 
-const VieuwLesson = () => {
+const VieuwSession = () => {
   return (
-    <div className="VieuwLesson">
+    <div className="VieuwSession">
       <Container>
         <Row className="justify-content-md-center">
           <Col md="auto">
           <Row className="justify-content-md-center">
 
-            <div className="LessonInfo">
-              <LessonInfo
-                lessonName={"Dummieeeeles"}
-                lessonFac={"Dumiieeeefac"}
-                lessonPrice={10}
-                lessonFreeTrial={true}
+            <div className="SessionInfo">
+              <SessionInfo
+                sessionName={"Dummieeeeles"}
+                sessionFac={"Dumiieeeefac"}
+                sessionPrice={10}
+                sessionFreeTrial={true}
                 Experience={3}
               />
             </div>
@@ -28,8 +28,8 @@ const VieuwLesson = () => {
 
             <Row className="justify-content-md-center">
           <Col md="">
-            <div className="LessonDescription">
-              <LessonDescription
+            <div className="SessionDescription">
+              <SessionDescription
               description={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"}
               />
             </div>
@@ -38,13 +38,13 @@ const VieuwLesson = () => {
           </Col>
 
           <Col md="auto">
-            <div className="TeacherInfo">
-              <TeacherInfo
-                teacherName={"Stoffel Oostvogels"}
-                teacherText={
-                  "This is my personal teacher textje, where I talk a bit about myself :)"
+            <div className="TutorInfo">
+              <TutorInfo
+                tutorName={"Stoffel Oostvogels"}
+                tutorText={
+                  "This is my personal tutor textje, where I talk a bit about myself :)"
                 }
-                teacherAge={21}
+                tutorAge={21}
                 AvgRating={3}
                 ProfileLink={"http://localhost:3000/Login"}
                 PhotoLink={
@@ -58,7 +58,7 @@ const VieuwLesson = () => {
         <Row className="justify-content-md-center">
 
         <Button>
-        Contact Teacher
+        Contact Tutor
       </Button>
         </Row>
 
@@ -67,4 +67,4 @@ const VieuwLesson = () => {
   );
 };
 
-export default VieuwLesson;
+export default VieuwSession;

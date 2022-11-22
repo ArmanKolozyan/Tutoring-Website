@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-function LessonDescription(props) {
+function SessionDescription(props) {
   let description = props.description;
 
 
@@ -17,4 +17,4 @@ function LessonDescription(props) {
   )
 }
 
-export default LessonDescription
+export default SessionDescription

@@ -241,11 +241,9 @@ $ourOrange: #fc3e03;
     }
   }
 
-  .VieuwLesson{
-    background-color: #fc3e03;
+  .VieuwSession{
 
-
-    .LessonInfo{
+    .SessionInfo{
       max-width: 30rem;
     }
 
@@ -255,7 +253,7 @@ $ourOrange: #fc3e03;
       padding-left: 1vh;
     }
 
-    .TeacherInfo{
+    .TutorInfo{
 
       img{
         width: 10vw;
@@ -264,7 +262,7 @@ $ourOrange: #fc3e03;
       }
     }
 
-    .LessonDescription{
+    .SessionDescription{
 
       textarea{
         height: 15rem;
@@ -274,7 +272,8 @@ $ourOrange: #fc3e03;
 
     button{
       width: 40vw;
-      background-color: $ourBlue;
+      border: none;
+      background-color: $ourOrange;
     }
 
 
