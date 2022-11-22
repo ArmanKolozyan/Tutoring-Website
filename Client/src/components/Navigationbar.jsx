@@ -10,12 +10,15 @@ import { PasswordContext } from "../context/PasswordContext";
 
 const Navigationbar = () => {
 
+
+  const {logout} = useContext(PasswordContext);
+
   const {currentUser} = useContext(PasswordContext);
    
   return (
     <div className="navigationbar">
       <Navbar class="navbar" fixed="top" expand="lg">
-        <Navbar.Brand href="#">
+        <Navbar.Brand href="/">
           <img src={logo} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -44,9 +47,15 @@ const Navigationbar = () => {
         }
         </span>
         </Nav.Link>
-        <Nav.Link href= "/Login"><Icon.BoxArrowRight size={20} />         {
-          currentUser ? "Logout" : "Login"
+       {currentUser ? 
+        <Nav.Link onClick={logout}><Icon.BoxArrowRight size={20} />         {
+          "Logout"
         }</Nav.Link>
+        :
+        <Nav.Link href= "/Login"><Icon.BoxArrowRight size={20} />         {
+          "Login"
+        }</Nav.Link>
+       }
 
 
         </Navbar.Collapse>
