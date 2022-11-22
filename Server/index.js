@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser"; // to parse cookies for authentication
 import session from "express-session";
 import { config } from "./passportConfig.js";
 import { authRoutes } from "./Routes/authRoutes.js";
+import { postRoutes } from "./Routes/postRoutes.js";
 
 
 const app = express(); // to have web server
@@ -35,6 +36,7 @@ config(passport);
 
 
 authRoutes(app, passport);
+postRoutes(app);
 
 
 // Routes

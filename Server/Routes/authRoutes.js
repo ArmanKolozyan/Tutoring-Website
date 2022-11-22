@@ -1,5 +1,3 @@
-import bcrypt from "bcryptjs"; // for hashing the password
-import { db } from "../db.js";
 import { getUser, login, logOut, register } from "../Controllers/authentication.js";
 
 // Routes for user register, login and logout handling.
