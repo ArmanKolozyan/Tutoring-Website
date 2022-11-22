@@ -10,8 +10,9 @@ export const config = (passport) => {
   passport.use(new LocalStrategy(function verify(username, password, cb) {
     db.query('SELECT * FROM users WHERE username = ?', [ username ], function(err, user) {
       if (err) { return cb(err); }
-      if (!user) { return cb(null, false, { message: 'Incorrect username or password.' }); }
-  
+      if (user.length == 0) { return cb(null, false, { message: 'Incorrect username or password.' }); }
+
+
       bcrypt.compare(password, user[0].password, (err, result) => {
         if (err) { return cb(err); }
         if (result === true) {

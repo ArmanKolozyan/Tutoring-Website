@@ -22,7 +22,9 @@ export const AuthConfig = ({ children }) => {
       withCredentials: true,
       url: "http://localhost:8800/login",
     })
+    if (res.data != null) {
     setCurrentUser(res.data);
+    }
   };
 
   const logout = async () => {

@@ -5,32 +5,22 @@ import { useState } from "react";
 import { PasswordContext } from "../context/PasswordContext";
 import { useContext } from "react";
 
-
-
 const Login = () => {
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-  const [data, setData] = useState(null);
 
-  const {login} = useContext(PasswordContext);
-  const {currentUser} = useContext(PasswordContext);
-  const {logout} = useContext(PasswordContext);
+  const { login } = useContext(PasswordContext);
+  const { currentUser } = useContext(PasswordContext);
+  const { logout } = useContext(PasswordContext);
 
-
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    currentUser ? logout() : login(loginUsername,loginPassword)};
-
-  const getUser = () => {
-    axios({
-      method: "get",
-      withCredentials: true,
-      headers: {"Content-Type": "application/json" }, 
-      url: "http://localhost:8800/user",
-    }).then((res) => {
-      setData(res.data);
-    });
+    login(loginUsername, loginPassword);
+    if (currentUser != null) {
+      navigate("/");
+    }
   };
 
   return (
