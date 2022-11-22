@@ -58,22 +58,27 @@ const CreateSession = () => {
             </Row>
             <Row className="">
               <Col md="auto">
-                <Form.Select required onChange={(e) => setCourse(e.target.value)}>
+                <Form.Select required onChange={(e) => setField(e.target.value)}>
                   <option disabled={true} selected value="">
-                    Select the right course
+                    Select the faculty of the subject
                   </option>
-                  <option  value="course 1">course 1</option>
-                  <option  value="course 2">course 2</option>
+                  <option value="Science and Bio-engineering Sciences">Science and Bio-engineering Sciences</option>
+                  <option value="Medicine and Pharmacy">Medicine and Pharmacy</option>
+                  <option value="Law and Criminology">Law and Criminology</option>
                 </Form.Select>
               </Col>
 
               <Col md="auto">
-                <Form.Select required onChange={(e) => setField(e.target.value)}>
+                <Form.Select required onChange={(e) => setCourse(e.target.value)}>
                   <option disabled={true} selected value="">
-                    Select the faculty of this course
+                    Select the subject
                   </option>
-                  <option value="faculty 1">faculty 1</option>
-                  <option value="faculty 2">faculty 2</option>
+                  <option  value="Computer Systems">Computer Systems</option>
+                  <option  value="Discrete Maths">Discrete Maths</option>
+                  <option  value="Biomedische Chemie">Biomedische Chemie</option>
+                  <option  value="Biologie">Biologie</option>
+                  <option  value="Politieke Geschiedenis">Politieke Geschiedenis</option>
+                  <option  value="Statistiek I">Statistiek I</option>
                 </Form.Select>
               </Col>
             </Row>

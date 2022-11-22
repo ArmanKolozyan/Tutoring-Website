@@ -2,7 +2,7 @@
 import React from "react";
 
 import "bootstrap/dist/css/bootstrap.css";
-import {Nav, Navbar, NavDropdown} from "react-bootstrap";
+//import {Nav, Navbar, NavDropdown} from "react-bootstrap";
 import * as Icon from 'react-bootstrap-icons';
 import "../style.scss";
 const Footer = () => {
