@@ -239,6 +239,43 @@ $ourOrange: #fc3e03;
         height: 10vh;
       }
     }
+  }
+
+  .VieuwLesson{
+    background-color: #fc3e03;
+
+
+    .LessonInfo{
+      max-width: 30rem;
+    }
+
+    div{
+      padding-top: 1vh;
+      padding-bottom: 1vh;
+      padding-left: 1vh;
+    }
+
+    .TeacherInfo{
+
+      img{
+        width: 10vw;
+        height: 10vw;
+        align-self: center;
+      }
+    }
+
+    .LessonDescription{
+
+      textarea{
+        height: 15rem;
+        width: 100%;
+      }
+    }
+
+    button{
+      width: 40vw;
+      background-color: $ourBlue;
+    }
 
 
   }
