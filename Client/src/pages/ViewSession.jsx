@@ -6,10 +6,40 @@ import SessionInfo from "../components/SessionInfo";
 import TutorInfo from "../components/TutorCard";
 import SessionDescription from "../components/SessionDescription";
 import Button from 'react-bootstrap/Button';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
-const VieuwSession = () => {
+
+const ViewSession = () => {
+
+  const location = useLocation();
+
+  const [post, setPost] = useState({});
+
+  const postId = location.pathname.split("/")[2];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios({
+          method: "get",
+          withCredentials: true,
+          url: `http://localhost:8800/posts/${postId}`,
+        })
+        console.log(res.data);
+        setPost(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [postId]);
+
+
+
   return (
-    <div className="VieuwSession">
+    <div className="ViewSession">
       <Container>
         <Row className="justify-content-md-center">
           <Col md="auto">
@@ -17,11 +47,11 @@ const VieuwSession = () => {
 
             <div className="SessionInfo">
               <SessionInfo
-                sessionName={"Dummieeeeles"}
-                sessionFac={"Dumiieeeefac"}
-                sessionPrice={10}
-                sessionFreeTrial={true}
-                Experience={3}
+                sessionName={post.course}
+                sessionFac={post.field_of_study}
+                sessionPrice={post.price}
+                sessionFreeTrial={post.free_test==="on" ? true : false}
+                Experience={post.experience}
               />
             </div>
             </Row>
@@ -40,7 +70,7 @@ const VieuwSession = () => {
           <Col md="auto">
             <div className="TutorInfo">
               <TutorInfo
-                tutorName={"Stoffel Oostvogels"}
+                tutorName={post.username}
                 tutorText={
                   "This is my personal tutor textje, where I talk a bit about myself :)"
                 }
@@ -67,4 +97,4 @@ const VieuwSession = () => {
   );
 };
 
-export default VieuwSession;
+export default ViewSession;

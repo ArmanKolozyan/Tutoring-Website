@@ -117,6 +117,7 @@ const CreateSession = () => {
               <Form.Control
                 as="textarea"
                 placeholder="Give a description of how to course will be given"
+                maxLength={573}
                 rows={5}
                 required
                 onChange={(e) => setDesc(e.target.value)}

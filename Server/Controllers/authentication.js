@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs"; // for hashing the password
 import { db } from "../db.js";
 
 export const login = (req, res) => {
-  res.send(req.user);
+  res.json(req.user); // Res json ({user: req.user, error: .....}) zo'n soort object errond zetten
 };
 
 export const register = (req, res) => {

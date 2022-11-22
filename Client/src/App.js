@@ -8,7 +8,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Compose from "./pages/Compose";
 import CreateSession from "./pages/CreateSession";
-import VieuwSession from "./pages/VieuwSession";
+import ViewSession from "./pages/ViewSession";
 import Post from "./pages/Post";
 import Footer from "./components/Footer";
 import Trademark from "./components/Trademark";
@@ -62,7 +62,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/session/:id",
-        element: <VieuwSession/>
+        element: <ViewSession/>
       },
     ],
   },

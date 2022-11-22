@@ -241,7 +241,7 @@ $ourOrange: #fc3e03;
     }
   }
 
-  .VieuwSession{
+  .ViewSession{
 
     .SessionInfo{
       max-width: 30rem;
@@ -265,8 +265,9 @@ $ourOrange: #fc3e03;
     .SessionDescription{
 
       textarea{
-        height: 15rem;
+        height: 17rem;
         width: 100%;
+        resize: none;
       }
     }
 
