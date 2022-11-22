@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Compose from "./pages/Compose";
 import CreateSession from "./pages/CreateSession";
+import VieuwLesson from "./pages/VieuwLesson";
 import Post from "./pages/Post";
 import Footer from "./components/Footer";
 import Trademark from "./components/Trademark";
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/createSession",
         element: <CreateSession/>
+      },
+      {
+        path: "/lesson/:id",
+        element: <VieuwLesson/>
       },
     ],
   },
