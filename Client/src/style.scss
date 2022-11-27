@@ -224,7 +224,7 @@ $ourOrange: #fc3e03;
     }
   }
 
-  .create-session{
+  .create-tutoring-session{
     background-color: $ourOrange;
     form{
       width: auto;
@@ -241,9 +241,9 @@ $ourOrange: #fc3e03;
     }
   }
 
-  .ViewSession{
+  .ViewTutoringSession{
 
-    .SessionInfo{
+    .TutoringSessionInfo{
       max-width: 30rem;
     }
 
@@ -262,7 +262,7 @@ $ourOrange: #fc3e03;
       }
     }
 
-    .SessionDescription{
+    .TutoringSessionDescription{
 
       textarea{
         height: 17rem;

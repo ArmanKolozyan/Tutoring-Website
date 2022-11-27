@@ -39,7 +39,7 @@ const Navigationbar = () => {
         </NavDropdown>
 
         
-        <Nav.Link href="#Profile"> <Icon.PersonBoundingBox size={30} /> 
+        <Nav.Link href="profile"> <Icon.PersonBoundingBox size={30} /> 
 
         <span>
         {

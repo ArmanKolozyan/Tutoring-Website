@@ -2,16 +2,16 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import SessionInfo from "../components/SessionInfo";
+import TutoringSessionInfo from "../components/TutoringSessionInfo";
 import TutorInfo from "../components/TutorCard";
-import SessionDescription from "../components/SessionDescription";
+import TutoringSessionDescription from "../components/TutoringSessionDescription";
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 
-const ViewSession = () => {
+const ViewTutoringSession = () => {
 
   const location = useLocation();
 
@@ -41,18 +41,18 @@ const ViewSession = () => {
 
 
   return (
-    <div className="ViewSession">
+    <div className="ViewTutoringSession">
       <Container>
         <Row className="justify-content-md-center">
           <Col md="auto">
           <Row className="justify-content-md-center">
 
-            <div className="SessionInfo">
-              <SessionInfo
-                sessionName={post.course}
-                sessionFac={post.field_of_study}
-                sessionPrice={post.price}
-                sessionFreeTrial={post.free_test==="on" ? true : false}
+            <div className="TutoringSessionInfo">
+              <TutoringSessionInfo
+                tutoringSessionName={post.tutoringSession}
+                tutoringSessionFac={post.field_of_study}
+                tutoringSessionPrice={post.price}
+                tutoringSessionFreeTrial={post.free_test==="on" ? true : false}
                 Experience={post.experience}
               />
             </div>
@@ -60,8 +60,8 @@ const ViewSession = () => {
 
             <Row className="justify-content-md-center">
           <Col md="">
-            <div className="SessionDescription">
-              <SessionDescription
+            <div className="TutoringSessionDescription">
+              <TutoringSessionDescription
               description={post.description}
               />
             </div>
@@ -99,4 +99,4 @@ const ViewSession = () => {
   );
 };
 
-export default ViewSession;
+export default ViewTutoringSession;

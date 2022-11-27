@@ -8,10 +8,10 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Multiselect from "react-bootstrap-multiselect";
 
 function ProfileInfo(props) {
-  let sessionName = props.sessionName;
-  let sessionFac = props.sessionFac;
-  let sessionPrice = props.sessionPrice;
-  let sessionFreeTrial = props.sessionFreeTrial;
+  let tutoringSessionName = props.tutoringSessionName;
+  let tutoringSessionFac = props.tutoringSessionFac;
+  let tutoringSessionPrice = props.tutoringSessionPrice;
+  let tutoringSessionFreeTrial = props.tutoringSessionFreeTrial;
   let Experience = props.Experience;
   const [field, setField] = useState([]);
 

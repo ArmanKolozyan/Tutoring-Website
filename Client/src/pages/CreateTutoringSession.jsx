@@ -13,8 +13,8 @@ import { PasswordContext } from "../context/PasswordContext";
 import { useContext } from "react";
 
 
-const CreateSession = () => {
-  const [course, setCourse] = useState();
+const CreateTutoringSession = () => {
+  const [tutoringSession, setTutoringSession] = useState();
   const [field, setField] = useState();
   const [exp, setExp] = useState();
   const [price, setPrice] = useState();
@@ -33,7 +33,7 @@ const CreateSession = () => {
         headers: {"Content-Type": "application/json" }, 
         url: "http://localhost:8800/posts/",
         data: {
-          course,
+          tutoringSession,
           field,
           desc,
           date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
@@ -47,13 +47,13 @@ const CreateSession = () => {
   };
 
   return (
-    <div className="create-session">
+    <div className="create-tutoring-session">
       <Form onSubmit={(event) => handleSubmit(event)}>
         <Row className="justify-content-md-center">
           <Col md="auto">
             <Row className="">
               <Col md="auto">
-                <h3> Creating a new session </h3>
+                <h3> Create a new tutoring session </h3>
               </Col>
             </Row>
             <Row className="">
@@ -69,7 +69,7 @@ const CreateSession = () => {
               </Col>
 
               <Col md="auto">
-                <Form.Select required onChange={(e) => setCourse(e.target.value)}>
+                <Form.Select required onChange={(e) => setTutoringSession(e.target.value)}>
                   <option disabled={true} selected value="">
                     Select the subject
                   </option>
@@ -84,7 +84,7 @@ const CreateSession = () => {
             </Row>
 
             <Row className="">
-              <Form.Label>Course information</Form.Label>
+              <Form.Label>Session information</Form.Label>
               <Col md="5">
                 <Form.Control
                   required
@@ -105,18 +105,18 @@ const CreateSession = () => {
                 <Form.Check
                   required
                   type="checkbox"
-                  label="Free Test-course"
+                  label="Free Test-session"
                   className="checkbox"
                   onChange={(e) => setTest(e.target.value)}
                 />
               </Col>
             </Row>
-            <Form.Label>Course description</Form.Label>
+            <Form.Label>Session description</Form.Label>
 
             <Col md="auto">
               <Form.Control
                 as="textarea"
-                placeholder="Give a description of how to course will be given"
+                placeholder="Give a description of how to session will be given"
                 maxLength={573}
                 rows={5}
                 required
@@ -139,4 +139,4 @@ const CreateSession = () => {
   );
 };
 
-export default CreateSession;
+export default CreateTutoringSession;
