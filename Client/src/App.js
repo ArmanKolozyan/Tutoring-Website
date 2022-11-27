@@ -15,6 +15,7 @@ import Trademark from "./components/Trademark";
 import Navigationbar from "./components/Navigationbar";
 import "./style.scss";
 import MyProfile from "./pages/MyProfile";
+import VieuwProfile from "./pages/VieuwProfile";
 // Using an Outlet component of React to avoid
 // duplication of Navbar and Footer at every page
 // that needs a navbar and a footer.
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "/session/:id",
         element: <ViewSession/>
+      },
+      {
+        path:"/VieuwProfile/:id",
+        element: <VieuwProfile/>
       },
       {
         path: "/Profile",

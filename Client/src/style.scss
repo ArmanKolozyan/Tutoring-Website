@@ -317,4 +317,32 @@ $ourOrange: #fc3e03;
     }
   }
 
+  .VieuwProfile{
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    margin-top: 3%;
+  }
+
+  .ProfilePicture{
+    img{
+      width: 100%;
+      height: 108%;
+      align-self: center;
+    }
+  }
+
+  .ProfileDescription{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3%;
+    width: 40vw;
+    min-width: 300px; //min width voor op gsm ... zodat de text ni te klein wordt door de hierboven gedefineerde breedte
+    textarea{
+      height: 10rem;
+      width: 100%;
+      resize: none;
+    }
+  }
+
 }
