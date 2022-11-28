@@ -7,8 +7,11 @@ import * as Icon from 'react-bootstrap-icons';
 import "../style.scss";
 import { useContext } from "react";
 import { PasswordContext } from "../context/PasswordContext";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navigationbar = () => {
+
+  const navigate = useNavigate();
 
 
   const {logout} = useContext(PasswordContext);
@@ -39,16 +42,15 @@ const Navigationbar = () => {
         </NavDropdown>
 
         
-        <Nav.Link href="profile"> <Icon.PersonBoundingBox size={30} /> 
-
+        <Nav.Link href={ currentUser ? `/profile/${currentUser.firstname}`: `/`}> <Icon.PersonBoundingBox size={30} /> 
         <span>
         {
-          currentUser ? currentUser.username : "My Profile"
+          currentUser ? currentUser.firstname : "My Profile"
         }
         </span>
         </Nav.Link>
        {currentUser ? 
-        <Nav.Link onClick={logout}><Icon.BoxArrowRight size={20} />         {
+        <Nav.Link onClick={function(event){ logout(); navigate("/");}}><Icon.BoxArrowRight size={20} />         {
           "Logout"
         }</Nav.Link>
         :

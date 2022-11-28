@@ -20,7 +20,7 @@ const MyProfile = () => {
         <Row>
           <Col md="auto">
             <div className="ProfileInformation">
-              <ProfileInfo />
+              <ProfileInfo  />
             </div>
           </Col>
 

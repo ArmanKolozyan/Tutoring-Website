@@ -3,24 +3,28 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { PasswordContext } from "../context/PasswordContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 const Login = () => {
-  const [loginUsername, setLoginUsername] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
   const { login } = useContext(PasswordContext);
   const { currentUser } = useContext(PasswordContext);
   const { logout } = useContext(PasswordContext);
-
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    if (currentUser != null) {
+    navigate("/");
+    }
+  }, [currentUser]);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(loginUsername, loginPassword);
-    if (currentUser != null) {
-      navigate("/");
-    }
+    login(loginEmail, loginPassword);
   };
 
   return (
@@ -30,8 +34,8 @@ const Login = () => {
         <input
           required
           type="text"
-          placeholder="username"
-          onChange={(e) => setLoginUsername(e.target.value)}
+          placeholder="email"
+          onChange={(e) => setLoginEmail(e.target.value)}
         />
         <input
           required

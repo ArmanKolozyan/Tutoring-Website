@@ -22,7 +22,7 @@ function TutorInfo(props) {
         </Card.Text>
       </Card.Body>
       <ListGroup className="list-group-flush">
-        <ListGroup.Item>Age: {tutorAge} Years</ListGroup.Item>
+        <ListGroup.Item>Birth date: {tutorAge}</ListGroup.Item>
         <ListGroup.Item>Average Rating: {AvgRating}</ListGroup.Item>
       </ListGroup>
       <Card.Body>

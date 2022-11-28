@@ -9,6 +9,7 @@ import { authRoutes } from "./Routes/authRoutes.js";
 import { postRoutes } from "./Routes/postRoutes.js";
 
 
+const port = 8800;
 const app = express(); // to have web server
 
 
@@ -41,7 +42,7 @@ postRoutes(app);
 
 // Routes
 
-app.listen(8800, () => {
+app.listen(port, () => {
   console.log("Hey Guys!");
 });
 

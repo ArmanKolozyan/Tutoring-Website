@@ -19,7 +19,7 @@ const ViewTutoringSession = () => {
 
   const postId = location.pathname.split("/")[2];
 
-  console.log(post)
+  console.log("hallo")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,7 +72,7 @@ const ViewTutoringSession = () => {
           <Col md="auto">
             <div className="TutorInfo">
               <TutorInfo
-                tutorName={post.username}
+                tutorName={post.FirstName}
                 tutorText={
                   "This is my personal tutor textje, where I talk a bit about myself :)"
                 }

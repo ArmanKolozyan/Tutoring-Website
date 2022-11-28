@@ -10,8 +10,7 @@ function TutoringSessionDescription(props) {
 
   return (
     <div>
-    <textarea readOnly>
-    {description}
+    <textarea value = {description} readOnly>
 </textarea>
     </div>
   )

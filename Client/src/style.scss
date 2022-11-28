@@ -18,7 +18,7 @@ $ourOrange: #fc3e03;
       flex-direction: column; // zorgt ervoor dat alle elementen onder elkaar komen te staan
       align-items: center;
       padding-top: 4vh;
-      height: 100vh;
+      height: 120vh;
       background-color: $ourBlue;
     }
 
@@ -286,6 +286,10 @@ $ourOrange: #fc3e03;
 
     form{
       width: auto;
+      
+      .multiselector{
+        max-width: 30em;
+      }
     }
 
 
@@ -344,5 +348,7 @@ $ourOrange: #fc3e03;
       resize: none;
     }
   }
+
+
 
 }

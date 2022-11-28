@@ -14,7 +14,7 @@ import { useContext } from "react";
 
 
 const CreateTutoringSession = () => {
-  const [tutoringSession, setTutoringSession] = useState();
+  const [course, setCourse] = useState();
   const [field, setField] = useState();
   const [exp, setExp] = useState();
   const [price, setPrice] = useState();
@@ -33,7 +33,7 @@ const CreateTutoringSession = () => {
         headers: {"Content-Type": "application/json" }, 
         url: "http://localhost:8800/posts/",
         data: {
-          tutoringSession,
+          course,
           field,
           desc,
           date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
@@ -69,7 +69,7 @@ const CreateTutoringSession = () => {
               </Col>
 
               <Col md="auto">
-                <Form.Select required onChange={(e) => setTutoringSession(e.target.value)}>
+                <Form.Select required onChange={(e) => setCourse(e.target.value)}>
                   <option disabled={true} selected value="">
                     Select the subject
                   </option>

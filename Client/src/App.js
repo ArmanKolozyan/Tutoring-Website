@@ -70,7 +70,7 @@ const router = createBrowserRouter([
         element: <VieuwProfile/>
       },
       {
-        path: "/Profile",
+        path: "/profile/:firstname",
         element: <MyProfile/>
       }
     ],

@@ -6,29 +6,116 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Multiselect from "react-bootstrap-multiselect";
+import { PasswordContext } from "../context/PasswordContext";
+import { useContext } from "react";
+import Select from "react-select";
+import { useEffect } from "react";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
-function ProfileInfo(props) {
-  let tutoringSessionName = props.tutoringSessionName;
-  let tutoringSessionFac = props.tutoringSessionFac;
-  let tutoringSessionPrice = props.tutoringSessionPrice;
-  let tutoringSessionFreeTrial = props.tutoringSessionFreeTrial;
-  let Experience = props.Experience;
-  const [field, setField] = useState([]);
+function ProfileInfo() {
+  const { currentUser } = useContext(PasswordContext);
+  const { setCurrentUser } = useContext(PasswordContext);
+
+
+  console.log("LOOKheeeere");
+  console.log(currentUser.intro);
+
+  const [firstName, setFirstName] = useState(currentUser.firstname);
+  const [lastName, setLastName] = useState(currentUser.lastname);
+  const [birthdate, setBirthDate] = useState(
+    currentUser.birthDate.slice(0, 10)
+  );
+  const [intro, setIntro] = useState(currentUser.intro);
+  const [shortIntro, setShortIntro] = useState(currentUser.shortIntro);
+  const [studies, setStudies] = useState({});
+
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios({
+        method: "post",
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
+        url: `http://localhost:8800/update/`,
+        data: {
+          firstName,
+          lastName,
+          birthdate,
+          intro,
+          shortIntro,
+        },
+      });
+  }
+    catch (err) {
+      console.log(err);
+    }
+  };
+
+  const options = [
+    {
+      value: "Science and Bio-engineering Sciences",
+      label: "Science and Bio-engineering Sciences",
+    },
+    { value: "Medicine and Pharmacy", label: "Medicine and Pharmacy" },
+    { value: "Law and Criminology", label: "Law and Criminology" },
+  ];
+
+  const hardCoded = [
+    {
+      value: "Medicine and Pharmacy",
+      label: "Medicine and Pharmacy",
+    },
+    {
+      value: "Law and Criminology",
+      label: "Law and Criminology",
+    },
+  ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios({
+          method: "get",
+          withCredentials: true,
+          url: `http://localhost:8800/studies/${currentUser.id}`,
+        });
+        let result = res.data;
+        result = result.map((x) => {
+          const neww = {
+            value: x.field,
+            label: x.field,
+          };
+          return neww;
+        });
+        console.log("smart");
+        setStudies(result);
+        console.log(result);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [currentUser.id]);
 
   return (
     <div>
-      <Form>
-        <Form.Label>Personal information</Form.Label>
+      <Form onSubmit={(event) => handleSubmit(event)}>
+        <Form.Label>
+          <b>Personal information</b>
+        </Form.Label>
 
         <Row className="justify-content-md-center">
           <Col>
             <FloatingLabel controlId="NameInput" label="Name">
-              <Form.Control as="textarea" value={"pieter"} />
+              <Form.Control type="text" defaultValue={firstName} onChange={(e) => setFirstName(e.target.value)} />
             </FloatingLabel>
           </Col>
           <Col>
             <FloatingLabel controlId="SurenameInput" label="Surname">
-              <Form.Control as="textarea" value={"poppiee"} />
+              <Form.Control as="textarea" defaultValue={lastName} onChange={(e) => setLastName(e.target.value)} />
             </FloatingLabel>
           </Col>
         </Row>
@@ -36,47 +123,67 @@ function ProfileInfo(props) {
         <Row className="justify-content-md-center">
           <Col>
             <FloatingLabel controlId="BirthdateInput" label="Birthdate">
-              <Form.Control type="date" value="2002-12-23" />
+              <Form.Control type="date" defaultValue={birthdate} onChange={(e) => setBirthDate(e.target.value)} />
             </FloatingLabel>
           </Col>
           <Col>
             <FloatingLabel controlId="PhoneNumberInput" label="PhoneNumber">
-              <Form.Control as="textarea" value={"0422913456"} />
+              <Form.Control
+                type="text"
+                pattern="\d*"
+                maxlength="12"
+                value={"0422913456"}
+              />
             </FloatingLabel>
           </Col>
         </Row>
 
-        <Form.Label>Educational information</Form.Label>
+        <Form.Label>
+          <b>Educational information</b>
+        </Form.Label>
+        <Form.Label>Select the field of studies you have taken</Form.Label>
         <Row className="justify-content-md-center">
           <Col>
-            <FloatingLabel
-              controlId="Fields_of_study_followedINput"
-              label="Select your field of study"
-            >
-              <Form.Select required>
-                <option value="Science and Bio-engineering Sciences">
-                  Science and Bio-engineering Sciences
-                </option>
-                <option value="Medicine and Pharmacy">
-                  Medicine and Pharmacy
-                </option>
-                <option value="Law and Criminology">Law and Criminology</option>
-              </Form.Select>{" "}
+            <FloatingLabel controlId="Fields_of_study_followedINput">
+              <div className="multiselector">
+                {console.log("aza")}
+                {console.log(studies)}
+                <Select
+                  onChange={(item) => {
+                    setStudies(item);
+                  }}
+                  components={{
+                    IndicatorSeparator: () => null,
+                  }}
+                  isMulti
+                  options={options}
+                  defaultValue={hardCoded}
+                  className="select"
+                  isClearable={true}
+                  isSearchable={true}
+                  isLoading={false}
+                  isRtl={false}
+                  closeMenuOnSelect={false}
+                />
+              </div>
             </FloatingLabel>
           </Col>
         </Row>
 
-        <Form.Label>description texts</Form.Label>
+        <Form.Label>
+          <b>Description texts</b>
+        </Form.Label>
         <Row className="justify-content-md-center">
           <Col>
             description to be shown at your profilepage
             <Form.Control
               as="textarea"
-              value="testsetssetsetesttesestetetet"
+              value={intro}
               placeholder="Give a description of yourself that will be shown on your profilepage"
               maxLength={573}
               rows={5}
               required
+              onChange={(e) => setIntro(e.target.value)}
             />
           </Col>
         </Row>
@@ -86,10 +193,11 @@ function ProfileInfo(props) {
             description to be shown at each post you create
             <Form.Control
               as="textarea"
-              value="testsetssetsetesttesestetetet"
+              defaultValue={shortIntro}
               placeholder="Give a description of yourself that will be shown on each post you create"
               maxLength={200}
               rows={3}
+              onChange={(e) => setShortIntro(e.target.value)}
               required
             />
           </Col>
