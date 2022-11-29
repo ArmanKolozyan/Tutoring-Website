@@ -16,6 +16,7 @@ import Navigationbar from "./components/Navigationbar";
 import "./style.scss";
 import MyProfile from "./pages/MyProfile";
 import VieuwProfile from "./pages/VieuwProfile";
+import CreateGroupSession from "./pages/CreateGroupSession";
 // Using an Outlet component of React to avoid
 // duplication of Navbar and Footer at every page
 // that needs a navbar and a footer.
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "/createTutoringSession",
         element: <CreateTutoringSession/>
+      },
+      {
+        path: "/createGroupSession",
+        element: <CreateGroupSession/>
       },
       {
         path: "/tutoringSession/:id",
