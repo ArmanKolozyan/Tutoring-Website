@@ -356,6 +356,50 @@ $ourOrange: #fc3e03;
 
   }
 
+  
+  
+
+  .ViewGroupSession{
+
+    .GroupSessionInfo{
+      max-width: 30rem;
+
+      .progress{
+        padding: 0;
+      }
+    }
+
+    div{
+      padding-top: 1vh;
+      padding-bottom: 1vh;
+      padding-left: 1vh;
+    }
+
+    .TutorInfo{
+      padding-left: 5vw;
+
+      img{
+        width: 10vw;
+        height: 10vw;
+        align-self: center;
+      }
+    }
+
+    .GroupSessionDescription{
+
+      textarea{
+        height: 17rem;
+        width: 100%;
+        resize: none;
+      }
+    }
+
+    button{
+      width: 40vw/2;
+      border: none;
+      background-color: $ourOrange;
+    }
+  }
 
 
 }

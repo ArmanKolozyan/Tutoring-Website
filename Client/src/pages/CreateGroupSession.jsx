@@ -4,7 +4,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "../style.scss";
@@ -134,7 +133,7 @@ const CreateGroupSession = () => {
                   required
                   onChange={(e) => setPrice(e.target.value)}
                   type="number"
-                  placeholder="Price in €/h"
+                  placeholder="Price"
                 />
               </Col>
               <Col md="auto">
