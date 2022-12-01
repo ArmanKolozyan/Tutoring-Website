@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../images/Logo.png"
 
-import "bootstrap/dist/css/bootstrap.css"; // HIER IS EEN PROBLEEM
+import "bootstrap/dist/css/bootstrap.css";
 import {Nav, Navbar, NavDropdown} from "react-bootstrap";
 import * as Icon from 'react-bootstrap-icons';
 import "../style.scss";
@@ -31,7 +31,6 @@ const Navigationbar = () => {
         <Nav.Link href="#Find_tutors"> <Icon.PersonVideo3 size={20} /> Find tutors</Nav.Link>
         <Nav.Link href="#Summaries"> <Icon.JournalBookmarkFill size={20} /> Summaries</Nav.Link>
         <Nav.Link href="#Search"><Icon.Search size={20} /> Search</Nav.Link>
-
         
         <NavDropdown id="collasible-nav-dropdown" className="ms-auto" title=<Icon.Bell size={25} />>
           <NavDropdown.Item href="#action/dummienoti1clicked">Dummie Notification1</NavDropdown.Item>

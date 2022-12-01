@@ -20,7 +20,7 @@ const MyProfile = () => {
         <Row>
           <Col md="auto">
             <div className="ProfileInformation">
-              <ProfileInfo  />
+              <ProfileInfo  /> {/* hier gebeuren de aanpassingen voor de profile, het gebeurt dus niet rechtstreeks in dit bestand */}
             </div>
           </Col>
 

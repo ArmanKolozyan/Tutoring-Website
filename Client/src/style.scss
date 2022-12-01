@@ -92,14 +92,50 @@ $ourOrange: #fc3e03;
   // HOME
   
   .home {
-    display: flex;
-    justify-content: center;
+    display: block;
+
+    .welcome {
+      text-align: center;
+      background-color: $ourBlue;
+      color: $ourOrange;
+      hr{ // code voor horizontale streep
+        border-top: 0.4vh solid;
+        opacity: 1;
+        margin: 0;
+      }
+      p {
+        font-family:Georgia, 'Times New Roman', Times, serif; // NOG TESTEN INDIEN GEEN MOOIERE/MODERNERE LETTERTYPE
+      }
+      .logo {
+        padding-top: 8vh;
+        padding-bottom: 4vh;
+        justify-content: center;
+        img {
+          width: 18vw;
+        }
+      }
+      .title {
+        font-size: 16vh;
+      }
+      .subtitle {
+        font-size: 6vh;
+        margin-top: -1em;
+      }
+      .introduction {
+        padding: 8vh;
+        font-size: 3vh;
+        text-align: left; 
+      }
+    }
 
     .posts {
       width: 80vw;
-      margin: 8vh;
+      padding-top: 12vh;
+      padding-bottom: 12vh;
+      margin: auto;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       gap: 18vh;
 
       .post {
@@ -212,9 +248,9 @@ $ourOrange: #fc3e03;
       margin-bottom: 3vh;
     }
 
-    hr{ // commentaar voor horizontale streep
+    hr{ // code voor horizontale streep
       border-top: 0.4vh solid;
-      color: orangered;
+      color: $ourOrange;
       opacity: 1;
       margin: 0;
     }
@@ -341,7 +377,7 @@ $ourOrange: #fc3e03;
     margin-right: auto;
     margin-top: 3%;
     width: 40vw;
-    min-width: 300px; //min width voor op gsm ... zodat de text ni te klein wordt door de hierboven gedefineerde breedte
+    min-width: 300px; //min width voor op gsm ... zodat de text niet te klein wordt door de hierboven gedefineerde breedte
     textarea{
       height: 10rem;
       width: 100%;
