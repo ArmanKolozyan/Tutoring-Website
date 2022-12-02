@@ -24,8 +24,6 @@ export const AuthConfig = ({ children }) => {
       url: "http://localhost:8800/login",
     })
     if (res.data != null) {
-      console.log("done");
-      console.log(res.data);
     setCurrentUser(res.data);
     }
   };

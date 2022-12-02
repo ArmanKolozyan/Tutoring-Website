@@ -5,6 +5,7 @@ export const getUsers = (req, res) => {
   db.query(q, (err, data) => {
     if (err) return res.status(500).send(err);
 
+
     return res.status(200).json(data);
   });
 };
@@ -22,28 +23,32 @@ export const getSingleUser = (req, res) => {
 export const updateUser = (req, res) => {
   const q = `UPDATE users SET firstname = ?, lastname = ?, birthDate = ?, intro = ?, shortIntro = ? WHERE id = ?`;
 
-  console.log("uuuuuu");
-  console.log(req.user);
+  const updateStudies = (studies) => {
+    const q1 = `DELETE FROM followed_fields WHERE uid = ?`
+    const q2 = "INSERT INTO followed_fields SET uid = ?, field = ?"
 
-  console.log(
-    req.body.firstName,
-    req.body.lastName,
-    req.body.birthdate,
-    req.body.intro,
-    req.body.shortIntro,
-  )
+    db.query(q1, [req.user[0].id], (err, data) => {
+      if (err) return res.status(500).json(err);
+    })
+    
+    studies.forEach((x) => 
+      db.query(q2, [req.user[0].id, x.value], (err, data) => {
+        if (err) return res.status(500).json(err);
+      }))
+
+  }
 
   const values = [
     req.body.firstName,
     req.body.lastName,
-    req.body.birthdate,
+    req.body.birthdate.slice(0,10),
     req.body.intro,
     req.body.shortIntro,
     req.user[0].id,
   ];
 
+  updateStudies(req.body.studies)
   db.query(q, values, (err, data) => {
-    if (err) console.log(err);
     if (err) return res.status(500).json(err);
     return res.json("User has been updated.");
   });

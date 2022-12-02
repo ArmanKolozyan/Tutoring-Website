@@ -27,8 +27,6 @@ export const addPost = (req, res) => {
   const q =
     "INSERT INTO posts(`course`, `field_of_study`, `description`, `date`, `uid`, `experience`, `price`, `free_test`) VALUES (?)";
 
-    console.log("thank god");
-    console.log(req.user);
   const values = [
     req.body.course,
     req.body.field,

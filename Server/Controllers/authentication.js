@@ -2,7 +2,6 @@ import bcrypt from "bcryptjs"; // for hashing the password
 import { db } from "../db.js";
 
 export const login = (req, res) => {
-  console.log(req.user);
   res.json(req.user); // Res json ({user: req.user, error: .....}) zo'n soort object errond zetten
 };
 
@@ -10,18 +9,12 @@ export const register = (req, res) => {
   //CHECK EXISTING USER 
   const q = "SELECT * FROM users WHERE email = ?";
 
-  console.log("hi hiwww");
-
-
   let firstName = req.body.firstName;
   let lastName = req.body.lastName;
   let email = req.body.email;
   let password = req.body.password;
   let birthDate = req.body.birthDate;
   //let fieldOfStudy = req.body.fieldOfStudy;
-
-  console.log("hi hiw");
-
 
   db.query(q, [req.body.email], (err, data) => {
     if (err) res.status(500).json(err);
@@ -62,9 +55,6 @@ export const getUserStudies = (req, res) => {
 
   db.query(q, [req.params.id], (err, data) => {
     if (err) return res.status(500).json(err);
-
-    console.log(data)
-
     return res.status(200).json(data);
   });
 };
