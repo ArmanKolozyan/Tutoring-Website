@@ -15,7 +15,7 @@ import Card from "react-bootstrap/Card";
 import { PasswordContext } from "../context/PasswordContext";
 import { useContext } from "react";
 
-const VieuwProfile = () => {
+const ViewProfile = () => {
 
   const {currentUser} = useContext(PasswordContext);
 
@@ -30,7 +30,7 @@ const VieuwProfile = () => {
   let PhoneNumber = "0411929242";
 
   return (
-    <div className="VieuwProfile">
+    <div className="ViewProfile">
       <Container>
         <Row className="justify-content-md-center">
           <Col md="auto">
@@ -82,4 +82,4 @@ const VieuwProfile = () => {
   );
 };
 
-export default VieuwProfile;
+export default ViewProfile;

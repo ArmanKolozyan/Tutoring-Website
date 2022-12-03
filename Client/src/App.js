@@ -15,7 +15,7 @@ import Trademark from "./components/Trademark";
 import Navigationbar from "./components/Navigationbar";
 import "./style.scss";
 import MyProfile from "./pages/MyProfile";
-import VieuwProfile from "./pages/VieuwProfile";
+import ViewProfile from "./pages/ViewProfile";
 import CreateGroupSession from "./pages/CreateGroupSession";
 import ViewGroupSession from "./pages/ViewGroupSession";
 // Using an Outlet component of React to avoid
@@ -76,8 +76,8 @@ const router = createBrowserRouter([
         element: <ViewGroupSession/>
       },
       {
-        path:"/VieuwProfile/:id",
-        element: <VieuwProfile/>
+        path:"/ViewProfile/:id",
+        element: <ViewProfile/>
       },
       {
         path: "/profile/:firstname",
