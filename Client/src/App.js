@@ -6,7 +6,6 @@ import {
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Compose from "./pages/Compose";
 import CreateTutoringSession from "./pages/CreateTutoringSession";
 import ViewTutoringSession from "./pages/ViewTutoringSession";
 import Post from "./pages/Post";
@@ -40,7 +39,6 @@ function Layout2() {
   )
 }
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,15 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home/>
-
       },
       {
         path: "/post/:id", // if you type "localhost:"portNumber"/post/1345" in the url bar, where 1345 is some id number you will trigger the "Post" React component
         element: <Post/>
-      },
-      {
-        path: "/compose",
-        element: <Compose/>
       },
       {
         path: "/createTutoringSession",
