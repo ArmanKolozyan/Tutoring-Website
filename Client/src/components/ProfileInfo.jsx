@@ -18,8 +18,6 @@ function ProfileInfo() {
   const { setCurrentUser } = useContext(PasswordContext);
 
 
-  console.log("LOOKheeeere");
-  console.log(currentUser.intro);
 
   const [firstName, setFirstName] = useState(currentUser.firstname);
   const [lastName, setLastName] = useState(currentUser.lastname);
@@ -29,6 +27,7 @@ function ProfileInfo() {
   const [intro, setIntro] = useState(currentUser.intro);
   const [shortIntro, setShortIntro] = useState(currentUser.shortIntro);
   const [studies, setStudies] = useState({});
+
 
 
 
@@ -46,8 +45,15 @@ function ProfileInfo() {
           birthdate,
           intro,
           shortIntro,
+          studies,
         },
       });
+      currentUser.firstName = firstName;
+      currentUser.lastName = lastName;
+      currentUser.birthDate = birthdate;
+      currentUser.intro = intro;
+      currentUser.shortIntro = shortIntro;
+      localStorage.setItem("user", JSON.stringify(currentUser));
   }
     catch (err) {
       console.log(err);
@@ -61,17 +67,6 @@ function ProfileInfo() {
     },
     { value: "Medicine and Pharmacy", label: "Medicine and Pharmacy" },
     { value: "Law and Criminology", label: "Law and Criminology" },
-  ];
-
-  const hardCoded = [
-    {
-      value: "Medicine and Pharmacy",
-      label: "Medicine and Pharmacy",
-    },
-    {
-      value: "Law and Criminology",
-      label: "Law and Criminology",
-    },
   ];
 
   useEffect(() => {
@@ -90,9 +85,7 @@ function ProfileInfo() {
           };
           return neww;
         });
-        console.log("smart");
         setStudies(result);
-        console.log(result);
       } catch (err) {
         console.log(err);
       }
@@ -146,8 +139,6 @@ function ProfileInfo() {
           <Col>
             <FloatingLabel controlId="Fields_of_study_followedINput">
               <div className="multiselector">
-                {console.log("aza")}
-                {console.log(studies)}
                 <Select
                   onChange={(item) => {
                     setStudies(item);
@@ -157,7 +148,7 @@ function ProfileInfo() {
                   }}
                   isMulti
                   options={options}
-                  defaultValue={hardCoded}
+                  value={studies}
                   className="select"
                   isClearable={true}
                   isSearchable={true}

@@ -75,7 +75,7 @@ const CreateGroupSession = () => {
                 />
               </Col>
 
-              <Col md="auto">
+              <Col md="4">
                 <Form.Control
                   required
                   type="number"

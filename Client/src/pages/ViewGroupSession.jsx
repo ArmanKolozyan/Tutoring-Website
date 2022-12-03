@@ -19,7 +19,6 @@ const ViewGroupSession = () => {
 
   const postId = location.pathname.split("/")[2];
 
-  console.log("hallo")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +28,6 @@ const ViewGroupSession = () => {
           withCredentials: true,
           url: `http://localhost:8800/posts/${postId}`,
         })
-        console.log(res.data);
         setPost(res.data);
       } catch (err) {
         console.log(err);
