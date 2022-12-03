@@ -90,7 +90,7 @@ $ourOrange: #fc3e03;
   }
 
   // HOME
-  
+
   .home {
     display: block;
 
@@ -98,13 +98,14 @@ $ourOrange: #fc3e03;
       text-align: center;
       background-color: $ourBlue;
       color: $ourOrange;
-      hr{ // code voor horizontale streep
+      hr {
+        // code voor horizontale streep
         border-top: 0.4vh solid;
         opacity: 1;
         margin: 0;
       }
       p {
-        font-family:Georgia, 'Times New Roman', Times, serif; // NOG TESTEN INDIEN GEEN MOOIERE/MODERNERE LETTERTYPE
+        font-family: Georgia, "Times New Roman", Times, serif; // NOG TESTEN INDIEN GEEN MOOIERE/MODERNERE LETTERTYPE
       }
       .logo {
         padding-top: 8vh;
@@ -124,11 +125,11 @@ $ourOrange: #fc3e03;
       .introduction {
         padding: 8vh;
         font-size: 3vh;
-        text-align: left; 
+        text-align: left;
       }
     }
 
-    .posts {
+    .promotedPosts {
       width: 80vw;
       padding-top: 12vh;
       padding-bottom: 12vh;
@@ -137,62 +138,61 @@ $ourOrange: #fc3e03;
       flex-direction: column;
       justify-content: center;
       gap: 18vh;
+    }
+  }
 
-      .post {
-        display: flex;
-        gap: 1.8vh;
+  .post {
+    display: flex;
+    gap: 1.8vh;
 
-        &:nth-child(2n + 1) {
-          flex-direction: row-reverse;
+    &:nth-child(2n + 1) {
+      flex-direction: row-reverse;
+    }
+
+    .img {
+      img {
+        width: 35vw;
+        height: 45vh;
+        object-fit: cover;
+        border-radius: 3vh;
+        box-shadow: rgba(1, 251, 247, 0.4) -0.5vh 0.5vh,
+          rgba(1, 251, 247, 0.3) -1vh 1vh,
+          rgba(1, 251, 247, 0.2) -1.5vh 1.5vh,
+          rgba(1, 251, 247, 0.1) -2vh 2vh,
+          rgba(1, 251, 247, 0.05) -2.5vh 2.5vh;
+        margin: 3vh;
+        transform: perspective(10000px) rotateY(40deg);
+      }
+    }
+
+    .content {
+      flex: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .stars {
+        flex-direction: row;
+        .checked {
+          color: orange;
         }
+      }
 
-        .img {
-          img {
-            width: 35vw;
-            height: 45vh;
-            object-fit: cover;
-            border-radius: 3vh;
-            box-shadow:
-              rgba(1, 251, 247, 0.4) -0.5vh 0.5vh,
-              rgba(1, 251, 247, 0.3) -1.0vh 1.0vh,
-              rgba(1, 251, 247, 0.2) -1.5vh 1.5vh,
-              rgba(1, 251, 247, 0.1) -2.0vh 2.0vh,
-              rgba(1, 251, 247, 0.05) -2.5vh 2.5vh;
-            margin: 3vh;
-            transform: perspective(10000px) rotateY(40deg);
-          }
-        }
+      p {
+        font-size: 3vh;
+      }
 
-        .content {
-          flex: 3;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
+      .myButton {
+        button {
+          padding: 1.8vh 2vw;
+          background-color: white;
+          border: 1px solid $ourBlue;
+          color: $ourBlue;
 
-          .stars {
-            flex-direction: row;
-            .checked {
-              color: orange;
-            }
-          }
-
-          p {
-            font-size: 3vh;
-          }
-
-          .myButton{
-            button {
-              padding: 1.8vh 2vw;
-              background-color: white;
-              border: 1px solid $ourBlue;
-              color: $ourBlue;
-  
-              &:hover {
-                border: 1px solid white;
-                background-color: $ourBlue;
-                color: white;
-              }
-            }
+          &:hover {
+            border: 1px solid white;
+            background-color: $ourBlue;
+            color: white;
           }
         }
       }
@@ -215,7 +215,8 @@ $ourOrange: #fc3e03;
       padding-left: 1vw;
     }
 
-    .nav-link { // van toepassing wanneer de navigation bar a.d.h.v. een hamburger wordt getoond
+    .nav-link {
+      // van toepassing wanneer de navigation bar a.d.h.v. een hamburger wordt getoond
       color: white;
       background-color: $ourBlue;
       max-width: 200px; // bewust met px's gewerkt om te vermijden dat het dropdown menu te klein wordt
@@ -224,218 +225,208 @@ $ourOrange: #fc3e03;
     }
   }
 
-  footer{
+  footer {
     background-color: lighten($ourBlue, 10%);
     color: white;
     padding-left: 3vw;
     padding-right: 3vw;
 
-    a{
+    a {
       color: white;
       text-decoration: none;
     }
 
-    .copyrightbox{
+    .copyrightbox {
       background-color: $ourBlue;
     }
 
-    .sloganbox{
+    .sloganbox {
       background-color: $ourBlue;
     }
 
-    .contentbox{
+    .contentbox {
       margin-top: 3vh;
       margin-bottom: 3vh;
     }
 
-    hr{ // code voor horizontale streep
+    hr {
+      // code voor horizontale streep
       border-top: 0.4vh solid;
       color: $ourOrange;
       opacity: 1;
       margin: 0;
     }
 
-    p{
+    p {
       margin-top: 1vh;
     }
   }
 
-  .create-tutoring-session{
+  .create-tutoring-session {
     background-color: $ourOrange;
-    form{
+    form {
       width: auto;
 
-      input{
+      input {
         padding: 0%;
         border: 1px solid $ourBlue;
       }
-      
-      button{
+
+      button {
         width: 40vw;
         height: 10vh;
       }
     }
   }
 
-  .ViewTutoringSession{
-
-    .TutoringSessionInfo{
+  .ViewTutoringSession {
+    .TutoringSessionInfo {
       max-width: 30rem;
     }
 
-    div{
+    div {
       padding-top: 1vh;
       padding-bottom: 1vh;
       padding-left: 1vh;
     }
 
-    .TutorInfo{
-
-      img{
+    .TutorInfo {
+      img {
         width: 10vw;
         height: 10vw;
         align-self: center;
       }
     }
 
-    .TutoringSessionDescription{
-
-      textarea{
+    .TutoringSessionDescription {
+      textarea {
         height: 17rem;
         width: 100%;
         resize: none;
       }
     }
 
-    button{
+    button {
       width: 40vw;
       border: none;
       background-color: $ourOrange;
     }
-
-
   }
 
-  .ProfileInformation{
+  .ProfileInformation {
     width: auto;
-    display:inline-block;    
+    display: inline-block;
 
-    form{
+    form {
       width: auto;
-      
-      .multiselector{
+
+      .multiselector {
         max-width: 30em;
       }
     }
-
-
   }
 
-  .ProfilePicture{
-    display:inline-block;    
+  .ProfilePicture {
+    display: inline-block;
 
-    img{
+    img {
       width: 10vw;
       height: 10vw;
       align-self: center;
     }
 
-    form{
-      input{
-      font-size: 2vh;
+    form {
+      input {
+        font-size: 2vh;
       }
     }
   }
 
-  .MyProfile{
+  .MyProfile {
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
 
-    form{
+    form {
       padding-bottom: 0;
     }
   }
 
-  .ViewProfile{
+  .ViewProfile {
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
     margin-top: 3%;
   }
 
-  .ProfilePicture{
-    img{
+  .ProfilePicture {
+    img {
       width: 100%;
       height: 108%;
       align-self: center;
     }
   }
 
-  .ProfileDescription{
+  .ProfileDescription {
     margin-left: auto;
     margin-right: auto;
     margin-top: 3%;
     width: 40vw;
     min-width: 300px; //min width voor op gsm ... zodat de text niet te klein wordt door de hierboven gedefineerde breedte
-    textarea{
+    textarea {
       height: 10rem;
       width: 100%;
       resize: none;
     }
   }
 
-  .RegisterForm{
+  .RegisterForm {
     form {
       width: fit-content;
     }
-
   }
 
-  
-  
-
-  .ViewGroupSession{
-
-    .GroupSessionInfo{
+  .ViewGroupSession {
+    .GroupSessionInfo {
       max-width: 30rem;
 
-      .progress{
+      .progress {
         padding: 0;
       }
     }
 
-    div{
+    div {
       padding-top: 1vh;
       padding-bottom: 1vh;
       padding-left: 1vh;
     }
 
-    .TutorInfo{
+    .TutorInfo {
       padding-left: 5vw;
 
-      img{
+      img {
         width: 10vw;
         height: 10vw;
         align-self: center;
       }
     }
 
-    .GroupSessionDescription{
-
-      textarea{
+    .GroupSessionDescription {
+      textarea {
         height: 17rem;
         width: 100%;
         resize: none;
       }
     }
 
-    button{
+    button {
       width: 40vw/2;
       border: none;
       background-color: $ourOrange;
     }
   }
 
-
+  .page-link {
+    color: $ourBlue;
+  }
 }

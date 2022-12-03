@@ -5,7 +5,7 @@ import {
   logOut,
   register,
 } from "../Controllers/authentication.js";
-import { updateUser, uploadImage } from "../Controllers/users.js";
+import { getSingleUser, updateUser, uploadImage } from "../Controllers/users.js";
 import multer from "multer";
 
 // TO DO:
@@ -33,7 +33,7 @@ export const authRoutes = (app, passport) => {
 
   app.post("/update", updateUser);
 
-  app.get("/giveuser", login);
+  app.get("/user/:id", getSingleUser);
 
   const fileFilter = (req, file, cb) => {
     if (
