@@ -15,29 +15,55 @@ import Card from "react-bootstrap/Card";
 import { PasswordContext } from "../context/PasswordContext";
 import { useContext } from "react";
 
-const VieuwProfile = () => {
+const ViewProfile = () => {
 
   const {currentUser} = useContext(PasswordContext);
+
+  // format date to dd/mm/yy using Regular Expressions
+  function formatDate (input) {
+    let date = input.match(/\d+/g),
+    day = date[2],
+    month = date[1],
+    year = date[0].substring(2); // get only two digits
+  
+    return day+'/'+month+'/'+year;
+  }
 
   let Name = currentUser.firstname;
   let SurName = currentUser.lastname;
   let Birthdate = currentUser.birthDate;
   let EmailAdress = currentUser.email;
-  let Fields_of_study = "Computer Sience";
-  let ProfilePicture =
-    "https://scontent-bru2-1.xx.fbcdn.net/v/t31.18172-1/10945869_121577144882309_2985454743005061280_o.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=7206a8&_nc_ohc=i4H20OgZaf8AX_yFfIP&_nc_ht=scontent-bru2-1.xx&oh=00_AfCbLBH9ApKn1jSQ1inEoeVN6U787gUNyVcO8EtlKqQBEQ&oe=63A97816";
-  let description = 'Lorem ipsum is een opvultekst die drukkers, zetters, grafisch ontwerpers en dergelijken gebruiken om te kijken hoe een opmaak er grafisch uitziet. De eerste woorden van de tekst luiden doorgaans Lorem ipsum dolor sit amet, consectetur adipiscing elit ... Wikipedia'
+  const [studies, setStudies] = useState([]); // must be initialised by an empty array! otherwise not possible to call 'map' 
+  let ProfilePicture = `../uploads/${currentUser.img}`;
+  let description = currentUser.intro;
   let PhoneNumber = "0411929242";
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios({
+          method: "get",
+          withCredentials: true,
+          url: `http://localhost:8800/studies/${currentUser.id}`,
+        });
+        let result = res.data.map(x => x.field);
+        setStudies(result);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [currentUser.id]);
+
   return (
-    <div className="VieuwProfile">
+    <div className="ViewProfile">
       <Container>
         <Row className="justify-content-md-center">
           <Col md="auto">
             <div className="PersonInfo">
               <Row className="justify-content-md-center">
                 <h5> {Name} </h5> <h6> {SurName} </h6>
-                <p>I was born on {Birthdate}.</p>
+                <p>I was born on {formatDate(Birthdate.slice(0,10))}.</p>
               </Row>
 
               <Row className="">
@@ -55,7 +81,7 @@ const VieuwProfile = () => {
               </Row>
 
               <Row className="justify-content-md-center">
-                <p>I am currently studying {Fields_of_study}.</p>
+                <p>I have studied <pre>{studies.join('\n')}</pre></p>
               </Row>
             </div>
           </Col>
@@ -82,4 +108,4 @@ const VieuwProfile = () => {
   );
 };
 
-export default VieuwProfile;
+export default ViewProfile;
