@@ -6,7 +6,7 @@ import Welcome from "../components/Welcome";
 const Home = () => {
   return (
     <div className="home">
-      <link
+      <link // zorgt voor de layout van de sterren 
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
       ></link>
@@ -18,7 +18,7 @@ const Home = () => {
               <img src={post.img} alt="" />
             </div>
             <div className="content">
-              <h1 style={{color: "black"}}>{post.title}</h1> {/* titel bij de post */}
+              <h1>{post.title}</h1> {/* titel bij de post */}
               <div className="stars">
                 <span class="fa fa-star checked fa-2x"></span>
                 <span class="fa fa-star checked fa-2x"></span>

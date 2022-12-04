@@ -1,9 +1,17 @@
 import React from "react";
 import CreateReview from "../components/CreateReview";
+import Review from "../components/Review";
 
 const Dummy = () => {
     return (
-        <CreateReview/> 
+        <div>
+            <div className="create-review">
+                <CreateReview/>
+            </div>
+            <div className="Review">
+                <Review/> 
+            </div>
+        </div>
     )
 }
 
