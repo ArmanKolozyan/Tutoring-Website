@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import CreateTutoringSession from "./pages/CreateTutoringSession";
 import ViewTutoringSession from "./pages/ViewTutoringSession";
+import ViewSummaries from "./pages/ViewSummaries";
 import Post from "./pages/Post";
 import Footer from "./components/Footer";
 import Trademark from "./components/Trademark";
@@ -17,6 +18,7 @@ import MyProfile from "./pages/MyProfile";
 import ViewProfile from "./pages/ViewProfile";
 import CreateGroupSession from "./pages/CreateGroupSession";
 import ViewGroupSession from "./pages/ViewGroupSession";
+import Dummy from "./pages/Dummy";
 // Using an Outlet component of React to avoid
 // duplication of Navbar and Footer at every page
 // that needs a navbar and a footer.
@@ -75,7 +77,15 @@ const router = createBrowserRouter([
       {
         path: "/profile/:firstname",
         element: <MyProfile/>
-      }
+      },
+      {
+        path: "/summaries",
+        element: <ViewSummaries/>
+      },
+      {
+        path: "/dummy",
+        element: <Dummy/>
+      },
     ],
   },
   {

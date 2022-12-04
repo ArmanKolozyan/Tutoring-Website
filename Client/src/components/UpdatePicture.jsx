@@ -61,7 +61,7 @@ function UpdatePicture() {
   return (
     <div>
       <Form onSubmit={handleSubmitFile}>
-        <Card style={{ width: "20rem" }}>
+        <Card style={{ width: "20rem" }}> {/* MISSCHIEN BEST VW GEBRUIKEN IPV REM*/}
           <Card.Img variant="top" src={preview ? preview : ""} />
           <Card.Body>
             <Card.Text>Change Profile Picture </Card.Text>
