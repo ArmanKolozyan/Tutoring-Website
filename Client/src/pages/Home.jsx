@@ -20,13 +20,13 @@ const Home = () => {
             <div className="content">
               <h1 style={{color: "black"}}>{post.title}</h1> {/* titel bij de post */}
               <div className="stars">
-                <span class="fa fa-star checked fa-2x"></span> {/* geselecteerde/gele ster */}
                 <span class="fa fa-star checked fa-2x"></span>
                 <span class="fa fa-star checked fa-2x"></span>
-                <span class="fa fa-star fa-2x"></span> {/* niet-geselecteerde/zwarte ster */}
+                <span class="fa fa-star checked fa-2x"></span>
+                <span class="fa fa-star fa-2x"></span>
                 <span class="fa fa-star fa-2x"></span>
               </div>
-              <p>{post.desc}</p> {/* tekst bij de post */}
+              <p>{post.desc}</p>
               <div className="myButton">
                 <Link className="link" to={`/user/${post.id}`}>
                   <button>Visit profile</button>

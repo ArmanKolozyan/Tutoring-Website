@@ -6,7 +6,7 @@ function TutoringSessionInfo(props) {
   let tutoringSessionFac = props.tutoringSessionFac;
   let tutoringSessionPrice = props.tutoringSessionPrice;
   let tutoringSessionFreeTrial = props.tutoringSessionFreeTrial;
-  let Experience = props.Experience;
+  let experience = props.experience;
 
   let freetrialpos = "no"
   if(tutoringSessionFreeTrial) {
@@ -15,13 +15,15 @@ function TutoringSessionInfo(props) {
 
   return (
     <div>
-    <h5> {tutoringSessionName} </h5> <h6>at {tutoringSessionFac} </h6>
+    <h5> {tutoringSessionName} </h5> 
+    <h6>This course is of the faculty {tutoringSessionFac} </h6>
     <p>
-    the tutor has {Experience} years of experience with this subject.
+    The tutor has {experience} years of experience with this subject.
     </p>
 
+
     <p>
-    the price of a tutoring session would be {tutoringSessionPrice} euro's per hour, and there is {freetrialpos} possiblity for a free trial of the tutoring session.
+    The price of a tutoring session would be {tutoringSessionPrice} euro's per hour, and there is {freetrialpos} possiblity for a free trial of the tutoring session.
     </p>
     </div>
   )

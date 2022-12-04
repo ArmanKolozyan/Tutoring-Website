@@ -19,6 +19,8 @@ import ViewProfile from "./pages/ViewProfile";
 import CreateGroupSession from "./pages/CreateGroupSession";
 import ViewGroupSession from "./pages/ViewGroupSession";
 import Dummy from "./pages/Dummy";
+import ViewTutoringSessions from "./pages/ViewTutoringSessions";
+
 // Using an Outlet component of React to avoid
 // duplication of Navbar and Footer at every page
 // that needs a navbar and a footer.
@@ -86,6 +88,10 @@ const router = createBrowserRouter([
         path: "/dummy",
         element: <Dummy/>
       },
+      {
+        path: "/tutoringsessions",
+        element: <ViewTutoringSessions/>
+      }
     ],
   },
   {
