@@ -11,7 +11,7 @@ const Home = () => {
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
       ></link>
       <Welcome/>
-      <div className="posts">
+      <div className="promotedPosts">
         {promotedUsers.map((post) => (
           <div className="post" key={post.id}>
             <div className="img">
