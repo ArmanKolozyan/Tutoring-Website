@@ -100,7 +100,7 @@ const ViewTutoringSession = () => {
                 tutorText={user?.shortIntro}
                 tutorAge={user.birthDate ? formatDate(user.birthDate) : ""}
                 AvgRating={3} // TO DOOO
-                ProfileLink={"http://localhost:3000/Login"}
+                ProfileLink={`/viewprofile/${user?.id}`}
                 PhotoLink={`../uploads/${user?.img}`}
               />
             </div>

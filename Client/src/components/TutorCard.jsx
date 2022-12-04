@@ -1,6 +1,8 @@
+import Button from "react-bootstrap/Button";
 import React from "react"
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import {Link} from "react-router-dom";
 
 function TutorInfo(props) {
   let tutorName = props.tutorName;
@@ -25,9 +27,9 @@ function TutorInfo(props) {
         <ListGroup.Item>Birth date: {tutorAge}</ListGroup.Item>
         <ListGroup.Item>Average Rating: {AvgRating}</ListGroup.Item>
       </ListGroup>
-      <Card.Body>
-        <Card.Link href={ProfileLink}>Visit my profile</Card.Link>
-      </Card.Body>
+      <Link to={ProfileLink} className = "btn btn-primary">
+          Visit Profile
+        </Link>
     </Card>
     </div>
   )

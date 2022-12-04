@@ -28,7 +28,7 @@ const Navigationbar = () => {
         <Navbar.Collapse id="basic-navbar-nav" className="text-end">
 
         <Nav.Link href="#Study_together" className="ms-auto"> <Icon.People size={20} /> Study Together</Nav.Link>
-        <Nav.Link href="#Find_tutors"> <Icon.PersonVideo3 size={20} /> Find tutors</Nav.Link>
+        <Nav.Link href="/tutoringsessions"> <Icon.PersonVideo3 size={20} /> Find tutors</Nav.Link>
         <Nav.Link href="#Summaries"> <Icon.JournalBookmarkFill size={20} /> Summaries</Nav.Link>
         <Nav.Link href="#Search"><Icon.Search size={20} /> Search</Nav.Link>
         
