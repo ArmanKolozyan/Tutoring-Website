@@ -25,7 +25,7 @@ const ViewTutoringSession = () => {
         const res = await axios({
           method: "get",
           withCredentials: true,
-          url: `http://localhost:8800/posts/${postId}`,
+          url: `http://localhost:8800/tutoringposts/${postId}`,
         });
         setPost(res.data);
       } catch (err) {

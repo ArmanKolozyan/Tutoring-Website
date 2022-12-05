@@ -1,11 +1,10 @@
 import {
   getUser,
-  getUserStudies,
   login,
   logOut,
   register,
 } from "../Controllers/authentication.js";
-import { getSingleUser, updateUser, uploadImage } from "../Controllers/users.js";
+import { getSingleUser, updateUser, uploadImage, getUserStudies} from "../Controllers/users.js";
 import multer from "multer";
 
 // TO DO:
