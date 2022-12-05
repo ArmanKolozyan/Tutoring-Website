@@ -12,12 +12,12 @@ import { useLocation } from "react-router-dom";
 
 const ViewTutoringSession = () => {
   const location = useLocation();
+  const postId = location.pathname.split("/")[2];
 
   const [post, setPost] = useState({});
 
   const [user, setUser] = useState({});
 
-  const postId = location.pathname.split("/")[2];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -96,7 +96,7 @@ const ViewTutoringSession = () => {
           <Col md="auto">
             <div className="TutorInfo">
               <TutorInfo
-                tutorName={post.FirstName}
+                tutorName={user?.firstname?.concat(' ').concat(user.lastname)} // VRAAG: kan dit mooier?
                 tutorText={user?.shortIntro}
                 tutorAge={user.birthDate ? formatDate(user.birthDate) : ""}
                 AvgRating={3} // TO DOOO

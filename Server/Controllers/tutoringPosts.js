@@ -38,8 +38,6 @@ export const addTutoringPost = (req, res) => {
     req.body.test,
   ];
 
-  console.log(values)
-
 
   db.query(q, [values], (err, data) => {
     if (err) return res.status(500).json(err);

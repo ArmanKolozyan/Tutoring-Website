@@ -7,6 +7,7 @@ import session from "express-session";
 import { config } from "./passportConfig.js";
 import { authRoutes } from "./Routes/authRoutes.js";
 import { tutoringPostRoutes } from "./Routes/tutoringPostRoutes.js";
+import { groupPostRoutes } from "./Routes/groupPostRoutes.js";
 
 
 const port = 8800;
@@ -38,6 +39,8 @@ config(passport);
 
 authRoutes(app, passport);
 tutoringPostRoutes(app);
+groupPostRoutes(app);
+
 
 
 // Routes
