@@ -48,8 +48,8 @@ function ProfileInfo() {
           studies,
         },
       });
-      currentUser.firstName = firstName;
-      currentUser.lastName = lastName;
+      currentUser.firstname = firstName;
+      currentUser.lastname = lastName;
       currentUser.birthDate = birthdate;
       currentUser.intro = intro;
       currentUser.shortIntro = shortIntro;
