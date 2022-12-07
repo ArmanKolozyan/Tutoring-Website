@@ -15,7 +15,7 @@ const ViewTutoringSessions = () => {
         const res = await axios({
           method: "get",
           withCredentials: true,
-          url: `http://localhost:8800/posts/`,
+          url: `http://localhost:8800/tutoringposts/`,
         });
         setPosts(res.data);
         setFetching(false);

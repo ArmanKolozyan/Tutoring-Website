@@ -31,7 +31,7 @@ const CreateTutoringSession = () => {
         method: "post",
         withCredentials: true,
         headers: {"Content-Type": "application/json" }, 
-        url: "http://localhost:8800/posts/",
+        url: "http://localhost:8800/tutoringposts/",
         data: {
           course,
           field,

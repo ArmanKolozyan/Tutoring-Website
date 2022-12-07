@@ -9,7 +9,6 @@ import Login from "./pages/Login";
 import CreateTutoringSession from "./pages/CreateTutoringSession";
 import ViewTutoringSession from "./pages/ViewTutoringSession";
 import ViewSummaries from "./pages/ViewSummaries";
-import Post from "./pages/Post";
 import Footer from "./components/Footer";
 import Trademark from "./components/Trademark";
 import Navigationbar from "./components/Navigationbar";
@@ -51,10 +50,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home/>
-      },
-      {
-        path: "/post/:id", // if you type "localhost:"portNumber"/post/1345" in the url bar, where 1345 is some id number you will trigger the "Post" React component
-        element: <Post/>
       },
       {
         path: "/createTutoringSession",

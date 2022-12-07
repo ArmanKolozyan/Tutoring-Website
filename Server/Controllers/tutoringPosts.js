@@ -1,7 +1,7 @@
 import { db } from "../db.js";
 
-export const getPosts = (req, res) => {
-  const q = "SELECT * FROM posts";
+export const getTutoringPosts = (req, res) => {
+  const q = "SELECT * FROM tutoring_posts";
 
   db.query(q, (err, data) => {
     if (err) return res.status(500).send(err);
@@ -10,9 +10,9 @@ export const getPosts = (req, res) => {
   });
 };
 
-export const getSinglePost = (req, res) => {
+export const getSingleTutoringPost = (req, res) => {
   const q =
-    "SELECT p.id, `course`, `field_of_study`, `description`, `date`, `experience`, `price`, `free_test`, p.uid, u.firstname FROM users u JOIN posts p ON u.id = p.uid WHERE p.id = ? ";
+    "SELECT p.id, `course`, `field_of_study`, `description`, `date`, `experience`, `price`, `free_test`, p.uid, u.firstname FROM users u JOIN tutoring_posts p ON u.id = p.uid WHERE p.id = ? ";
 
   db.query(q, [req.params.id], (err, data) => {
     if (err) return res.status(500).json(err);
@@ -21,11 +21,11 @@ export const getSinglePost = (req, res) => {
   });
 };
 
-export const addPost = (req, res) => {
+export const addTutoringPost = (req, res) => {
   // here we should check authentication
 
   const q =
-    "INSERT INTO posts(`course`, `field_of_study`, `description`, `date`, `uid`, `experience`, `price`, `free_test`) VALUES (?)";
+    "INSERT INTO tutoring_posts(`course`, `field_of_study`, `description`, `date`, `uid`, `experience`, `price`, `free_test`) VALUES (?)";
 
   const values = [
     req.body.course,
@@ -41,6 +41,6 @@ export const addPost = (req, res) => {
 
   db.query(q, [values], (err, data) => {
     if (err) return res.status(500).json(err);
-    return res.json("Post has been created.");
+    return res.json("Tutoring post has been created.");
   });
 };

@@ -91,7 +91,7 @@ $ourOrange: #fc3e03;
   }
 
   // HOME
-  
+
   .home {
     display: block;
 
@@ -126,7 +126,7 @@ $ourOrange: #fc3e03;
       .introduction {
         padding: 8vh;
         font-size: 3vh;
-        text-align: left; 
+        text-align: left;
       }
     }
 
@@ -142,39 +142,34 @@ $ourOrange: #fc3e03;
     }
   }
 
-      .post {
-        display: flex;
-        gap: 1.8vh;
+  .post {
+    display: flex;
+    gap: 1.8vh;
 
-        &:nth-child(2n + 1) {
-          flex-direction: row-reverse;
-        }
+    &:nth-child(2n + 1) {
+      flex-direction: row-reverse;
+    }
 
-        .img {
-          img {
-            width: 35vw;
-            height: 45vh;
-            object-fit: cover;
-            border-radius: 3vh;
-            box-shadow: rgba(1, 251, 247, 0.4) -0.5vh 0.5vh,
-                        rgba(1, 251, 247, 0.3) -1vh 1vh,
-                        rgba(1, 251, 247, 0.2) -1.5vh 1.5vh,
-                        rgba(1, 251, 247, 0.1) -2vh 2vh,
-                        rgba(1, 251, 247, 0.05) -2.5vh 2.5vh;
-            margin: 3vh;
-            transform: perspective(10000px) rotateY(40deg);
-          }
-        }
+    .pic_caption {
+      vertical-align: top;
+      display: inline-block;
+      text-align: center;
+  }
 
-        .content {
-          flex: 3;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
 
-          h1{
-            color: black;
-          }
+    .img {
+      img {
+        width: 35vw;
+        height: 45vh;
+        object-fit: cover;
+        border-radius: 3vh;
+        box-shadow: rgba(1, 251, 247, 0.4) -0.5vh 0.5vh,
+          rgba(1, 251, 247, 0.3) -1vh 1vh, rgba(1, 251, 247, 0.2) -1.5vh 1.5vh,
+          rgba(1, 251, 247, 0.1) -2vh 2vh, rgba(1, 251, 247, 0.05) -2.5vh 2.5vh;
+        margin: 3vh;
+        transform: perspective(10000px) rotateY(40deg);
+      }
+    }
 
           .stars {
             font-size: 2.5vh;
@@ -184,27 +179,44 @@ $ourOrange: #fc3e03;
               color: $ourOrange;
             }
           }
+    .content {
+      flex: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
-          p {
-            font-size: 3vh;
-          }
+      h1 {
+        color: black;
+      }
+
+      p {
+        font-size: 3vh;
+      }
 
       .myButton {
-            button {
-              padding: 1.8vh 2vw;
-              background-color: white;
-              border: 1px solid $ourBlue;
-              color: $ourBlue;
-  
-              &:hover {
-                border: 1px solid white;
-                background-color: $ourBlue;
-                color: white;
-              }
-            }
+        button {
+          padding: 1.8vh 2vw;
+          background-color: white;
+          border: 1px solid $ourBlue;
+          color: $ourBlue;
+
+          &:hover {
+            border: 1px solid white;
+            background-color: $ourBlue;
+            color: white;
           }
         }
       }
+    }
+  }
+
+  .stars {
+    flex-direction: row;
+    color: $ourBlue;
+    .checked {
+      color: $ourOrange;
+    }
+  }
 
   // NAVBAR
 
@@ -236,7 +248,7 @@ $ourOrange: #fc3e03;
 
   // FOOTER
 
-  footer{
+  footer {
     background-color: lighten($ourBlue, 10%);
     color: white;
     padding-left: 3vw;
@@ -275,7 +287,7 @@ $ourOrange: #fc3e03;
 
   // TUTORING SESSION
 
-  .create-tutoring-session{
+  .create-tutoring-session {
     background-color: $ourOrange;
     form {
       width: auto;
@@ -284,7 +296,7 @@ $ourOrange: #fc3e03;
         padding: 0%;
         border: 1px solid $ourBlue;
       }
-      
+
       button {
         width: 40vw;
         height: 10vh;
@@ -305,7 +317,7 @@ $ourOrange: #fc3e03;
 
     .TutorInfo {
       padding-left: 4vh;
-      div{
+      div {
         padding-left: 0vh;
       }
       img {
@@ -333,13 +345,13 @@ $ourOrange: #fc3e03;
 
   // PROFILE
 
-  .ProfileInformation{
+  .ProfileInformation {
     width: auto;
     display: inline-block;
 
     form {
       width: auto;
-      
+
       .multiselector {
         max-width: 30em;
       }
@@ -357,7 +369,7 @@ $ourOrange: #fc3e03;
 
     form {
       input {
-      font-size: 2vh;
+        font-size: 2vh;
       }
     }
   }
@@ -405,12 +417,11 @@ $ourOrange: #fc3e03;
       width: fit-content;
     }
   }
-  
+
   // GROUP SESSION
 
-  .ViewGroupSession{
-
-    .GroupSessionInfo{
+  .ViewGroupSession {
+    .GroupSessionInfo {
       max-width: 30rem;
 
       .progress {
@@ -451,16 +462,16 @@ $ourOrange: #fc3e03;
 
   // REVIEW
 
-  .create-review{
+  .create-review {
     flex-direction: column;
     padding: 10vh;
     padding-bottom: 5vh;
-    h1{
+    h1 {
       font-size: 5vh;
       color: $ourBlue;
       margin-bottom: 3vh;
     }
-    textarea{
+    textarea {
       font-size: 3vh;
       margin-top: 3vh;
       width: 60%;
@@ -477,8 +488,9 @@ $ourOrange: #fc3e03;
     }
   }
 
-  .Review{
-    .box{ // zodat de review zich in een box bevindt
+  .Review {
+    .box {
+      // zodat de review zich in een box bevindt
       margin: 5vh;
       padding: 4vh;
       //box-sizing: border-box;
@@ -489,7 +501,7 @@ $ourOrange: #fc3e03;
       border: 0.5vh solid black;
       border-radius: 5vh;
     }
-    h1{
+    h1 {
       font-size: 4vh;
       color: $ourBlue;
       width: fit-content;
@@ -503,11 +515,11 @@ $ourOrange: #fc3e03;
         color: $ourOrange;
       }
     }
-    p{
+    p {
       margin-top: 2vh;
       font-size: 2.5vh;
     }
-    h2{
+    h2 {
       display: flex;
       justify-content: right;
       font-size: 2vh;
@@ -519,5 +531,4 @@ $ourOrange: #fc3e03;
   .page-link {
     color: $ourBlue;
   }
-  
 }

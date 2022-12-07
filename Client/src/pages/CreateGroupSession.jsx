@@ -13,11 +13,14 @@ import { PasswordContext } from "../context/PasswordContext";
 import { useContext } from "react";
 
 const CreateGroupSession = () => {
+  const [title, setTitle] = useState();
+  const [limited, setLimited] = useState(false);
+  const [space, setSpace] = useState();
+  const [faculty, setFaculty] = useState();
   const [course, setCourse] = useState();
-  const [field, setField] = useState();
-  const [exp, setExp] = useState();
   const [price, setPrice] = useState();
-  const [test, setTest] = useState();
+  const [free, setFree] = useState(true);
+  const [dateAndTime, setDateAndTime] = useState();
   const [desc, setDesc] = useState();
 
   const { currentUser } = useContext(PasswordContext);
@@ -30,19 +33,37 @@ const CreateGroupSession = () => {
         method: "post",
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
-        url: "http://localhost:8800/posts/",
+        url: "http://localhost:8800/groupposts/",
         data: {
+          title,
+          limited,
+          space,
+          faculty,
           course,
-          field,
-          desc,
-          date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-          exp,
           price,
-          test,
+          free,
+          dateAndTime,
+          desc,
         },
       });
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const checkLimited = () => {
+    if (limited) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const checkFree = () => {
+    if (free) {
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -59,68 +80,40 @@ const CreateGroupSession = () => {
 
             <Row className="">
               <Col md="5">
-                <Form.Control
-                  type="text"
-                  required
-                  placeholder="Session Titel"
-                />
+                <Form.Control type="text" required placeholder="Session Title" onChange={(e) => setTitle(e.target.value)} />
               </Col>
 
               <Col md="auto">
-                <Form.Check
-                  required
-                  type="checkbox"
-                  label="Limited spaces"
-                  className="checkbox"
-                />
+                <Form.Check type="checkbox" label="Limited spaces" className="checkbox" onChange={(e) => setLimited(e.target.checked)} />
               </Col>
-
               <Col md="4">
-                <Form.Control
-                  required
-                  type="number"
-                  placeholder="Max inscriptions"
-                />
+                <Form.Control required type="number" placeholder="Max inscriptions" disabled={checkLimited()} onChange={(e) => setSpace(e.target.value)} />
               </Col>
             </Row>
 
             <Row className="">
               <Form.Label>Target audience</Form.Label>
               <Col md="auto">
-                <Form.Select
-                  required
-                  onChange={(e) => setField(e.target.value)}
-                >
+                <Form.Select required onChange={(e) => setFaculty(e.target.value)}>
                   <option disabled={true} selected value="">
-                    Select the faculty of the subject
+                    Select the faculty of the course
                   </option>
-                  <option value="Science and Bio-engineering Sciences">
-                    Science and Bio-engineering Sciences
-                  </option>
-                  <option value="Medicine and Pharmacy">
-                    Medicine and Pharmacy
-                  </option>
-                  <option value="Law and Criminology">
-                    Law and Criminology
-                  </option>
+                  <option value="Science and Bio-engineering Sciences">Science and Bio-engineering Sciences</option>
+                  <option value="Medicine and Pharmacy">Medicine and Pharmacy</option>
+                  <option value="Law and Criminology">Law and Criminology</option>
                 </Form.Select>
               </Col>
 
               <Col md="auto">
-                <Form.Select
-                  required
-                  onChange={(e) => setCourse(e.target.value)}
-                >
+                <Form.Select required onChange={(e) => setCourse(e.target.value)}>
                   <option disabled={true} selected value="">
-                    Select the subject
+                    Select the course
                   </option>
                   <option value="Computer Systems">Computer Systems</option>
                   <option value="Discrete Maths">Discrete Maths</option>
                   <option value="Biomedische Chemie">Biomedische Chemie</option>
                   <option value="Biologie">Biologie</option>
-                  <option value="Politieke Geschiedenis">
-                    Politieke Geschiedenis
-                  </option>
+                  <option value="Politieke Geschiedenis">Politieke Geschiedenis</option>
                   <option value="Statistiek I">Statistiek I</option>
                 </Form.Select>
               </Col>
@@ -128,35 +121,21 @@ const CreateGroupSession = () => {
 
             <Row className="">
               <Form.Label>Session information</Form.Label>
+              <Col md="auto">
+                <Form.Check defaultChecked={true} type="checkbox" label="Free groupsession" className="checkbox" onChange={(e) => setFree(e.target.checked)} />
+              </Col>
               <Col md="5">
-                <Form.Control
-                  required
-                  onChange={(e) => setPrice(e.target.value)}
-                  type="number"
-                  placeholder="Price"
-                />
+                <Form.Control style={{"width": "10vw"}} required onChange={(e) => setPrice(e.target.value)} type="number" placeholder="Price" disabled = {checkFree()} />
               </Col>
               <Col md="auto">
-                <Form.Check
-                  required
-                  type="checkbox"
-                  label="Free groupsession"
-                  className="checkbox"
-                  onChange={(e) => setTest(e.target.value)}
-                />
+                <Form.Label> Date and time: </Form.Label>
+                <input required type="datetime-local" id="birthdaytime" name="birthdaytime" onChange={(e) => setDateAndTime(e.target.value)} />
               </Col>
             </Row>
             <Form.Label>Session description</Form.Label>
 
             <Col md="auto">
-              <Form.Control
-                as="textarea"
-                placeholder="Give a discrition of what this groupsession will be like"
-                maxLength={573}
-                rows={5}
-                required
-                onChange={(e) => setDesc(e.target.value)}
-              />
+              <Form.Control as="textarea" placeholder="Give a description of what this groupsession will be like" maxLength={573} rows={5} required onChange={(e) => setDesc(e.target.value)} />
             </Col>
             <Row></Row>
           </Col>
