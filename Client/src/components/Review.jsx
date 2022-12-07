@@ -16,11 +16,11 @@ const Review = () => {
                 </Row>
                 <Row>
                     <div className="stars">
-                        <span class="fa fa-star checked fa-2x"></span>
-                        <span class="fa fa-star checked fa-2x"></span>
-                        <span class="fa fa-star checked fa-2x"></span>
-                        <span class="fa fa-star checked fa-2x"></span>
-                        <span class="fa fa-star fa-2x"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
                     </div>
                 </Row>
                 <Row>

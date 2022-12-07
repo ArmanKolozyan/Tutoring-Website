@@ -46,12 +46,12 @@ const PostCard = ({ post }) => {
         <Link className="link" to={`/tutoringsession/${post.id}`}>
           <h1 style={{ color: "black" }}>{post.course}</h1>
         </Link>
-        <div className="stars" style={{"margin-top": "-5em"}}>
-          <span className="fa fa-star checked fa-2x"></span>
-          <span className="fa fa-star checked fa-2x"></span>
-          <span className="fa fa-star checked fa-2x"></span>
-          <span className="fa fa-star fa-2x"></span>
-          <span className="fa fa-star fa-2x"></span>
+        <div className="stars" style={{"margin-top": "-5em", "font-size": "5vh"}}>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star checked"></span>
+          <span className="fa fa-star"></span>
+          <span className="fa fa-star"></span>
         </div>
         <p>{post.description}</p>
         <div className="myButton">

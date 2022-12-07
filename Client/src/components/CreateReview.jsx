@@ -1,6 +1,7 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 import Row from "react-bootstrap/Row";
+import { useLayoutEffect } from "react";
 
 const CreateReview = () => {
 
@@ -13,6 +14,7 @@ const CreateReview = () => {
     const stars = Array(nrStars).fill(0); // lijst van "nrStars" aantal elementen geïnitialiseerd met 0'en
     const [nrGivenStars, setGivenStars] = React.useState(0); // per default is de rating = 0
     const [nrSelectedStars, setNrSelectedStars] = React.useState(undefined); // per default werden er nog geen sterren geselecteerd
+    //const [screenHeight, setScreenHeight] = React.useState(window.innerHeight); // schermhoogte
 
     const handleMouseClick = value => {
         setGivenStars(value)
@@ -26,6 +28,14 @@ const CreateReview = () => {
         setNrSelectedStars(undefined)
     };
 
+    /*
+    const handleScreenResizing = () => {
+        setScreenHeight(window.innerHeight)
+    }
+
+    window.addEventListener('resize', handleScreenResizing)
+    */
+
     return (
         <div>
             <Row>
@@ -37,11 +47,12 @@ const CreateReview = () => {
                         return (
                             <FaStar
                                 key={index}
-                                size={25} // grootte van sterren
+                                //size={0.05*screenHeight}
+                                size={"5vh"}
                                 style={{
                                     marginRight: 10
                                 }}
-                                color={(nrSelectedStars || nrGivenStars) > index ? colors.ourOrange : colors.ourBlue} // indien "index" groter is dan het aantal geselecteerde OF gegeven sterren => kleur de ster horende bij de index in het oranje
+                                color={(nrSelectedStars || nrGivenStars) > index ? colors.ourOrange : colors.ourBlue}
                                 onClick={() => handleMouseClick(index + 1)}
                                 onMouseOver={() => handleMouseOver(index + 1)}
                                 onMouseLeave={handleMouseLeave}
@@ -54,7 +65,7 @@ const CreateReview = () => {
                 <textarea placeholder="Describe your experience"/>
             </Row>
             <Row>
-            <button>Submit</button>
+                <button>Submit</button>
             </Row>
         </div>
     )

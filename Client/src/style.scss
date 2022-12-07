@@ -177,6 +177,7 @@ $ourOrange: #fc3e03;
           }
 
           .stars {
+            font-size: 2.5vh;
             flex-direction: row;
             color: $ourBlue;
             .checked {
@@ -494,6 +495,7 @@ $ourOrange: #fc3e03;
       width: fit-content;
     }
     .stars {
+      font-size: 5vh;
       margin-top: 1vh;
       flex-direction: row;
       color: $ourBlue;
