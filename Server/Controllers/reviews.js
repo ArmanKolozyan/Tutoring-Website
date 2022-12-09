@@ -2,13 +2,12 @@ import { db } from "../db.js";
 
 export const addPostReview = (req, res) => {
     // here we should check authentication
-
-    console.log()
   
     const q =
-      "INSERT INTO post_reviews(`comment`, `rating`, `date`, `authorid`, `postid`) VALUES (?)";
+      "INSERT INTO post_reviews(`title`, `description`, `rating`, `date`, `authorid`, `postid`) VALUES (?)";
   
     const values = [
+      req.body.title,
       req.body.description,
       req.body.nrClickedStars,
       req.body.date,
@@ -22,5 +21,16 @@ export const addPostReview = (req, res) => {
         return res.status(200).json(data[0]);
       });
 }
+
+export const getSinglePostReviews = (req, res) => {
+  const q =
+    "SELECT r.id, `title`, `description`, `rating`, `date`, `authorid`, `postid`, u.firstname FROM post_reviews r JOIN users u ON r.authorid = u.id WHERE r.postid = ? ";
+
+  db.query(q, [req.params.id], (err, data) => {
+    if (err) return res.status(500).json(err);
+
+    return res.status(200).json(data);
+  });
+};
 
 

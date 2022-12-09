@@ -1,13 +1,14 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { useLayoutEffect } from "react";
 import { PasswordContext } from "../context/PasswordContext";
 import { useContext } from "react";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
-import reviewTypes from "./reviewTypes"
+import reviewTypes from "./reviewTypes";
 
 const CreateReview = (props) => {
   const id = props.id;
@@ -28,6 +29,7 @@ const CreateReview = (props) => {
   const stars = Array(nrStars).fill(0); // lijst van "nrStars" aantal elementen geïnitialiseerd met 0'en
   const [nrHoveredStars, setNrHoveredStars] = React.useState(undefined); // per default werden er nog geen sterren geselecteerd
   const [nrClickedStars, setClickedStars] = React.useState(0); // per default is de rating = 0
+  const [title, setTitle] = React.useState(0);
   const [description, setDescription] = React.useState(0);
 
   const handleMouseClick = (value) => {
@@ -49,8 +51,9 @@ const CreateReview = (props) => {
         method: "post",
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
-        url: `http://localhost:8800/reviews/`,
+        url: `http://localhost:8800/postReviews/`,
         data: {
+          title,
           description,
           nrClickedStars,
           date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
@@ -88,12 +91,26 @@ const CreateReview = (props) => {
           })}
         </div>
       </Row>
+      <Col>
+        <Row>
+          <textarea className="reviewTitle" onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
+        </Row>
+        <Row>
+          <textarea onChange={(e) => setDescription(e.target.value)} placeholder="Describe your experience" />
+        </Row>
+      </Col>
       <Row>
-        <textarea onChange={(e) => setDescription(e.target.value)} placeholder="Describe your experience" />
-      </Row>
-      <Row>
-        <button onClick={(event) => {
-  if (type === reviewTypes.Post) {handleSubmit(event) } else {console.log("nope")}}}>Submit</button>
+        <button
+          onClick={(event) => {
+            if (type === reviewTypes.Post) {
+              handleSubmit(event);
+            } else {
+              console.log("nope");
+            }
+          }}
+        >
+          Submit
+        </button>
       </Row>
     </div>
   );

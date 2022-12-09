@@ -471,6 +471,13 @@ $ourOrange: #fc3e03;
       color: $ourBlue;
       margin-bottom: 1vh;
     }
+    .reviewTitle {
+      resize: none;
+      font-size: 3vh;
+      margin-top: 1vh;
+      width: 70vh;
+      height: 5vh;
+    }
     textarea {
       font-size: 3vh;
       margin-top: 1vh;
@@ -508,7 +515,6 @@ $ourOrange: #fc3e03;
     }
     .stars {
       font-size: 5vh;
-      margin-top: 1vh;
       flex-direction: row;
       color: $ourBlue;
       .checked {
@@ -525,6 +531,12 @@ $ourOrange: #fc3e03;
       font-size: 2vh;
       color: $ourBlue;
       margin-top: 3vh;
+    }
+  }
+
+  .reviews-list {
+    .list-group-item {
+      width: 80%;
     }
   }
 

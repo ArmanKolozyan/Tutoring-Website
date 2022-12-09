@@ -11,6 +11,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import CreateReview from "../components/CreateReview";
 import reviewTypes from "../components/reviewTypes";
+import ViewReviews from "../components/ViewReviews";
 
 
 const ViewTutoringSession = () => {
@@ -98,6 +99,9 @@ const ViewTutoringSession = () => {
               <Col md="">
                 <div className="create-review">
                   <CreateReview id = {postId} type = {reviewTypes.Post} />
+                </div>
+                <div className="reviews-list">
+                <ViewReviews id = {postId}/>
                 </div>
               </Col>
             </Row>
