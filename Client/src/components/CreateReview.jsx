@@ -2,74 +2,101 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 import Row from "react-bootstrap/Row";
 import { useLayoutEffect } from "react";
+import { PasswordContext } from "../context/PasswordContext";
+import { useContext } from "react";
+import axios from "axios";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import moment from "moment";
+import reviewTypes from "./reviewTypes"
 
-const CreateReview = () => {
+const CreateReview = (props) => {
+  const id = props.id;
+  const type = props.type;
 
-    const colors = {
-        ourBlue: "#1e328d",
-        ourOrange: "#fc3e03"
+  const location = useLocation();
+
+  const postId = location.pathname.split("/")[2];
+
+  const colors = {
+    ourBlue: "#1e328d",
+    ourOrange: "#fc3e03",
+  };
+
+  const { currentUser } = useContext(PasswordContext);
+
+  const nrStars = 5;
+  const stars = Array(nrStars).fill(0); // lijst van "nrStars" aantal elementen geïnitialiseerd met 0'en
+  const [nrHoveredStars, setNrHoveredStars] = React.useState(undefined); // per default werden er nog geen sterren geselecteerd
+  const [nrClickedStars, setClickedStars] = React.useState(0); // per default is de rating = 0
+  const [description, setDescription] = React.useState(0);
+
+  const handleMouseClick = (value) => {
+    setClickedStars(value);
+  };
+
+  const handleMouseOver = (value) => {
+    setNrHoveredStars(value);
+  };
+
+  const handleMouseLeave = () => {
+    setNrHoveredStars(undefined);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios({
+        method: "post",
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
+        url: `http://localhost:8800/reviews/`,
+        data: {
+          description,
+          nrClickedStars,
+          date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+          id,
+        },
+      });
+    } catch (err) {
+      console.log(err);
     }
+  };
 
-    const nrStars = 5
-    const stars = Array(nrStars).fill(0); // lijst van "nrStars" aantal elementen geïnitialiseerd met 0'en
-    const [nrGivenStars, setGivenStars] = React.useState(0); // per default is de rating = 0
-    const [nrSelectedStars, setNrSelectedStars] = React.useState(undefined); // per default werden er nog geen sterren geselecteerd
-    //const [screenHeight, setScreenHeight] = React.useState(window.innerHeight); // schermhoogte
-
-    const handleMouseClick = value => {
-        setGivenStars(value)
-    };
-
-    const handleMouseOver = value => {
-        setNrSelectedStars(value)
-    };
-
-    const handleMouseLeave = () => {
-        setNrSelectedStars(undefined)
-    };
-
-    /*
-    const handleScreenResizing = () => {
-        setScreenHeight(window.innerHeight)
-    }
-
-    window.addEventListener('resize', handleScreenResizing)
-    */
-
-    return (
-        <div>
-            <Row>
-                <h1>Rate your experience</h1>
-            </Row>
-            <Row>
-                <div className="stars">
-                    {stars.map((_, index) => { // gaat elk element van de lijst "stars" naar een ster mappen
-                        return (
-                            <FaStar
-                                key={index}
-                                //size={0.05*screenHeight}
-                                size={"5vh"}
-                                style={{
-                                    marginRight: 10
-                                }}
-                                color={(nrSelectedStars || nrGivenStars) > index ? colors.ourOrange : colors.ourBlue}
-                                onClick={() => handleMouseClick(index + 1)}
-                                onMouseOver={() => handleMouseOver(index + 1)}
-                                onMouseLeave={handleMouseLeave}
-                            />
-                        )
-                    })}
-                </div>
-            </Row>
-            <Row>
-                <textarea placeholder="Describe your experience"/>
-            </Row>
-            <Row>
-                <button>Submit</button>
-            </Row>
+  return (
+    <div>
+      <Row>
+        <h1>Rate your experience</h1>
+      </Row>
+      <Row>
+        <div className="stars">
+          {stars.map((_, index) => {
+            // gaat elk element van de lijst "stars" naar een ster mappen
+            return (
+              <FaStar
+                key={index}
+                //size={0.05*screenHeight}
+                size={"5vh"}
+                style={{
+                  marginRight: 10,
+                }}
+                color={(nrHoveredStars || nrClickedStars) > index ? colors.ourOrange : colors.ourBlue} // indien "index" groter is dan het aantal geselecteerde OF gegeven sterren => kleur de ster horende bij de index in het oranje
+                onClick={() => handleMouseClick(index + 1)}
+                onMouseOver={() => handleMouseOver(index + 1)}
+                onMouseLeave={handleMouseLeave}
+              />
+            );
+          })}
         </div>
-    )
-}
+      </Row>
+      <Row>
+        <textarea onChange={(e) => setDescription(e.target.value)} placeholder="Describe your experience" />
+      </Row>
+      <Row>
+        <button onClick={(event) => {
+  if (type === reviewTypes.Post) {handleSubmit(event) } else {console.log("nope")}}}>Submit</button>
+      </Row>
+    </div>
+  );
+};
 
 export default CreateReview;
-

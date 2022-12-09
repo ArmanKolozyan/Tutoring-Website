@@ -9,6 +9,9 @@ import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import CreateReview from "../components/CreateReview";
+import reviewTypes from "../components/reviewTypes";
+
 
 const ViewTutoringSession = () => {
   const location = useLocation();
@@ -88,6 +91,13 @@ const ViewTutoringSession = () => {
                 <div className="TutoringSessionDescription">
                   <h6> Some words from the tutor: </h6>
                   <TutoringSessionDescription description={post.description} />
+                </div>
+              </Col>
+            </Row>
+            <Row className="justify-content-md-center">
+              <Col md="">
+                <div className="create-review">
+                  <CreateReview id = {postId} type = {reviewTypes.Post} />
                 </div>
               </Col>
             </Row>

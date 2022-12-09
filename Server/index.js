@@ -8,6 +8,7 @@ import { config } from "./passportConfig.js";
 import { authRoutes } from "./Routes/authRoutes.js";
 import { tutoringPostRoutes } from "./Routes/tutoringPostRoutes.js";
 import { groupPostRoutes } from "./Routes/groupPostRoutes.js";
+import { reviewRoutes } from "./Routes/reviewRoutes.js";
 import { createClient } from 'redis';
 import connectRedis from 'connect-redis';
 import dotenv from 'dotenv'
@@ -57,6 +58,8 @@ config(passport);
 authRoutes(app, passport);
 tutoringPostRoutes(app);
 groupPostRoutes(app);
+reviewRoutes(app);
+
 
 
 
