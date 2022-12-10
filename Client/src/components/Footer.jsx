@@ -7,7 +7,7 @@ import * as Icon from 'react-bootstrap-icons';
 import "../style.scss";
 const Footer = () => {
   return (
-<footer class="text-center text-lg-start" fixed="bottom">
+<footer class="text-center text-lg-start">
 
   <div class="sloganbox p-3">
   Where Students meet Tutors

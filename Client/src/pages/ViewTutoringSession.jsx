@@ -95,16 +95,6 @@ const ViewTutoringSession = () => {
                 </div>
               </Col>
             </Row>
-            <Row className="justify-content-md-center">
-              <Col md="">
-                <div className="create-review">
-                  <CreateReview id = {postId} type = {reviewTypes.Post} />
-                </div>
-                <div className="reviews-list">
-                <ViewReviews id = {postId}/>
-                </div>
-              </Col>
-            </Row>
           </Col>
 
           <Col md="auto">
@@ -124,6 +114,18 @@ const ViewTutoringSession = () => {
         <Row className="justify-content-md-center">
           <Button>Contact Tutor</Button>
         </Row>
+
+        <Row className="justify-content-md-center">
+              <Col md="auto">
+                <div className="create-review">
+                  <CreateReview id = {postId} type = {reviewTypes.Post} />
+                </div>
+                <div className="reviews-list">
+                <ViewReviews id = {postId}/>
+                </div>
+              </Col>
+            </Row>
+
       </Container>
     </div>
   );
