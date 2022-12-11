@@ -82,6 +82,7 @@ const ViewGroupSession = () => {
                   free={post.free}
                   price={post.price}
                   dateTime={post.date_time}
+                  location={post.location}
                 />
               </div>
             </Row>

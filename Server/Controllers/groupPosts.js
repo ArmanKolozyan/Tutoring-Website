@@ -12,7 +12,7 @@ export const getgroupPosts = (req, res) => {
 
 export const getSinglegroupPost = (req, res) => {
   const q =
-    "SELECT `id`, `title`, `limited`, `max_inscriptions`, `faculty`, `course`, `free`, `price`, `date_time`, `description`, `userid` FROM group_posts WHERE id = ? ";
+    "SELECT `id`, `title`, `limited`, `max_inscriptions`, `faculty`, `course`, `free`, `price`, `date_time`, `description`, `userid`, `location` FROM group_posts WHERE id = ? ";
 
   db.query(q, [req.params.id], (err, data) => {
     if (err) return res.status(500).json(err);
@@ -25,7 +25,7 @@ export const addgroupPost = (req, res) => {
   // here we should check authentication
 
   const q =
-    "INSERT INTO group_posts(`title`, `limited`, `max_inscriptions`, `faculty`, `course`, `free`, `price`, `date_time`, `description`, `userid`) VALUES (?)";
+    "INSERT INTO group_posts(`title`, `limited`, `max_inscriptions`, `faculty`, `course`, `free`, `price`, `date_time`, `description`, `userid`, `location`) VALUES (?)";
 
   const values = [
     req.body.title,
@@ -38,7 +38,7 @@ export const addgroupPost = (req, res) => {
     req.body.dateAndTime,
     req.body.desc,
     req.user[0].id,
-
+    req.body.location
   ];
 
   db.query(q, [values], (err, data) => {
