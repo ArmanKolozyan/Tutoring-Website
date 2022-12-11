@@ -1,5 +1,4 @@
 import React from "react";
-import Logo from "../images/Logo.png";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
