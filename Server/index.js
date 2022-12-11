@@ -43,7 +43,7 @@ app.use(
    cookie: {
      secure: false,  // if true only transmits cookie over HTPPS
      httpOnly: false, // if true prevents client side JS from reading the cookie
-     maxAge: 1000 * 60 * 10, // session max age in milliseconds
+     maxAge: 1000 * 60 * 100, // session max age in milliseconds
    },
   })
 );

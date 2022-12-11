@@ -11,7 +11,7 @@ import axios from "axios";
 import moment from "moment";
 import { PasswordContext } from "../context/PasswordContext";
 import { useContext } from "react";
-import TutorMap from "../components/TutorMap";
+import {TutorMap} from "../components/TutorMap";
 
 const CreateGroupSession = () => {
   const [title, setTitle] = useState();

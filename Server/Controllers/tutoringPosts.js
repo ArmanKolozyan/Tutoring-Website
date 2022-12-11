@@ -38,9 +38,49 @@ export const addTutoringPost = (req, res) => {
     req.body.test,
   ];
 
+  let post_id;
 
-  db.query(q, [values], (err, data) => {
+
+  const withCallback = (callback) => {
+    db.query(q, [values], (err, data) => {
+      if (err) return res.status(500).json(err);
+      post_id = data.insertId
+      console.log(post_id)
+      callback(req.body.regions, post_id)
+    });  
+  }
+  withCallback(insertRegions)
+
+
+};
+
+const insertRegions = (regions, post_id) => {
+  const q1 = `DELETE FROM tutor_regions WHERE post_id = ?`;
+  const q2 = "INSERT INTO tutor_regions SET post_id = ?, latitude = ?, longitude = ?, radius = ?";
+
+  console.log(post_id)
+
+  db.query(q1, [post_id], (err, data) => {
+    if (err) console.log("error 1");
+  });
+
+
+  regions.forEach((region) => {
+    console.log([post_id, region.latitude, region.longitude, region.radius])
+    db.query(q2, [post_id, region.latitude, region.longitude, region.radius], (err, data) => {
+      if (err) console.log("error 2");
+    })
+  }
+  );
+};
+
+export const getRegions = (req, res) => {
+  const q =
+    "SELECT `latitude`, `longitude`, `radius` FROM tutor_regions WHERE post_id = ? ";
+
+  db.query(q, [req.params.id], (err, data) => {
     if (err) return res.status(500).json(err);
-    return res.json("Tutoring post has been created.");
+    console.log(data)
+    return res.status(200).json(data);
   });
 };

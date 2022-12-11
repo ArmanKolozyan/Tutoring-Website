@@ -12,6 +12,7 @@ import { useLocation } from "react-router-dom";
 import CreateReview from "../components/CreateReview";
 import reviewTypes from "../components/reviewTypes";
 import ViewReviews from "../components/ViewReviews";
+import {ViewMap} from "../components/ViewMap";
 
 
 const ViewTutoringSession = () => {
@@ -110,6 +111,12 @@ const ViewTutoringSession = () => {
             </div>
           </Col>
         </Row>
+
+        <Row className="justify-content-md-center">
+          <ViewMap post_id = {post.id}/>
+        </Row>
+
+
 
         <Row className="justify-content-md-center">
           <Button>Contact Tutor</Button>

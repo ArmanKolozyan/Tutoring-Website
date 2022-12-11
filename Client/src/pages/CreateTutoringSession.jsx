@@ -11,7 +11,7 @@ import axios from "axios";
 import moment from "moment";
 import { PasswordContext } from "../context/PasswordContext";
 import { useContext } from "react";
-import TutorMap from "../components/TutorMap";
+import {TutorMap, mapRef, giveRegions} from "../components/TutorMap";
 
 
 const CreateTutoringSession = () => {
@@ -41,6 +41,7 @@ const CreateTutoringSession = () => {
           exp,
           price,
           test,
+          regions: giveRegions(),
         }});
     } catch (err) {
       console.log(err);
