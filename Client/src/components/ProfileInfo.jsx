@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import Logo from "../images/Logo.png";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Multiselect from "react-bootstrap-multiselect";
 import { PasswordContext } from "../context/PasswordContext";
 import { useContext } from "react";
 import Select from "react-select";

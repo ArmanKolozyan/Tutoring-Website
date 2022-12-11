@@ -2,7 +2,6 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useLayoutEffect } from "react";
 import { PasswordContext } from "../context/PasswordContext";
 import { useContext } from "react";
 import axios from "axios";

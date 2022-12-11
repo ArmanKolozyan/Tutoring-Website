@@ -1,5 +1,4 @@
 import React from "react";
-import Logo from "../images/Logo.png";
 import ProgressBar from "react-bootstrap/ProgressBar";
 
 function GroupSessionInfo(props) {
