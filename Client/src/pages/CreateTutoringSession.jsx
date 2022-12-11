@@ -11,6 +11,7 @@ import axios from "axios";
 import moment from "moment";
 import { PasswordContext } from "../context/PasswordContext";
 import { useContext } from "react";
+import TutorMap from "../components/TutorMap";
 
 
 const CreateTutoringSession = () => {
@@ -128,9 +129,9 @@ const CreateTutoringSession = () => {
         </Row>
 
         <Row className="justify-content-md-center">
-          <Col md="auto">Select location / map has to be integrapted</Col>
+          <Col md="auto">Draw the regions where you can teach</Col>
         </Row>
-
+        <TutorMap/>
         <Row className="justify-content-md-center">
           <Button type="submit">Submit</Button>
         </Row>

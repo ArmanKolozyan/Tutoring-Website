@@ -6,7 +6,6 @@ $ourOrange: #fc3e03;
   .container {
     padding: 0;
     max-width: 100%;
-    min-height: 70vh;
     .link {
       text-decoration: none;
       color: inherit;
@@ -498,8 +497,7 @@ $ourOrange: #fc3e03;
   .Review {
     .box {
       // zodat de review zich in een box bevindt
-      margin: 5vh;
-      padding: 4vh;
+      padding: 1vh;
       //box-sizing: border-box;
       //-moz-box-sizing: border-box;
       //-webkit-box-sizing: border-box;
