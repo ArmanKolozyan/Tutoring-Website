@@ -120,7 +120,7 @@ const CreateTutoringSession = () => {
           <Col md="auto">
             <Row className="">
               <Col md="auto">
-                <h3> Create a new tutoring session </h3>
+              {post ? <h3> Edit tutoring session </h3> : <h3> Create a new tutoring session </h3>}
               </Col>
             </Row>
             <Row className="">
