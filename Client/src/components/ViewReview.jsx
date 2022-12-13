@@ -6,8 +6,6 @@ import { FaStar } from "react-icons/fa";
 const ViewReview = ({review}) => {
   const stars = Array(5).fill(0);
 
-  console.log(review)
-
   const colors = {
     ourBlue: "#1e328d",
     ourOrange: "#fc3e03",

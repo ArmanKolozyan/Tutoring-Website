@@ -8,11 +8,13 @@ import TutoringSessionDescription from "../components/TutoringSessionDescription
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import CreateReview from "../components/CreateReview";
 import reviewTypes from "../components/reviewTypes";
 import ViewReviews from "../components/ViewReviews";
 import {ViewMap} from "../components/ViewMap";
+import { useContext } from "react";
+import { PasswordContext } from "../context/PasswordContext";
 
 
 const ViewTutoringSession = () => {
@@ -22,6 +24,8 @@ const ViewTutoringSession = () => {
   const [post, setPost] = useState({});
 
   const [user, setUser] = useState({});
+
+  const { currentUser } = useContext(PasswordContext);
 
 
   useEffect(() => {
@@ -81,7 +85,7 @@ const ViewTutoringSession = () => {
                   tutoringSessionFac={post.field_of_study}
                   tutoringSessionPrice={post.price}
                   tutoringSessionFreeTrial={
-                    post.free_test === "on" ? true : false
+                    post.free_test === "1" ? true : false
                   }
                   experience={post.experience}
                 />
@@ -108,7 +112,14 @@ const ViewTutoringSession = () => {
                 ProfileLink={`/viewprofile/${user?.id}`}
                 PhotoLink={`../uploads/${user?.img}`}
               />
+              {currentUser.id === post.uid && (
+            <div className="edit">
+              <Link to={`/createtutoringsession?edit=${post.id}`} state={post}>
+                Edit Post
+              </Link>
             </div>
+          )}
+            </div>        
           </Col>
         </Row>
 

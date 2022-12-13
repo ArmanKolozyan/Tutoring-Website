@@ -96,7 +96,7 @@ export const uploadImage = (req, res) => {
   const q = `UPDATE users SET img = ? WHERE id = ?`;
   const values = [image, req.user[0].id]
   db.query(q, values, (err, data) => {
-    if (err) console.log(err);
+    if (err) res.status(500).json(err);
     return res.status(200).json(image);
   });
 }

@@ -26,7 +26,7 @@ const PostCard = ({ post }) => {
       fetchData();
     }
   }, []);
-return (
+  return (
     <div className="post" key={post.id}>
       <link
         rel="stylesheet"
@@ -44,9 +44,7 @@ return (
               </Row>
 
               <Row className="justify-content-md-center">
-                <div
-                  className="stars"
-                >
+                <div className="stars">
                   <span className="fa fa-star checked"></span>
                   <span className="fa fa-star checked"></span>
                   <span className="fa fa-star checked"></span>
@@ -61,18 +59,15 @@ return (
 
               <Row className="justify-content-md-center">
                 <Col md="auto">
-                  <Button>Visit Profile</Button>
+                  <Link to={`/tutoringsession/${post.id}`} className="btn btn-primary">
+                    Visit Post
+                  </Link>
                 </Col>
               </Row>
             </Col>
 
             <Col md="auto">
-              <img
-                style={{ width: "50vh", height: "auto" }}
-                src={`../uploads/${user?.img}`}
-                key={user.img}
-                alt=""
-              />
+              <img style={{ width: "50vh", height: "auto" }} src={`../uploads/${user?.img}`} key={user.img} alt="" />
             </Col>
           </Row>
         </Row>

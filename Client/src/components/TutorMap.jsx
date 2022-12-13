@@ -16,7 +16,6 @@ export const giveRegions = () => {
       regions.push({latitude: layer.getLatLng().lat, longitude: layer.getLatLng().lng, radius: layer.getRadius()});
     }
   });
-  console.log(regions)
   return regions;
 };
 
@@ -24,7 +23,7 @@ export const giveRegions = () => {
 var MAPBOX_ACCESSTOKEN = "pk.eyJ1IjoibWF4aW12ZHciLCJhIjoiY2szbHM0Zm5lMDY1bzNibzRuYWRuc3hjYiJ9.zBkCaknMTrrWIdTlURoBTA";
 const ZOOM_LEVEL = 12;
 
-export function TutorMap() {
+export function TutorMap({regions}) {
   const location = getUserLocation();
 
   const jumpToUserLocation = () => {
@@ -36,13 +35,15 @@ export function TutorMap() {
     }
   };
 
-
-
   useEffect(() => {
-    if (mapRef.current !== null) {
-      console.log(mapRef.current._layers)
+    if (regions.length > 0 && mapRef.current !== null) {
+      regions.forEach(region => {
+        L.circle([region.latitude, region.longitude], region.radius).addTo(mapRef.current)
+      })
+    } else{
     }
-  }, [mapRef.current]); // [] needs to be here so that it is only loaded when mounted, otherwise infinite loop
+  }, [mapRef.current]);
+
 
   return (
     <>

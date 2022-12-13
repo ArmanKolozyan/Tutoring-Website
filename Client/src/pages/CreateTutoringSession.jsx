@@ -12,37 +12,102 @@ import moment from "moment";
 import { PasswordContext } from "../context/PasswordContext";
 import { useContext } from "react";
 import {TutorMap, mapRef, giveRegions} from "../components/TutorMap";
+import { useLocation } from "react-router-dom";
+import { ViewMap } from "../components/ViewMap";
+import { useEffect } from "react";
+
 
 
 const CreateTutoringSession = () => {
-  const [course, setCourse] = useState();
-  const [field, setField] = useState();
-  const [exp, setExp] = useState();
-  const [price, setPrice] = useState();
-  const [test, setTest] = useState();
-  const [desc, setDesc] = useState();
+
+
+  const post = useLocation().state
+
+
+  const checkFree = () => {
+    if (test == "1") {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+
+
+  const [course, setCourse] = useState(post?.course || "");
+  const [field, setField] = useState(post?.field_of_study || "");
+  const [exp, setExp] = useState(post?.experience || "");
+  const [price, setPrice] = useState(post?.price || "");
+  const [test, setTest] = useState(post?.free_test || "");
+  const [desc, setDesc] = useState(post?.description || "");
 
   const {currentUser} = useContext(PasswordContext);
 
-  const handleSubmit = (e) => {
+  const [regions, setRegions] = useState([]); // must be initialised by an empty array! otherwise not possible to call 'map' 
+
+
+
+  useEffect(() => {
+    if (post) {
+        const fetchData = async () => {
+            try {
+              const res = await axios({
+                method: "get",
+                withCredentials: true,
+                url: `http://localhost:8800/tutoringpostRegion/${post.id}`,
+              });
+              //let result = res.data.map(x => x.field);
+              setRegions(res.data);
+            } catch (err) {
+              console.log(err);
+            }
+          };
+          fetchData();} else {
+          }
+  }, []); 
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      axios({
-        method: "post",
-        withCredentials: true,
-        headers: {"Content-Type": "application/json" }, 
-        url: "http://localhost:8800/tutoringposts/",
-        data: {
-          course,
-          field,
-          desc,
-          date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-          exp,
-          price,
-          test,
-          regions: giveRegions(),
-        }});
+      if (post) {
+
+        await axios({
+          method: "put",
+          withCredentials: true,
+          headers: {"Content-Type": "application/json" }, 
+          url: `http://localhost:8800/tutoringposts/${post.id}`,
+          data: {
+            course,
+            field,
+            desc,
+            date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+            exp,
+            price,
+            test,
+            regions: giveRegions(),
+          }});
+
+      } else {
+
+        await axios({
+          method: "post",
+          withCredentials: true,
+          headers: {"Content-Type": "application/json" }, 
+          url: "http://localhost:8800/tutoringposts/",
+          data: {
+            course,
+            field,
+            desc,
+            date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+            exp,
+            price,
+            test,
+            regions: giveRegions(),
+          }});
+
+      }
     } catch (err) {
       console.log(err);
     }
@@ -60,7 +125,7 @@ const CreateTutoringSession = () => {
             </Row>
             <Row className="">
               <Col md="auto">
-                <Form.Select required onChange={(e) => setField(e.target.value)}>
+                <Form.Select required value={field} onChange={(e) => setField(e.target.value)}>
                   <option disabled={true} selected value="">
                     Select the faculty of the subject
                   </option>
@@ -71,7 +136,7 @@ const CreateTutoringSession = () => {
               </Col>
 
               <Col md="auto">
-                <Form.Select required onChange={(e) => setCourse(e.target.value)}>
+                <Form.Select required value={course} onChange={(e) => setCourse(e.target.value)}>
                   <option disabled={true} selected value="">
                     Select the subject
                   </option>
@@ -90,6 +155,7 @@ const CreateTutoringSession = () => {
               <Col md="5">
                 <Form.Control
                   required
+                  value = {exp}
                   type="number"
                   placeholder="# Years experience with subject"
                   onChange={(e) => setExp(e.target.value)}
@@ -98,6 +164,7 @@ const CreateTutoringSession = () => {
               <Col md="auto">
                 <Form.Control
                   required
+                  value={price}
                   onChange={(e) => setPrice(e.target.value)}
                   type="number"
                   placeholder="Price in €/h"
@@ -105,11 +172,11 @@ const CreateTutoringSession = () => {
               </Col>
               <Col md="auto">
                 <Form.Check
-                  required
+                  checked = {checkFree()}
                   type="checkbox"
                   label="Free Test-session"
                   className="checkbox"
-                  onChange={(e) => setTest(e.target.value)}
+                  onChange={(e) => setTest(e.target.checked)}
                 />
               </Col>
             </Row>
@@ -122,6 +189,7 @@ const CreateTutoringSession = () => {
                 maxLength={573}
                 rows={5}
                 required
+                value={desc}
                 onChange={(e) => setDesc(e.target.value)}
               />
             </Col>
@@ -132,7 +200,7 @@ const CreateTutoringSession = () => {
         <Row className="justify-content-md-center">
           <Col md="auto">Draw the regions where you can teach</Col>
         </Row>
-        <TutorMap/>
+        <TutorMap regions = {regions}/>
         <Row className="justify-content-md-center">
           <Button type="submit">Submit</Button>
         </Row>

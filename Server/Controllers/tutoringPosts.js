@@ -40,47 +40,59 @@ export const addTutoringPost = (req, res) => {
 
   let post_id;
 
-
   const withCallback = (callback) => {
     db.query(q, [values], (err, data) => {
       if (err) return res.status(500).json(err);
-      post_id = data.insertId
-      console.log(post_id)
-      callback(req.body.regions, post_id)
-    });  
-  }
-  withCallback(insertRegions)
-
-
+      post_id = data.insertId;
+      callback(req.body.regions, post_id);
+    });
+  };
+  withCallback(insertRegions);
 };
 
 const insertRegions = (regions, post_id) => {
   const q1 = `DELETE FROM tutor_regions WHERE post_id = ?`;
   const q2 = "INSERT INTO tutor_regions SET post_id = ?, latitude = ?, longitude = ?, radius = ?";
 
-  console.log(post_id)
-
   db.query(q1, [post_id], (err, data) => {
-    if (err) console.log("error 1");
+    if (err) res.status(500).json(err);
   });
 
-
   regions.forEach((region) => {
-    console.log([post_id, region.latitude, region.longitude, region.radius])
     db.query(q2, [post_id, region.latitude, region.longitude, region.radius], (err, data) => {
-      if (err) console.log("error 2");
-    })
-  }
-  );
+      if (err) res.status(500).json(err);
+    });
+  });
 };
 
 export const getRegions = (req, res) => {
-  const q =
-    "SELECT `latitude`, `longitude`, `radius` FROM tutor_regions WHERE post_id = ? ";
+  const q = "SELECT `latitude`, `longitude`, `radius` FROM tutor_regions WHERE post_id = ? ";
 
   db.query(q, [req.params.id], (err, data) => {
     if (err) return res.status(500).json(err);
-    console.log(data)
     return res.status(200).json(data);
   });
+};
+
+export const updatePost = (req, res) => {
+  const post_id = req.params.id;
+
+  const q =
+    "UPDATE tutoring_posts SET `course`=?,`field_of_study`=?,`description`=?,`date`=?,`experience`=?,`price`=?, `free_test`=? WHERE `id` = ?";
+
+  const values = [
+    req.body.course,
+    req.body.field,
+    req.body.desc,
+    req.body.date,
+    req.body.exp,
+    req.body.price,
+    req.body.test,
+    post_id,
+  ];
+
+  db.query(q, values, (err, data) => {
+    if (err) return res.status(500).json(err);
+  });
+  insertRegions(req.body.regions, post_id);
 };

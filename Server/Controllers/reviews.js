@@ -12,8 +12,9 @@ export const addPostReview = (req, res) => {
       req.body.nrClickedStars,
       req.body.date,
       req.user[0].id,
-      req.body.id,
+      parseInt(req.body.id),
     ];
+
 
     db.query(q, [values], (err, data) => {
         if (err) return res.status(500).json(err);

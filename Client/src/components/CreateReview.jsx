@@ -104,7 +104,7 @@ const CreateReview = (props) => {
             if (type === reviewTypes.Post) {
               handleSubmit(event);
             } else {
-              console.log("nope");
+              console.log("TO DO");
             }
           }}
         >

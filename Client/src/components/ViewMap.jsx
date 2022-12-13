@@ -3,13 +3,11 @@ import { MapContainer, TileLayer, FeatureGroup } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
-import getUserLocation from "./GetUserLocation";
 import * as L from "leaflet";
 import axios from "axios";
 
 
 export function ViewMap({post_id}) {
-  const location = getUserLocation();
   const center = [50.85045, 4.34878];
   const mapRef = useRef();
   const [regions, setRegions] = useState([]); // must be initialised by an empty array! otherwise not possible to call 'map' 
@@ -26,8 +24,6 @@ export function ViewMap({post_id}) {
                 withCredentials: true,
                 url: `http://localhost:8800/tutoringpostRegion/${post_id}`,
               });
-              //let result = res.data.map(x => x.field);
-              console.log(res.data);
               setRegions(res.data);
             } catch (err) {
               console.log(err);
