@@ -38,7 +38,7 @@ const ViewTutoringSessions = () => {
 
   return (
     <div className="container mt-5">
-      <Searchbar />
+      <Searchbar callback = {setPosts} />
       <TutoringSessions posts={currentPosts} fetching={fetching} />
       <Separator
         totalNmbr={posts.length}

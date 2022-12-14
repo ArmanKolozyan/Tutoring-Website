@@ -6,46 +6,64 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-function Searchbar(props) {
+function Searchbar({ callback }) {
+  const [keyword, setKeyword] = useState("");
+  const [course, setCourse] = useState("");
+  const [field, setField] = useState("");
+  const [orderBy, setOrderBy] = useState("");
+  const [freeTest, setFreeTest] = useState(false);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await axios({
+          method: "get",
+          withCredentials: true,
+          url:"http://localhost:8800/searchTutoringPosts/",
+          params: {
+            keyword: keyword,
+            course: course,
+            field: field,
+            orderBy: orderBy,
+            freeTest: freeTest,
+          }
+        });
+        callback(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchPosts();
+  }, [keyword, course, field, orderBy, freeTest]);
+
   return (
     <div className="Searchbar">
       <Form>
-        <Card
-          style={
-            {
-              /* width: "40vw" */
-            }
-          }
-        >
+        <Card>
           <Card.Body>
             <Card.Text>Search/ Filter Options </Card.Text>
           </Card.Body>
           <ListGroup className="list-group-flush">
             <ListGroup.Item>
               <FloatingLabel controlId="SearchInput" label="Search for">
-                <Form.Control required type="text" />
+                <Form.Control onChange={(e) => setKeyword(e.target.value)} required type="text" />
               </FloatingLabel>
             </ListGroup.Item>
 
             <ListGroup.Item>
               <Row className="justify-content-md-center">
                 <Col md="auto">
-                  <FloatingLabel
-                    controlId="CourseInput"
-                    label="Select a course"
-                  >
-                    <Form.Select>
-                      <option value="All">All</option>
+                  <FloatingLabel controlId="CourseInput" label="Select a course">
+                    <Form.Select onChange={(e) => setCourse(e.target.value)}>
+                      <option value="">All</option>
                       <option value="Computer Systems">Computer Systems</option>
                       <option value="Discrete Maths">Discrete Maths</option>
-                      <option value="Biomedische Chemie">
-                        Biomedische Chemie
-                      </option>
+                      <option value="Biomedische Chemie">Biomedische Chemie</option>
                       <option value="Biologie">Biologie</option>
-                      <option value="Politieke Geschiedenis">
-                        Politieke Geschiedenis
-                      </option>
+                      <option value="Politieke Geschiedenis">Politieke Geschiedenis</option>
                       <option value="Statistiek I">Statistiek I</option>
                     </Form.Select>
                   </FloatingLabel>
@@ -53,33 +71,24 @@ function Searchbar(props) {
 
                 <Col md="auto">
                   <FloatingLabel controlId="FieldInput" label="Select a Field">
-                    <Form.Select>
-                      <option value="All">All</option>
-                      <option value="Science and Bio-engineering Sciences">
-                        Science and Bio-engineering Sciences
-                      </option>
-                      <option value="Medicine and Pharmacy">
-                        Medicine and Pharmacy
-                      </option>
-                      <option value="Law and Criminology">
-                        Law and Criminology
-                      </option>
+                    <Form.Select onChange={(e) => setField(e.target.value)}>
+                      <option value="">All</option>
+                      <option value="Science and Bio-engineering Sciences">Science and Bio-engineering Sciences</option>
+                      <option value="Medicine and Pharmacy">Medicine and Pharmacy</option>
+                      <option value="Law and Criminology">Law and Criminology</option>
                     </Form.Select>
                   </FloatingLabel>
                 </Col>
 
                 <Col md="auto">
-                  <FloatingLabel controlId="MaxPriceInput" label="MaxPrice">
-                    <Form.Control type="number" />
-                  </FloatingLabel>
-                </Col>
-
-                <Col md="auto">
-                  <FloatingLabel
-                    controlId="RequiredExperience"
-                    label="Years experience required"
-                  >
-                    <Form.Control type="number" />
+                  <FloatingLabel controlId="OrderInput" label="Sort posts">
+                    <Form.Select onChange={(e) => setOrderBy(e.target.value)}>
+                    <option value="Default">Default sorting</option>
+                      <option value="Price low-high">Price lowest to highest</option>
+                      <option value="Price high-low">Price highest to lowest</option>
+                      <option value="Experience high-low">Experience highest to lowest</option>
+                      <option value="Experience low-high">Experience lowest to highest</option>
+                    </Form.Select>
                   </FloatingLabel>
                 </Col>
               </Row>
@@ -87,31 +96,8 @@ function Searchbar(props) {
 
             <ListGroup.Item>
               <Row className="justify-content-md-center">
-                <Col md="2">
-                  <Form.Check
-                    required
-                    type="checkbox"
-                    label="Free"
-                    className="checkbox"
-                  />
-                </Col>
-
-                <Col md="2">
-                  <Form.Check
-                    required
-                    type="checkbox"
-                    label="Free test session"
-                    className="checkbox"
-                  />
-                </Col>
-
-                <Col md="2">
-                  <Form.Check
-                    required
-                    type="checkbox"
-                    label="Has experience"
-                    className="checkbox"
-                  />
+                <Col md="3">
+                  <Form.Check type="checkbox" label="Offers a free test session" className="checkbox" onChange={(e) => setFreeTest(e.target.checked)}/>
                 </Col>
               </Row>
             </ListGroup.Item>

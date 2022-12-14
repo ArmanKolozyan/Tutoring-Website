@@ -96,7 +96,7 @@ const ViewTutoringSession = () => {
                   tutoringSessionName={post.course}
                   tutoringSessionFac={post.field_of_study}
                   tutoringSessionPrice={post.price}
-                  tutoringSessionFreeTrial={post.free_test === "1" ? true : false}
+                  tutoringSessionFreeTrial={post.free_test === 1 ? true : false}
                   experience={post.experience}
                 />
               </div>

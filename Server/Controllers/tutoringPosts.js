@@ -45,10 +45,11 @@ export const addTutoringPost = (req, res) => {
       if (err) return res.status(500).json(err);
       post_id = data.insertId;
       callback(req.body.regions, post_id);
-      return res.status(200).json(post_id)
+      return res.status(200).json(post_id);
     });
   };
-  withCallback(insertRegions);};
+  withCallback(insertRegions);
+};
 
 const insertRegions = (regions, post_id) => {
   const q1 = `DELETE FROM tutor_regions WHERE post_id = ?`;
@@ -95,21 +96,65 @@ export const updateTutoringPost = (req, res) => {
     if (err) return res.status(500).json(err);
   });
   insertRegions(req.body.regions, post_id);
-  return res.status(200).json(post_id)
+  return res.status(200).json(post_id);
 };
-
 
 export const deleteTutoringPost = (req, res) => {
   const post_id = req.params.id;
 
-  const q =
-    "DELETE FROM tutoring_posts WHERE `id` = ?";
+  const q = "DELETE FROM tutoring_posts WHERE `id` = ?";
 
-  
-    db.query(q, [post_id], (err, data) => {
-      if (err) return res.status(403);
+  db.query(q, [post_id], (err, data) => {
+    if (err) return res.status(403);
 
-      return res.json("Post is deleted!");
-    });   
+    return res.json("Post is deleted!");
+  });
+};
 
-}
+// for the search functionality
+export const findTutoringPost = (req, res) => {
+  const keyword = req.query.keyword;
+  const course = req.query.course;
+  const field = req.query.field;
+  const freeTest = req.query.freeTest;
+
+  const checkOrder = () => {
+    let order;
+
+    switch (req.query.orderBy) {
+      case "Price low-high":
+        order = "ORDER BY price ASC";
+        break;
+      case "Price high-low":
+        order = "ORDER BY price DESC";
+        break;
+      case "Experience high-low":
+        order = "ORDER BY experience DESC";
+        break;
+      case "Experience low-high":
+        order = "ORDER BY experience ASC";
+        break;
+      default:
+        order = "";
+    }
+    return order;
+  };
+
+  const checkFreeTest = () => {
+    if (freeTest === 'true') {
+      return "AND free_test = 1";
+    } else {
+      return "";
+    }
+  }
+
+  const values = ["%" + keyword + "%", "%" + course + "%", "%" + field + "%", freeTest];
+  db.query(
+    "SELECT * FROM tutoring_posts WHERE description LIKE ? AND course LIKE ? AND field_of_study LIKE ?" + checkFreeTest() + checkOrder(),
+    values,
+    (err, data) => {
+      if (err) return res.status(500).json(err);
+      return res.status(200).json(data);
+    }
+  );
+};
