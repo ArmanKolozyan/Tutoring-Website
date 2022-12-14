@@ -22,14 +22,14 @@ function Searchbar({ callback }) {
         const res = await axios({
           method: "get",
           withCredentials: true,
-          url:"http://localhost:8800/searchTutoringPosts/",
+          url: "http://localhost:8800/searchTutoringPosts/",
           params: {
             keyword: keyword,
             course: course,
             field: field,
             orderBy: orderBy,
             freeTest: freeTest,
-          }
+          },
         });
         callback(res.data);
       } catch (err) {
@@ -55,6 +55,18 @@ function Searchbar({ callback }) {
 
             <ListGroup.Item>
               <Row className="justify-content-md-center">
+
+                <Col md="auto">
+                  <FloatingLabel controlId="FieldInput" label="Select a Field">
+                    <Form.Select onChange={(e) => setField(e.target.value)}>
+                      <option value="">All</option>
+                      <option value="Science and Bio-engineering Sciences">Science and Bio-engineering Sciences</option>
+                      <option value="Medicine and Pharmacy">Medicine and Pharmacy</option>
+                      <option value="Law and Criminology">Law and Criminology</option>
+                    </Form.Select>
+                  </FloatingLabel>
+                </Col>
+
                 <Col md="auto">
                   <FloatingLabel controlId="CourseInput" label="Select a course">
                     <Form.Select onChange={(e) => setCourse(e.target.value)}>
@@ -70,20 +82,9 @@ function Searchbar({ callback }) {
                 </Col>
 
                 <Col md="auto">
-                  <FloatingLabel controlId="FieldInput" label="Select a Field">
-                    <Form.Select onChange={(e) => setField(e.target.value)}>
-                      <option value="">All</option>
-                      <option value="Science and Bio-engineering Sciences">Science and Bio-engineering Sciences</option>
-                      <option value="Medicine and Pharmacy">Medicine and Pharmacy</option>
-                      <option value="Law and Criminology">Law and Criminology</option>
-                    </Form.Select>
-                  </FloatingLabel>
-                </Col>
-
-                <Col md="auto">
                   <FloatingLabel controlId="OrderInput" label="Sort posts">
                     <Form.Select onChange={(e) => setOrderBy(e.target.value)}>
-                    <option value="Default">Default sorting</option>
+                      <option value="Default">Default sorting</option>
                       <option value="Price low-high">Price lowest to highest</option>
                       <option value="Price high-low">Price highest to lowest</option>
                       <option value="Experience high-low">Experience highest to lowest</option>
@@ -97,7 +98,12 @@ function Searchbar({ callback }) {
             <ListGroup.Item>
               <Row className="justify-content-md-center">
                 <Col md="3">
-                  <Form.Check type="checkbox" label="Offers a free test session" className="checkbox" onChange={(e) => setFreeTest(e.target.checked)}/>
+                  <Form.Check
+                    type="checkbox"
+                    label="Offers a free test session"
+                    className="checkbox"
+                    onChange={(e) => setFreeTest(e.target.checked)}
+                  />
                 </Col>
               </Row>
             </ListGroup.Item>
