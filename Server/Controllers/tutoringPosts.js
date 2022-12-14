@@ -45,10 +45,10 @@ export const addTutoringPost = (req, res) => {
       if (err) return res.status(500).json(err);
       post_id = data.insertId;
       callback(req.body.regions, post_id);
+      return res.status(200).json(post_id)
     });
   };
-  withCallback(insertRegions);
-};
+  withCallback(insertRegions);};
 
 const insertRegions = (regions, post_id) => {
   const q1 = `DELETE FROM tutor_regions WHERE post_id = ?`;
@@ -74,7 +74,7 @@ export const getRegions = (req, res) => {
   });
 };
 
-export const updatePost = (req, res) => {
+export const updateTutoringPost = (req, res) => {
   const post_id = req.params.id;
 
   const q =
@@ -95,4 +95,21 @@ export const updatePost = (req, res) => {
     if (err) return res.status(500).json(err);
   });
   insertRegions(req.body.regions, post_id);
+  return res.status(200).json(post_id)
 };
+
+
+export const deleteTutoringPost = (req, res) => {
+  const post_id = req.params.id;
+
+  const q =
+    "DELETE FROM tutoring_posts WHERE `id` = ?";
+
+  
+    db.query(q, [post_id], (err, data) => {
+      if (err) return res.status(403);
+
+      return res.json("Post is deleted!");
+    });   
+
+}

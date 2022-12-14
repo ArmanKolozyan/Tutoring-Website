@@ -8,17 +8,18 @@ import TutoringSessionDescription from "../components/TutoringSessionDescription
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import CreateReview from "../components/CreateReview";
 import reviewTypes from "../components/reviewTypes";
 import ViewReviews from "../components/ViewReviews";
-import {ViewMap} from "../components/ViewMap";
+import { ViewMap } from "../components/ViewMap";
 import { useContext } from "react";
 import { PasswordContext } from "../context/PasswordContext";
 
-
 const ViewTutoringSession = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const postId = location.pathname.split("/")[2];
 
   const [post, setPost] = useState({});
@@ -26,7 +27,6 @@ const ViewTutoringSession = () => {
   const [user, setUser] = useState({});
 
   const { currentUser } = useContext(PasswordContext);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +44,6 @@ const ViewTutoringSession = () => {
     fetchData();
   }, [postId]);
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -59,19 +58,32 @@ const ViewTutoringSession = () => {
       }
     };
     if (post) {
-    fetchData();
+      fetchData();
     }
   }, [post]);
 
-    // format date to dd/mm/yy using Regular Expressions
-    function formatDate (input) {
-      let date = input.match(/\d+/g),
+  // format date to dd/mm/yy using Regular Expressions
+  function formatDate(input) {
+    let date = input.match(/\d+/g),
       day = date[2],
       month = date[1],
       year = date[0].substring(2); // get only two digits
-    
-      return day+'/'+month+'/'+year;
+
+    return day + "/" + month + "/" + year;
+  }
+
+  const deletePost = async () => {
+    try {
+      await axios({
+        method: "delete",
+        withCredentials: true,
+        url: `http://localhost:8800/tutoringposts/${post.id}`,
+      });
+      navigate("/tutoringsessions")
+    } catch (err) {
+      console.log(err);
     }
+  }
 
   return (
     <div className="ViewTutoringSession">
@@ -84,9 +96,7 @@ const ViewTutoringSession = () => {
                   tutoringSessionName={post.course}
                   tutoringSessionFac={post.field_of_study}
                   tutoringSessionPrice={post.price}
-                  tutoringSessionFreeTrial={
-                    post.free_test === "1" ? true : false
-                  }
+                  tutoringSessionFreeTrial={post.free_test === "1" ? true : false}
                   experience={post.experience}
                 />
               </div>
@@ -105,7 +115,7 @@ const ViewTutoringSession = () => {
           <Col md="auto">
             <div className="TutorInfo">
               <TutorInfo
-                tutorName={user?.firstname?.concat(' ').concat(user.lastname)} // VRAAG: kan dit mooier?
+                tutorName={user?.firstname?.concat(" ").concat(user.lastname)} // VRAAG: kan dit mooier?
                 tutorText={user?.shortIntro}
                 tutorAge={user.birthDate ? formatDate(user.birthDate) : ""}
                 AvgRating={3} // TO DOOO
@@ -113,37 +123,41 @@ const ViewTutoringSession = () => {
                 PhotoLink={`../uploads/${user?.img}`}
               />
               {currentUser.id === post.uid && (
-            <div className="edit">
-              <Link to={`/createtutoringsession?edit=${post.id}`} state={post}>
-                Edit Post
-              </Link>
+                <>
+                  <div className="edit">
+                    <Link to={`/createtutoringsession?edit=${post.id}`} state={post} className="btn btn-secondary">
+                      Edit Post
+                    </Link>
+                  </div>
+                  <div className="delete">
+                    <Link onClick={deletePost} to={`/createtutoringsession?edit=${post.id}`} state={post} className="btn btn-danger">
+                      Delete post
+                    </Link>
+                  </div>
+                </>
+              )}
             </div>
-          )}
-            </div>        
           </Col>
         </Row>
 
         <Row className="justify-content-md-center">
-          <ViewMap post_id = {post.id}/>
+          <ViewMap post_id={post.id} />
         </Row>
-
-
 
         <Row className="justify-content-md-center">
           <Button>Contact Tutor</Button>
         </Row>
 
         <Row className="justify-content-md-center">
-              <Col md="auto">
-                <div className="create-review">
-                  <CreateReview id = {postId} type = {reviewTypes.Post} />
-                </div>
-                <div className="reviews-list">
-                <ViewReviews id = {postId}/>
-                </div>
-              </Col>
-            </Row>
-
+          <Col md="auto">
+            <div className="create-review">
+              <CreateReview id={postId} type={reviewTypes.Post} />
+            </div>
+            <div className="reviews-list">
+              <ViewReviews id={postId} />
+            </div>
+          </Col>
+        </Row>
       </Container>
     </div>
   );

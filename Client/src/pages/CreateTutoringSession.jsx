@@ -11,18 +11,14 @@ import axios from "axios";
 import moment from "moment";
 import { PasswordContext } from "../context/PasswordContext";
 import { useContext } from "react";
-import {TutorMap, mapRef, giveRegions} from "../components/TutorMap";
-import { useLocation } from "react-router-dom";
+import { TutorMap, mapRef, giveRegions } from "../components/TutorMap";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ViewMap } from "../components/ViewMap";
 import { useEffect } from "react";
 
-
-
 const CreateTutoringSession = () => {
-
-
-  const post = useLocation().state
-
+  const post = useLocation().state;
+  const navigate = useNavigate();
 
   const checkFree = () => {
     if (test == "1") {
@@ -32,8 +28,6 @@ const CreateTutoringSession = () => {
     }
   };
 
-
-
   const [course, setCourse] = useState(post?.course || "");
   const [field, setField] = useState(post?.field_of_study || "");
   const [exp, setExp] = useState(post?.experience || "");
@@ -41,42 +35,39 @@ const CreateTutoringSession = () => {
   const [test, setTest] = useState(post?.free_test || "");
   const [desc, setDesc] = useState(post?.description || "");
 
-  const {currentUser} = useContext(PasswordContext);
+  const { currentUser } = useContext(PasswordContext);
 
-  const [regions, setRegions] = useState([]); // must be initialised by an empty array! otherwise not possible to call 'map' 
-
-
+  const [regions, setRegions] = useState([]); // must be initialised by an empty array! otherwise not possible to call 'map'
 
   useEffect(() => {
     if (post) {
-        const fetchData = async () => {
-            try {
-              const res = await axios({
-                method: "get",
-                withCredentials: true,
-                url: `http://localhost:8800/tutoringpostRegion/${post.id}`,
-              });
-              //let result = res.data.map(x => x.field);
-              setRegions(res.data);
-            } catch (err) {
-              console.log(err);
-            }
-          };
-          fetchData();} else {
-          }
-  }, []); 
-
+      const fetchData = async () => {
+        try {
+          const res = await axios({
+            method: "get",
+            withCredentials: true,
+            url: `http://localhost:8800/tutoringpostRegion/${post.id}`,
+          });
+          //let result = res.data.map(x => x.field);
+          setRegions(res.data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      fetchData();
+    } else {
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       if (post) {
-
-        await axios({
+        const postId = await axios({
           method: "put",
           withCredentials: true,
-          headers: {"Content-Type": "application/json" }, 
+          headers: { "Content-Type": "application/json" },
           url: `http://localhost:8800/tutoringposts/${post.id}`,
           data: {
             course,
@@ -87,14 +78,14 @@ const CreateTutoringSession = () => {
             price,
             test,
             regions: giveRegions(),
-          }});
-
+          },
+        });
+        navigate(`/tutoringsession/${postId.data}`);
       } else {
-
-        await axios({
+        const postId = await axios({
           method: "post",
           withCredentials: true,
-          headers: {"Content-Type": "application/json" }, 
+          headers: { "Content-Type": "application/json" },
           url: "http://localhost:8800/tutoringposts/",
           data: {
             course,
@@ -105,8 +96,9 @@ const CreateTutoringSession = () => {
             price,
             test,
             regions: giveRegions(),
-          }});
-
+          },
+        });
+        navigate(`/tutoringsession/${postId.data}`);
       }
     } catch (err) {
       console.log(err);
@@ -119,9 +111,7 @@ const CreateTutoringSession = () => {
         <Row className="justify-content-md-center">
           <Col md="auto">
             <Row className="">
-              <Col md="auto">
-              {post ? <h3> Edit tutoring session </h3> : <h3> Create a new tutoring session </h3>}
-              </Col>
+              <Col md="auto">{post ? <h3> Edit tutoring session </h3> : <h3> Create a new tutoring session </h3>}</Col>
             </Row>
             <Row className="">
               <Col md="auto">
@@ -140,12 +130,12 @@ const CreateTutoringSession = () => {
                   <option disabled={true} selected value="">
                     Select the subject
                   </option>
-                  <option  value="Computer Systems">Computer Systems</option>
-                  <option  value="Discrete Maths">Discrete Maths</option>
-                  <option  value="Biomedische Chemie">Biomedische Chemie</option>
-                  <option  value="Biologie">Biologie</option>
-                  <option  value="Politieke Geschiedenis">Politieke Geschiedenis</option>
-                  <option  value="Statistiek I">Statistiek I</option>
+                  <option value="Computer Systems">Computer Systems</option>
+                  <option value="Discrete Maths">Discrete Maths</option>
+                  <option value="Biomedische Chemie">Biomedische Chemie</option>
+                  <option value="Biologie">Biologie</option>
+                  <option value="Politieke Geschiedenis">Politieke Geschiedenis</option>
+                  <option value="Statistiek I">Statistiek I</option>
                 </Form.Select>
               </Col>
             </Row>
@@ -155,7 +145,7 @@ const CreateTutoringSession = () => {
               <Col md="5">
                 <Form.Control
                   required
-                  value = {exp}
+                  value={exp}
                   type="number"
                   placeholder="# Years experience with subject"
                   onChange={(e) => setExp(e.target.value)}
@@ -172,7 +162,7 @@ const CreateTutoringSession = () => {
               </Col>
               <Col md="auto">
                 <Form.Check
-                  checked = {checkFree()}
+                  checked={checkFree()}
                   type="checkbox"
                   label="Free Test-session"
                   className="checkbox"
@@ -200,7 +190,7 @@ const CreateTutoringSession = () => {
         <Row className="justify-content-md-center">
           <Col md="auto">Draw the regions where you can teach</Col>
         </Row>
-        <TutorMap regions = {regions}/>
+        <TutorMap regions={regions} />
         <Row className="justify-content-md-center">
           <Button type="submit">Submit</Button>
         </Row>
