@@ -130,7 +130,7 @@ const ViewTutoringSession = () => {
                     </Link>
                   </div>
                   <div className="delete">
-                    <Link onClick={deletePost} to={`/createtutoringsession?edit=${post.id}`} state={post} className="btn btn-danger">
+                    <Link onClick={deletePost} to={"/tutoringsessions"} state={post} className="btn btn-danger">
                       Delete post
                     </Link>
                   </div>
