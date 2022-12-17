@@ -84,7 +84,7 @@ const ViewProfile = () => {
 
           <Col md="auto">
             <div className="ProfilePicture">
-              <Card style={{ width: "20rem" }}>
+              <Card style={{ width: "20rem", border: "0" }}>
                 <Card.Img variant="top" src={ProfilePicture} />
                 <Card.Body></Card.Body>
               </Card>

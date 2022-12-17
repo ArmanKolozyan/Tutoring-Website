@@ -9,8 +9,33 @@ import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import Modal from 'react-bootstrap/Modal';
+
 
 const ViewGroupSession = () => {
+
+   //contact popup
+   const [show, setShow] = useState(false);
+
+   const handleClose = () => setShow(false);
+   const handleShow = () => setShow(true);
+ 
+ 
+   const phonenumber = "+32 423 32 34 54"
+   const email = "Stoffel@hotmail.be"
+ 
+   function copyPhonenumber(){
+     navigator.clipboard.writeText(phonenumber);
+   }
+ 
+   
+   function copyEmail(){
+     navigator.clipboard.writeText(email);
+   }
+   //
+
+
+
   const location = useLocation();
   const postId = location.pathname.split("/")[2];
 
@@ -117,10 +142,39 @@ const ViewGroupSession = () => {
           </Col>
           <Col md="auto">OR</Col>
           <Col md="auto">
-            <Button>Contact Group session Organisator</Button>
+            <Button onClick={handleShow}>Contact Group session Organisator</Button>
           </Col>
         </Row>
       </Container>
+
+
+
+
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Contact information of the tutor</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        
+        
+        <p>
+          His/Her phonenumber is : {phonenumber}
+        </p>
+        <Button variant="secondary" onClick={copyPhonenumber}>
+        Copy phonenumber
+        </Button>
+        
+        <p>        <br/>
+          His/her Email adress is : {email}
+        </p>
+        <Button variant="secondary" onClick={copyEmail}>
+        Copy email
+        </Button>
+
+        </Modal.Body>
+      </Modal>
+
     </div>
   );
 };
