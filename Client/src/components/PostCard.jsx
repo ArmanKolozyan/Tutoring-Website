@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 const PostCard = ({ post }) => {
   const [user, setUser] = useState({});
@@ -22,48 +26,52 @@ const PostCard = ({ post }) => {
       fetchData();
     }
   }, []);
-
   return (
     <div className="post" key={post.id}>
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
       ></link>
-      <div className="pic_caption">
-      <div className="img">
-        <img
-          style={{ width: "50vh", height: "auto" }}
-          src={`../uploads/${user?.img}`}
-          key={user.img}
-          // VRAAG: als ik bovenste weghaal, worden de images niet weergegeven
-          // (src wordt niet geüpdated ook al is user veranderd), hoe komt dit???
-          alt=""
-        />
-        <div className="caption">
-          <p>
-            <b>{user?.firstname?.concat(" ").concat(user?.lastname)} </b>
-          </p>
-          <div className="stars" style={{"margin-top": "-5em", "font-size": "5vh"}}>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star checked"></span>
-            <span className="fa fa-star"></span>
-            <span className="fa fa-star"></span>
-          </div>
-        </div>
-      </div>
-      </div>
-      <div className="content">
-        <Link className="link" to={`/tutoringsession/${post.id}`}>
-          <h1 style={{ color: "black" }}>{post.course}</h1>
-        </Link>
-        <p>{post.description}</p>
-        <div className="myButton">
-          <Link className="link" to={`/tutoringsession/${post.id}`}>
-            <button>Visit post</button>
-          </Link>
-        </div>
-      </div>
+
+      <Container>
+        <Row className="justify-content-md-center">
+          <Row className="justify-content-md-center">
+            <Col md="auto">
+              <Row className="justify-content-md-center">
+                <Link className="link" to={`/tutoringsession/${post.id}`}>
+                  <h1 style={{ color: "black" }}>{post.course}</h1>
+                </Link>
+              </Row>
+
+              <Row className="justify-content-md-center">
+                <div className="stars">
+                  <span className="fa fa-star checked"></span>
+                  <span className="fa fa-star checked"></span>
+                  <span className="fa fa-star checked"></span>
+                  <span className="fa fa-star"></span>
+                  <span className="fa fa-star"></span>
+                </div>
+              </Row>
+
+              <Row className="justify-content-md-center">
+                <p>{post.description}</p>
+              </Row>
+
+              <Row className="justify-content-md-center">
+                <Col md="auto">
+                  <Link to={`/tutoringsession/${post.id}`} className="btn btn-primary">
+                    Visit Post
+                  </Link>
+                </Col>
+              </Row>
+            </Col>
+
+            <Col md="auto">
+              <img style={{ width: "50vh", height: "auto" }} src={`../uploads/${user?.img}`} key={user.img} alt="" />
+            </Col>
+          </Row>
+        </Row>
+      </Container>
     </div>
   );
 };

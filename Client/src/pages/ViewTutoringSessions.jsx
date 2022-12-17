@@ -2,6 +2,7 @@ import TutoringSessions from "../components/TutoringSessions";
 import Separator from "../components/Separator";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Searchbar from "../components/SearchBar";
 
 const ViewTutoringSessions = () => {
   const [posts, setPosts] = useState([]);
@@ -37,6 +38,7 @@ const ViewTutoringSessions = () => {
 
   return (
     <div className="container mt-5">
+      <Searchbar callback = {setPosts} />
       <TutoringSessions posts={currentPosts} fetching={fetching} />
       <Separator
         totalNmbr={posts.length}

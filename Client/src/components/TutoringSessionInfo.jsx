@@ -1,5 +1,4 @@
 import React from "react"
-import Logo from "../images/Logo.png"
 
 function TutoringSessionInfo(props) {
   let tutoringSessionName = props.tutoringSessionName;

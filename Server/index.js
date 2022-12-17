@@ -8,6 +8,7 @@ import { config } from "./passportConfig.js";
 import { authRoutes } from "./Routes/authRoutes.js";
 import { tutoringPostRoutes } from "./Routes/tutoringPostRoutes.js";
 import { groupPostRoutes } from "./Routes/groupPostRoutes.js";
+import { reviewRoutes } from "./Routes/reviewRoutes.js";
 import { createClient } from 'redis';
 import connectRedis from 'connect-redis';
 import dotenv from 'dotenv'
@@ -16,10 +17,6 @@ import dotenv from 'dotenv'
 const port = 8800;
 const app = express(); // to have web server
 
-//Configure redis 
-const redisClient = createClient({ legacyMode: true});
-redisClient.connect().catch(console.error);
-const RedisStore = connectRedis(session);
 
 //Configure session middleware
 dotenv.config()
@@ -35,14 +32,13 @@ app.use(
 );
 app.use(
   session({
-    store: new RedisStore({ client: redisClient }),
-    secret: SESSION_SECRET,
+    secret: "secretcode",
     resave: false,
    saveUninitialized: false,
    cookie: {
      secure: false,  // if true only transmits cookie over HTPPS
      httpOnly: false, // if true prevents client side JS from reading the cookie
-     maxAge: 1000 * 60 * 10, // session max age in milliseconds
+     maxAge: 1000 * 60 * 100, // session max age in milliseconds
    },
   })
 );
@@ -57,6 +53,8 @@ config(passport);
 authRoutes(app, passport);
 tutoringPostRoutes(app);
 groupPostRoutes(app);
+reviewRoutes(app);
+
 
 
 

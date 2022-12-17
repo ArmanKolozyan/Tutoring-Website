@@ -75,28 +75,13 @@ export const insertUser = (req, res) => {
 
 // vraag aan Maxim hoe gevolgde richtingen best updaten
 
-// for the search functionality
-export const findUser = (req, res) => {
-  const keyword = req.body.search;
-  // User the connection
-  connection.query(
-    "SELECT * FROM users WHERE firstname LIKE ? OR lastname LIKE ?",
-    ["%" + keyword + "%", "%" + keyword + "%"],
-    (err, data) => {
-      if (err) return res.status(500).json(err);
-
-      return res.status(200).json(data);
-    }
-  );
-};
-
 export const uploadImage = (req, res) => {
   if (typeof req.file !== 'undefined') { // VRAAG: MAAR IK HEB EEN CALLBACK GEZET BIJ FOUTE FILENAME, WAAROM KOMT HET TOCH NOG TOT HIER?
   const image = req.file.filename;
   const q = `UPDATE users SET img = ? WHERE id = ?`;
   const values = [image, req.user[0].id]
   db.query(q, values, (err, data) => {
-    if (err) console.log(err);
+    if (err) res.status(500).json(err);
     return res.status(200).json(image);
   });
 }

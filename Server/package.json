@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon index.js",
-    "redis": "redis-server"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",

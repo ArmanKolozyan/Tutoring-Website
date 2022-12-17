@@ -22,6 +22,7 @@ const CreateGroupSession = () => {
   const [free, setFree] = useState(true);
   const [dateAndTime, setDateAndTime] = useState();
   const [desc, setDesc] = useState();
+  const [location, setLocation] = useState();
 
   const { currentUser } = useContext(PasswordContext);
 
@@ -44,6 +45,7 @@ const CreateGroupSession = () => {
           free,
           dateAndTime,
           desc,
+          location,
         },
       });
     } catch (err) {
@@ -78,7 +80,7 @@ const CreateGroupSession = () => {
               </Col>
             </Row>
 
-            <Row className="">
+            <Row>
               <Col md="5">
                 <Form.Control type="text" required placeholder="Session Title" onChange={(e) => setTitle(e.target.value)} />
               </Col>
@@ -91,7 +93,7 @@ const CreateGroupSession = () => {
               </Col>
             </Row>
 
-            <Row className="">
+            <Row>
               <Form.Label>Target audience</Form.Label>
               <Col md="auto">
                 <Form.Select required onChange={(e) => setFaculty(e.target.value)}>
@@ -132,8 +134,14 @@ const CreateGroupSession = () => {
                 <input required type="datetime-local" id="birthdaytime" name="birthdaytime" onChange={(e) => setDateAndTime(e.target.value)} />
               </Col>
             </Row>
-            <Form.Label>Session description</Form.Label>
 
+            <Row>
+              <Col md="5">
+                <Form.Control type="text" required placeholder="Location" onChange={(e) => setLocation(e.target.value)} />
+              </Col>
+              </Row>
+        
+            <Form.Label>Session description</Form.Label>
             <Col md="auto">
               <Form.Control as="textarea" placeholder="Give a description of what this groupsession will be like" maxLength={573} rows={5} required onChange={(e) => setDesc(e.target.value)} />
             </Col>
@@ -141,9 +149,6 @@ const CreateGroupSession = () => {
           </Col>
         </Row>
 
-        <Row className="justify-content-md-center">
-          <Col md="auto">Select location / map has to be integrapted</Col>
-        </Row>
 
         <Row className="justify-content-md-center">
           <Button type="submit">Submit</Button>

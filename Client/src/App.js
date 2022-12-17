@@ -1,8 +1,4 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Outlet,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -17,8 +13,8 @@ import MyProfile from "./pages/MyProfile";
 import ViewProfile from "./pages/ViewProfile";
 import CreateGroupSession from "./pages/CreateGroupSession";
 import ViewGroupSession from "./pages/ViewGroupSession";
-import Dummy from "./pages/Dummy";
 import ViewTutoringSessions from "./pages/ViewTutoringSessions";
+import ScrollToTop from "./components/ScrollToTop";
 
 // Using an Outlet component of React to avoid
 // duplication of Navbar and Footer at every page
@@ -26,91 +22,88 @@ import ViewTutoringSessions from "./pages/ViewTutoringSessions";
 function Layout1() {
   return (
     <>
-      <Navigationbar/>
-      <Outlet/>
-      <Footer/>
+      <ScrollToTop />
+      <Navigationbar />
+      <Outlet />
+      <Footer />
     </>
-  )
+  );
 }
 
 function Layout2() {
   return (
     <>
-      <Trademark/>
-      <Outlet/>
+      <ScrollToTop />
+      <Trademark />
+      <Outlet />
     </>
-  )
+  );
 }
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout1/>,
+    element: <Layout1 />,
     children: [
       {
         path: "/",
-        element: <Home/>
+        element: <Home />,
       },
       {
         path: "/createTutoringSession",
-        element: <CreateTutoringSession/>
+        element: <CreateTutoringSession />,
       },
       {
         path: "/createGroupSession",
-        element: <CreateGroupSession/>
+        element: <CreateGroupSession />,
       },
       {
         path: "/tutoringSession/:id",
-        element: <ViewTutoringSession/>
+        element: <ViewTutoringSession />,
       },
       {
         path: "/groupSession/:id",
-        element: <ViewGroupSession/>
+        element: <ViewGroupSession />,
       },
       {
-        path:"/ViewProfile/:id",
-        element: <ViewProfile/>
+        path: "/ViewProfile/:id",
+        element: <ViewProfile />,
       },
       {
         path: "/profile/:firstname",
-        element: <MyProfile/>
+        element: <MyProfile />,
       },
       {
         path: "/summaries",
-        element: <ViewSummaries/>
-      },
-      {
-        path: "/dummy",
-        element: <Dummy/>
+        element: <ViewSummaries />,
       },
       {
         path: "/tutoringsessions",
-        element: <ViewTutoringSessions/>
-      }
+        element: <ViewTutoringSessions />,
+      },
     ],
   },
   {
     path: "/",
-    element: <Layout2/>,
+    element: <Layout2 />,
     children: [
       {
         path: "/register",
-        element: <Register/>,
+        element: <Register />,
       },
-      { 
+      {
         path: "/login",
-        element: <Login/>,
+        element: <Login />,
       },
     ],
   },
 ]);
 
-
 function App() {
   return (
-    <div className="app"> 
+    <div className="app">
       <div className="container">
-      <RouterProvider router={router} />
+        <RouterProvider router={router} />
       </div>
     </div>
   );

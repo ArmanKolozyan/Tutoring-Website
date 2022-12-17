@@ -1,5 +1,4 @@
 import React from "react";
-import Logo from "../images/Logo.png";
 import ProgressBar from "react-bootstrap/ProgressBar";
 
 function GroupSessionInfo(props) {
@@ -10,6 +9,7 @@ function GroupSessionInfo(props) {
   let limited = props.limited;
   let space = props.space;
   let dateTime = props.dateTime;
+  let location = props.location;
 
   let SpotsTakenSession = 14;
 
@@ -43,7 +43,9 @@ function GroupSessionInfo(props) {
         <ProgressBar min={0} max={space} now={SpotsTakenSession} label={`${SpotsTakenSession} of ${space}`} />
       </p>
 
-      <p>The price for this session will be {price} euros.</p>
+      <p> <h6>The price for this session will be</h6> {price}  euros. </p>
+      <p> <h6>The session will take place in the following location:</h6> {location}</p>
+
     </div>
   );
 }

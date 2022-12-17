@@ -38,9 +38,123 @@ export const addTutoringPost = (req, res) => {
     req.body.test,
   ];
 
+  let post_id;
 
-  db.query(q, [values], (err, data) => {
-    if (err) return res.status(500).json(err);
-    return res.json("Tutoring post has been created.");
+  const withCallback = (callback) => {
+    db.query(q, [values], (err, data) => {
+      if (err) return res.status(500).json(err);
+      post_id = data.insertId;
+      callback(req.body.regions, post_id);
+      return res.status(200).json(post_id);
+    });
+  };
+  withCallback(insertRegions);
+};
+
+const insertRegions = (regions, post_id) => {
+  const q1 = `DELETE FROM tutor_regions WHERE post_id = ?`;
+  const q2 = "INSERT INTO tutor_regions SET post_id = ?, latitude = ?, longitude = ?, radius = ?";
+
+  db.query(q1, [post_id], (err, data) => {
+    if (err) res.status(500).json(err);
   });
+
+  regions.forEach((region) => {
+    db.query(q2, [post_id, region.latitude, region.longitude, region.radius], (err, data) => {
+      if (err) res.status(500).json(err);
+    });
+  });
+};
+
+export const getRegions = (req, res) => {
+  const q = "SELECT `latitude`, `longitude`, `radius` FROM tutor_regions WHERE post_id = ? ";
+
+  db.query(q, [req.params.id], (err, data) => {
+    if (err) return res.status(500).json(err);
+    return res.status(200).json(data);
+  });
+};
+
+export const updateTutoringPost = (req, res) => {
+  const post_id = req.params.id;
+
+  const q =
+    "UPDATE tutoring_posts SET `course`=?,`field_of_study`=?,`description`=?,`date`=?,`experience`=?,`price`=?, `free_test`=? WHERE `id` = ?";
+
+  const values = [
+    req.body.course,
+    req.body.field,
+    req.body.desc,
+    req.body.date,
+    req.body.exp,
+    req.body.price,
+    req.body.test,
+    post_id,
+  ];
+
+  db.query(q, values, (err, data) => {
+    if (err) return res.status(500).json(err);
+  });
+  insertRegions(req.body.regions, post_id);
+  return res.status(200).json(post_id);
+};
+
+export const deleteTutoringPost = (req, res) => {
+  const post_id = req.params.id;
+
+  const q = "DELETE FROM tutoring_posts WHERE `id` = ?";
+
+  db.query(q, [post_id], (err, data) => {
+    if (err) return res.status(403);
+
+    return res.json("Post is deleted!");
+  });
+};
+
+// for the search functionality
+export const findTutoringPost = (req, res) => {
+  const keyword = req.query.keyword;
+  const course = req.query.course;
+  const field = req.query.field;
+  const freeTest = req.query.freeTest;
+
+  const checkOrder = () => {
+    let order;
+
+    switch (req.query.orderBy) {
+      case "Price low-high":
+        order = "ORDER BY price ASC";
+        break;
+      case "Price high-low":
+        order = "ORDER BY price DESC";
+        break;
+      case "Experience high-low":
+        order = "ORDER BY experience DESC";
+        break;
+      case "Experience low-high":
+        order = "ORDER BY experience ASC";
+        break;
+      default:
+        order = "";
+    }
+    return order;
+  };
+
+  const checkFreeTest = () => {
+    if (freeTest === 'true') {
+      return "AND free_test = 1";
+    } else {
+      return "";
+    }
+  }
+
+  const values = ["%" + keyword + "%", "%" + course + "%", "%" + field + "%", freeTest];
+  db.query(
+    "SELECT * FROM tutoring_posts WHERE description LIKE ? AND course LIKE ? AND field_of_study LIKE ?" + checkFreeTest() + checkOrder(),
+    values,
+    (err, data) => {
+      if (err) return res.status(500).json(err);
+      return res.status(200).json(data);
+    }
+  );
 };
