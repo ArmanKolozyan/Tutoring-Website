@@ -43,6 +43,19 @@ const ViewTutoringSession = () => {
   //
 
 
+
+  //// delete popup
+
+
+  const [showDelete, setShowDelete] = useState(false);
+
+  const handleCloseDelete = () => setShowDelete(false);
+  const handleShowDelete = () => setShowDelete(true);
+
+
+  //
+
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -156,7 +169,7 @@ const ViewTutoringSession = () => {
                     </Link>
                   </div>
                   <div className="delete">
-                    <Link onClick={deletePost} to={"/tutoringsessions"} state={post} className="btn btn-danger">
+                    <Link onClick={handleShowDelete} className="btn btn-danger">
                       Delete post
                     </Link>
                   </div>
@@ -217,6 +230,23 @@ const ViewTutoringSession = () => {
         </Button>
 
         </Modal.Body>
+      </Modal>
+
+
+
+      <Modal show={showDelete} onHide={handleCloseDelete}>
+        <Modal.Header closeButton>
+          <Modal.Title>Deleting Post</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>You are deleting your post! Are you sure you want to do this, this action can not be undone.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDelete}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={deletePost} to={"/tutoringsessions"}>
+            Delete!
+          </Button>
+        </Modal.Footer>
       </Modal>
 
     </div>
