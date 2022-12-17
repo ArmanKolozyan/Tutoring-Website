@@ -112,7 +112,7 @@ export const deleteTutoringPost = (req, res) => {
 };
 
 // for the search functionality
-export const findTutoringPost = (req, res) => {
+export const findTutoringPosts = (req, res) => {
   const keyword = req.query.keyword;
   const course = req.query.course;
   const field = req.query.field;

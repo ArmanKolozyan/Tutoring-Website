@@ -2,7 +2,7 @@ import PostCards from "../components/PostCards";
 import Separator from "../components/Separator";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Searchbar from "../components/SearchBar";
+import Searchbar from "../components/TutoringSessionSearchbar";
 
 const ViewTutoringSessions = () => {
   const [posts, setPosts] = useState([]);

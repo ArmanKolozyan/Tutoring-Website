@@ -37,7 +37,7 @@ export const addGroupPost = (req, res) => {
     req.body.dateAndTime,
     req.body.desc,
     req.user[0].id,
-    req.body.location
+    req.body.location,
   ];
 
   db.query(q, [values], (err, data) => {
@@ -80,7 +80,74 @@ export const deleteGroupPost = (req, res) => {
   const q = "DELETE FROM group_posts WHERE `id` = ?";
 
   db.query(q, [post_id], (err, data) => {
-    if (err) return res.status(403);
+    if (err) return res.status(500).json(err);
     return res.json("Post is deleted!");
   });
+};
+
+// for the search functionality
+export const findGroupPosts = (req, res) => {
+  const keyword = req.query.keyword;
+  const course = req.query.course;
+  const field = req.query.field;
+  const free = req.query.free;
+  const noRegistration = req.query.noRegistration;
+
+  const checkOrder = () => {
+    let order;
+
+    switch (req.query.orderBy) {
+      case "Price low-high":
+        order = "ORDER BY price ASC";
+        break;
+      case "Price high-low":
+        order = "ORDER BY price DESC";
+        break;
+      case "Date new-old":
+        order = "ORDER BY date_time ASC";
+        break;
+      case "Date old-new":
+        order = "ORDER BY date_time DESC";
+        break;
+      case "Registrations high-low":
+        order = "ORDER BY registrations DESC";
+        break;
+      case "Registrations low-high":
+        order = "ORDER BY registrations ASC";
+        break;
+      default:
+        order = "";
+    }
+    return order;
+  };
+
+  const checkFree = () => {
+console.log(free)
+    if (free === "true") {
+      return "AND free = 1";
+    } else {
+      return "";
+    }
+  };
+
+  const checkNoRegistrattions = () => {
+    if (noRegistration === "true") {
+      return "AND limited = 0";
+    } else {
+      return "";
+    }
+  };
+
+  const values = ["%" + keyword + "%", "%" + course + "%", "%" + field + "%"];
+  db.query(
+    "SELECT * FROM group_posts WHERE description LIKE ? AND course LIKE ? AND faculty LIKE ?" +
+      checkFree() +
+      checkNoRegistrattions() +
+      checkOrder(),
+    values,
+    (err, data) => {
+      if (err) return res.status(500).json(err);
+      return res.status(200).json(data);
+    }
+  );
 };
