@@ -145,7 +145,9 @@ const ViewTutoringSession = () => {
         </Row>
 
         <Row className="justify-content-md-center">
+        <Col>
           <Button>Contact Tutor</Button>
+        </Col>
         </Row>
 
         <Row className="justify-content-md-center">

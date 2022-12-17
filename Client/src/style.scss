@@ -11,6 +11,10 @@ $ourOrange: #fc3e03;
       color: inherit;
     }
 
+    ul {
+      list-style-type: none;
+    }
+    
     // Login & Register pages
 
     .auth {
@@ -338,6 +342,9 @@ $ourOrange: #fc3e03;
       width: 40vw;
       border: none;
       background-color: $ourOrange;
+      align-self: center;
+      margin-left: 30vw;
+      margin-right: 30vw;
     }
   }
 
@@ -494,40 +501,39 @@ $ourOrange: #fc3e03;
   }
 
   .Review {
+    padding: 0;
+    margin-right : 10vw;
     .box {
-      // zodat de review zich in een box bevindt
-      padding: 1vh;
-      //box-sizing: border-box;
-      //-moz-box-sizing: border-box;
-      //-webkit-box-sizing: border-box;
-      width: 80%;
+      width: 100%;
       height: fit-content;
-      border: 0.5vh solid black;
-      border-radius: 5vh;
+      border: 0.2vh solid black;
+      border-radius: 1vh;
     }
-    h1 {
-      font-size: 4vh;
-      color: $ourBlue;
-      width: fit-content;
-    }
+
     .stars {
-      font-size: 5vh;
+      font-size: 3vh;
       flex-direction: row;
       color: $ourBlue;
       .checked {
         color: $ourOrange;
       }
     }
+    
     p {
-      margin-top: 2vh;
-      font-size: 2.5vh;
+      font-size: 2vh;
     }
+
+    h4 {
+      color: $ourBlue;
+      width: fit-content;
+    }
+
     h2 {
       display: flex;
       justify-content: right;
+      padding-right: 3vw;
       font-size: 2vh;
       color: $ourBlue;
-      margin-top: 3vh;
     }
   }
 
@@ -556,6 +562,17 @@ $ourOrange: #fc3e03;
 
     Button {
       width: 30%;
+    }
+  }
+
+  .pagination{
+
+    Button{
+      border: 1px solid $ourBlue;
+      background-color: white;
+      color: $ourBlue;
+      width: fit-content;
+      text-align: center;
     }
   }
 }
