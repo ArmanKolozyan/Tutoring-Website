@@ -72,3 +72,14 @@ export const updateGroupPost = (req, res) => {
     return res.status(200).json(post_id);
   });
 };
+
+export const deleteGroupPost = (req, res) => {
+  const post_id = req.params.id;
+
+  const q = "DELETE FROM group_posts WHERE `id` = ?";
+
+  db.query(q, [post_id], (err, data) => {
+    if (err) return res.status(403);
+    return res.json("Post is deleted!");
+  });
+};

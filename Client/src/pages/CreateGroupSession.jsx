@@ -115,7 +115,9 @@ const CreateGroupSession = () => {
           <Col md="auto">
             <Row className="">
               <Col md="auto">
-                <h3> Create a group session </h3>
+                <h3> 
+                {post ? <h3> Edit group session </h3> : <h3> Create a new group session </h3>}
+                </h3>
               </Col>
             </Row>
 

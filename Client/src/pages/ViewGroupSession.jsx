@@ -33,6 +33,7 @@ const ViewGroupSession = () => {
   //
 
   const location = useLocation();
+  const navigate = useNavigate();
   const postId = location.pathname.split("/")[2];
 
   const [post, setPost] = useState({});
@@ -40,6 +41,12 @@ const ViewGroupSession = () => {
   const [user, setUser] = useState({});
 
   const { currentUser } = useContext(PasswordContext);
+
+    //// delete popup
+    const [showDelete, setShowDelete] = useState(false);
+
+    const handleCloseDelete = () => setShowDelete(false);
+    const handleShowDelete = () => setShowDelete(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,6 +90,19 @@ const ViewGroupSession = () => {
       year = date[0].substring(2); // get only two digits
 
     return day + "/" + month + "/" + year;
+  }
+
+  const deletePost = async () => {
+    try {
+      await axios({
+        method: "delete",
+        withCredentials: true,
+        url: `http://localhost:8800/groupposts/${post.id}`,
+      });
+      navigate("/groupsessions")
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -137,8 +157,11 @@ const ViewGroupSession = () => {
                       Edit Post
                     </Link>
                   </div>
-                  <div className="delete">Delete post</div>
-                </>
+                  <div className="delete">
+                    <Link onClick={handleShowDelete} className="btn btn-danger">
+                      Delete post
+                    </Link>
+                  </div>                </>
               )}
             </div>
           </Col>
@@ -174,6 +197,21 @@ const ViewGroupSession = () => {
             Copy email
           </Button>
         </Modal.Body>
+      </Modal>
+
+      <Modal show={showDelete} onHide={handleCloseDelete}>
+        <Modal.Header closeButton>
+          <Modal.Title>Deleting Post</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>You are deleting your post! Are you sure you want to do this, this action can not be undone.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDelete}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={deletePost}>
+            Delete!
+          </Button>
+        </Modal.Footer>
       </Modal>
     </div>
   );
