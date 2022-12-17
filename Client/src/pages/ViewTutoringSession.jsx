@@ -16,7 +16,33 @@ import { ViewMap } from "../components/ViewMap";
 import { useContext } from "react";
 import { PasswordContext } from "../context/PasswordContext";
 
+import Modal from 'react-bootstrap/Modal';
+
+
 const ViewTutoringSession = () => {
+
+
+  //contact popup
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
+  const phonenumber = "+32 423 32 34 54"
+  const email = "Stoffel@hotmail.be"
+
+  function copyPhonenumber(){
+    navigator.clipboard.writeText(phonenumber);
+  }
+
+  
+  function copyEmail(){
+    navigator.clipboard.writeText(email);
+  }
+  //
+
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -146,7 +172,7 @@ const ViewTutoringSession = () => {
 
         <Row className="justify-content-md-center">
         <Col>
-          <Button>Contact Tutor</Button>
+          <Button onClick={handleShow}>Contact Tutor</Button>
         </Col>
         </Row>
 
@@ -161,6 +187,38 @@ const ViewTutoringSession = () => {
           </Col>
         </Row>
       </Container>
+
+
+
+
+
+
+
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Contact information of the tutor</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        
+        
+        <p>
+          His/Her phonenumber is : {phonenumber}
+        </p>
+        <Button variant="secondary" onClick={copyPhonenumber}>
+        Copy phonenumber
+        </Button>
+        
+        <p>        <br/>
+          His/her Email adress is : {email}
+        </p>
+        <Button variant="secondary" onClick={copyEmail}>
+        Copy email
+        </Button>
+
+        </Modal.Body>
+      </Modal>
+
     </div>
   );
 };
