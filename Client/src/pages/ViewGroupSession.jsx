@@ -8,33 +8,29 @@ import GroupSessionDescription from "../components/GroupSessionDescription";
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
-import Modal from 'react-bootstrap/Modal';
-
+import { useLocation, Link, useNavigate } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+import { useContext } from "react";
+import { PasswordContext } from "../context/PasswordContext";
 
 const ViewGroupSession = () => {
+  //contact popup
+  const [show, setShow] = useState(false);
 
-   //contact popup
-   const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-   const handleClose = () => setShow(false);
-   const handleShow = () => setShow(true);
- 
- 
-   const phonenumber = "+32 423 32 34 54"
-   const email = "Stoffel@hotmail.be"
- 
-   function copyPhonenumber(){
-     navigator.clipboard.writeText(phonenumber);
-   }
- 
-   
-   function copyEmail(){
-     navigator.clipboard.writeText(email);
-   }
-   //
+  const phonenumber = "+32 423 32 34 54";
+  const email = "Stoffel@hotmail.be";
 
+  function copyPhonenumber() {
+    navigator.clipboard.writeText(phonenumber);
+  }
 
+  function copyEmail() {
+    navigator.clipboard.writeText(email);
+  }
+  //
 
   const location = useLocation();
   const postId = location.pathname.split("/")[2];
@@ -42,6 +38,8 @@ const ViewGroupSession = () => {
   const [post, setPost] = useState({});
 
   const [user, setUser] = useState({});
+
+  const { currentUser } = useContext(PasswordContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -100,11 +98,11 @@ const ViewGroupSession = () => {
             <Row className="justify-content-md-center">
               <div className="GroupSessionInfo">
                 <GroupSessionInfo
-                  limited={post.limited}
+                  limited={post.limited === 1 ? true : false}
                   space={post.max_inscriptions}
                   faculty={post.faculty}
                   course={post.course}
-                  free={post.free}
+                  free={post.free === 1 ? true : false}
                   price={post.price}
                   dateTime={post.date_time}
                   location={post.location}
@@ -125,13 +123,23 @@ const ViewGroupSession = () => {
             <div className="TutorInfo">
               <h6> Organised by: </h6>
               <TutorInfo
-                 tutorName={user?.firstname?.concat(' ').concat(user.lastname)} // VRAAG: kan dit mooier?
+                tutorName={user?.firstname?.concat(" ").concat(user.lastname)} // VRAAG: kan dit mooier?
                 tutorText={user?.shortIntro}
                 tutorAge={user.birthDate ? formatDate(user.birthDate) : ""}
                 AvgRating={3} // TO DOOO
                 ProfileLink={`/viewprofile/${user?.id}`}
                 PhotoLink={`../uploads/${user?.img}`}
               />
+              {currentUser.id === post.userid && (
+                <>
+                  <div className="edit">
+                    <Link to={`/creategroupsession?edit=${post.id}`} state={post} className="btn btn-secondary">
+                      Edit Post
+                    </Link>
+                  </div>
+                  <div className="delete">Delete post</div>
+                </>
+              )}
             </div>
           </Col>
         </Row>
@@ -147,34 +155,26 @@ const ViewGroupSession = () => {
         </Row>
       </Container>
 
-
-
-
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Contact information of the tutor</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        
-        
-        <p>
-          His/Her phonenumber is : {phonenumber}
-        </p>
-        <Button variant="secondary" onClick={copyPhonenumber}>
-        Copy phonenumber
-        </Button>
-        
-        <p>        <br/>
-          His/her Email adress is : {email}
-        </p>
-        <Button variant="secondary" onClick={copyEmail}>
-        Copy email
-        </Button>
+          <p>His/Her phonenumber is : {phonenumber}</p>
+          <Button variant="secondary" onClick={copyPhonenumber}>
+            Copy phonenumber
+          </Button>
 
+          <p>
+            {" "}
+            <br />
+            His/her Email adress is : {email}
+          </p>
+          <Button variant="secondary" onClick={copyEmail}>
+            Copy email
+          </Button>
         </Modal.Body>
       </Modal>
-
     </div>
   );
 };

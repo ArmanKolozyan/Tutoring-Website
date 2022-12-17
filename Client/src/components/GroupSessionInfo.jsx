@@ -18,7 +18,7 @@ function GroupSessionInfo(props) {
     priceText = " part of this group session is free!";
   }
 
-  let limitedpacestext = "There are unlimited spots for this groupsession";
+  let limitedpacestext = "Spots for this session are not limited.";
   let limitedspacetext2 = "";
   if (limited) {
     limitedpacestext = "This is a groupsession with limited space, and";
@@ -28,22 +28,26 @@ function GroupSessionInfo(props) {
   return (
     <div>
       <p>
-        <h6>This event will take place on </h6>
-        {dateTime}.
+        <h6>This event will take place on: </h6>
+        {dateTime}
       </p>
       <p>
         <h6> The Target audience of this groupsession is:</h6>
-        People from the {faculty} faculty, following the {course} course.
+        people from the {faculty} faculty, following the {course} course
       </p>
 
+
+      <p>
+        <h6>Inscriptions: </h6>
+      </p>
       <p>
         {limitedpacestext}
         <br></br>
         {limitedspacetext2}
-        <ProgressBar min={0} max={space} now={SpotsTakenSession} label={`${SpotsTakenSession} of ${space}`} />
+        {limited ? <ProgressBar min={0} max={space} now={SpotsTakenSession} label={`${SpotsTakenSession} of ${space}`}/> : ""}
       </p>
 
-      <p> <h6>The price for this session will be</h6> {price}  euros. </p>
+      <p> <h6>The price for this session is:</h6> {free ? "free session" : price + "euros"} </p>
       <p> <h6>The session will take place in the following location:</h6> {location}</p>
 
     </div>

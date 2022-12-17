@@ -20,14 +20,6 @@ const CreateTutoringSession = () => {
   const post = useLocation().state;
   const navigate = useNavigate();
 
-  const checkFree = () => {
-    if (test == "1") {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   const [course, setCourse] = useState(post?.course || "");
   const [field, setField] = useState(post?.field_of_study || "");
   const [exp, setExp] = useState(post?.experience || "");
@@ -38,6 +30,14 @@ const CreateTutoringSession = () => {
   const { currentUser } = useContext(PasswordContext);
 
   const [regions, setRegions] = useState([]); // must be initialised by an empty array! otherwise not possible to call 'map'
+
+  const checkFree = () => {
+    if (test == "1") {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   useEffect(() => {
     if (post) {

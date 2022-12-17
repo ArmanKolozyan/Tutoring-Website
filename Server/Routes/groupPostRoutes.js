@@ -1,9 +1,9 @@
-import {addgroupPost, getSinglegroupPost, getgroupPosts} from "../Controllers/groupPosts.js"
+import {addGroupPost, getSingleGroupPost, getGroupPosts, updateGroupPost} from "../Controllers/GroupPosts.js"
 
 export const groupPostRoutes = (app) => {
-  app.get("/groupposts/", getgroupPosts);
-  app.get("/groupposts/:id", getSinglegroupPost);
-  app.post("/groupposts/", addgroupPost);
-  //app.delete("/posts/:id", deletegroupPost);
-  //app.put("/posts/:id", updategroupPost);
+  app.get("/groupposts/", getGroupPosts);
+  app.get("/groupposts/:id", getSingleGroupPost);
+  app.post("/groupposts/", addGroupPost);
+    app.put("/groupposts/:id", updateGroupPost);
+  //app.delete("/posts/:id", deleteGroupPost);
 };

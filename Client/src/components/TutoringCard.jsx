@@ -56,11 +56,13 @@ const TutoringCard = ({ post }) => {
 
 
                 <Col>
-                <p> The price of this course is : {''}   <span style={{ fontWeight: 'bold' }}> € {post.price}</span> </p>
+                <p> The price of this course is :</p>
+                <p> <span style={{ fontWeight: 'bold' }}> € {post.price}</span> </p>
                 </Col>
 
                 <Col>
-                <p> Years of experience : {''}   <span style={{ fontWeight: 'bold' }}> {post.experience}</span> </p>
+                <p> Years of experience :</p>
+                <p> <span style={{ fontWeight: 'bold' }}> {post.experience}</span> </p>
                 </Col>
 
 

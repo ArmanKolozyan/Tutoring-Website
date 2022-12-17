@@ -55,11 +55,13 @@ const GroupCard = ({ post }) => {
                 </Col>
 
                 <Col>
-                <p> The price of this session is : {''}   <span style={{ fontWeight: 'bold' }}> € {post.price}</span> </p>
+                <p> The price of this session is : </p>
+                <p><span style={{ fontWeight: 'bold' }}> € {post.free ? 0 : post.price}</span> </p>
                 </Col>
 
                 <Col>
-                <p> Total subscriptions : {''}   <span style={{ fontWeight: 'bold' }}> {post.registrations}</span> </p>
+                <p> Total registrations : </p>
+                <p><span style={{ fontWeight: 'bold' }}> {post.registrations}</span> </p>
                 </Col>
               </Row>
 
