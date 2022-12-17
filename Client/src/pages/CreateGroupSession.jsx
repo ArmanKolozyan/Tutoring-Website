@@ -19,16 +19,14 @@ const CreateGroupSession = () => {
 
   const postDate = () => {
     if (post !== null) {
-    const d = new Date(post.date_time);
-    const result = [d.getFullYear(),
-      d.getMonth()+1,
-      d.getDate()].join('-')+'T'+
-     [d.getHours(),
-      d.getMinutes()].join(':');
+      const d = new Date(post.date_time);
+      const result =
+        [d.getFullYear(), d.getMonth() + 1, d.getDate()].join("-") + "T" + [d.getHours(), d.getMinutes()].join(":");
       return result;
-      } else{ 
-        return false}
-  }
+    } else {
+      return false;
+    }
+  };
 
   const [title, setTitle] = useState(post?.title || "");
   const [limited, setLimited] = useState(post?.limited || "1");
@@ -66,27 +64,28 @@ const CreateGroupSession = () => {
             location,
           },
         });
-        navigate(`/groupsession/${postId.data}`); }
-        else {
-      await axios({
-        method: "post",
-        withCredentials: true,
-        headers: { "Content-Type": "application/json" },
-        url: "http://localhost:8800/groupposts/",
-        data: {
-          title,
-          limited,
-          space,
-          faculty,
-          course,
-          price,
-          free,
-          dateAndTime,
-          desc,
-          location,
-        },
-      });
-    }
+        navigate(`/groupsession/${postId.data}`);
+      } else {
+        const postId =await axios({
+          method: "post",
+          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
+          url: "http://localhost:8800/groupposts/",
+          data: {
+            title,
+            limited,
+            space,
+            faculty,
+            course,
+            price,
+            free,
+            dateAndTime,
+            desc,
+            location,
+          },
+        });
+        navigate(`/groupsession/${postId.data}`);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -115,9 +114,7 @@ const CreateGroupSession = () => {
           <Col md="auto">
             <Row className="">
               <Col md="auto">
-                <h3> 
-                {post ? <h3> Edit group session </h3> : <h3> Create a new group session </h3>}
-                </h3>
+                <h3>{post ? <h3> Edit group session </h3> : <h3> Create a new group session </h3>}</h3>
               </Col>
             </Row>
 
@@ -185,7 +182,7 @@ const CreateGroupSession = () => {
               <Form.Label>Session information</Form.Label>
               <Col md="auto">
                 <Form.Check
-                checked={checkFree()}
+                  checked={checkFree()}
                   type="checkbox"
                   label="Free groupsession"
                   className="checkbox"
@@ -194,7 +191,7 @@ const CreateGroupSession = () => {
               </Col>
               <Col md="5">
                 <Form.Control
-                value={price}
+                  value={price}
                   style={{ width: "10vw" }}
                   required
                   onChange={(e) => setPrice(e.target.value)}
@@ -206,7 +203,7 @@ const CreateGroupSession = () => {
               <Col md="auto">
                 <Form.Label> Date and time: </Form.Label>
                 <input
-                value={dateAndTime}
+                  value={dateAndTime}
                   required
                   type="datetime-local"
                   id="birthdaytime"
@@ -219,7 +216,7 @@ const CreateGroupSession = () => {
             <Row>
               <Col md="5">
                 <Form.Control
-                value={location}
+                  value={location}
                   type="text"
                   required
                   placeholder="Location"
@@ -231,7 +228,7 @@ const CreateGroupSession = () => {
             <Form.Label>Session description</Form.Label>
             <Col md="auto">
               <Form.Control
-              value={desc}
+                value={desc}
                 as="textarea"
                 placeholder="Give a description of what this groupsession will be like"
                 maxLength={573}

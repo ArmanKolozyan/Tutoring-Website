@@ -42,7 +42,8 @@ export const addGroupPost = (req, res) => {
 
   db.query(q, [values], (err, data) => {
     if (err) return res.status(500).json(err);
-    return res.json("group post has been created.");
+    const post_id = data.insertId;
+    return res.json(post_id);
   });
 };
 

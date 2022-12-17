@@ -82,8 +82,11 @@ const TutoringCard = ({ post }) => {
             </Col>
 
             <Col md="auto">
-              <img style={{"margin-left": "auto", "max-width": "80%", display: "block", height: "auto", "border-radius": "50px", "margin-right": "0px" }} src={`../uploads/${user?.img}`} key={user.img} alt="" />
-            </Col>
+            {
+            user.img ?
+              <img style={{"margin-left": "auto", "max-width": "80%", display: "block", height: "auto", "border-radius": "50px" }} src={`../uploads/${user?.img}`} key={user.img} alt="" />
+            : ""
+            }            </Col>
           </Row>
         </Row>
       </Container>

@@ -4,16 +4,35 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Card from "react-bootstrap/Card";
-import { PasswordContext } from "../context/PasswordContext";
-import { useContext } from "react";
 
 const ViewProfile = () => {
 
-  const {currentUser} = useContext(PasswordContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const userid = location.pathname.split("/")[2];
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios({
+          method: "get",
+          withCredentials: true,
+          url: `http://localhost:8800/user/${userid}`,
+        });
+        setUser(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (userid) {
+      fetchData();
+    }
+  }, [userid]);
 
   // format date to dd/mm/yy using Regular Expressions
   function formatDate (input) {
@@ -25,13 +44,13 @@ const ViewProfile = () => {
     return day+'/'+month+'/'+year;
   }
 
-  let Name = currentUser.firstname;
-  let SurName = currentUser.lastname;
-  let Birthdate = currentUser.birthDate;
-  let EmailAdress = currentUser.email;
+  let Name = user.firstname;
+  let SurName = user.lastname;
+  let Birthdate = user.birthDate;
+  let EmailAdress = user.email;
   const [studies, setStudies] = useState([]); // must be initialised by an empty array! otherwise not possible to call 'map' 
-  let ProfilePicture = `../uploads/${currentUser.img}`;
-  let description = currentUser.intro;
+  let ProfilePicture = `../uploads/${user.img}`;
+  let description = user.intro;
   let PhoneNumber = "0411929242";
 
   useEffect(() => {
@@ -40,7 +59,7 @@ const ViewProfile = () => {
         const res = await axios({
           method: "get",
           withCredentials: true,
-          url: `http://localhost:8800/studies/${currentUser.id}`,
+          url: `http://localhost:8800/studies/${user.id}`,
         });
         let result = res.data.map(x => x.field);
         setStudies(result);
@@ -49,7 +68,7 @@ const ViewProfile = () => {
       }
     };
     fetchData();
-  }, [currentUser.id]);
+  }, [user.id]);
 
   return (
     <div className="ViewProfile">
@@ -59,7 +78,7 @@ const ViewProfile = () => {
             <div className="PersonInfo">
               <Row className="justify-content-md-center">
                 <h5> {Name} </h5> <h6> {SurName} </h6>
-                <p>I was born on {formatDate(Birthdate.slice(0,10))}.</p>
+                <p>I was born on {Birthdate ? formatDate(Birthdate.slice(0,10)) : ""}.</p>
               </Row>
 
               <Row className="">
