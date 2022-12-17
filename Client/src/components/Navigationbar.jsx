@@ -29,16 +29,6 @@ const Navigationbar = () => {
 
         <Nav.Link href="#Study_together" className="ms-auto"> <Icon.People size={20} /> Study Together</Nav.Link>
         <Nav.Link href="/tutoringsessions"> <Icon.PersonVideo3 size={20} /> Find tutors</Nav.Link>
-        <Nav.Link href="#Summaries"> <Icon.JournalBookmarkFill size={20} /> Summaries</Nav.Link>
-        <Nav.Link href="#Search"><Icon.Search size={20} /> Search</Nav.Link>
-        
-        <NavDropdown id="collasible-nav-dropdown" className="ms-auto" title=<Icon.Bell size={25} />>
-          <NavDropdown.Item href="#action/dummienoti1clicked">Dummie Notification1</NavDropdown.Item>
-          <NavDropdown.Item href="#action/dummienoti2clicked">Dummie Notification2</NavDropdown.Item>
-          <NavDropdown.Item href="#action/dummienoti3clicked">Dummie Notification3</NavDropdown.Item>
-          <NavDropdown.Divider />
-          <NavDropdown.Item href="#action/3.4">All Notifications</NavDropdown.Item>
-        </NavDropdown>
 
         
         <Nav.Link href={ currentUser ? `/profile/${currentUser.firstname}`: `/`}> <Icon.PersonBoundingBox size={30} /> 
