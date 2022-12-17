@@ -25,11 +25,21 @@ function GroupSessionInfo(props) {
     limitedspacetext2 = SpotsTakenSession + " out of the " + space + " have been taken already!";
   }
 
+    // format date to dd/mm/yy using Regular Expressions
+    function formatDate(input) {
+      let date = input.match(/\d+/g),
+        day = date[2],
+        month = date[1],
+        year = date[0].substring(2); // get only two digits
+  
+      return day + "/" + month + "/" + year;
+    }
+
   return (
     <div>
       <p>
         <h6>This event will take place on: </h6>
-        {dateTime}
+        {dateTime ? formatDate(dateTime) + " " + dateTime.slice(11,16) : ""}
       </p>
       <p>
         <h6> The Target audience of this groupsession is:</h6>
@@ -47,7 +57,7 @@ function GroupSessionInfo(props) {
         {limited ? <ProgressBar min={0} max={space} now={SpotsTakenSession} label={`${SpotsTakenSession} of ${space}`}/> : ""}
       </p>
 
-      <p> <h6>The price for this session is:</h6> {free ? "free session" : price + "euros"} </p>
+      <p> <h6>The price for this session is:</h6> {free ? "free session" : price + " euros"} </p>
       <p> <h6>The session will take place in the following location:</h6> {location}</p>
 
     </div>
