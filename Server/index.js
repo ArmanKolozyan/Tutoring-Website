@@ -17,10 +17,6 @@ import dotenv from 'dotenv'
 const port = 8800;
 const app = express(); // to have web server
 
-//Configure redis 
-const redisClient = createClient({ legacyMode: true});
-redisClient.connect().catch(console.error);
-const RedisStore = connectRedis(session);
 
 //Configure session middleware
 dotenv.config()
@@ -36,8 +32,7 @@ app.use(
 );
 app.use(
   session({
-    store: new RedisStore({ client: redisClient }),
-    secret: SESSION_SECRET,
+    secret: "secretcode",
     resave: false,
    saveUninitialized: false,
    cookie: {
