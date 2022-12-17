@@ -148,7 +148,8 @@ $ourOrange: #fc3e03;
   .post {
     display: flex;
     gap: 1.8vh;
-
+    padding-left: 10vw;
+    
     &:nth-child(2n + 1) {
       flex-direction: row-reverse;
     }
