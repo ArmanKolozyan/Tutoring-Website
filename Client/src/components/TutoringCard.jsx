@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
-const PostCard = ({ post }) => {
+const TutoringCard = ({ post }) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -36,10 +36,10 @@ const PostCard = ({ post }) => {
       <Container>
         <Row className="justify-content-md-center">
           <Row className="justify-content-md-center">
-            <Col md="auto">
+            <Col >
               <Row className="justify-content-md-center">
                 <Link className="link" to={`/tutoringsession/${post.id}`}>
-                  <h1 style={{ color: "black" }}>{post.course}</h1>
+                  <h1 style={{ color: "black", "overflow-wrap": "break-word"}}>{post.course}</h1>
                 </Link>
               </Row>
 
@@ -57,7 +57,7 @@ const PostCard = ({ post }) => {
                 <p>{post.description}</p>
               </Row>
 
-              <Row className="justify-content-md-center">
+              <Row>
                 <Col md="auto">
                   <Link to={`/tutoringsession/${post.id}`} className="btn btn-primary">
                     Visit Post
@@ -67,7 +67,7 @@ const PostCard = ({ post }) => {
             </Col>
 
             <Col md="auto">
-              <img style={{ width: "50vh", height: "auto" }} src={`../uploads/${user?.img}`} key={user.img} alt="" />
+              <img style={{ "max-width": "80%", display: "block", height: "auto", "border-radius": "50px", "margin-right": "0px" }} src={`../uploads/${user?.img}`} key={user.img} alt="" />
             </Col>
           </Row>
         </Row>
@@ -76,4 +76,4 @@ const PostCard = ({ post }) => {
   );
 };
 
-export default PostCard;
+export default TutoringCard;

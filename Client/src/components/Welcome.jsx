@@ -8,7 +8,7 @@ const Welcome = () => {
             <div className="logo">
                 <img src={Logo} alt=""/>
             </div>
-            <div className="title">
+            <div className="title" style={{"overflow-wrap": "break-word"}}>
                 <p>Welcome</p>
             </div>
             <div className="subtitle">

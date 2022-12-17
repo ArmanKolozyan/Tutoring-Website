@@ -2,3 +2,5 @@ node_modules
 *.json
 *.json
 Client/package.json
+Server/db.js
+Server/db.js

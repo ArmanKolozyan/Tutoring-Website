@@ -16,7 +16,7 @@ const ViewTutoringSessions = () => {
         const res = await axios({
           method: "get",
           withCredentials: true,
-          url: `http://localhost:8800/tutoringposts/`,
+          url: `http://localhost:8800/groupposts/`,
         });
         setPosts(res.data);
         setFetching(false);
@@ -39,7 +39,7 @@ const ViewTutoringSessions = () => {
   return (
     <div className="container mt-5">
       <Searchbar callback = {setPosts} />
-      <PostCards posts={currentPosts} fetching={fetching} is_tutorcard = {true} />
+      <PostCards posts={currentPosts} fetching={fetching} is_tutorcard = {false}/>
       <Separator
         totalNmbr={posts.length}
         nmbrPerPage={postsPerPage}

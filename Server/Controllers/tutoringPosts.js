@@ -3,11 +3,8 @@ import { db } from "../db.js";
 export const getTutoringPosts = (req, res) => {
   const q = "SELECT * FROM tutoring_posts";
 
-  console.log("zzz")
-
   db.query(q, (err, data) => {
-    if (err) return console.log(err);
-    console.log(data)
+    if (err) return res.status(500).send(err);
 
     return res.status(200).json(data);
   });

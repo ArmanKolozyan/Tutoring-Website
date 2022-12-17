@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const PostCard = ({ post }) => {
+const TutoringCard = ({ post }) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -71,4 +71,4 @@ const PostCard = ({ post }) => {
   );
 };
 
-export default PostCard;
+export default TutoringCard;

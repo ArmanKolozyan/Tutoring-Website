@@ -573,5 +573,8 @@ $ourOrange: #fc3e03;
       width: fit-content;
       text-align: center;
     }
+    Button:hover{
+      transform: scale(1.5);
+    }
   }
 }

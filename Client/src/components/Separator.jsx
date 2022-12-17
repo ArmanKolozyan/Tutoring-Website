@@ -10,7 +10,7 @@ const Separator = ({ nmbrPerPage, totalNmbr, separateFunc }) => {
 
   return (
     <nav>
-      <ul className="pagination"> 
+      <ul className="pagination justify-content-center" > 
         {pages.map((number) => (
           <li key={number} className="page-item">
             <Button onClick={() => separateFunc(number)} className="page-link">
