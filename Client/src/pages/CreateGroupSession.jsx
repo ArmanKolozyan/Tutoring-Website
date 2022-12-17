@@ -19,9 +19,11 @@ const CreateGroupSession = () => {
 
   const postDate = () => {
     if (post !== null) {
+      console.log(post);
       const d = new Date(post.date_time);
       const result =
-        [d.getFullYear(), d.getMonth() + 1, d.getDate()].join("-") + "T" + [d.getHours(), d.getMinutes()].join(":");
+        [d.getFullYear(), d.getMonth() + 1, d.getDate()].join("-") + "T" + [post.date_time.slice(11,13), d.getMinutes()].join(":");
+        // last slice is needed, otherwise problem when hour starts with 0 (date not showing when editing)
       return result;
     } else {
       return false;
@@ -66,7 +68,7 @@ const CreateGroupSession = () => {
         });
         navigate(`/groupsession/${postId.data}`);
       } else {
-        const postId =await axios({
+        const postId = await axios({
           method: "post",
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
