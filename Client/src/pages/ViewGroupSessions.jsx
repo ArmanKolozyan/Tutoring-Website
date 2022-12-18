@@ -5,10 +5,10 @@ import axios from "axios";
 import Searchbar from "../components/GroupSessionSearchbar";
 
 const ViewTutoringSessions = () => {
-  const [posts, setPosts] = useState([]);
   const [fetching, setFetching] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  var postsPerPage = 5;
+  const [totalPosts, setTotalPosts] = useState(0);
+  var postsPerPage = 3;
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -16,9 +16,9 @@ const ViewTutoringSessions = () => {
         const res = await axios({
           method: "get",
           withCredentials: true,
-          url: `http://localhost:8800/groupposts/`,
+          url: `http://localhost:8800/grouppostsAmount/`,
         });
-        setPosts(res.data);
+        setTotalPosts(res.data);
         setFetching(false);
       } catch (err) {
         console.log(err);
@@ -27,21 +27,45 @@ const ViewTutoringSessions = () => {
     fetchPosts();
   }, []); // [] needs to be here so that it is only loaded when mounted, otherwise infinite loop
 
-  // Handling amount of posts on each page
-  const lastPostidx = currentPage * postsPerPage;
-  const firstPostidx = lastPostidx - postsPerPage;
-  const currentPosts = posts.slice(firstPostidx, lastPostidx);
+  // Handling posts on pages
+  const [currentPosts, setCurrentPosts] = useState([]);
+  const [lastPostidx, setLastPostidx] = useState(currentPage * postsPerPage);
+  const [firstPostidx, setFirstPostidx] = useState(lastPostidx - postsPerPage);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+
+      try {
+        const res = await axios({
+          method: "get",
+          withCredentials: true,
+          url: "http://localhost:8800/groupposts/",
+          params: {
+            start: firstPostidx,
+            end: lastPostidx,
+          },
+        });
+        setCurrentPosts(res.data);
+        setFetching(false);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchPosts();
+  }, [lastPostidx]); // [] needs to be here so that it is only loaded when mounted, otherwise infinite loop
 
   const separate = (pageNumber) => {
     setCurrentPage(pageNumber);
+    setLastPostidx(pageNumber * postsPerPage);
+    setFirstPostidx(pageNumber * postsPerPage - postsPerPage);
   };
 
   return (
     <div className="container mt-5">
-      <Searchbar callback = {setPosts} />
+      <Searchbar callback = {setCurrentPosts} start = {firstPostidx} end = {lastPostidx} />
       <PostCards posts={currentPosts} fetching={fetching} is_tutorcard = {false}/>
       <Separator
-        totalNmbr={posts.length}
+        totalNmbr={totalPosts}
         nmbrPerPage={postsPerPage}
         separateFunc={separate}
       />

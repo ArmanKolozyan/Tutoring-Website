@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function Searchbar({ callback }) {
+function Searchbar({ callback, start, end }) {
   const [keyword, setKeyword] = useState("");
   const [course, setCourse] = useState("");
   const [field, setField] = useState("");
@@ -29,6 +29,8 @@ function Searchbar({ callback }) {
             field: field,
             orderBy: orderBy,
             freeTest: freeTest,
+            start: start,
+            end: end,
           },
         });
         callback(res.data);

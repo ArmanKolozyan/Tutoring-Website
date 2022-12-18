@@ -1,10 +1,14 @@
 import { db } from "../db.js";
 
 export const getTutoringPosts = (req, res) => {
-  const q = "SELECT * FROM tutoring_posts";
+  let q = "SELECT * FROM tutoring_posts";
+
+  if ((req.query.start !== undefined) && (req.query.end !== undefined)) {
+    q = `SELECT * FROM tutoring_posts LIMIT ${req.query.start}, ${req.query.end - req.query.start}`
+  }
 
   db.query(q, (err, data) => {
-    if (err) return res.status(500).send(err);
+    if (err) return console.log(err);
 
     return res.status(200).json(data);
   });
@@ -148,9 +152,18 @@ export const findTutoringPosts = (req, res) => {
     }
   }
 
+  const checkLimits = () => {
+    if ((req.query.start !== undefined) && (req.query.end !== undefined)) {
+      return `LIMIT ${req.query.start}, ${req.query.end - req.query.start}`
+    } else {
+      return "";
+    }
+  }
+
+
   const values = ["%" + keyword + "%", "%" + course + "%", "%" + field + "%", freeTest];
   db.query(
-    "SELECT * FROM tutoring_posts WHERE description LIKE ? AND course LIKE ? AND field_of_study LIKE ?" + checkFreeTest() + checkOrder(),
+    "SELECT * FROM tutoring_posts WHERE description LIKE ? AND course LIKE ? AND field_of_study LIKE ?" + checkFreeTest() + checkOrder() + checkLimits(),
     values,
     (err, data) => {
       if (err) return res.status(500).json(err);
@@ -158,3 +171,14 @@ export const findTutoringPosts = (req, res) => {
     }
   );
 };
+
+export const getTutoringPostsAmount = (req, res) => {
+  let q = "SELECT COUNT(id) AS amount FROM tutoring_posts";
+
+  db.query(q, (err, data) => {
+    if (err) return console.log(err);
+
+    return res.status(200).json(data[0].amount);
+  });
+  
+}

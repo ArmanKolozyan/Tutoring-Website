@@ -1,7 +1,11 @@
 import { db } from "../db.js";
 
 export const getGroupPosts = (req, res) => {
-  const q = "SELECT * FROM group_posts";
+  let q = "SELECT * FROM group_posts";
+
+  if ((req.query.start !== undefined) && (req.query.end !== undefined)) {
+    q = `SELECT * FROM group_posts LIMIT ${req.query.start}, ${req.query.end - req.query.start}`
+  }
 
   db.query(q, (err, data) => {
     if (err) return res.status(500).send(err);
@@ -138,12 +142,21 @@ console.log(free)
     }
   };
 
+  const checkLimits = () => {
+    if ((req.query.start !== undefined) && (req.query.end !== undefined)) {
+      return `LIMIT ${req.query.start}, ${req.query.end - req.query.start}`
+    } else {
+      return "";
+    }
+  }
+
   const values = ["%" + keyword + "%", "%" + course + "%", "%" + field + "%"];
   db.query(
     "SELECT * FROM group_posts WHERE description LIKE ? AND course LIKE ? AND faculty LIKE ?" +
       checkFree() +
       checkNoRegistrattions() +
-      checkOrder(),
+      checkOrder()
+      + checkLimits(),
     values,
     (err, data) => {
       if (err) return res.status(500).json(err);
@@ -151,3 +164,14 @@ console.log(free)
     }
   );
 };
+
+export const getGroupPostsAmount = (req, res) => {
+  let q = "SELECT COUNT(id) AS amount FROM group_posts";
+
+  db.query(q, (err, data) => {
+    if (err) return console.log(err);
+
+    return res.status(200).json(data[0].amount);
+  });
+  
+}

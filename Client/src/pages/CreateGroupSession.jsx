@@ -19,7 +19,6 @@ const CreateGroupSession = () => {
 
   const postDate = () => {
     if (post !== null) {
-      console.log(post);
       const d = new Date(post.date_time);
       const result =
         [d.getFullYear(), d.getMonth() + 1, d.getDate()].join("-") +
@@ -123,7 +122,6 @@ const CreateGroupSession = () => {
         }&day=${date_time.getDate()}`
       )
       .then((response) => {
-        console.log(response.data);
         const result = response.data;
         if (result.length > 0) {
           setDateWarning(`Attention: This is a national holiday (${result[0].name}) `);
