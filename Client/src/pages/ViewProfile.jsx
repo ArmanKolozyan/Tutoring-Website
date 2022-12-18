@@ -24,6 +24,7 @@ const ViewProfile = () => {
           withCredentials: true,
           url: `http://localhost:8800/user/${userid}`,
         });
+        console.log(res.data.data)
         setUser(res.data.data);
       } catch (err) {
         console.log(err.response.data.message);
@@ -114,7 +115,7 @@ const ViewProfile = () => {
         <Row className="justify-content-md-center">
         <Col md="auto">
           <div className="ProfileDescription">
-            <textarea readOnly>{description}</textarea>
+            <textarea value = {description} readOnly></textarea>
           </div>
           </Col>
         </Row>

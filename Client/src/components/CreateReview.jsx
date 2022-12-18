@@ -60,7 +60,7 @@ const CreateReview = (props) => {
         },
       });
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.message);
     }
   };
 

@@ -156,7 +156,7 @@ const ViewTutoringSession = () => {
               <TutorInfo
                 tutorName={user?.firstname?.concat(" ").concat(user.lastname)} // VRAAG: kan dit mooier?
                 tutorText={user?.shortIntro}
-                tutorAge={user.birthDate ? formatDate(user.birthDate) : ""}
+                tutorAge={user?.birthDate ? formatDate(user.birthDate) : ""}
                 AvgRating={3} // TO DOOO
                 ProfileLink={`/viewprofile/${user?.id}`}
                 PhotoLink={`../uploads/${user?.img}`}
