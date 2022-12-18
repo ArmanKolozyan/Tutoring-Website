@@ -69,7 +69,7 @@ const CreateGroupSession = () => {
             location,
           },
         });
-        navigate(`/groupsession/${postId.data}`);
+        navigate(`/groupsession/${postId.data.data}`);
       } else {
         const postId = await axios({
           method: "post",
@@ -89,10 +89,10 @@ const CreateGroupSession = () => {
             location,
           },
         });
-        navigate(`/groupsession/${postId.data}`);
+        navigate(`/groupsession/${postId.data.data}`);
       }
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.message);
     }
   };
 

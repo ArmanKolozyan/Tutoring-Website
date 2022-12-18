@@ -56,9 +56,9 @@ const ViewGroupSession = () => {
           withCredentials: true,
           url: `http://localhost:8800/groupposts/${postId}`,
         });
-        setPost(res.data);
+        setPost(res.data.data);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.message);
       }
     };
     fetchData();
@@ -101,7 +101,7 @@ const ViewGroupSession = () => {
       });
       navigate("/groupsessions")
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.message);
     }
   }
 

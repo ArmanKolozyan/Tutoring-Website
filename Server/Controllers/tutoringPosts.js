@@ -109,9 +109,9 @@ export const deleteTutoringPost = (req, res) => {
   const q = "DELETE FROM tutoring_posts WHERE `id` = ?";
 
   db.query(q, [post_id], (err, data) => {
-    if (err) return res.status(500).json({message: "Deleting post failed.", data: []});
+    if (err) return res.status(500).json({message: "Deleting tutoring post failed.", data: []});
 
-    return res.status(200).json({message: "Post is deleted.", data: []});
+    return res.status(200).json({message: "Tutoring post is deleted.", data: []});
   });
 };
 
@@ -166,7 +166,7 @@ export const findTutoringPosts = (req, res) => {
     "SELECT * FROM tutoring_posts WHERE description LIKE ? AND course LIKE ? AND field_of_study LIKE ?" + checkFreeTest() + checkOrder() + checkLimits(),
     values,
     (err, data) => {
-      if (err) return res.status(500).json({message: "Finding the posts failed.", data: []});
+      if (err) return res.status(500).json({message: "Finding the tutoring posts failed.", data: []});
       return res.status(200).json({message: "", data: data});
     }
   );

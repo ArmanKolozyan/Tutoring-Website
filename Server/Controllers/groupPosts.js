@@ -8,8 +8,8 @@ export const getGroupPosts = (req, res) => {
   }
 
   db.query(q, (err, data) => {
-    if (err) return res.status(500).send(err);
-    return res.status(200).json(data);
+    if (err) return res.status(500).json({message: "Fetching all group posts failed.", data: []});
+    return res.status(200).json({message: "", data: data});
   });
 };
 
@@ -18,9 +18,9 @@ export const getSingleGroupPost = (req, res) => {
     "SELECT `id`, `title`, `limited`, `max_inscriptions`, `faculty`, `course`, `free`, `price`, `date_time`, `description`, `userid`, `location` FROM group_posts WHERE id = ? ";
 
   db.query(q, [req.params.id], (err, data) => {
-    if (err) return res.status(500).json(err);
+    if (err) return res.status(500).json({message: "Fetching the specified group post failed.", data: []});
 
-    return res.status(200).json(data[0]);
+    return res.status(200).json({message: "", data: data[0]});
   });
 };
 
@@ -45,9 +45,9 @@ export const addGroupPost = (req, res) => {
   ];
 
   db.query(q, [values], (err, data) => {
-    if (err) return res.status(500).json(err);
+    if (err) return res.status(500).json({message: "Inserting the given group post failed.", data: []});
     const post_id = data.insertId;
-    return res.json(post_id);
+    return res.status(200).json({message: "", data: post_id});
   });
 };
 
@@ -73,8 +73,8 @@ export const updateGroupPost = (req, res) => {
   ];
 
   db.query(q, values, (err, data) => {
-    if (err) return res.status(500).json(err);
-    return res.status(200).json(post_id);
+    if (err) return res.status(500).json({message: "Updating the group post failed.", data: []});
+    return res.status(200).json({message: "", data: post_id});
   });
 };
 
@@ -84,8 +84,8 @@ export const deleteGroupPost = (req, res) => {
   const q = "DELETE FROM group_posts WHERE `id` = ?";
 
   db.query(q, [post_id], (err, data) => {
-    if (err) return res.status(500).json(err);
-    return res.json("Post is deleted!");
+    if (err) return res.status(500).json({message: "Deleting group post failed.", data: []});
+    return res.status(200).json({message: "Group post is deleted.", data: []});
   });
 };
 
@@ -158,8 +158,8 @@ export const findGroupPosts = (req, res) => {
       + checkLimits(),
     values,
     (err, data) => {
-      if (err) return res.status(500).json(err);
-      return res.status(200).json(data);
+      if (err) return res.status(500).json({message: "Finding the group posts failed.", data: []});
+      return res.status(200).json({message: "", data: data});
     }
   );
 };
@@ -168,9 +168,9 @@ export const getGroupPostsAmount = (req, res) => {
   let q = "SELECT COUNT(id) AS amount FROM group_posts";
 
   db.query(q, (err, data) => {
-    if (err) return console.log(err);
+    if (err) return res.status(500).json({message: "Fetching the amount of posts failed.", data: []});
 
-    return res.status(200).json(data[0].amount);
+    return res.status(200).json({message: "", data: data[0].amount});
   });
   
 }

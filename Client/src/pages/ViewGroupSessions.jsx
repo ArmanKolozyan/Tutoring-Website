@@ -18,10 +18,10 @@ const ViewTutoringSessions = () => {
           withCredentials: true,
           url: `http://localhost:8800/grouppostsAmount/`,
         });
-        setTotalPosts(res.data);
+        setTotalPosts(res.data.data);
         setFetching(false);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.message);
       }
     };
     fetchPosts();
@@ -45,10 +45,10 @@ const ViewTutoringSessions = () => {
             end: lastPostidx,
           },
         });
-        setCurrentPosts(res.data);
+        setCurrentPosts(res.data.data);
         setFetching(false);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.message);
       }
     };
     fetchPosts();
