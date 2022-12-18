@@ -22,8 +22,10 @@ const CreateGroupSession = () => {
       console.log(post);
       const d = new Date(post.date_time);
       const result =
-        [d.getFullYear(), d.getMonth() + 1, d.getDate()].join("-") + "T" + [post.date_time.slice(11,13), d.getMinutes()].join(":");
-        // last slice is needed, otherwise problem when hour starts with 0 (date not showing when editing)
+        [d.getFullYear(), d.getMonth() + 1, d.getDate()].join("-") +
+        "T" +
+        [post.date_time.slice(11, 13), d.getMinutes()].join(":");
+      // last slice is needed, otherwise problem when hour starts with 0 (date not showing when editing)
       return result;
     } else {
       return false;
@@ -40,6 +42,8 @@ const CreateGroupSession = () => {
   const [dateAndTime, setDateAndTime] = useState(post ? postDate() : "");
   const [desc, setDesc] = useState(post?.description || "");
   const [location, setLocation] = useState(post?.location || "");
+  const [picture, setPicture] = useState("");
+  const [dateWarning, setDateWarning] = useState("");
 
   const { currentUser } = useContext(PasswordContext);
 
@@ -109,6 +113,29 @@ const CreateGroupSession = () => {
     }
   };
 
+  const handleDate = (dateTime) => {
+    setDateAndTime(dateTime);
+    const date_time = new Date(dateTime);
+    axios
+      .get(
+        `https://holidays.abstractapi.com/v1/?api_key=d72dfeacf5a44e0a94877c4e0eef05db&country=BE&year=${date_time.getFullYear()}&month=${
+          date_time.getMonth() + 1
+        }&day=${date_time.getDate()}`
+      )
+      .then((response) => {
+        console.log(response.data);
+        const result = response.data;
+        if (result.length > 0) {
+          setDateWarning(`Attention: This is a national holiday (${result[0].name}) `);
+        } else {
+          setDateWarning("");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="create-tutoring-session">
       <Form onSubmit={(event) => handleSubmit(event)}>
@@ -120,7 +147,7 @@ const CreateGroupSession = () => {
               </Col>
             </Row>
 
-            <Row>
+            <Row style={{ "margin-bottom": "3vh" }}>
               <Col md="5">
                 <Form.Control
                   value={title}
@@ -152,7 +179,7 @@ const CreateGroupSession = () => {
               </Col>
             </Row>
 
-            <Row>
+            <Row style={{ "margin-bottom": "3vh" }}>
               <Form.Label>Target audience</Form.Label>
               <Col md="auto">
                 <Form.Select required value={faculty} onChange={(e) => setFaculty(e.target.value)}>
@@ -180,8 +207,8 @@ const CreateGroupSession = () => {
               </Col>
             </Row>
 
-            <Row className="">
-              <Form.Label>Session information</Form.Label>
+            <Row>
+              <Form.Label>Practical information</Form.Label>
               <Col md="auto">
                 <Form.Check
                   checked={checkFree()}
@@ -194,7 +221,7 @@ const CreateGroupSession = () => {
               <Col md="5">
                 <Form.Control
                   value={price}
-                  style={{ width: "10vw" }}
+                  style={{ width: "20%" }}
                   required
                   onChange={(e) => setPrice(e.target.value)}
                   type="number"
@@ -202,30 +229,34 @@ const CreateGroupSession = () => {
                   disabled={checkFree()}
                 />
               </Col>
-              <Col md="auto">
-                <Form.Label> Date and time: </Form.Label>
-                <input
-                  value={dateAndTime}
-                  required
-                  type="datetime-local"
-                  id="birthdaytime"
-                  name="birthdaytime"
-                  onChange={(e) => setDateAndTime(e.target.value)}
-                />
-              </Col>
+              <Row>
+                <Col md="auto">
+                  <Form.Label> Date and time: </Form.Label>
+                  <input
+                    value={dateAndTime}
+                    required
+                    type="datetime-local"
+                    id="birthdaytime"
+                    name="birthdaytime"
+                    onChange={(e) => handleDate(e.target.value)}
+                  />
+                </Col>
+                <Col>
+                  <Form.Label style={{ color: "red", position: "absolute" }}> {dateWarning} </Form.Label>
+                </Col>
+              </Row>
             </Row>
 
-            <Row>
-              <Col md="5">
-                <Form.Control
-                  value={location}
-                  type="text"
-                  required
-                  placeholder="Location"
-                  onChange={(e) => setLocation(e.target.value)}
-                />
-              </Col>
-            </Row>
+            <Col md="3">
+              <Form.Control
+                value={location}
+                style={{ "margin-bottom": "3vh" }}
+                type="text"
+                required
+                placeholder="Location"
+                onChange={(e) => setLocation(e.target.value)}
+              />
+            </Col>
 
             <Form.Label>Session description</Form.Label>
             <Col md="auto">
@@ -239,7 +270,6 @@ const CreateGroupSession = () => {
                 onChange={(e) => setDesc(e.target.value)}
               />
             </Col>
-            <Row></Row>
           </Col>
         </Row>
 
