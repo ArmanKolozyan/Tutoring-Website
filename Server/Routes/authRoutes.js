@@ -30,7 +30,7 @@ export const authRoutes = (app, passport) => {
 
   app.get("/studies/:id", getUserStudies);
 
-  app.post("/update", updateUser);
+  app.put("/users/:id", updateUser);
 
   app.get("/user/:id", getSingleUser);
 

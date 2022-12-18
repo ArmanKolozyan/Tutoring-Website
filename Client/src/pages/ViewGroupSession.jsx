@@ -72,9 +72,9 @@ const ViewGroupSession = () => {
           withCredentials: true,
           url: `http://localhost:8800/user/${post.userid}`,
         });
-        setUser(res.data);
+        setUser(res.data.data);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.message);
       }
     };
     if (post) {

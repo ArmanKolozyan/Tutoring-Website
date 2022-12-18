@@ -91,9 +91,9 @@ const ViewTutoringSession = () => {
           withCredentials: true,
           url: `http://localhost:8800/user/${post.uid}`,
         });
-        setUser(res.data);
+        setUser(res.data.data);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.message);
       }
     };
     if (post) {

@@ -43,10 +43,10 @@ function UpdatePicture() {
         url: `http://localhost:8800/profilePicture/${currentUser.id}`,
         data: formData,
       });
-      currentUser.img = res.data;
+      currentUser.img = res.data.data;
       localStorage.setItem("user", JSON.stringify(currentUser));
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.message);
     }
   };
 
