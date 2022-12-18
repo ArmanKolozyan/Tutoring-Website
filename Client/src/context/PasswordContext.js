@@ -7,34 +7,38 @@ export const AuthConfig = ({ children }) => {
   // if no user is logged in, it is null
   // this currentUser can be used in the entire application
   // (see <AuthConfig> in index.js)
-  const [currentUser, setCurrentUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
-  );
-
-
+  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
 
   const login = async (loginEmail, loginPassword) => {
-    const res = await axios({
-      method: "post",
-      data: {
-        email: loginEmail,
-        password: loginPassword,
-      },
-      withCredentials: true,
-      url: "http://localhost:8800/login",
-    })
-    if (res.data != null) {
-    setCurrentUser(res.data);
+    try {
+      const res = await axios({
+        method: "post",
+        data: {
+          email: loginEmail,
+          password: loginPassword,
+        },
+        withCredentials: true,
+        url: "http://localhost:8800/login",
+      });
+      if (res.data.data != null) {
+        setCurrentUser(res.data.data);
+      }
+    } catch (err) {
+      console.log(err.response.data.message);
     }
   };
 
   const logout = async () => {
-    const res = await axios({
-      method: "post",
-      withCredentials: true,
-      url: "http://localhost:8800/logout",
-    })
-    setCurrentUser(null);
+    try {
+      const res = await axios({
+        method: "post",
+        withCredentials: true,
+        url: "http://localhost:8800/logout",
+      });
+      setCurrentUser(null);
+    } catch (err) {
+      console.log(err.response.data.message);
+    }
   };
 
   useEffect(() => {

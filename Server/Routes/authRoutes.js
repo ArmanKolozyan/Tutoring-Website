@@ -7,24 +7,32 @@ import {
 import { getSingleUser, updateUser, uploadImage, getUserStudies} from "../Controllers/users.js";
 import multer from "multer";
 
-// TO DO:
-// https://express-validator.github.io/docs/ gebruiken voor server-side validation
-// Client-side validation toevoegen
-
 // Routes for user register, login and logout handling.
 export const authRoutes = (app, passport) => {
+  
   app.post(
     "/login",
     passport.authenticate("local", {
-      failureRedirect: "/login",
       failureMessage: true,
-    }),
-    login
+    },
+    (err, user, options) => {
+      console.log(err)
+      console.log(options)
+      console.log(user) // options will be the complete object you pass in done()
+  })
   );
 
-  app.post("/register", register);
+  app.post('/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+      if (err) { return res.status(500).json({message: "Logging in failed.", data: []}); }
+      if (!user) { 
+          return res.status(401).json({message: "Authentication failed.", data: []});
+      }
+          return res.status(200).json({message: "", data: req.user}); 
+    })(req, res, next);
+  });
 
-  app.get("/user", getUser);
+  app.post("/register", register);
 
   app.post("/logout", logOut);
 
