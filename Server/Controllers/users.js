@@ -37,6 +37,8 @@ export const updateUser = (req, res) => {
     );
   };
 
+  console.log(req.user)
+
   const values = [
     req.body.firstName,
     req.body.lastName,

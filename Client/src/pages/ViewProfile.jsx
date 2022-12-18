@@ -61,10 +61,10 @@ const ViewProfile = () => {
           withCredentials: true,
           url: `http://localhost:8800/studies/${user.id}`,
         });
-        let result = res.data.map(x => x.field);
+        let result = res.data.data.map(x => x.field);
         setStudies(result);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.message);
       }
     };
     fetchData();
