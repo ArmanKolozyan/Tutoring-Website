@@ -75,9 +75,9 @@ const ViewTutoringSession = () => {
           withCredentials: true,
           url: `http://localhost:8800/tutoringposts/${postId}`,
         });
-        setPost(res.data);
+        setPost(res.data.data);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.message);
       }
     };
     fetchData();
@@ -120,7 +120,7 @@ const ViewTutoringSession = () => {
       });
       navigate("/tutoringsessions")
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.message);
     }
   }
 

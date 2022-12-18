@@ -49,9 +49,9 @@ const CreateTutoringSession = () => {
             url: `http://localhost:8800/tutoringpostRegion/${post.id}`,
           });
           //let result = res.data.map(x => x.field);
-          setRegions(res.data);
+          setRegions(res.data.data);
         } catch (err) {
-          console.log(err);
+          console.log(err.response.data.message);
         }
       };
       fetchData();
@@ -80,7 +80,7 @@ const CreateTutoringSession = () => {
             regions: giveRegions(),
           },
         });
-        navigate(`/tutoringsession/${postId.data}`);
+        navigate(`/tutoringsession/${postId.data.data}`);
       } else {
         const postId = await axios({
           method: "post",
@@ -98,10 +98,10 @@ const CreateTutoringSession = () => {
             regions: giveRegions(),
           },
         });
-        navigate(`/tutoringsession/${postId.data}`);
+        navigate(`/tutoringsession/${postId.data.data}`);
       }
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.message);
     }
   };
 

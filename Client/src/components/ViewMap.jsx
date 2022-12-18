@@ -24,9 +24,9 @@ export function ViewMap({post_id}) {
                 withCredentials: true,
                 url: `http://localhost:8800/tutoringpostRegion/${post_id}`,
               });
-              setRegions(res.data);
+              setRegions(res.data.data);
             } catch (err) {
-              console.log(err);
+              console.log(err.response.data.message);
             }
           };
           fetchData();}

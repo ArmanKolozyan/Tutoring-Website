@@ -126,7 +126,6 @@ export const findGroupPosts = (req, res) => {
   };
 
   const checkFree = () => {
-console.log(free)
     if (free === "true") {
       return "AND free = 1";
     } else {

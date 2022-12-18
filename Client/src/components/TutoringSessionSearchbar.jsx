@@ -33,9 +33,9 @@ function Searchbar({ callback, start, end }) {
             end: end,
           },
         });
-        callback(res.data);
+        callback(res.data.data);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.message);
       }
     };
     fetchPosts();
