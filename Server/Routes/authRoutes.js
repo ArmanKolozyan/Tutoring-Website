@@ -1,37 +1,28 @@
-import { getUser, logOut, register, login } from "../Controllers/authentication.js";
+import { getUser, logOut, register } from "../Controllers/authentication.js";
 import { getSingleUser, updateUser, uploadImage, getUserStudies } from "../Controllers/users.js";
 import multer from "multer";
 
 
 export const authRoutes = (app, passport) => {
   
-// Routes for user register, login and logout handling.
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    failureRedirect: "/login",
-    failureMessage: true,
-  }),
-  login
-);
-/* 
-  app.post("/login", function (req, res, next) {
-    passport.authenticate(
-      "local",
-      {
-        failureMessage: true,
-      },
-      (err, user, info) => {
-        if (err) {
-          res.status(500).json({ message: "Logging in failed.", data: [] });
-        }
-        if (!user) {
-          return res.status(401).json({ message: info.message, data: [] }); // passport js will always provide a more detailed message than we can
-        }
-        res.status(200).json({ message: "", data: user });
+  // login with a callback to be able to handle erros manually in our way
+  // based on https://stackoverflow.com/a/15711502
+app.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) {
+      res.status(500).json({ message: "Authentication failed.", data: [] });
+    }
+    if (! user) {
+      return res.status(500).json({ message: "Wrong email or password", data: [] });
+    }
+    req.login(user, loginErr => {
+      if (loginErr) {
+        return res.status(500).json({ message: "Authentication failed.", data: [] });;
       }
-    )(req, res, next);
-  }); */
+      return res.send({ message : "", data : req.user });
+    });      
+  })(req, res, next);
+});
 
   app.post("/register", register);
 

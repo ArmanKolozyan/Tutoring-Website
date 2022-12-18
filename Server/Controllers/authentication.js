@@ -1,10 +1,6 @@
 import bcrypt from "bcryptjs"; // for hashing the password
 import { db } from "../db.js";
 
-export const login = (req, res) => {
-  res.status(200).json({message: "", data: req.user}); // Res json ({user: req.user, error: .....}) zo'n soort object errond zetten
-};
-
 export const register = (req, res) => {
   //CHECK EXISTING USER 
   const q = "SELECT * FROM users WHERE email = ?";

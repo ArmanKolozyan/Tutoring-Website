@@ -9,6 +9,7 @@ export const AuthConfig = ({ children }) => {
   // (see <AuthConfig> in index.js)
   const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
 
+
   const login = async (loginEmail, loginPassword) => {
     try {
       const res = await axios({
