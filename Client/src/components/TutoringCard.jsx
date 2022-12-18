@@ -44,7 +44,7 @@ const TutoringCard = ({ post }) => {
               </Row>
 
               <Row className="justify-content-md-center">
-              <Col >
+              <Col md="auto">
                 <div className="stars">
                   <span className="fa fa-star checked"></span>
                   <span className="fa fa-star checked"></span>

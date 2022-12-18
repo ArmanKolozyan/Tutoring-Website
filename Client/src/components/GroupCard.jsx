@@ -44,7 +44,7 @@ const GroupCard = ({ post }) => {
               </Row>
 
               <Row className="justify-content-md-center">
-              <Col>
+              <Col md="auto">
                 <div className="stars">
                   <span className="fa fa-star checked"></span>
                   <span className="fa fa-star checked"></span>
@@ -55,8 +55,7 @@ const GroupCard = ({ post }) => {
                 </Col>
 
                 <Col>
-                <p> The price of this session is : </p>
-                <p><span style={{ fontWeight: 'bold' }}> € {post.free ? 0 : post.price}</span> </p>
+                <p> The price of this session is :  <span style={{ fontWeight: 'bold' }}> € {post.free ? 0 : post.price}</span> </p>
                 </Col>
 
                 <Col>
