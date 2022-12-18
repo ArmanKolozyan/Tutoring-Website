@@ -120,11 +120,6 @@ function Searchbar({ callback }) {
               </Row>
             </ListGroup.Item>
           </ListGroup>
-          <Card.Body>
-            <Card.Text>
-              <Button type="submit">Apply</Button>
-            </Card.Text>
-          </Card.Body>
         </Card>
       </Form>
     </div>
