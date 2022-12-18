@@ -232,8 +232,6 @@ const ViewTutoringSession = () => {
         </Modal.Body>
       </Modal>
 
-
-
       <Modal show={showDelete} onHide={handleCloseDelete}>
         <Modal.Header closeButton>
           <Modal.Title>Deleting Post</Modal.Title>
@@ -243,7 +241,7 @@ const ViewTutoringSession = () => {
           <Button variant="secondary" onClick={handleCloseDelete}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={deletePost} to={"/tutoringsessions"}>
+          <Button variant="danger" onClick={deletePost}>
             Delete!
           </Button>
         </Modal.Footer>

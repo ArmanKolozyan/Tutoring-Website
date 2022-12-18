@@ -16,7 +16,7 @@ function UpdatePicture() {
   const { currentUser } = useContext(PasswordContext);
   const { setCurrentUser } = useContext(PasswordContext);
 
-  const [preview, setPreview] = useState(`../uploads/${currentUser.img}`);
+  const [preview, setPreview] = useState((currentUser?.img !== null) ? `../uploads/${currentUser.img}` : false);
 
   const makePreview = (file) => {
     const reader = new FileReader();
@@ -58,7 +58,9 @@ function UpdatePicture() {
     <div>
       <Form onSubmit={handleSubmitFile}>
         <Card style={{ width: "20rem" }}> {/* MISSCHIEN BEST VW GEBRUIKEN IPV REM*/}
-          <Card.Img variant="top" src={preview ? preview : ""} />
+        { preview ?
+          <Card.Img variant="top" src={ preview} />
+          : ""}
           <Card.Body>
             <Card.Text>Change Profile Picture </Card.Text>
           </Card.Body>

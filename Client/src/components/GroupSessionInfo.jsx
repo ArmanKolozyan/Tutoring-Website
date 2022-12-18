@@ -18,32 +18,46 @@ function GroupSessionInfo(props) {
     priceText = " part of this group session is free!";
   }
 
-  let limitedpacestext = "There are unlimited spots for this groupsession";
+  let limitedpacestext = "Spots for this session are not limited.";
   let limitedspacetext2 = "";
   if (limited) {
     limitedpacestext = "This is a groupsession with limited space, and";
     limitedspacetext2 = SpotsTakenSession + " out of the " + space + " have been taken already!";
   }
 
+    // format date to dd/mm/yy using Regular Expressions
+    function formatDate(input) {
+      let date = input.match(/\d+/g),
+        day = date[2],
+        month = date[1],
+        year = date[0].substring(2); // get only two digits
+  
+      return day + "/" + month + "/" + year;
+    }
+
   return (
     <div>
       <p>
-        <h6>This event will take place on </h6>
-        {dateTime}.
+        <h6>This event will take place on: </h6>
+        {dateTime ? formatDate(dateTime) + " " + dateTime.slice(11,16) : ""}
       </p>
       <p>
         <h6> The Target audience of this groupsession is:</h6>
-        People from the {faculty} faculty, following the {course} course.
+        people from the {faculty} faculty, following the {course} course
       </p>
 
+
+      <p>
+        <h6>Inscriptions: </h6>
+      </p>
       <p>
         {limitedpacestext}
         <br></br>
         {limitedspacetext2}
-        <ProgressBar min={0} max={space} now={SpotsTakenSession} label={`${SpotsTakenSession} of ${space}`} />
+        {limited ? <ProgressBar min={0} max={space} now={SpotsTakenSession} label={`${SpotsTakenSession} of ${space}`}/> : ""}
       </p>
 
-      <p> <h6>The price for this session will be</h6> {price}  euros. </p>
+      <p> <h6>The price for this session is:</h6> {free ? "free session" : price + " euros"} </p>
       <p> <h6>The session will take place in the following location:</h6> {location}</p>
 
     </div>

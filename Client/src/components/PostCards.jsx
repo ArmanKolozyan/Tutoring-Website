@@ -1,10 +1,7 @@
 import GroupCard from "./GroupCard";
 import TutoringCard from "./TutoringCard";
 
-const PostCards = ({ posts, fetching, is_tutorcard }) => {
-
-  console.log(posts)
-    
+const PostCards = ({ posts, fetching, is_tutorcard }) => {    
   
     if (fetching) {
       return <h2>The posts are loading...</h2>;

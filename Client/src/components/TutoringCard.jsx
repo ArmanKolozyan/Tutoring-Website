@@ -56,11 +56,13 @@ const TutoringCard = ({ post }) => {
 
 
                 <Col>
-                <p> The price of this course is : {''}   <span style={{ fontWeight: 'bold' }}> € {post.price}</span> </p>
+                <p> The price of this course is :</p>
+                <p> <span style={{ fontWeight: 'bold' }}> € {post.price}</span> </p>
                 </Col>
 
                 <Col>
-                <p> Years of experience : {''}   <span style={{ fontWeight: 'bold' }}> {post.experience}</span> </p>
+                <p> Years of experience :</p>
+                <p> <span style={{ fontWeight: 'bold' }}> {post.experience}</span> </p>
                 </Col>
 
 
@@ -80,8 +82,11 @@ const TutoringCard = ({ post }) => {
             </Col>
 
             <Col md="auto">
-              <img style={{"margin-left": "auto", "max-width": "80%", display: "block", height: "auto", "border-radius": "50px", "margin-right": "0px" }} src={`../uploads/${user?.img}`} key={user.img} alt="" />
-            </Col>
+            {
+            user.img ?
+              <img style={{"margin-left": "auto", "max-width": "80%", display: "block", height: "auto", "border-radius": "50px" }} src={`../uploads/${user?.img}`} key={user.img} alt="" />
+            : ""
+            }            </Col>
           </Row>
         </Row>
       </Container>
