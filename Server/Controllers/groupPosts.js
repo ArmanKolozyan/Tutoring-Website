@@ -2,14 +2,21 @@ import { db } from "../db.js";
 
 export const getGroupPosts = (req, res) => {
   let q = "SELECT * FROM group_posts";
+  const startIdx = req.query.start;
+  const endIdx = req.query.end; 
 
-  if ((req.query.start !== undefined) && (req.query.end !== undefined)) {
-    q = `SELECT * FROM group_posts LIMIT ${req.query.start}, ${req.query.end - req.query.start}`
+  if (
+    startIdx !== undefined &&
+    endIdx !== undefined &&
+    parseInt(startIdx) !== NaN &&
+    parseInt(endIdx) !== NaN
+  ) {
+    q = `SELECT * FROM group_posts LIMIT ${startIdx}, ${endIdx - startIdx}`;
   }
 
   db.query(q, (err, data) => {
-    if (err) return res.status(500).json({message: "Fetching all group posts failed.", data: []});
-    return res.status(200).json({message: "", data: data});
+    if (err) return res.status(500).json({ message: "Fetching all group posts failed.", data: [] });
+    return res.status(200).json({ message: "", data: data });
   });
 };
 
@@ -18,9 +25,9 @@ export const getSingleGroupPost = (req, res) => {
     "SELECT `id`, `title`, `limited`, `max_inscriptions`, `faculty`, `course`, `free`, `price`, `date_time`, `description`, `userid`, `location` FROM group_posts WHERE id = ? ";
 
   db.query(q, [req.params.id], (err, data) => {
-    if (err) return res.status(500).json({message: "Fetching the specified group post failed.", data: []});
+    if (err) return res.status(500).json({ message: "Fetching the specified group post failed.", data: [] });
 
-    return res.status(200).json({message: "", data: data[0]});
+    return res.status(200).json({ message: "", data: data[0] });
   });
 };
 
@@ -45,9 +52,9 @@ export const addGroupPost = (req, res) => {
   ];
 
   db.query(q, [values], (err, data) => {
-    if (err) return res.status(500).json({message: "Inserting the given group post failed.", data: []});
+    if (err) return res.status(500).json({ message: "Inserting the given group post failed.", data: [] });
     const post_id = data.insertId;
-    return res.status(200).json({message: "", data: post_id});
+    return res.status(200).json({ message: "", data: post_id });
   });
 };
 
@@ -73,8 +80,8 @@ export const updateGroupPost = (req, res) => {
   ];
 
   db.query(q, values, (err, data) => {
-    if (err) return res.status(500).json({message: "Updating the group post failed.", data: []});
-    return res.status(200).json({message: "", data: post_id});
+    if (err) return res.status(500).json({ message: "Updating the group post failed.", data: [] });
+    return res.status(200).json({ message: "", data: post_id });
   });
 };
 
@@ -84,8 +91,8 @@ export const deleteGroupPost = (req, res) => {
   const q = "DELETE FROM group_posts WHERE `id` = ?";
 
   db.query(q, [post_id], (err, data) => {
-    if (err) return res.status(500).json({message: "Deleting group post failed.", data: []});
-    return res.status(200).json({message: "Group post is deleted.", data: []});
+    if (err) return res.status(500).json({ message: "Deleting group post failed.", data: [] });
+    return res.status(200).json({ message: "Group post is deleted.", data: [] });
   });
 };
 
@@ -96,6 +103,8 @@ export const findGroupPosts = (req, res) => {
   const field = req.query.field;
   const free = req.query.free;
   const noRegistration = req.query.noRegistration;
+  const startIdx = req.query.start;
+  const endIdx = req.query.end; 
 
   const checkOrder = () => {
     let order;
@@ -142,24 +151,29 @@ export const findGroupPosts = (req, res) => {
   };
 
   const checkLimits = () => {
-    if ((req.query.start !== undefined) && (req.query.end !== undefined)) {
-      return `LIMIT ${req.query.start}, ${req.query.end - req.query.start}`
+    if (
+      startIdx !== undefined &&
+      endIdx !== undefined &&
+      parseInt(startIdx) !== NaN &&
+      parseInt(endIdx) !== NaN
+    ) {
+      return `LIMIT ${startIdx}, ${endIdx - startIdx}`;
     } else {
       return "";
     }
-  }
+  };
 
   const values = ["%" + keyword + "%", "%" + course + "%", "%" + field + "%"];
   db.query(
     "SELECT * FROM group_posts WHERE description LIKE ? AND course LIKE ? AND faculty LIKE ?" +
       checkFree() +
       checkNoRegistrattions() +
-      checkOrder()
-      + checkLimits(),
+      checkOrder() +
+      checkLimits(),
     values,
     (err, data) => {
-      if (err) return res.status(500).json({message: "Finding the group posts failed.", data: []});
-      return res.status(200).json({message: "", data: data});
+      if (err) return res.status(500).json({ message: "Finding the group posts failed.", data: [] });
+      return res.status(200).json({ message: "", data: data });
     }
   );
 };
@@ -168,9 +182,8 @@ export const getGroupPostsAmount = (req, res) => {
   let q = "SELECT COUNT(id) AS amount FROM group_posts";
 
   db.query(q, (err, data) => {
-    if (err) return res.status(500).json({message: "Fetching the amount of posts failed.", data: []});
+    if (err) return res.status(500).json({ message: "Fetching the amount of posts failed.", data: [] });
 
-    return res.status(200).json({message: "", data: data[0].amount});
+    return res.status(200).json({ message: "", data: data[0].amount });
   });
-  
-}
+};

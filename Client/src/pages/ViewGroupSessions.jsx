@@ -8,7 +8,7 @@ const ViewTutoringSessions = () => {
   const [fetching, setFetching] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
-  var postsPerPage = 3;
+  var postsPerPage = 2;
 
   useEffect(() => {
     const fetchPosts = async () => {

@@ -2,9 +2,16 @@ import { db } from "../db.js";
 
 export const getTutoringPosts = (req, res) => {
   let q = "SELECT * FROM tutoring_posts";
+  const startIdx = req.query.start;
+  const endIdx = req.query.end; 
 
-  if ((req.query.start !== undefined) && (req.query.end !== undefined)) {
-    q = `SELECT * FROM tutoring_posts LIMIT ${req.query.start}, ${req.query.end - req.query.start}`
+  if (
+    startIdx !== undefined &&
+    endIdx !== undefined &&
+    parseInt(startIdx) !== NaN &&
+    parseInt(endIdx) !== NaN
+  ) {
+    q = `SELECT * FROM tutoring_posts LIMIT ${startIdx}, ${endIdx - startIdx}`
   }
 
   db.query(q, (err, data) => {
@@ -121,6 +128,8 @@ export const findTutoringPosts = (req, res) => {
   const course = req.query.course;
   const field = req.query.field;
   const freeTest = req.query.freeTest;
+  const startIdx = req.query.start;
+  const endIdx = req.query.end; 
 
   const checkOrder = () => {
     let order;
@@ -146,15 +155,20 @@ export const findTutoringPosts = (req, res) => {
 
   const checkFreeTest = () => {
     if (freeTest === 'true') {
-      return "AND free_test = 1";
+      return "AND free_test = 1 ";
     } else {
       return "";
     }
   }
 
   const checkLimits = () => {
-    if ((req.query.start !== undefined) && (req.query.end !== undefined)) {
-      return `LIMIT ${req.query.start}, ${req.query.end - req.query.start}`
+    if (
+      startIdx !== undefined &&
+      endIdx !== undefined &&
+      parseInt(startIdx) !== NaN &&
+      parseInt(endIdx) !== NaN
+    ) {
+      return `LIMIT ${startIdx}, ${endIdx - startIdx}`
     } else {
       return "";
     }
@@ -163,7 +177,7 @@ export const findTutoringPosts = (req, res) => {
 
   const values = ["%" + keyword + "%", "%" + course + "%", "%" + field + "%", freeTest];
   db.query(
-    "SELECT * FROM tutoring_posts WHERE description LIKE ? AND course LIKE ? AND field_of_study LIKE ?" + checkFreeTest() + checkOrder() + checkLimits(),
+    "SELECT * FROM tutoring_posts WHERE description LIKE ? AND course LIKE ? AND field_of_study LIKE ? " + checkFreeTest() + checkOrder() + checkLimits(),
     values,
     (err, data) => {
       if (err) return res.status(500).json({message: "Finding the tutoring posts failed.", data: []});
