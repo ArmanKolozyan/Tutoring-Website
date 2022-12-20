@@ -105,8 +105,8 @@ function ProfileInfo() {
             </FloatingLabel>
           </Col>
           <Col>
-            <FloatingLabel controlId="SurenameInput" label="Surname">
-              <Form.Control as="textarea" defaultValue={lastName} onChange={(e) => setLastName(e.target.value)} />
+            <FloatingLabel controlId="SurnameInput" label="Surname">
+              <Form.Control type="text" defaultValue={lastName} onChange={(e) => setLastName(e.target.value)} />
             </FloatingLabel>
           </Col>
         </Row>
