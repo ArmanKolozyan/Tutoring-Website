@@ -132,17 +132,6 @@ $ourOrange: #fc3e03;
         text-align: left;
       }
     }
-
-    .promotedPosts {
-      width: 80vw;
-      padding-top: 12vh;
-      padding-bottom: 12vh;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 18vh;
-    }
   }
 
   .post {
@@ -180,35 +169,6 @@ $ourOrange: #fc3e03;
       color: $ourBlue;
       .checked {
         color: $ourOrange;
-      }
-    }
-    .content {
-      flex: 3;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      h1 {
-        color: black;
-      }
-
-      p {
-        font-size: 3vh;
-      }
-
-      .myButton {
-        button {
-          padding: 1.8vh 2vw;
-          background-color: white;
-          border: 1px solid $ourBlue;
-          color: $ourBlue;
-
-          &:hover {
-            border: 1px solid white;
-            background-color: $ourBlue;
-            color: white;
-          }
-        }
       }
     }
   }

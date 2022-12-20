@@ -27,8 +27,8 @@ const Navigationbar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="text-end">
 
-        <Nav.Link href="/groupsessions"> <Icon.People size={20} /> Study Together</Nav.Link>
-        <Nav.Link href="/tutoringsessions"> <Icon.PersonVideo3 size={20} /> Find tutors</Nav.Link>
+        <Nav.Link href={currentUser ? "/groupsessions" : "/login"}> <Icon.People size={20} /> Study Together</Nav.Link>
+        <Nav.Link href={currentUser ? "/tutoringsessions" : "/login"}> <Icon.PersonVideo3 size={20} /> Find tutors</Nav.Link>
 
         {currentUser ?
         <Nav.Link href={ currentUser ? `/profile/${currentUser.firstname}`: `/`}> <Icon.PersonBoundingBox size={30} /> 
