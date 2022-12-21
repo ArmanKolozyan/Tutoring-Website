@@ -12,6 +12,8 @@ import { useLocation, Link, useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import { useContext } from "react";
 import { PasswordContext } from "../context/PasswordContext";
+import { atcb_action, atcb_init } from "add-to-calendar-button";
+import "add-to-calendar-button/assets/css/atcb.css";
 
 const ViewGroupSession = () => {
   //contact popup
@@ -52,7 +54,7 @@ const ViewGroupSession = () => {
 
   const [action, setAction] = useState(false);
   const [count, setCount] = useState("");
-  const [updatedBackEnd, setUpdatedBackEnd] = useState(false)
+  const [updatedBackEnd, setUpdatedBackEnd] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -120,7 +122,7 @@ const ViewGroupSession = () => {
     };
     if (post && post.id && (!action || updatedBackEnd)) {
       fetchData();
-      setUpdatedBackEnd(false)
+      setUpdatedBackEnd(false);
     }
   }, [post, signUp, updatedBackEnd]);
 
@@ -132,6 +134,15 @@ const ViewGroupSession = () => {
       year = date[0].substring(2); // get only two digits
 
     return day + "/" + month + "/" + year;
+  }
+
+  function formatDateForCalendar(input) {
+    let date = input.match(/\d+/g),
+      day = date[2],
+      month = date[1],
+      year = date[0]; // get only two digits
+
+    return year + "-" + month + "-" + day;
   }
 
   const deletePost = async () => {
@@ -160,7 +171,7 @@ const ViewGroupSession = () => {
             signup: signUp,
           },
         });
-        setUpdatedBackEnd(true)
+        setUpdatedBackEnd(true);
       } catch (err) {
         console.log(err.response.data.message);
       }
@@ -169,6 +180,24 @@ const ViewGroupSession = () => {
       updateSignUp();
     }
   }, [signUp, action]);
+
+  useEffect(() => {
+    atcb_init();
+  }, []);
+
+
+  const showCalendarOptions = () => {
+    atcb_action({
+      name: post.title,
+      startDate: formatDateForCalendar(post.date_time),
+      startTime: post.date_time.slice(11,16),
+      endTime: post.date_time.slice(11,16),
+      options: ['Outlook.com', 'Google', 'Apple', 'Microsoft365'],
+      location: post.location,
+      timeZone: "Europe/Berlin",
+      iCalFileName: "Reminder-Event",
+    });
+  }
 
   return (
     <div className="ViewGroupSession">
@@ -197,12 +226,17 @@ const ViewGroupSession = () => {
             </Row>
 
             <Row className="justify-content-md-center">
-              <Col md="">
+              <Col >
                 <div className="GroupSessionDescription">
                   <GroupSessionDescription description={post.description} />
                 </div>
               </Col>
             </Row>
+            <Row className="justify-content-md-center">
+            <Col md="auto">
+              <Button onClick={showCalendarOptions} style={{"width": "20vw", "margin-bottom": "5vw"}}> Add to calendar </Button>
+              </Col>
+              </Row>
           </Col>
 
           <Col md="auto">
