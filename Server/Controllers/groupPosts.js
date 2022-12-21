@@ -3,14 +3,9 @@ import { db } from "../db.js";
 export const getGroupPosts = (req, res) => {
   let q = "SELECT * FROM group_posts";
   const startIdx = req.query.start;
-  const endIdx = req.query.end; 
+  const endIdx = req.query.end;
 
-  if (
-    startIdx !== undefined &&
-    endIdx !== undefined &&
-    parseInt(startIdx) !== NaN &&
-    parseInt(endIdx) !== NaN
-  ) {
+  if (startIdx !== undefined && endIdx !== undefined && parseInt(startIdx) !== NaN && parseInt(endIdx) !== NaN) {
     q = `SELECT * FROM group_posts LIMIT ${startIdx}, ${endIdx - startIdx}`;
   }
 
@@ -104,7 +99,7 @@ export const findGroupPosts = (req, res) => {
   const free = req.query.free;
   const noRegistration = req.query.noRegistration;
   const startIdx = req.query.start;
-  const endIdx = req.query.end; 
+  const endIdx = req.query.end;
 
   const checkOrder = () => {
     let order;
@@ -151,12 +146,7 @@ export const findGroupPosts = (req, res) => {
   };
 
   const checkLimits = () => {
-    if (
-      startIdx !== undefined &&
-      endIdx !== undefined &&
-      parseInt(startIdx) !== NaN &&
-      parseInt(endIdx) !== NaN
-    ) {
+    if (startIdx !== undefined && endIdx !== undefined && parseInt(startIdx) !== NaN && parseInt(endIdx) !== NaN) {
       return `LIMIT ${startIdx}, ${endIdx - startIdx}`;
     } else {
       return "";
@@ -187,3 +177,61 @@ export const getGroupPostsAmount = (req, res) => {
     return res.status(200).json({ message: "", data: data[0].amount });
   });
 };
+
+// REGISTRATIONS
+
+export const signUpForSession = (req, res) => {
+  const values = [req.body.student_id, req.body.session_id];
+
+  if (!req.body.signup) {
+    const q = "DELETE FROM session_registrations WHERE `student_id` = ? AND `session_id` = ?";
+
+    db.query(q, values, (err, data) => {
+      if (err) return res.status(500).json({ message: "Unregistering the user for the session failed.", data: [] });
+      return res.status(200).json({ message: "", data: [] });
+    });
+  } else {
+    const q = "INSERT INTO session_registrations(`student_id`, `session_id`) VALUES (?)";
+
+    db.query(q, [values], (err, data) => {
+      if (err)
+        return res.status(500).json({
+          message: "Registering the user for the session failed. Possible reason: user is already registered.",
+          data: [],
+        });
+      return res.status(200).json({ message: "", data: [] });
+    });
+  }
+};
+
+export const is_signedUp = (req, res) => {
+  const values = [req.query.student_id, req.query.session_id];
+
+  let q = "SELECT COUNT(student_id) AS amount FROM session_registrations WHERE student_id = ? AND session_id = ?";
+
+  db.query(q, values, (err, data) => {
+    if (err) {
+      return res.status(500).json({
+        message: "Checking if user is registered failed.",
+        data: [],
+      });
+    }
+    return res.status(200).json({ message: "", data: data[0].amount > 0 }); // if not zero
+  });
+};
+
+export const registrationCount = (req, res) => {
+  const session_id = req.query.session_id;
+
+  let q = "SELECT COUNT(student_id) AS amount FROM session_registrations WHERE session_id = ?";
+
+  db.query(q, session_id, (err, data) => {
+    if (err) {
+      return res.status(500).json({
+        message: "Fetching the count of registration for the given session failed.",
+        data: [],
+      });
+    }
+    return res.status(200).json({ message: "", data: data[0].amount}); 
+  });
+}
