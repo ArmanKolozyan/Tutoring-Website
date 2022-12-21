@@ -81,6 +81,13 @@ const ViewProfile = () => {
                 <p>I was born on {Birthdate ? formatDate(Birthdate.slice(0,10)) : ""}.</p>
               </Row>
 
+
+
+              <Row className="justify-content-md-center">
+                <p>I have studied: <pre>{studies.join('\n')}</pre></p>
+              </Row>
+
+
               <Row className="">
                 <Form.Label>Contact Information:</Form.Label>
                 <Col md="auto">
@@ -95,9 +102,6 @@ const ViewProfile = () => {
                 </Col>
               </Row>
 
-              <Row className="justify-content-md-center">
-                <p>I have studied <pre>{studies.join('\n')}</pre></p>
-              </Row>
             </div>
           </Col>
 
