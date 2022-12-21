@@ -104,7 +104,8 @@ $ourOrange: #fc3e03;
       color: $ourOrange;
 
       .container {
-        background-color: $ourBlue;
+        background-color: lighten($ourBlue, 0%);
+        border-bottom: 0.4vh solid $ourOrange; 
 
       }
       button {
