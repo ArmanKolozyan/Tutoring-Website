@@ -20,14 +20,6 @@ const CreateTutoringSession = () => {
   const post = useLocation().state;
   const navigate = useNavigate();
 
-  const checkFree = () => {
-    if (test == "1") {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   const [course, setCourse] = useState(post?.course || "");
   const [field, setField] = useState(post?.field_of_study || "");
   const [exp, setExp] = useState(post?.experience || "");
@@ -39,6 +31,14 @@ const CreateTutoringSession = () => {
 
   const [regions, setRegions] = useState([]); // must be initialised by an empty array! otherwise not possible to call 'map'
 
+  const checkFree = () => {
+    if (test == "1") {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   useEffect(() => {
     if (post) {
       const fetchData = async () => {
@@ -49,9 +49,9 @@ const CreateTutoringSession = () => {
             url: `http://localhost:8800/tutoringpostRegion/${post.id}`,
           });
           //let result = res.data.map(x => x.field);
-          setRegions(res.data);
+          setRegions(res.data.data);
         } catch (err) {
-          console.log(err);
+          console.log(err.response.data.message);
         }
       };
       fetchData();
@@ -80,7 +80,7 @@ const CreateTutoringSession = () => {
             regions: giveRegions(),
           },
         });
-        navigate(`/tutoringsession/${postId.data}`);
+        navigate(`/tutoringsession/${postId.data.data}`);
       } else {
         const postId = await axios({
           method: "post",
@@ -98,10 +98,10 @@ const CreateTutoringSession = () => {
             regions: giveRegions(),
           },
         });
-        navigate(`/tutoringsession/${postId.data}`);
+        navigate(`/tutoringsession/${postId.data.data}`);
       }
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.message);
     }
   };
 

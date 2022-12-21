@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function Searchbar({ callback }) {
+function Searchbar({ callback, start, end }) {
   const [keyword, setKeyword] = useState("");
   const [course, setCourse] = useState("");
   const [field, setField] = useState("");
@@ -29,11 +29,13 @@ function Searchbar({ callback }) {
             field: field,
             orderBy: orderBy,
             freeTest: freeTest,
+            start: start,
+            end: end,
           },
         });
-        callback(res.data);
+        callback(res.data.data);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.message);
       }
     };
     fetchPosts();
@@ -108,11 +110,6 @@ function Searchbar({ callback }) {
               </Row>
             </ListGroup.Item>
           </ListGroup>
-          <Card.Body>
-            <Card.Text>
-              <Button type="submit">Apply</Button>
-            </Card.Text>
-          </Card.Body>
         </Card>
       </Form>
     </div>

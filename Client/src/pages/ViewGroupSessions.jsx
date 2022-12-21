@@ -2,13 +2,13 @@ import PostCards from "../components/PostCards";
 import Separator from "../components/Separator";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Searchbar from "../components/TutoringSessionSearchbar";
+import Searchbar from "../components/GroupSessionSearchbar";
 
 const ViewTutoringSessions = () => {
   const [fetching, setFetching] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
-  var postsPerPage = 3;
+  var postsPerPage = 2;
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -16,7 +16,7 @@ const ViewTutoringSessions = () => {
         const res = await axios({
           method: "get",
           withCredentials: true,
-          url: `http://localhost:8800/tutoringpostsAmount/`,
+          url: `http://localhost:8800/grouppostsAmount/`,
         });
         setTotalPosts(res.data.data);
         setFetching(false);
@@ -34,13 +34,12 @@ const ViewTutoringSessions = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      let res
 
       try {
-        res = await axios({
+        const res = await axios({
           method: "get",
           withCredentials: true,
-          url: "http://localhost:8800/tutoringposts/",
+          url: "http://localhost:8800/groupposts/",
           params: {
             start: firstPostidx,
             end: lastPostidx,
@@ -64,7 +63,7 @@ const ViewTutoringSessions = () => {
   return (
     <div className="container mt-5">
       <Searchbar callback = {setCurrentPosts} start = {firstPostidx} end = {lastPostidx} />
-      <PostCards posts={currentPosts} fetching={fetching} is_tutorcard = {true} />
+      <PostCards posts={currentPosts} fetching={fetching} is_tutorcard = {false}/>
       <Separator
         totalNmbr={totalPosts}
         nmbrPerPage={postsPerPage}

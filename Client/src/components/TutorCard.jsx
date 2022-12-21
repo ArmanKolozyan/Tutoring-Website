@@ -13,7 +13,7 @@ function TutorInfo(props) {
 
   return (
     <div className="Tutorcard">
-      <Card style={{ width: "20rem" }}>
+      <Card style={{ width: "20rem", padding: "0vh" }}>
         <Card.Img variant="top" src={PhotoLink} />
         <Card.Title style={{ margin: "auto" }}>{tutorName}</Card.Title>
         <ListGroup className="list-group-flush">

@@ -60,16 +60,19 @@ const CreateReview = (props) => {
         },
       });
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.message);
     }
   };
 
   return (
     <div>
-      <Row>
+      <Row className="justify-content-md-center">
+      <Col md="auto">
         <h1>Rate your experience</h1>
+        </Col>
       </Row>
-      <Row>
+      <Row className="justify-content-md-center">
+      <Col md="auto">
         <div className="stars">
           {stars.map((_, index) => {
             // gaat elk element van de lijst "stars" naar een ster mappen
@@ -89,13 +92,20 @@ const CreateReview = (props) => {
             );
           })}
         </div>
+        </Col>
       </Row>
       <Col>
-        <Row>
+      <Row className="justify-content-md-center">
+      <Col md="auto">
+
           <textarea className="reviewTitle" onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
+          </Col>
+
         </Row>
-        <Row>
+        <Row className="justify-content-md-center">
+      <Col md="auto">
           <textarea onChange={(e) => setDescription(e.target.value)} placeholder="Describe your experience" />
+          </Col>
         </Row>
       </Col>
       <Row>

@@ -10,7 +10,7 @@ const ReviewsList = ({ reviews, fetching }) => {
     return (
       <ul className='list-group mb-4'>
         {reviews.map(review => (
-          <li key={review.id} className='list-group-item'>
+          <li key={review.id}>
             <ViewReview review = {review}/>
           </li>
         ))}

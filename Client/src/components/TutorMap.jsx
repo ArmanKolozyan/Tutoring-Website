@@ -24,9 +24,9 @@ var MAPBOX_ACCESSTOKEN = "pk.eyJ1IjoibWF4aW12ZHciLCJhIjoiY2szbHM0Zm5lMDY1bzNibzR
 const ZOOM_LEVEL = 12;
 
 export function TutorMap({regions}) {
-  const location = getUserLocation();
 
   const jumpToUserLocation = () => {
+    const location = getUserLocation();
     if (location.loaded && !location.error) {
       const newZoom = 16;
       mapRef.current.flyTo([location.coordinates.lat, location.coordinates.lng], newZoom, { animate: true });
@@ -71,6 +71,9 @@ export function TutorMap({regions}) {
           />
         </MapContainer>
       </div>
+      {(regions.length > 0) ?
+      ""
+      :
       <div className="row">
         <div className="col d-flex justify-content-center">
           <button
@@ -82,6 +85,7 @@ export function TutorMap({regions}) {
           </button>
         </div>
       </div>
+      }
     </>
   );
 }

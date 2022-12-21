@@ -16,7 +16,7 @@ function UpdatePicture() {
   const { currentUser } = useContext(PasswordContext);
   const { setCurrentUser } = useContext(PasswordContext);
 
-  const [preview, setPreview] = useState(`../uploads/${currentUser.img}`);
+  const [preview, setPreview] = useState((currentUser?.img !== null) ? `../uploads/${currentUser.img}` : false);
 
   const makePreview = (file) => {
     const reader = new FileReader();
@@ -43,10 +43,10 @@ function UpdatePicture() {
         url: `http://localhost:8800/profilePicture/${currentUser.id}`,
         data: formData,
       });
-      currentUser.img = res.data;
+      currentUser.img = res.data.data;
       localStorage.setItem("user", JSON.stringify(currentUser));
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.message);
     }
   };
 
@@ -58,7 +58,9 @@ function UpdatePicture() {
     <div>
       <Form onSubmit={handleSubmitFile}>
         <Card style={{ width: "20rem" }}> {/* MISSCHIEN BEST VW GEBRUIKEN IPV REM*/}
-          <Card.Img variant="top" src={preview ? preview : ""} />
+        { preview ?
+          <Card.Img variant="top" src={ preview} />
+          : ""}
           <Card.Body>
             <Card.Text>Change Profile Picture </Card.Text>
           </Card.Body>

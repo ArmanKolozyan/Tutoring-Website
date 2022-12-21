@@ -33,10 +33,10 @@ function ProfileInfo() {
     e.preventDefault();
     try {
       await axios({
-        method: "post",
+        method: "put",
         withCredentials: true,
         headers: { "Content-Type": "application/json" },
-        url: `http://localhost:8800/update/`,
+        url: `http://localhost:8800/users/${currentUser.id}`,
         data: {
           firstName,
           lastName,
@@ -75,7 +75,7 @@ function ProfileInfo() {
           withCredentials: true,
           url: `http://localhost:8800/studies/${currentUser.id}`,
         });
-        let result = res.data;
+        let result = res.data.data;
         result = result.map((x) => {
           const neww = {
             value: x.field,
@@ -85,7 +85,7 @@ function ProfileInfo() {
         });
         setStudies(result);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.message);
       }
     };
     fetchData();
@@ -105,8 +105,8 @@ function ProfileInfo() {
             </FloatingLabel>
           </Col>
           <Col>
-            <FloatingLabel controlId="SurenameInput" label="Surname">
-              <Form.Control as="textarea" defaultValue={lastName} onChange={(e) => setLastName(e.target.value)} />
+            <FloatingLabel controlId="SurnameInput" label="Surname">
+              <Form.Control type="text" defaultValue={lastName} onChange={(e) => setLastName(e.target.value)} />
             </FloatingLabel>
           </Col>
         </Row>

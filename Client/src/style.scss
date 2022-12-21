@@ -11,6 +11,10 @@ $ourOrange: #fc3e03;
       color: inherit;
     }
 
+    ul {
+      list-style-type: none;
+    }
+    
     // Login & Register pages
 
     .auth {
@@ -98,6 +102,27 @@ $ourOrange: #fc3e03;
       text-align: center;
       background-color: $ourBlue;
       color: $ourOrange;
+
+      .container {
+        background-color: $ourBlue;
+
+      }
+      button {
+        margin: 10%;
+        width: 20vw;
+        min-width: fit-content;
+        height: 15vh;
+        border: none;
+        background-color: $ourOrange;
+        background-image: linear-gradient(100deg,lighten($ourOrange, 10%) , darken($ourOrange, 10%) );
+        align-self: center;
+        margin-left: 5vw;
+        margin-right: 5vw;
+        font-size: 4vh;
+        text-transform: uppercase;
+        
+            }
+
       hr {
         // code voor horizontale streep
         border-top: 0.4vh solid;
@@ -127,24 +152,115 @@ $ourOrange: #fc3e03;
         font-size: 3vh;
         text-align: left;
       }
-    }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html {
+        font-size: 62.5%;
+      }
+      
+      body {
+        font-family: "Open Sans";
+        font-size: 1.4rem;
+        font-weight: 400;
+        background: #333;
+        color: #fff;
+      }
+      a,
+      a:hover {
+        text-decoration: none;
+      }
 
-    .promotedPosts {
-      width: 80vw;
-      padding-top: 12vh;
-      padding-bottom: 12vh;
-      margin: auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 18vh;
+      // button styling based on https://codepen.io/tawhidur876/pen/rNVreJx
+      .banner {
+      .butn:link,
+      .butn:visited {
+        margin-top: 15vh;
+        margin-bottom: 10vh;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        text-transform: uppercase;
+        text-decoration: none;
+        background-color: #5e16bd;
+        background-image: linear-gradient(90deg, #501aa8, #870de8);
+        padding: 1rem 2.5rem;
+        height: 6rem;
+        width: 28rem;
+      
+        margin-right: 13px;
+        border-radius: 4px;
+        border: none;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease-in-out;
+      }
+      .butn::before {
+        background: #fff;
+        content: "";
+        height: 155px;
+        opacity: 0;
+        position: absolute;
+        top: -50px;
+        transform: rotate(35deg);
+        width: 50px;
+        transition: all 3000ms cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      .butn::after {
+        background: #fff;
+        content: "";
+        height: 20rem;
+        opacity: 0;
+        position: absolute;
+        top: -50px;
+        transform: rotate(35deg);
+        transition: all 3000ms cubic-bezier(0.19, 1, 0.22, 1);
+        width: 8rem;
+      }
+      .butn__new::before {
+        left: -50%;
+      }
+      
+      .butn__new::after {
+        left: -100%;
+      }
+      
+      .butn:hover,
+      .butn:active {
+        transform: translateY(-3px);
+        color: #fff;
+        box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.3);
+      }
+      
+      .butn__new:hover::before {
+        left: 120%;
+        opacity: 0.5s;
+      }
+      
+      .butn__new:hover::after {
+        left: 200%;
+        opacity: 0.6;
+      }
+      .butn span {
+        z-index: 20;
+      }
+      background-color: white;
+    }
+      
+      
     }
   }
 
   .post {
     display: flex;
     gap: 1.8vh;
-
+    padding-left: 10vw;
+    
     &:nth-child(2n + 1) {
       flex-direction: row-reverse;
     }
@@ -175,35 +291,6 @@ $ourOrange: #fc3e03;
       color: $ourBlue;
       .checked {
         color: $ourOrange;
-      }
-    }
-    .content {
-      flex: 3;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      h1 {
-        color: black;
-      }
-
-      p {
-        font-size: 3vh;
-      }
-
-      .myButton {
-        button {
-          padding: 1.8vh 2vw;
-          background-color: white;
-          border: 1px solid $ourBlue;
-          color: $ourBlue;
-
-          &:hover {
-            border: 1px solid white;
-            background-color: $ourBlue;
-            color: white;
-          }
-        }
       }
     }
   }
@@ -316,12 +403,7 @@ $ourOrange: #fc3e03;
 
     .TutorInfo {
       padding-left: 4vh;
-      div {
-        padding-left: 0vh;
-      }
       img {
-        width: 10vw;
-        height: 10vw;
         align-self: center;
       }
     }
@@ -339,6 +421,9 @@ $ourOrange: #fc3e03;
       width: 40vw;
       border: none;
       background-color: $ourOrange;
+      align-self: center;
+      margin-left: 30vw;
+      margin-right: 30vw;
     }
   }
 
@@ -352,7 +437,7 @@ $ourOrange: #fc3e03;
       width: auto;
 
       .multiselector {
-        max-width: 30em;
+        max-width: 28em;
       }
     }
   }
@@ -438,8 +523,8 @@ $ourOrange: #fc3e03;
       padding-left: 5vw;
 
       img {
-        width: 10vw;
-        height: 10vw;
+        width: 100%;
+        height: 108%;
         align-self: center;
       }
     }
@@ -495,40 +580,39 @@ $ourOrange: #fc3e03;
   }
 
   .Review {
+    padding: 0;
+    margin-right : 10vw;
     .box {
-      // zodat de review zich in een box bevindt
-      padding: 1vh;
-      //box-sizing: border-box;
-      //-moz-box-sizing: border-box;
-      //-webkit-box-sizing: border-box;
-      width: 80%;
+      width: 100%;
       height: fit-content;
-      border: 0.5vh solid black;
-      border-radius: 5vh;
+      border: 0.2vh solid black;
+      border-radius: 1vh;
     }
-    h1 {
-      font-size: 4vh;
-      color: $ourBlue;
-      width: fit-content;
-    }
+
     .stars {
-      font-size: 5vh;
+      font-size: 3vh;
       flex-direction: row;
       color: $ourBlue;
       .checked {
         color: $ourOrange;
       }
     }
+    
     p {
-      margin-top: 2vh;
-      font-size: 2.5vh;
+      font-size: 2vh;
     }
+
+    h4 {
+      color: $ourBlue;
+      width: fit-content;
+    }
+
     h2 {
       display: flex;
       justify-content: right;
+      padding-right: 3vw;
       font-size: 2vh;
       color: $ourBlue;
-      margin-top: 3vh;
     }
   }
 
@@ -559,4 +643,20 @@ $ourOrange: #fc3e03;
       width: 30%;
     }
   }
+
+  .pagination{
+
+    Button{
+      border: 1px solid $ourBlue;
+      background-color: white;
+      color: $ourBlue;
+      width: fit-content;
+      text-align: center;
+    }
+    Button:hover{
+      transform: scale(1.5);
+    }
+  }
 }
+
+

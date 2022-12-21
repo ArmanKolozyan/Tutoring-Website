@@ -16,7 +16,46 @@ import { ViewMap } from "../components/ViewMap";
 import { useContext } from "react";
 import { PasswordContext } from "../context/PasswordContext";
 
+import Modal from 'react-bootstrap/Modal';
+
+
 const ViewTutoringSession = () => {
+
+
+  //contact popup
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
+  const phonenumber = "+32 423 32 34 54"
+  const email = "Stoffel@hotmail.be"
+
+  function copyPhonenumber(){
+    navigator.clipboard.writeText(phonenumber);
+  }
+
+  
+  function copyEmail(){
+    navigator.clipboard.writeText(email);
+  }
+  //
+
+
+
+  //// delete popup
+
+
+  const [showDelete, setShowDelete] = useState(false);
+
+  const handleCloseDelete = () => setShowDelete(false);
+  const handleShowDelete = () => setShowDelete(true);
+
+
+  //
+
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -36,9 +75,9 @@ const ViewTutoringSession = () => {
           withCredentials: true,
           url: `http://localhost:8800/tutoringposts/${postId}`,
         });
-        setPost(res.data);
+        setPost(res.data.data);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.message);
       }
     };
     fetchData();
@@ -52,9 +91,9 @@ const ViewTutoringSession = () => {
           withCredentials: true,
           url: `http://localhost:8800/user/${post.uid}`,
         });
-        setUser(res.data);
+        setUser(res.data.data);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.message);
       }
     };
     if (post) {
@@ -81,7 +120,7 @@ const ViewTutoringSession = () => {
       });
       navigate("/tutoringsessions")
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.message);
     }
   }
 
@@ -117,7 +156,7 @@ const ViewTutoringSession = () => {
               <TutorInfo
                 tutorName={user?.firstname?.concat(" ").concat(user.lastname)} // VRAAG: kan dit mooier?
                 tutorText={user?.shortIntro}
-                tutorAge={user.birthDate ? formatDate(user.birthDate) : ""}
+                tutorAge={user?.birthDate ? formatDate(user.birthDate) : ""}
                 AvgRating={3} // TO DOOO
                 ProfileLink={`/viewprofile/${user?.id}`}
                 PhotoLink={`../uploads/${user?.img}`}
@@ -130,7 +169,7 @@ const ViewTutoringSession = () => {
                     </Link>
                   </div>
                   <div className="delete">
-                    <Link onClick={deletePost} to={"/tutoringsessions"} state={post} className="btn btn-danger">
+                    <Link onClick={handleShowDelete} className="btn btn-danger">
                       Delete post
                     </Link>
                   </div>
@@ -145,7 +184,9 @@ const ViewTutoringSession = () => {
         </Row>
 
         <Row className="justify-content-md-center">
-          <Button>Contact Tutor</Button>
+        <Col>
+          <Button onClick={handleShow}>Contact Tutor</Button>
+        </Col>
         </Row>
 
         <Row className="justify-content-md-center">
@@ -159,6 +200,53 @@ const ViewTutoringSession = () => {
           </Col>
         </Row>
       </Container>
+
+
+
+
+
+
+
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Contact information of the tutor</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        
+        
+        <p>
+          His/Her phonenumber is : {phonenumber}
+        </p>
+        <Button variant="secondary" onClick={copyPhonenumber}>
+        Copy phonenumber
+        </Button>
+        
+        <p>        <br/>
+          His/her Email adress is : {email}
+        </p>
+        <Button variant="secondary" onClick={copyEmail}>
+        Copy email
+        </Button>
+
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={showDelete} onHide={handleCloseDelete}>
+        <Modal.Header closeButton>
+          <Modal.Title>Deleting Post</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>You are deleting your post! Are you sure you want to do this, this action can not be undone.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDelete}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={deletePost}>
+            Delete!
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
     </div>
   );
 };

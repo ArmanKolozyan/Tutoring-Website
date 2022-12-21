@@ -20,10 +20,10 @@ const ViewReviews = ({ id }) => {
           withCredentials: true,
           url: `http://localhost:8800/postReviews/${id}`,
         });
-        setReviews(res.data);
+        setReviews(res.data.data);
         setFetching(false);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.message);
       }
     };
     fetchReviews();

@@ -1,10 +1,6 @@
 import bcrypt from "bcryptjs"; // for hashing the password
 import { db } from "../db.js";
 
-export const login = (req, res) => {
-  res.json(req.user); // Res json ({user: req.user, error: .....}) zo'n soort object errond zetten
-};
-
 export const register = (req, res) => {
   //CHECK EXISTING USER 
   const q = "SELECT * FROM users WHERE email = ?";
@@ -18,7 +14,7 @@ export const register = (req, res) => {
 
   db.query(q, [req.body.email], (err, data) => {
     if (err) res.status(500).json(err);
-    if (data.length) return res.status(409).json("User already exists!");
+    if (data.length) return res.status(409).json({message: "The provided e-mail already exists!", data: []});
 
     const q1 = "INSERT INTO users(`firstname`, `lastname`, `email`,`password`, `birthDate`) VALUES (?)";
     bcrypt.genSalt(10, (err, salt) => {
@@ -27,8 +23,8 @@ export const register = (req, res) => {
         // hashing the password
         const values = [firstName, lastName, email, hash, birthDate];
         db.query(q1, [values], (err, data) => {
-          if (err) throw res.status(500).json(err);
-          return res.status(200).json("User has been created.");
+          if (err) throw res.status(500).json({message: "Adding the user failed.", data: []});
+          return res.status(200).json({message: "User is registered.", data: []});
         });
       });
     });
@@ -36,14 +32,14 @@ export const register = (req, res) => {
 };
 
 export const getUser = (req, res) => {
-  res.send(req.user);
+  res.status(200).json({message: "", data: req.user});
 };
 
 export const logOut = (req, res, next) => {
   req.logout(function (err) {
     if (err) {
-      return next(err);
+      return res.status(500).json({message: "Logging out failed.", data: []});
     }
-    res.send("logged out");
+    res.status(200).json({message: "User is logged out.", data: []});
   });
 };

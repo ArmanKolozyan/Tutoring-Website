@@ -16,10 +16,10 @@ const ViewReview = ({review}) => {
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-      ></link>
+      />
       <div className="box">
         <Row>
-          <h1>{review.title}</h1>
+          <h4>{review.title}</h4>
         </Row>
         <Row>
           <div className="stars">
@@ -28,8 +28,6 @@ const ViewReview = ({review}) => {
               return (
                 <FaStar
                   key={index}
-                  //size={0.05*screenHeight}
-                  size={"5vh"}
                   style={{
                     marginRight: 10,
                   }}

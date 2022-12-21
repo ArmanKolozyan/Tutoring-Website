@@ -14,6 +14,7 @@ import ViewProfile from "./pages/ViewProfile";
 import CreateGroupSession from "./pages/CreateGroupSession";
 import ViewGroupSession from "./pages/ViewGroupSession";
 import ViewTutoringSessions from "./pages/ViewTutoringSessions";
+import ViewGroupSessions from "./pages/ViewGroupSessions";
 import ScrollToTop from "./components/ScrollToTop";
 
 // Using an Outlet component of React to avoid
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
       {
         path: "/tutoringsessions",
         element: <ViewTutoringSessions />,
+      },
+      {
+        path: "/groupsessions",
+        element: <ViewGroupSessions/>,
       },
     ],
   },

@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
-const PostCard = ({ post }) => {
+const GroupCard = ({ post }) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -15,11 +15,11 @@ const PostCard = ({ post }) => {
         const res = await axios({
           method: "get",
           withCredentials: true,
-          url: `http://localhost:8800/user/${post.uid}`,
+          url: `http://localhost:8800/user/${post.userid}`,
         });
-        setUser(res.data);
+        setUser(res.data.data);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data.message);
       }
     };
     if (post) {
@@ -36,14 +36,15 @@ const PostCard = ({ post }) => {
       <Container>
         <Row className="justify-content-md-center">
           <Row className="justify-content-md-center">
-            <Col md="auto">
+            <Col>
               <Row className="justify-content-md-center">
-                <Link className="link" to={`/tutoringsession/${post.id}`}>
-                  <h1 style={{ color: "black" }}>{post.course}</h1>
+                <Link className="link" to={`/groupsession/${post.id}`}>
+                  <h1 style={{ color: "black", "overflow-wrap": "break-word"}}>{post.title}</h1>
                 </Link>
               </Row>
 
               <Row className="justify-content-md-center">
+              <Col md="auto">
                 <div className="stars">
                   <span className="fa fa-star checked"></span>
                   <span className="fa fa-star checked"></span>
@@ -51,15 +52,25 @@ const PostCard = ({ post }) => {
                   <span className="fa fa-star"></span>
                   <span className="fa fa-star"></span>
                 </div>
+                </Col>
+
+                <Col>
+                <p> The price of this session is :  <span style={{ fontWeight: 'bold' }}> € {post.free ? 0 : post.price}</span> </p>
+                </Col>
+
+                <Col>
+                <p> Total registrations : </p>
+                <p><span style={{ fontWeight: 'bold' }}> {post.registrations}</span> </p>
+                </Col>
               </Row>
 
               <Row className="justify-content-md-center">
                 <p>{post.description}</p>
               </Row>
 
-              <Row className="justify-content-md-center">
+              <Row>
                 <Col md="auto">
-                  <Link to={`/tutoringsession/${post.id}`} className="btn btn-primary">
+                  <Link to={`/groupsession/${post.id}`} className="btn btn-primary">
                     Visit Post
                   </Link>
                 </Col>
@@ -67,7 +78,11 @@ const PostCard = ({ post }) => {
             </Col>
 
             <Col md="auto">
-              <img style={{ width: "50vh", height: "auto" }} src={`../uploads/${user?.img}`} key={user.img} alt="" />
+            {
+            user.img ?
+              <img style={{"margin-left": "auto", "max-width": "80%", display: "block", height: "auto", "border-radius": "50px" }} src={`../uploads/${user?.img}`} key={user.img} alt="" />
+            : ""
+            }
             </Col>
           </Row>
         </Row>
@@ -76,4 +91,4 @@ const PostCard = ({ post }) => {
   );
 };
 
-export default PostCard;
+export default GroupCard;
