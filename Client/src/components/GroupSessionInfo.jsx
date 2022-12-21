@@ -10,8 +10,8 @@ function GroupSessionInfo(props) {
   let space = props.space;
   let dateTime = props.dateTime;
   let location = props.location;
+  let spotsTaken = props.spotsTaken;
 
-  let SpotsTakenSession = 14;
 
   let priceText = "the cost of participation in this groupsession is " + price;
   if (free) {
@@ -22,7 +22,7 @@ function GroupSessionInfo(props) {
   let limitedspacetext2 = "";
   if (limited) {
     limitedpacestext = "This is a groupsession with limited space, and";
-    limitedspacetext2 = SpotsTakenSession + " out of the " + space + " have been taken already!";
+    limitedspacetext2 = spotsTaken + " out of the " + space + " have been taken already!";
   }
 
     // format date to dd/mm/yy using Regular Expressions
@@ -54,7 +54,7 @@ function GroupSessionInfo(props) {
         {limitedpacestext}
         <br></br>
         {limitedspacetext2}
-        {limited ? <ProgressBar min={0} max={space} now={SpotsTakenSession} label={`${SpotsTakenSession} of ${space}`}/> : ""}
+        {limited ? <ProgressBar visuallyHidden={true} min={0} max={space} now={spotsTaken} animated={true} label={`${spotsTaken} of ${space}`}/> : ""}
       </p>
 
       <p> <h6>The price for this session is:</h6> {free ? "free session" : price + " euros"} </p>

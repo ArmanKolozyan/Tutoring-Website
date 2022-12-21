@@ -24,7 +24,6 @@ const ViewProfile = () => {
           withCredentials: true,
           url: `http://localhost:8800/user/${userid}`,
         });
-        console.log(res.data.data)
         setUser(res.data.data);
       } catch (err) {
         console.log(err.response.data.message);

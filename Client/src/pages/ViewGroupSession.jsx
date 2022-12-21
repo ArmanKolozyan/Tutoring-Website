@@ -6,7 +6,7 @@ import GroupSessionInfo from "../components/GroupSessionInfo";
 import TutorInfo from "../components/TutorCard";
 import GroupSessionDescription from "../components/GroupSessionDescription";
 import Button from "react-bootstrap/Button";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
@@ -42,11 +42,17 @@ const ViewGroupSession = () => {
 
   const { currentUser } = useContext(PasswordContext);
 
-    //// delete popup
-    const [showDelete, setShowDelete] = useState(false);
+  //// delete popup
+  const [showDelete, setShowDelete] = useState(false);
 
-    const handleCloseDelete = () => setShowDelete(false);
-    const handleShowDelete = () => setShowDelete(true);
+  const [signUp, setSignUp] = useState(false);
+
+  const handleCloseDelete = () => setShowDelete(false);
+  const handleShowDelete = () => setShowDelete(true);
+
+  const [action, setAction] = useState(false);
+  const [count, setCount] = useState("");
+  const [updatedBackEnd, setUpdatedBackEnd] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,11 +82,47 @@ const ViewGroupSession = () => {
       } catch (err) {
         console.log(err.response.data.message);
       }
+      try {
+        const res = await axios({
+          method: "get",
+          withCredentials: true,
+          url: `http://localhost:8800/groupposts/registrations/isSignedUp`,
+          params: {
+            student_id: currentUser.id,
+            session_id: post.id,
+          },
+        });
+        setSignUp(res.data.data);
+      } catch (err) {
+        console.log(err.response.data.message);
+      }
     };
-    if (post) {
+    if (post && post.id) {
       fetchData();
     }
-  }, [post]);
+  }, [post, signUp]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios({
+          method: "get",
+          withCredentials: true,
+          url: `http://localhost:8800/groupposts/registrations/count`,
+          params: {
+            session_id: post.id,
+          },
+        });
+        setCount(res.data.data);
+      } catch (err) {
+        console.log(err.response.data.message);
+      }
+    };
+    if (post && post.id && (!action || updatedBackEnd)) {
+      fetchData();
+      setUpdatedBackEnd(false)
+    }
+  }, [post, signUp, updatedBackEnd]);
 
   // format date to dd/mm/yy using Regular Expressions
   function formatDate(input) {
@@ -99,11 +141,34 @@ const ViewGroupSession = () => {
         withCredentials: true,
         url: `http://localhost:8800/groupposts/${post.id}`,
       });
-      navigate("/groupsessions")
+      navigate("/groupsessions");
     } catch (err) {
       console.log(err.response.data.message);
     }
-  }
+  };
+
+  useEffect(() => {
+    const updateSignUp = () => {
+      try {
+        axios({
+          method: "post",
+          withCredentials: true,
+          url: "http://localhost:8800/groupposts/registrations",
+          data: {
+            student_id: currentUser.id,
+            session_id: post.id,
+            signup: signUp,
+          },
+        });
+        setUpdatedBackEnd(true)
+      } catch (err) {
+        console.log(err.response.data.message);
+      }
+    };
+    if (action) {
+      updateSignUp();
+    }
+  }, [signUp, action]);
 
   return (
     <div className="ViewGroupSession">
@@ -126,6 +191,7 @@ const ViewGroupSession = () => {
                   price={post.price}
                   dateTime={post.date_time}
                   location={post.location}
+                  spotsTaken={count}
                 />
               </div>
             </Row>
@@ -161,7 +227,8 @@ const ViewGroupSession = () => {
                     <Link onClick={handleShowDelete} className="btn btn-danger">
                       Delete post
                     </Link>
-                  </div>                </>
+                  </div>{" "}
+                </>
               )}
             </div>
           </Col>
@@ -169,7 +236,15 @@ const ViewGroupSession = () => {
 
         <Row className="justify-content-md-center">
           <Col md="auto">
-            <Button>Inscribe yourself for session!</Button>
+            <Button
+              onClick={() => {
+                setAction(true);
+                setSignUp(!signUp);
+              }}
+            >
+              {" "}
+              {signUp ? "Unsubscribe for this study session" : "Sign up for this study session"}
+            </Button>
           </Col>
           <Col md="auto">OR</Col>
           <Col md="auto">
@@ -203,7 +278,9 @@ const ViewGroupSession = () => {
         <Modal.Header closeButton>
           <Modal.Title>Deleting Post</Modal.Title>
         </Modal.Header>
-        <Modal.Body>You are deleting your post! Are you sure you want to do this, this action can not be undone.</Modal.Body>
+        <Modal.Body>
+          You are deleting your post! Are you sure you want to do this, this action can not be undone.
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseDelete}>
             Cancel

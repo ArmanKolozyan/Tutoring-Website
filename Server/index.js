@@ -61,7 +61,7 @@ reviewRoutes(app);
 // Routes
 
 app.listen(port, () => {
-  console.log("Hey Guys!");
+  console.log("Server is running");
 });
 
 

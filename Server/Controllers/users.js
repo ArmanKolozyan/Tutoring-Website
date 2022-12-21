@@ -76,7 +76,7 @@ export const uploadImage = (req, res) => {
       // check if image size too big
       const path = req.file.path; // too big => delete image
       clearImage(path);
-      return res.status(500).json({ message: "Image dimension is too big.", data: "" })
+      return res.status(500).json({ message: "Image dimension is too big.", data: [] })
     } else {
       // image size is fine => add to database
       const q = `UPDATE users SET img = ? WHERE id = ?`;
