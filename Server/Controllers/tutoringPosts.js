@@ -136,16 +136,16 @@ export const findTutoringPosts = (req, res) => {
 
     switch (req.query.orderBy) {
       case "Price low-high":
-        order = "ORDER BY price ASC";
+        order = "ORDER BY price ASC ";
         break;
       case "Price high-low":
-        order = "ORDER BY price DESC";
+        order = "ORDER BY price DESC ";
         break;
       case "Experience high-low":
-        order = "ORDER BY experience DESC";
+        order = "ORDER BY experience DESC ";
         break;
       case "Experience low-high":
-        order = "ORDER BY experience ASC";
+        order = "ORDER BY experience ASC ";
         break;
       default:
         order = "";
@@ -180,7 +180,7 @@ export const findTutoringPosts = (req, res) => {
     "SELECT * FROM tutoring_posts WHERE description LIKE ? AND course LIKE ? AND field_of_study LIKE ? " + checkFreeTest() + checkOrder() + checkLimits(),
     values,
     (err, data) => {
-      if (err) return res.status(500).json({message: "Finding the tutoring posts failed.", data: []});
+      if (err) return console.log(err);
       return res.status(200).json({message: "", data: data});
     }
   );

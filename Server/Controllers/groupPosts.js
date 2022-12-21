@@ -101,9 +101,9 @@ export const findGroupPosts = (req, res) => {
   const startIdx = req.query.start;
   const endIdx = req.query.end;
 
+
   const checkOrder = () => {
     let order;
-
     switch (req.query.orderBy) {
       case "Price low-high":
         order = "ORDER BY price ASC";
@@ -232,6 +232,6 @@ export const registrationCount = (req, res) => {
         data: [],
       });
     }
-    return res.status(200).json({ message: "", data: data[0].amount}); 
+    return res.status(200).json({ message: "", data: data[0].amount });
   });
-}
+};
