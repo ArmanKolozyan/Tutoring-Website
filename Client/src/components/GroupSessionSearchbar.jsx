@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function Searchbar({ callback }) {
+function Searchbar({ callback, start, end, setSearching, setTotalPosts }) {
   const [keyword, setKeyword] = useState("");
   const [course, setCourse] = useState("");
   const [field, setField] = useState("");
@@ -31,15 +31,28 @@ function Searchbar({ callback }) {
             orderBy: orderBy,
             free: free,
             noRegistration: noRegistration,
+            start: start,
+            end: end,
           },
         });
-        callback(res.data.data);
+        console.log(res.data)
+        console.log(res.data.data.amount)
+        callback(res.data.data.posts);
+        setTotalPosts(res.data.data.amount);
       } catch (err) {
+        console.log("errroorr")
         console.log(err.response.data.message);
       }
     };
-    fetchPosts();
-  }, [keyword, course, field, orderBy, free, noRegistration]);
+    {
+      if (keyword === "" && course === "" && field === "" && orderBy === "" && free === false && noRegistration === false) {
+        console.log("in1")
+        setSearching(false)
+      } else {
+        setSearching(true)
+        fetchPosts();
+      }
+    }  }, [keyword, course, field, orderBy, free, noRegistration, start, end]);
 
   return (
     <div className="Searchbar">

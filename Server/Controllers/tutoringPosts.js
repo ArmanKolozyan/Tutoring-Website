@@ -175,15 +175,27 @@ export const findTutoringPosts = (req, res) => {
   }
 
 
+  let data_first;
   const values = ["%" + keyword + "%", "%" + course + "%", "%" + field + "%", freeTest];
   db.query(
     "SELECT * FROM tutoring_posts WHERE description LIKE ? AND course LIKE ? AND field_of_study LIKE ? " + checkFreeTest() + checkOrder() + checkLimits(),
     values,
     (err, data) => {
+      console.log("eeeefd");
       if (err) return console.log(err);
-      return res.status(200).json({message: "", data: data});
+      data_first = data;
     }
   );
+
+  let q2 = "SELECT COUNT(id) AS amount FROM tutoring_posts WHERE description LIKE ? AND course LIKE ? AND field_of_study LIKE ? ";
+
+  db.query(q2 + checkFreeTest() + checkOrder(), values, (err, data) => {
+    console.log("zzzz");
+    if (err) return res.status(500).json({ message: "Fetching the amount of posts failed.", data: [] });
+
+    console.log(data);
+    return res.status(200).json({ message: "", data: { posts: data_first, amount: data[0].amount } });
+  });
 };
 
 export const getTutoringPostsAmount = (req, res) => {

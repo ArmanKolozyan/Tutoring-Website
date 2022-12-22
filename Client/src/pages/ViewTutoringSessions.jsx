@@ -8,7 +8,8 @@ const ViewTutoringSessions = () => {
   const [fetching, setFetching] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
-  var postsPerPage = 3;
+  const [searching, setSearching] = useState(false);
+  var postsPerPage = 1;
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -24,8 +25,10 @@ const ViewTutoringSessions = () => {
         console.log(err.response.data.message);
       }
     };
+    if (searching === false) {
     fetchPosts();
-  }, []); // [] needs to be here so that it is only loaded when mounted, otherwise infinite loop
+    }
+  }, [searching]); // [] needs to be here so that it is only loaded when mounted, otherwise infinite loop
 
   // Handling posts on pages
   const [currentPosts, setCurrentPosts] = useState([]);
@@ -52,8 +55,11 @@ const ViewTutoringSessions = () => {
         console.log(err.response.data.message);
       }
     };
+    if (searching === false) {
+      console.log("okeuu")
     fetchPosts();
-  }, [lastPostidx]); // [] needs to be here so that it is only loaded when mounted, otherwise infinite loop
+    }
+  }, [lastPostidx, searching]); // [] needs to be here so that it is only loaded when mounted, otherwise infinite loop
 
   const separate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -63,7 +69,7 @@ const ViewTutoringSessions = () => {
 
   return (
     <div className="container mt-5">
-      <Searchbar callback = {setCurrentPosts} start = {firstPostidx} end = {lastPostidx} />
+      <Searchbar callback = {setCurrentPosts} start = {firstPostidx} end = {lastPostidx} setSearching = {setSearching} setTotalPosts = {setTotalPosts} />
       <PostCards posts={currentPosts} fetching={fetching} is_tutorcard = {true} />
       <Separator
         totalNmbr={totalPosts}

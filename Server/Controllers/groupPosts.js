@@ -101,7 +101,6 @@ export const findGroupPosts = (req, res) => {
   const startIdx = req.query.start;
   const endIdx = req.query.end;
 
-
   const checkOrder = () => {
     let order;
     switch (req.query.orderBy) {
@@ -139,7 +138,7 @@ export const findGroupPosts = (req, res) => {
 
   const checkNoRegistrattions = () => {
     if (noRegistration === "true") {
-      return "AND limited = 0";
+      return " AND limited = 0 ";
     } else {
       return "";
     }
@@ -147,12 +146,13 @@ export const findGroupPosts = (req, res) => {
 
   const checkLimits = () => {
     if (startIdx !== undefined && endIdx !== undefined && parseInt(startIdx) !== NaN && parseInt(endIdx) !== NaN) {
-      return `LIMIT ${startIdx}, ${endIdx - startIdx}`;
+      return ` LIMIT ${startIdx}, ${endIdx - startIdx}`;
     } else {
       return "";
     }
   };
 
+  let data_first;
   const values = ["%" + keyword + "%", "%" + course + "%", "%" + field + "%"];
   db.query(
     "SELECT * FROM group_posts WHERE description LIKE ? AND course LIKE ? AND faculty LIKE ?" +
@@ -162,10 +162,18 @@ export const findGroupPosts = (req, res) => {
       checkLimits(),
     values,
     (err, data) => {
-      if (err) return res.status(500).json({ message: "Finding the group posts failed.", data: [] });
-      return res.status(200).json({ message: "", data: data });
+      if (err) return console.log(err);
+      data_first = data;
     }
   );
+
+  let q2 = "SELECT COUNT(id) AS amount FROM group_posts WHERE description LIKE ? AND course LIKE ? AND faculty LIKE ? ";
+
+  db.query(q2 + checkFree() + checkNoRegistrattions() + checkOrder() + checkLimits(), values, (err, data) => {
+    if (err) return res.status(500).json({ message: "Fetching the amount of posts failed.", data: [] });
+
+    return res.status(200).json({ message: "", data: { posts: data_first, amount: data[0].amount } });
+  });
 };
 
 export const getGroupPostsAmount = (req, res) => {

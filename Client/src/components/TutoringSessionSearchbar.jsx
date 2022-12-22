@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function Searchbar({ callback, start, end }) {
+function Searchbar({ callback, start, end, setSearching, setTotalPosts}) {
   const [keyword, setKeyword] = useState("");
   const [course, setCourse] = useState("");
   const [field, setField] = useState("");
@@ -22,7 +22,7 @@ function Searchbar({ callback, start, end }) {
         const res = await axios({
           method: "get",
           withCredentials: true,
-          url: "http://localhost:8800/searchTutoringPosts/",
+          url: "http://localhost:8800/searchTutoringposts/",
           params: {
             keyword: keyword,
             course: course,
@@ -33,13 +33,27 @@ function Searchbar({ callback, start, end }) {
             end: end,
           },
         });
-        callback(res.data.data);
+        console.log(res.data)
+        callback(res.data.data.posts);
+        console.log("-")
+        console.log(res.data.data.amount);
+        console.log("-")
+        setTotalPosts(res.data.data.amount);
       } catch (err) {
         console.log(err.response.data.message);
       }
     };
-    fetchPosts();
-  }, [keyword, course, field, orderBy, freeTest]);
+    {
+      if (keyword === "" && course === "" && field === "" && orderBy === "" && freeTest === false) {
+        console.log("in")
+        setSearching(false)
+      } else {
+        console.log(keyword, course, field, orderBy, freeTest)
+        setSearching(true)
+        fetchPosts();
+      }
+    }
+  }, [keyword, course, field, orderBy, freeTest, start, end]);
 
   return (
     <div className="Searchbar">

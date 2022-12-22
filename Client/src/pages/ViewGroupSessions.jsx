@@ -8,6 +8,7 @@ const ViewTutoringSessions = () => {
   const [fetching, setFetching] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
+  const [searching, setSearching] = useState(false);
   var postsPerPage = 2;
 
   useEffect(() => {
@@ -24,8 +25,10 @@ const ViewTutoringSessions = () => {
         console.log(err.response.data.message);
       }
     };
-    fetchPosts();
-  }, []); // [] needs to be here so that it is only loaded when mounted, otherwise infinite loop
+    if (searching === false) {
+      fetchPosts();
+    }
+  }, [searching]); // [] needs to be here so that it is only loaded when mounted, otherwise infinite loop
 
   // Handling posts on pages
   const [currentPosts, setCurrentPosts] = useState([]);
@@ -34,7 +37,6 @@ const ViewTutoringSessions = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-
       try {
         const res = await axios({
           method: "get",
@@ -51,8 +53,11 @@ const ViewTutoringSessions = () => {
         console.log(err.response.data.message);
       }
     };
-    fetchPosts();
-  }, [lastPostidx]); // [] needs to be here so that it is only loaded when mounted, otherwise infinite loop
+    if (searching === false) {
+      console.log("okeuu");
+      fetchPosts();
+    }
+  }, [lastPostidx, searching]); // [] needs to be here so that it is only loaded when mounted, otherwise infinite loop
 
   const separate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -62,13 +67,15 @@ const ViewTutoringSessions = () => {
 
   return (
     <div className="container mt-5">
-      <Searchbar callback = {setCurrentPosts} start = {firstPostidx} end = {lastPostidx} />
-      <PostCards posts={currentPosts} fetching={fetching} is_tutorcard = {false}/>
-      <Separator
-        totalNmbr={totalPosts}
-        nmbrPerPage={postsPerPage}
-        separateFunc={separate}
+      <Searchbar
+        callback={setCurrentPosts}
+        start={firstPostidx}
+        end={lastPostidx}
+        setSearching={setSearching}
+        setTotalPosts={setTotalPosts}
       />
+      <PostCards posts={currentPosts} fetching={fetching} is_tutorcard={false} />
+      <Separator totalNmbr={totalPosts} nmbrPerPage={postsPerPage} separateFunc={separate} />
     </div>
   );
 };
