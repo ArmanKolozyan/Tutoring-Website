@@ -26,12 +26,6 @@ const MyProfile = () => {
                 <UpdatePicture/>
               </div>
             </Row>
-
-            <Row>
-              <div className="PasswordChangeBox">
-                <ChangePassword/>
-              </div>
-            </Row>
           </Col>
         </Row>
       </Container>

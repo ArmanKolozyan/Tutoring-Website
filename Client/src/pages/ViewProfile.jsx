@@ -92,12 +92,12 @@ const ViewProfile = () => {
                 <Form.Label>Contact Information:</Form.Label>
                 <Col md="auto">
                 <FloatingLabel label="Phonenumber">
-                    <Form.Control as="textarea" disabled value={PhoneNumber} />
+                    <Form.Control as="textarea" readOnly value={PhoneNumber} style={{"resize": "none"}} />
                   </FloatingLabel>
                 </Col>
                 <Col md="auto">
-                  <FloatingLabel label="Emailadress">
-                    <Form.Control as="textarea" disabled value={EmailAdress} />
+                  <FloatingLabel label="Email address">
+                    <Form.Control as="textarea" readOnly value={EmailAdress} style={{"resize": "none"}} />
                   </FloatingLabel>
                 </Col>
               </Row>

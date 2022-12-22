@@ -75,7 +75,7 @@ export const updateGroupPost = (req, res) => {
   ];
 
   db.query(q, values, (err, data) => {
-    if (err) return res.status(500).json({ message: "Updating the group post failed.", data: [] });
+    if (err) return console.log(err);
     return res.status(200).json({ message: "", data: post_id });
   });
 };
@@ -172,7 +172,7 @@ export const findGroupPosts = (req, res) => {
   db.query(q2 + checkFree() + checkNoRegistrattions() + checkOrder() + checkLimits(), values, (err, data) => {
     if (err) return res.status(500).json({ message: "Fetching the amount of posts failed.", data: [] });
 
-    return res.status(200).json({ message: "", data: { posts: data_first, amount: data[0].amount } });
+    return res.status(200).json({ message: "", data: { posts: data_first, amount: data[0]?.amount } });
   });
 };
 

@@ -67,6 +67,7 @@ const ViewTutoringSessions = () => {
   return (
     <div className="container mt-5">
       <Searchbar
+      separate={separate}
         callback={setCurrentPosts}
         start={firstPostidx}
         end={lastPostidx}

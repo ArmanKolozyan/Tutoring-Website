@@ -9,7 +9,7 @@ const ViewTutoringSessions = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
   const [searching, setSearching] = useState(false);
-  var postsPerPage = 1;
+  var postsPerPage = 3;
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -69,7 +69,7 @@ const ViewTutoringSessions = () => {
 
   return (
     <div className="container mt-5">
-      <Searchbar callback = {setCurrentPosts} start = {firstPostidx} end = {lastPostidx} setSearching = {setSearching} setTotalPosts = {setTotalPosts} />
+      <Searchbar separate = {separate} callback = {setCurrentPosts} start = {firstPostidx} end = {lastPostidx} setSearching = {setSearching} setTotalPosts = {setTotalPosts} />
       <PostCards posts={currentPosts} fetching={fetching} is_tutorcard = {true} />
       <Separator
         totalNmbr={totalPosts}

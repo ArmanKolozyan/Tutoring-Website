@@ -51,11 +51,10 @@ app.post('/login', function(req, res, next) {
     },
   });
 
-  const maxSize = 1024 * 1024 * 5
   const upload = multer({
     storage: storage,
     limits: {
-      fileSize: maxSize,
+      fileSize: 1024 * 1024 * 50,
     },
     fileFilter: fileFilter,
   });

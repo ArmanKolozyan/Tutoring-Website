@@ -60,11 +60,11 @@ function ProfileInfo() {
 
   const options = [
     {
-      value: "Science and Bio-engineering Sciences",
-      label: "Science and Bio-engineering Sciences",
+      value: "Computer Science",
+      label: "Computer Science",
     },
-    { value: "Medicine and Pharmacy", label: "Medicine and Pharmacy" },
-    { value: "Law and Criminology", label: "Law and Criminology" },
+    { value: "Biology", label: "Biology" },
+    { value: "Chemistry", label: "Chemistry" },
   ];
 
   useEffect(() => {
@@ -123,7 +123,7 @@ function ProfileInfo() {
                 type="text"
                 pattern="\d*"
                 maxlength="12"
-                value={"0422913456"}
+                value={""}
               />
             </FloatingLabel>
           </Col>
@@ -132,7 +132,7 @@ function ProfileInfo() {
         <Form.Label>
           <b>Educational information</b>
         </Form.Label>
-        <Form.Label>Select the field of studies you have taken</Form.Label>
+        <Form.Label>Select the coursesyou have taken</Form.Label>
         <Row className="justify-content-md-center">
           <Col>
             <FloatingLabel controlId="Fields_of_study_followedINput">

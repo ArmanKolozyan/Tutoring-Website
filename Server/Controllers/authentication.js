@@ -10,11 +10,12 @@ export const register = (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
   let birthDate = req.body.birthDate;
-  let domain = email.split('-')[1];
+  let domain = email.split('@')[1];
 
   db.query(q, [req.body.email], (err, data) => {
     if (err) res.status(500).json(err);
     if (data.length) return res.status(409).json({ message: "The provided email already exists!", data: [] });
+    console.log(domain)
     if (domain !== "vub.be") return res.status(500).json({ message: "The provided email is not a vub email!", data: [] })
 
     const q1 = "INSERT INTO users(`firstname`, `lastname`, `email`,`password`, `birthDate`) VALUES (?)";

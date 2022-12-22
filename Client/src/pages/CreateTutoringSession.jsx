@@ -164,7 +164,7 @@ const CreateTutoringSession = () => {
                 <Form.Check
                   checked={checkFree()}
                   type="checkbox"
-                  label="Free Test-post"
+                  label="Free Test-session"
                   className="checkbox"
                   onChange={(e) => setTest(e.target.checked)}
                 />

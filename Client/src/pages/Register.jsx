@@ -17,8 +17,8 @@ const Register = () => {
   const [registerPassword, setRegisterPassword] = useState("");
   const [birthDate, setBirthDate] = useState("");
   // const [field, setField] = useState();
-  const { error } = useContext(PasswordContext);
-  const [showError, setShowError] = useState(false)
+  const [message, setMessage] = useState();
+  const [showMessage, setShowMessage] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,18 +34,20 @@ const Register = () => {
           // fieldOfStudy: field,
         },
         url: "http://localhost:8800/register",
+
       });
+      setMessage("You are registered!")
     } catch (err) {
-      console.log(err.response.data.message);
+      setMessage(err.response.data.message);
     }
   };
 
   useEffect(() => {
-    console.log(error)
-    if (error !== false) {
-    setShowError(true)
+    console.log(message)
+    if (message !== false) {
+    setShowMessage(true)
     }
-}, [error]);
+}, [message]);
 
   return (
     <div className="RegisterForm">
@@ -76,8 +78,8 @@ const Register = () => {
             onChange={(e) => setRegisterPassword(e.target.value)}
           ></input>
           <button type="submit">Register</button>
-          {showError ? 
-        error
+          {showMessage ? 
+        message
         :
         ""}          <span>Already have an account?</span>
           <Link className="linkStyle" to="/login">

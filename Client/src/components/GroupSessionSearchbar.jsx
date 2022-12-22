@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function Searchbar({ callback, start, end, setSearching, setTotalPosts }) {
+function Searchbar({ separate, callback, start, end, setSearching, setTotalPosts }) {
   const [keyword, setKeyword] = useState("");
   const [course, setCourse] = useState("");
   const [field, setField] = useState("");
@@ -47,6 +47,7 @@ function Searchbar({ callback, start, end, setSearching, setTotalPosts }) {
       if (keyword === "" && course === "" && field === "" && orderBy === "" && free === false && noRegistration === false) {
         setSearching(false)
       } else {
+        separate(1)
         setSearching(true)
         fetchPosts();
       }

@@ -62,20 +62,24 @@ const clearImage = (filePath) => {
   const __dirname = path.resolve();
   filePath = path.join(__dirname, "../images/", filePath);
   fs.unlink(filePath, (err) => {
-    res.status(500).json({ message: "Deleting the image with unsupported dimensions failed.", data: [] });
+   // res.status(500).json({ message: "Deleting the image with unsupported dimensions failed.", data: [] });
   });
 };
 
 export const uploadImage = (req, res) => {
+  console.log("ok")
   if (typeof req.file !== "undefined") {
     const image = req.file.filename;
     const dimensions = imageSize("../client/public/uploads/" + image);
-    if (dimensions.width > 600 || dimensions.height > 300) {
+    if (dimensions.width > 800 || dimensions.height > 600) {
       // check if image size too big
+      console.log(dimensions)
       const path = req.file.path; // too big => delete image
       clearImage(path);
       return res.status(500).json({ message: "Image dimension is too big.", data: [] })
+      console.log("blook")
     } else {
+      console.log("odsdsk")
       // image size is fine => add to database
       const q = `UPDATE users SET img = ? WHERE id = ?`;
       const values = [image, req.user[0].id];

@@ -23,14 +23,13 @@ const ViewGroupSession = () => {
   const handleShow = () => setShow(true);
 
   const phonenumber = "+32 423 32 34 54";
-  const email = "Stoffel@hotmail.be";
 
   function copyPhonenumber() {
     navigator.clipboard.writeText(phonenumber);
   }
 
   function copyEmail() {
-    navigator.clipboard.writeText(email);
+    navigator.clipboard.writeText(user.email);
   }
   //
 
@@ -246,9 +245,9 @@ const ViewGroupSession = () => {
                 tutorName={user?.firstname?.concat(" ").concat(user.lastname)} // VRAAG: kan dit mooier?
                 tutorText={user?.shortIntro}
                 tutorAge={user?.birthDate ? user.birthDate : ""}
-                AvgRating={3} // TO DOOO
                 ProfileLink={`/viewprofile/${user?.id}`}
                 PhotoLink={`../uploads/${user?.img}`}
+                tutorID={user?.id}
               />
               {currentUser.id === post.userid && (
                 <>
@@ -272,8 +271,12 @@ const ViewGroupSession = () => {
           <Col md="auto">
             <Button
               onClick={() => {
+                if (user.id === currentUser.id) {
+
+                } else {
                 setAction(true);
                 setSignUp(!signUp);
+                }
               }}
             >
               {" "}
@@ -300,7 +303,7 @@ const ViewGroupSession = () => {
           <p>
             {" "}
             <br />
-            His/her Email adress is : {email}
+            His/her Email adress is : {user.email}
           </p>
           <Button variant="secondary" onClick={copyEmail}>
             Copy email

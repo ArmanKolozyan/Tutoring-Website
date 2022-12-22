@@ -157,9 +157,9 @@ const ViewTutoringSession = () => {
                 tutorName={user?.firstname?.concat(" ").concat(user.lastname)} // VRAAG: kan dit mooier?
                 tutorText={user?.shortIntro}
                 tutorAge={user?.birthDate ? user.birthDate : ""}
-                AvgRating={3} // TO DOOO
                 ProfileLink={`/viewprofile/${user?.id}`}
                 PhotoLink={`../uploads/${user?.img}`}
+                tutorID={user?.id}
               />
               {currentUser.id === post.uid && (
                 <>
