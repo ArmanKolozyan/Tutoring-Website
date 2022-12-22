@@ -68,15 +68,6 @@ const GroupCard = ({ post }) => {
               </Row>
 
               <Row className="justify-content-md-center">
-                <Col md="auto">
-                  <div className="stars">
-                    <span className="fa fa-star checked"></span>
-                    <span className="fa fa-star checked"></span>
-                    <span className="fa fa-star checked"></span>
-                    <span className="fa fa-star"></span>
-                    <span className="fa fa-star"></span>
-                  </div>
-                </Col>
 
                 <Col>
                   <p>

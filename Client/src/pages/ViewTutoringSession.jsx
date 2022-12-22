@@ -191,9 +191,11 @@ const ViewTutoringSession = () => {
 
         <Row className="justify-content-md-center">
           <Col md="auto">
+          {(post.uid !== currentUser.id) ? 
             <div className="create-review">
               <CreateReview id={postId} type={reviewTypes.Post} />
             </div>
+          : ""}
             <div className="reviews-list">
               <ViewReviews id={postId} />
             </div>
