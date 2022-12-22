@@ -15,6 +15,7 @@ import { TutorMap, mapRef, giveRegions } from "../components/TutorMap";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ViewMap } from "../components/ViewMap";
 import { useEffect } from "react";
+import getUserLocation from "../components/GetUserLocation";
 
 const CreateTutoringSession = () => {
   const post = useLocation().state;
@@ -24,10 +25,13 @@ const CreateTutoringSession = () => {
   const [field, setField] = useState(post?.field_of_study || "");
   const [exp, setExp] = useState(post?.experience || "");
   const [price, setPrice] = useState(post?.price || "");
-  const [test, setTest] = useState(post?.free_test || "");
+  const [test, setTest] = useState(post?.free_test || "0");
   const [desc, setDesc] = useState(post?.description || "");
 
   const { currentUser } = useContext(PasswordContext);
+
+  const location = getUserLocation();
+
 
   const [regions, setRegions] = useState([]); // must be initialised by an empty array! otherwise not possible to call 'map'
 
@@ -36,6 +40,16 @@ const CreateTutoringSession = () => {
       return true;
     } else {
       return false;
+    }
+  };
+
+  const jumpToUserLocation = () => {
+    console.log("huhuhu")
+    if (location.loaded && !location.error) {
+      const newZoom = 16;
+      mapRef.current.flyTo([location.coordinates.lat, location.coordinates.lng], newZoom, { animate: true });
+    } else {
+      alert(location.error.message);
     }
   };
 
@@ -128,7 +142,7 @@ const CreateTutoringSession = () => {
               <Col md="auto">
                 <Form.Select required value={course} onChange={(e) => setCourse(e.target.value)}>
                   <option disabled={true} selected value="">
-                    Select the subject
+                    Select the course
                   </option>
                   <option value="Computer Systems">Computer Systems</option>
                   <option value="Discrete Maths">Discrete Maths</option>
@@ -191,6 +205,17 @@ const CreateTutoringSession = () => {
           <Col md="auto">Draw the regions where you can teach</Col>
         </Row>
         <TutorMap regions={regions} />
+        <div className="row">
+        <div className="col d-flex justify-content-center">
+          <Button
+            className="btn btn-primary small"
+            style={{ width: "fit-content", height: "fit-content" }}
+            onClick={jumpToUserLocation}
+          >
+            Locate Me
+          </Button>
+        </div>
+      </div>
         <Row className="justify-content-md-center">
           <Button type="submit">Submit</Button>
         </Row>

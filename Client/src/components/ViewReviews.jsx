@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ReviewsList from "./ReviewsList";
 
+/**
+ * COMPONENT FOR VIEWING ALL THE REVIEWS OF A SINGLE POST
+ * BY PROVIDING AS ARGUMENT THE ID OF THE BEST.
+ */
 const ViewReviews = ({ id }) => {
   const [reviews, setReviews] = useState([]);
   const [fetching, setFetching] = useState(true);
@@ -12,6 +16,7 @@ const ViewReviews = ({ id }) => {
   const lastPostidx = currentPage * postsPerPage;
   const firstPostidx = lastPostidx - postsPerPage;
 
+  // fetching the reviews
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -31,6 +36,7 @@ const ViewReviews = ({ id }) => {
 
   const currentReviews = reviews.slice(firstPostidx, lastPostidx); // to wrap into array
 
+  // when the user presses on one of the pagination pages, we move to that page
   const separate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };

@@ -6,6 +6,10 @@ import axios from "axios";
 import { PasswordContext } from "../context/PasswordContext";
 import { useContext } from "react";
 
+/**
+ * COMPONENT FOR UPDATING THE PROFILE PICTURE OF THE USER 
+ * (WITH LIVE PREVIEW)
+ */
 function UpdatePicture() {
   const [profilePicture, setProfilePicture] = useState("");
   const [fileInputState, setFileInputState] = useState("");
@@ -14,10 +18,10 @@ function UpdatePicture() {
   const [errMsg, setErrMsg] = useState("");
 
   const { currentUser } = useContext(PasswordContext);
-  const { setCurrentUser } = useContext(PasswordContext);
 
   const [preview, setPreview] = useState((currentUser?.img !== null) ? `../uploads/${currentUser.img}` : false);
 
+  // make preview of the, not yet fully, uploaded image
   const makePreview = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -50,14 +54,10 @@ function UpdatePicture() {
     }
   };
 
-  //om frontend te testen
-  // ProfilePicture =
-  //  "https://scontent-bru2-1.xx.fbcdn.net/v/t31.18172-1/10945869_121577144882309_2985454743005061280_o.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=7206a8&_nc_ohc=i4H20OgZaf8AX_yFfIP&_nc_ht=scontent-bru2-1.xx&oh=00_AfCbLBH9ApKn1jSQ1inEoeVN6U787gUNyVcO8EtlKqQBEQ&oe=63A97816";
-
   return (
     <div>
       <Form onSubmit={handleSubmitFile}>
-        <Card style={{ width: "20rem" }}> {/* MISSCHIEN BEST VW GEBRUIKEN IPV REM*/}
+        <Card style={{ width: "20rem" }}> 
         { preview ?
           <Card.Img variant="top" src={ preview} />
           : ""}

@@ -245,8 +245,8 @@ const ViewGroupSession = () => {
                 tutorName={user?.firstname?.concat(" ").concat(user.lastname)} // VRAAG: kan dit mooier?
                 tutorText={user?.shortIntro}
                 tutorAge={user?.birthDate ? user.birthDate : ""}
-                ProfileLink={`/viewprofile/${user?.id}`}
-                PhotoLink={`../uploads/${user?.img}`}
+                profileLink={`/viewprofile/${user?.id}`}
+                pictureSrc={`../uploads/${user?.img}`}
                 tutorID={user?.id}
               />
               {currentUser.id === post.userid && (

@@ -1,6 +1,10 @@
 import React from "react";
 import Logo from "../images/Logo.png";
 
+
+/**
+ * OUR LOGO
+ */
 const Trademark = () => {
   return (
     <div className="trademark">

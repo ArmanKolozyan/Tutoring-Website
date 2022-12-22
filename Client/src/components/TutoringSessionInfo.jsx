@@ -1,28 +1,31 @@
 import React from "react"
 
+/**
+ * INFORMATION ABOUT THE POST SHOWN WHEN VIEWING A PARTICULAR TUTORING POST
+ */
 function TutoringSessionInfo(props) {
-  let tutoringPostName = props.tutoringPostName;
-  let tutoringPostFac = props.tutoringPostFac;
-  let tutoringPostPrice = props.tutoringPostPrice;
-  let tutoringPostFreeTrial = props.tutoringPostFreeTrial;
+  let title = props.title;
+  let faculty = props.faculty;
+  let price = props.price;
+  let freeTrial = props.freeTrial;
   let experience = props.experience;
 
   let freetrialpos = "no"
-  if(tutoringPostFreeTrial) {
+  if(freeTrial) {
     freetrialpos = "a"
   }
 
   return (
     <div>
-    <h5> {tutoringPostName} </h5> 
-    <h6>This course is of the faculty {tutoringPostFac} </h6>
+    <h5> {title} </h5> 
+    <h6>This course is of the faculty {faculty} </h6>
     <p>
     The tutor has {experience} years of experience with this subject.
     </p>
 
 
     <p>
-    The price of a tutoring post would be {tutoringPostPrice} euro's per hour, and there is {freetrialpos} possiblity for a free trial of the tutoring session.
+    The price of a tutoring post would be {price} euro's per hour, and there is {freeTrial} possiblity for a free trial of the tutoring session.
     </p>
     </div>
   )

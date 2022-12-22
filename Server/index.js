@@ -12,6 +12,11 @@ import { reviewRoutes } from "./Routes/reviewRoutes.js";
 import { createClient } from 'redis';
 import connectRedis from 'connect-redis';
 import dotenv from 'dotenv'
+import path from 'path';
+import {fileURLToPath} from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 const port = 8800;
@@ -45,6 +50,7 @@ app.use(
 app.use(cookieParser("secretcode"));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use("/doc", express.static(__dirname + "/doc"));
 config(passport);
 
 

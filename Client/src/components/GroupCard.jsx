@@ -4,12 +4,15 @@ import axios from "axios";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 
+/**
+ * CARDS USED WHEN DISPLAYING POSTS ON MAIN GROUP SESSIONS PAGE (UNDER THE SEARCH)
+ */
 const GroupCard = ({ post }) => {
   const [user, setUser] = useState({});
   const [registrations, setRegistrations] = useState();
 
+  // getting the author information
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,6 +31,7 @@ const GroupCard = ({ post }) => {
     }
   }, []);
 
+  // getting the number of registrations
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -68,7 +72,6 @@ const GroupCard = ({ post }) => {
               </Row>
 
               <Row className="justify-content-md-center">
-
                 <Col>
                   <p>
                     {" "}

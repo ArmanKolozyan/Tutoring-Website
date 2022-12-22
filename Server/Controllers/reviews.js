@@ -33,13 +33,27 @@ export const getSinglePostReviews = (req, res) => {
 };
 
 export const getAverageRating = (req, res) => {
-  const author_id = req.query.tutor_id;
-  const q = "SELECT AVG(rating) as average FROM post_reviews r JOIN tutoring_posts p ON r.postid = p.id WHERE p.uid = ?";
+  const tutor_id = req.query.tutor_id;
+  const q =
+    "SELECT AVG(rating) as average FROM post_reviews r JOIN tutoring_posts p ON r.postid = p.id WHERE p.uid = ?";
 
-  console.log(req.query)
-  db.query(q, [author_id], (err, data) => {
-    if (err) return res.status(500).json({ message: "Fetching user rating failed.", data: [] })
-    console.log("aa")
+  console.log("author");
+  console.log(tutor_id)
+  db.query(q, [tutor_id], (err, data) => {
+    if (err) return res.status(500).json({ message: "Fetching user average rating failed.", data: [] });
+    console.log("aa");
+    return res.status(200).json({ message: "", data: Math.round(data[0].average) });
+  });
+};
+
+export const getAveragePostRating = (req, res) => {
+  const post_id = req.query.post_id;
+  const q = "SELECT AVG(rating) as average FROM post_reviews WHERE postid = ?";
+  console.log("uuuu");
+  db.query(q, [post_id], (err, data) => {
+    if (err) return res.status(500).json({ message: "Fetching post average rating failed.", data: [] });
+    console.log("aa");
+    console.log(data);
     return res.status(200).json({ message: "", data: Math.round(data[0].average) });
   });
 };

@@ -132,10 +132,10 @@ const ViewTutoringSession = () => {
             <Row className="justify-content-md-center">
               <div className="TutoringPostInfo">
                 <TutoringSessionInfo
-                  tutoringPostName={post.course}
-                  tutoringPostFac={post.field_of_study}
-                  tutoringPostPrice={post.price}
-                  tutoringPostFreeTrial={post.free_test === 1 ? true : false}
+                  title={post.course}
+                  faculty={post.field_of_study}
+                  price={post.price}
+                  freeTrial={post.free_test === 1 ? true : false}
                   experience={post.experience}
                 />
               </div>
@@ -157,8 +157,8 @@ const ViewTutoringSession = () => {
                 tutorName={user?.firstname?.concat(" ").concat(user.lastname)} // VRAAG: kan dit mooier?
                 tutorText={user?.shortIntro}
                 tutorAge={user?.birthDate ? user.birthDate : ""}
-                ProfileLink={`/viewprofile/${user?.id}`}
-                PhotoLink={`../uploads/${user?.img}`}
+                profileLink={`/viewprofile/${user?.id}`}
+                pictureSrc={`../uploads/${user?.img}`}
                 tutorID={user?.id}
               />
               {currentUser.id === post.uid && (

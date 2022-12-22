@@ -8,6 +8,10 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { PasswordContext } from "../context/PasswordContext";
 
+/**
+ * THE WELCOME SCREEN ON THE MAIN PAGE
+ * WITH THE INTRODUCTION TEXT
+ */
 const Welcome = () => {
   const { currentUser } = useContext(PasswordContext);
   return (
@@ -33,8 +37,8 @@ const Welcome = () => {
           </div>
           <div class="col-xl-4 mx-auto mb-1">
             <p>
-              Students can search for tutoring posts on subjects they are struggling with. They can also create study-together
-              events with other students to discuss subject matters or study together. And much more!
+              Students can search for tutoring posts on subjects they are struggling with. They can also create
+              study-together events with other students to discuss subject matters or study together. And much more!
             </p>
           </div>
         </div>

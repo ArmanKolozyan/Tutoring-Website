@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Row from "react-bootstrap/Row";
@@ -9,13 +8,24 @@ import Col from "react-bootstrap/Col";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function Searchbar({ separate, callback, start, end, setSearching, setTotalPosts}) {
+/**
+ * SEARCH BAR FOR TUTORING SESSIONS
+ * THE ARGUMENTS:
+ * seperate => for the separation of content into pages
+ * callback => function that is called when new posts are fetched based on the search fields
+ * start & end indices
+ * setSearching to indicate whether the user is using a search field at the moment
+ * setTotalPosts to indicate how many posts are now distributed over the pages
+ * (technically they are only available when moving to that page, because pagination happens in back-end)
+ */
+function Searchbar({ separate, callback, start, end, setSearching, setTotalPosts }) {
   const [keyword, setKeyword] = useState("");
   const [course, setCourse] = useState("");
   const [field, setField] = useState("");
   const [orderBy, setOrderBy] = useState("");
   const [freeTest, setFreeTest] = useState(false);
 
+  // calling back-end to filter the posts
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -39,11 +49,12 @@ function Searchbar({ separate, callback, start, end, setSearching, setTotalPosts
         console.log(err.response.data.message);
       }
     };
-    {
+    { // if all filters are on default
       if (keyword === "" && course === "" && field === "" && orderBy === "" && freeTest === false) {
-        setSearching(false)
+        setSearching(false);
       } else {
-        setSearching(true)
+        separate(1); // we move to page one before filtering
+        setSearching(true);
         fetchPosts();
       }
     }
@@ -65,7 +76,6 @@ function Searchbar({ separate, callback, start, end, setSearching, setTotalPosts
 
             <ListGroup.Item>
               <Row className="justify-content-md-center">
-
                 <Col md="auto">
                   <FloatingLabel controlId="FieldInput" label="Select a Field">
                     <Form.Select onChange={(e) => setField(e.target.value)}>

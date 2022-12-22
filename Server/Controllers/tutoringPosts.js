@@ -72,7 +72,7 @@ const insertRegions = (regions, post_id) => {
 
   regions.forEach((region) => {
     db.query(q2, [post_id, region.latitude, region.longitude, region.radius], (err, data) => {
-      if (err) res.status(500).json({message: "Inserting the regions failed.", data: []});
+      if (err) res.status(500).json({message: "Inserting the new regions failed.", data: []});
     });
   });
 };
@@ -104,6 +104,7 @@ export const updateTutoringPost = (req, res) => {
   ];
 
   db.query(q, values, (err, data) => {
+    console.log(values)
     if (err) return res.status(500).json({message: "Updating the tutoring post failed.", data: []});
   });
   insertRegions(req.body.regions, post_id);

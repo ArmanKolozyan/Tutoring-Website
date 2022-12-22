@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Row from "react-bootstrap/Row";
@@ -9,7 +8,19 @@ import Col from "react-bootstrap/Col";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+
+/**
+ * SEARCH BAR FOR GROUP SESSIONS
+ * THE ARGUMENTS:
+ * seperate => for the separation of content into pages
+ * callback => function that is called when new posts are fetched based on the search fields
+ * start & end indices
+ * setSearching to indicate whether the user is using a search field at the moment
+ * setTotalPosts to indicate how many posts are now distributed over the pages
+ * (technically they are only available when moving to that page, because pagination happens in back-end)
+ */
 function Searchbar({ separate, callback, start, end, setSearching, setTotalPosts }) {
+  // the search fields
   const [keyword, setKeyword] = useState("");
   const [course, setCourse] = useState("");
   const [field, setField] = useState("");
@@ -17,6 +28,7 @@ function Searchbar({ separate, callback, start, end, setSearching, setTotalPosts
   const [free, setFree] = useState(false);
   const [noRegistration, setNoRegistration] = useState(false);
 
+  // calling back-end to filter the posts
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -35,8 +47,6 @@ function Searchbar({ separate, callback, start, end, setSearching, setTotalPosts
             end: end,
           },
         });
-        console.log(res.data)
-        console.log(res.data.data.amount)
         callback(res.data.data.posts);
         setTotalPosts(res.data.data.amount);
       } catch (err) {
@@ -44,14 +54,22 @@ function Searchbar({ separate, callback, start, end, setSearching, setTotalPosts
       }
     };
     {
-      if (keyword === "" && course === "" && field === "" && orderBy === "" && free === false && noRegistration === false) {
-        setSearching(false)
+      if ( // if all filters are on default
+        keyword === "" &&
+        course === "" &&
+        field === "" &&
+        orderBy === "" &&
+        free === false &&
+        noRegistration === false
+      ) {
+        setSearching(false); 
       } else {
-        separate(1)
-        setSearching(true)
+        separate(1); // we move to page one before filtering
+        setSearching(true);
         fetchPosts();
       }
-    }  }, [keyword, course, field, orderBy, free, noRegistration, start, end]);
+    }
+  }, [keyword, course, field, orderBy, free, noRegistration, start, end]);
 
   return (
     <div className="Searchbar">
@@ -69,7 +87,6 @@ function Searchbar({ separate, callback, start, end, setSearching, setTotalPosts
 
             <ListGroup.Item>
               <Row className="justify-content-md-center">
-
                 <Col md="auto">
                   <FloatingLabel controlId="FieldInput" label="Select a Field">
                     <Form.Select onChange={(e) => setField(e.target.value)}>

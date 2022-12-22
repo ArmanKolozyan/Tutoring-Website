@@ -6,6 +6,12 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 
+
+/**
+ * COMPONENT TO UPDATE THE PASSWORD OF THE USER
+ * Back end of this component is not implmented, but the React component 
+ * is provided here if another developer might be interested in adding that.
+ */
 function ChangePassword(props) {
   return (
     <div>

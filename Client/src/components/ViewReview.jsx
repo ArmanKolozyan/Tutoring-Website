@@ -1,15 +1,14 @@
-// ZICH INSPIREREN VAN DE HOME PAGE MAAR ZONDER DE IMAGE EN EEN DUIDELIJK SPLITSING VAN DE VERSCHILLENDE REVIEWS
 import React from "react";
 import Row from "react-bootstrap/Row";
 import { FaStar } from "react-icons/fa";
+import {colors} from "../constants.js"
 
+/**
+ * COMPONENT FOR VIEWING A SINGLE REVIEW 
+ * BY PROVIDING AS ARGUMENT THE REVIEW FROM THE DATABASE.
+ */
 const ViewReview = ({review}) => {
   const stars = Array(5).fill(0);
-
-  const colors = {
-    ourBlue: "#1e328d",
-    ourOrange: "#fc3e03",
-  };
 
   return (
     <div className="Review">
@@ -24,7 +23,7 @@ const ViewReview = ({review}) => {
         <Row>
           <div className="stars">
             {stars.map((_, index) => {
-              // gaat elk element van de lijst "stars" naar een ster mappen
+              // maps each element of the stars list to a star
               return (
                 <FaStar
                   key={index}

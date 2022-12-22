@@ -9,26 +9,32 @@ import { useContext } from "react";
 import Select from "react-select";
 import { useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
 
+
+/**
+ * COMPONENT FOR THE LOGGED IN USER THAT VIEWS ITS PROFILE
+ * @returns 
+ */
 function ProfileInfo() {
   const { currentUser } = useContext(PasswordContext);
-  const { setCurrentUser } = useContext(PasswordContext);
-
-
 
   const [firstName, setFirstName] = useState(currentUser.firstname);
   const [lastName, setLastName] = useState(currentUser.lastname);
-  const [birthdate, setBirthDate] = useState(
-    currentUser.birthDate.slice(0, 10)
-  );
+  const [birthdate, setBirthDate] = useState(currentUser.birthDate.slice(0, 10));
   const [intro, setIntro] = useState(currentUser.intro);
   const [shortIntro, setShortIntro] = useState(currentUser.shortIntro);
   const [studies, setStudies] = useState({});
 
+  const options = [
+    {
+      value: "Computer Science",
+      label: "Computer Science",
+    },
+    { value: "Biology", label: "Biology" },
+    { value: "Chemistry", label: "Chemistry" },
+  ];
 
-
-
+  // update user information
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -51,22 +57,13 @@ function ProfileInfo() {
       currentUser.birthDate = birthdate;
       currentUser.intro = intro;
       currentUser.shortIntro = shortIntro;
-      localStorage.setItem("user", JSON.stringify(currentUser));
-  }
-    catch (err) {
+      localStorage.setItem("user", JSON.stringify(currentUser)); // make the update in the local storage (front-end)
+    } catch (err) {
       console.log(err);
     }
   };
 
-  const options = [
-    {
-      value: "Computer Science",
-      label: "Computer Science",
-    },
-    { value: "Biology", label: "Biology" },
-    { value: "Chemistry", label: "Chemistry" },
-  ];
-
+  // get the studies of the user
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -91,6 +88,8 @@ function ProfileInfo() {
     fetchData();
   }, [currentUser.id]);
 
+
+  // the parts to update a particular information
   return (
     <div>
       <Form onSubmit={(event) => handleSubmit(event)}>
@@ -119,12 +118,7 @@ function ProfileInfo() {
           </Col>
           <Col>
             <FloatingLabel controlId="PhoneNumberInput" label="PhoneNumber">
-              <Form.Control
-                type="text"
-                pattern="\d*"
-                maxlength="12"
-                value={""}
-              />
+              <Form.Control type="text" pattern="\d*" maxlength="12" value={""} />
             </FloatingLabel>
           </Col>
         </Row>
@@ -132,7 +126,7 @@ function ProfileInfo() {
         <Form.Label>
           <b>Educational information</b>
         </Form.Label>
-        <Form.Label>Select the coursesyou have taken</Form.Label>
+        <Form.Label>Select the field of studies you have taken</Form.Label>
         <Row className="justify-content-md-center">
           <Col>
             <FloatingLabel controlId="Fields_of_study_followedINput">

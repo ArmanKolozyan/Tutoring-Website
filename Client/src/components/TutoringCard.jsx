@@ -4,11 +4,19 @@ import axios from "axios";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 
+
+/**
+ * CARDS USED WHEN DISPLAYING POSTS ON MAIN TUTORING PAGE (UNDER THE SEARCH)
+ */
 const TutoringCard = ({ post }) => {
-  const [user, setUser] = useState({});
+  const stars = Array(5).fill(0);
 
+  const [user, setUser] = useState({});
+  const [rating, setRating] = useState({});
+  const [avgRating, setAvgRating] = useState();
+
+  // getting the author information
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,6 +34,32 @@ const TutoringCard = ({ post }) => {
       fetchData();
     }
   }, []);
+
+  // getting the average rating of the post
+  useEffect(() => {
+    const fetchRating = async () => {
+      try {
+        const res = await axios({
+          method: "get",
+          withCredentials: true,
+          url: "http://localhost:8800/postRatingAverage/",
+          params: {
+            post_id: post.id,
+          },
+        });
+        setAvgRating(res.data.data);
+        console.log("seeehhshshs");
+      } catch (err) {
+        console.log(err.response.data.message);
+      }
+    };
+    console.log("seeehhshshs");
+    if (post !== undefined) {
+      fetchRating();
+    }
+    console.log("hhalllo")
+  }, [post]);
+
   return (
     <div className="post" key={post.id}>
       <link
@@ -36,27 +70,37 @@ const TutoringCard = ({ post }) => {
       <Container>
         <Row className="justify-content-md-center">
           <Row className="justify-content-md-center">
-            <Col >
+            <Col>
               <Row className="justify-content-md-center">
                 <Link className="link" to={`/tutoringpost/${post.id}`}>
-                  <h1 style={{ color: "black", "overflow-wrap": "break-word"}}>{post.course}</h1>
+                  <h1 style={{ color: "black", "overflow-wrap": "break-word" }}>{post.course}</h1>
                 </Link>
               </Row>
 
               <Row className="justify-content-md-center">
-
-
                 <Col>
-                <p> The price of this course is :</p>
-                <p> <span style={{ fontWeight: 'bold' }}> € {post.price}</span> </p>
+                  <p> Average rating :</p>
+                  <p>
+                    {" "}
+                    <span style={{ fontWeight: "bold" }}> {avgRating}</span>{" "}
+                  </p>
                 </Col>
 
                 <Col>
-                <p> Years of experience :</p>
-                <p> <span style={{ fontWeight: 'bold' }}> {post.experience}</span> </p>
+                  <p> The price of this course is :</p>
+                  <p>
+                    {" "}
+                    <span style={{ fontWeight: "bold" }}> € {post.price}</span>{" "}
+                  </p>
                 </Col>
 
-
+                <Col>
+                  <p> Years of experience :</p>
+                  <p>
+                    {" "}
+                    <span style={{ fontWeight: "bold" }}> {post.experience}</span>{" "}
+                  </p>
+                </Col>
               </Row>
 
               <Row className="justify-content-md-center">
@@ -73,11 +117,23 @@ const TutoringCard = ({ post }) => {
             </Col>
 
             <Col md="auto">
-            {
-            user.img ?
-              <img style={{"margin-left": "auto", "max-width": "80%", display: "block", height: "auto", "border-radius": "50px" }} src={`../uploads/${user?.img}`} key={user.img} alt="" />
-            : ""
-            }            </Col>
+              {user.img ? (
+                <img
+                  style={{
+                    "margin-left": "auto",
+                    "max-width": "80%",
+                    display: "block",
+                    height: "auto",
+                    "border-radius": "50px",
+                  }}
+                  src={`../uploads/${user?.img}`}
+                  key={user.img}
+                  alt=""
+                />
+              ) : (
+                ""
+              )}{" "}
+            </Col>
           </Row>
         </Row>
       </Container>
