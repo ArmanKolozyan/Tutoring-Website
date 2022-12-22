@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Searchbar from "../components/TutoringSessionSearchbar";
 
+/**
+ * COMPONENT FOR PAGINATING THE TUTORING POSTS
+ */
 const ViewTutoringSessions = () => {
   const [fetching, setFetching] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -11,6 +14,7 @@ const ViewTutoringSessions = () => {
   const [searching, setSearching] = useState(false);
   var postsPerPage = 3;
 
+  // get the total amount of posts (a number, to calculate number of pages)
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -26,7 +30,7 @@ const ViewTutoringSessions = () => {
       }
     };
     if (searching === false) {
-    fetchPosts();
+      fetchPosts();
     }
   }, [searching]); // [] needs to be here so that it is only loaded when mounted, otherwise infinite loop
 
@@ -35,12 +39,11 @@ const ViewTutoringSessions = () => {
   const [lastPostidx, setLastPostidx] = useState(currentPage * postsPerPage);
   const [firstPostidx, setFirstPostidx] = useState(lastPostidx - postsPerPage);
 
+  // get the tutoring posts of the current page
   useEffect(() => {
     const fetchPosts = async () => {
-      let res
-
       try {
-        res = await axios({
+        const res = await axios({
           method: "get",
           withCredentials: true,
           url: "http://localhost:8800/tutoringposts/",
@@ -49,7 +52,6 @@ const ViewTutoringSessions = () => {
             end: lastPostidx,
           },
         });
-        console.log(res.data.data)
         setCurrentPosts(res.data.data);
         setFetching(false);
       } catch (err) {
@@ -57,10 +59,11 @@ const ViewTutoringSessions = () => {
       }
     };
     if (searching === false) {
-    fetchPosts();
+      fetchPosts();
     }
   }, [lastPostidx, searching]); // [] needs to be here so that it is only loaded when mounted, otherwise infinite loop
 
+  // we provide this as a callback to the pagination handler and the searching handler
   const separate = (pageNumber) => {
     setCurrentPage(pageNumber);
     setLastPostidx(pageNumber * postsPerPage);
@@ -69,13 +72,16 @@ const ViewTutoringSessions = () => {
 
   return (
     <div className="container mt-5">
-      <Searchbar separate = {separate} callback = {setCurrentPosts} start = {firstPostidx} end = {lastPostidx} setSearching = {setSearching} setTotalPosts = {setTotalPosts} />
-      <PostCards posts={currentPosts} fetching={fetching} is_tutorcard = {true} />
-      <Separator
-        totalNmbr={totalPosts}
-        nmbrPerPage={postsPerPage}
-        separateFunc={separate}
+      <Searchbar
+        separate={separate}
+        callback={setCurrentPosts}
+        start={firstPostidx}
+        end={lastPostidx}
+        setSearching={setSearching}
+        setTotalPosts={setTotalPosts}
       />
+      <PostCards posts={currentPosts} fetching={fetching} is_tutorcard={true} />
+      <Separator totalNmbr={totalPosts} nmbrPerPage={postsPerPage} separateFunc={separate} />
     </div>
   );
 };

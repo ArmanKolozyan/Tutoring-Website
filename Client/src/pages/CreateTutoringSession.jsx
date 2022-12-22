@@ -4,20 +4,22 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
-
 import "bootstrap/dist/css/bootstrap.css";
 import "../style.scss";
 import axios from "axios";
 import moment from "moment";
-import { PasswordContext } from "../context/PasswordContext";
-import { useContext } from "react";
 import { TutorMap, mapRef, giveRegions } from "../components/TutorMap";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ViewMap } from "../components/ViewMap";
 import { useEffect } from "react";
 import getUserLocation from "../components/GetUserLocation";
 
+/**
+ * COMPONENT FOR CREATING A TUTORING POST
+ */
 const CreateTutoringSession = () => {
+  // if we are updating an exisiting post,
+  // the state (the post itself) will be sent
+  // when redirected to this page. (see VIEWTUTORINGPOST)
   const post = useLocation().state;
   const navigate = useNavigate();
 
@@ -28,13 +30,10 @@ const CreateTutoringSession = () => {
   const [test, setTest] = useState(post?.free_test || "0");
   const [desc, setDesc] = useState(post?.description || "");
 
-  const { currentUser } = useContext(PasswordContext);
-
   const location = getUserLocation();
-
-
   const [regions, setRegions] = useState([]); // must be initialised by an empty array! otherwise not possible to call 'map'
 
+  // is there a free test session? 1 => true, otherwise 0
   const checkFree = () => {
     if (test == "1") {
       return true;
@@ -44,7 +43,6 @@ const CreateTutoringSession = () => {
   };
 
   const jumpToUserLocation = () => {
-    console.log("huhuhu")
     if (location.loaded && !location.error) {
       const newZoom = 16;
       mapRef.current.flyTo([location.coordinates.lat, location.coordinates.lng], newZoom, { animate: true });
@@ -53,6 +51,7 @@ const CreateTutoringSession = () => {
     }
   };
 
+  // get the drawn regions (when we are editing an existing post)
   useEffect(() => {
     if (post) {
       const fetchData = async () => {
@@ -73,6 +72,7 @@ const CreateTutoringSession = () => {
     }
   }, []);
 
+  // sending the data to back-end for update or insert
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -120,6 +120,7 @@ const CreateTutoringSession = () => {
   };
 
   return (
+    // form to fill in all the necessary information
     <div className="create-tutoring-post">
       <Form onSubmit={(event) => handleSubmit(event)}>
         <Row className="justify-content-md-center">
@@ -206,16 +207,16 @@ const CreateTutoringSession = () => {
         </Row>
         <TutorMap regions={regions} />
         <div className="row">
-        <div className="col d-flex justify-content-center">
-          <Button
-            className="btn btn-primary small"
-            style={{ width: "fit-content", height: "fit-content" }}
-            onClick={jumpToUserLocation}
-          >
-            Locate Me
-          </Button>
+          <div className="col d-flex justify-content-center">
+            <Button
+              className="btn btn-primary small"
+              style={{ width: "fit-content", height: "fit-content" }}
+              onClick={jumpToUserLocation}
+            >
+              Locate Me
+            </Button>
+          </div>
         </div>
-      </div>
         <Row className="justify-content-md-center">
           <Button type="submit">Submit</Button>
         </Row>

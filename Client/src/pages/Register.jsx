@@ -10,16 +10,20 @@ import "../style.scss";
 import { PasswordContext } from "../context/PasswordContext";
 import { useContext, useEffect } from "react";
 
+/**
+ * COMPONENT FOR THE REGISTER PAGE
+ */
 const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [birthDate, setBirthDate] = useState("");
-  // const [field, setField] = useState();
-  const [message, setMessage] = useState();
-  const [showMessage, setShowMessage] = useState(false)
+  const [message, setMessage] = useState(); // error message
+  const [showMessage, setShowMessage] = useState(false);
 
+  // send the information to the back-end to create
+  // an account
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -34,22 +38,21 @@ const Register = () => {
           // fieldOfStudy: field,
         },
         url: "http://localhost:8800/register",
-
       });
-      setMessage("You are registered!")
+      setMessage("You are registered!");
     } catch (err) {
       setMessage(err.response.data.message);
     }
   };
 
   useEffect(() => {
-    console.log(message)
     if (message !== false) {
-    setShowMessage(true)
+      setShowMessage(true);
     }
-}, [message]);
+  }, [message]);
 
   return (
+    // the form
     <div className="RegisterForm">
       <div className="auth">
         <h1>Register</h1>
@@ -68,7 +71,6 @@ const Register = () => {
               <input required type="text" placeholder="last name" onChange={(e) => setLastName(e.target.value)}></input>
             </Col>
           </Row>
-
           <input required type="email" placeholder="email" onChange={(e) => setRegisterEmail(e.target.value)}></input>
           <input required type="date" placeholder="birthdate" onChange={(e) => setBirthDate(e.target.value)}></input>
           <input
@@ -78,10 +80,7 @@ const Register = () => {
             onChange={(e) => setRegisterPassword(e.target.value)}
           ></input>
           <button type="submit">Register</button>
-          {showMessage ? 
-        message
-        :
-        ""}          <span>Already have an account?</span>
+          {showMessage ? message : ""} <span>Already have an account?</span>
           <Link className="linkStyle" to="/login">
             Login
           </Link>

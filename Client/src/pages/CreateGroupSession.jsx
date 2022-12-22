@@ -4,19 +4,26 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
-
 import "bootstrap/dist/css/bootstrap.css";
 import "../style.scss";
 import axios from "axios";
-import moment from "moment";
 import { PasswordContext } from "../context/PasswordContext";
 import { useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
+/**
+ * COMPONENT FOR CREATING A GROUP SESSION
+ */
 const CreateGroupSession = () => {
+  // if we are updating an exisiting post,
+  // the state (the post itself) will be sent
+  // when redirected to this page. (see ViewGroupSession)
   const post = useLocation().state;
+
   const navigate = useNavigate();
 
+  // making human readable date and hours from the DATETIME object that
+  // sent from the back-end
   const postDate = () => {
     if (post !== null) {
       const d = new Date(post.date_time);
@@ -44,12 +51,12 @@ const CreateGroupSession = () => {
   const [picture, setPicture] = useState("");
   const [dateWarning, setDateWarning] = useState("");
 
-  const { currentUser } = useContext(PasswordContext);
-
+  // sending the data to back-end for update or insert
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (post) {
+        // if new post, insert
         const postId = await axios({
           method: "put",
           withCredentials: true,
@@ -71,6 +78,7 @@ const CreateGroupSession = () => {
         navigate(`/grouppost/${postId.data.data}`);
       } else {
         const postId = await axios({
+          // if exiting post, update
           method: "post",
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
@@ -91,12 +99,11 @@ const CreateGroupSession = () => {
         navigate(`/grouppost/${postId.data.data}`);
       }
     } catch (err) {
-      console.log(free)
-      console.log(limited)
       console.log(err.response.data.message);
     }
   };
 
+  // is the session with limited space? 1 => true, otherwise 0
   const checkLimited = () => {
     if (limited == "1") {
       return true;
@@ -105,6 +112,7 @@ const CreateGroupSession = () => {
     }
   };
 
+  // is the session free? 1 => true, otherwise 0
   const checkFree = () => {
     if (free == 1) {
       return true;
@@ -113,6 +121,8 @@ const CreateGroupSession = () => {
     }
   };
 
+  // WEB SERVICE 
+  // If the selected date is a holiday, you get a warning.
   const handleDate = (dateTime) => {
     setDateAndTime(dateTime);
     const date_time = new Date(dateTime);
@@ -136,6 +146,7 @@ const CreateGroupSession = () => {
   };
 
   return (
+    // form to fill in all the necessary information
     <div className="create-tutoring-post">
       <Form onSubmit={(event) => handleSubmit(event)}>
         <Row className="justify-content-md-center">

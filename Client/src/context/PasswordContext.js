@@ -1,7 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
+/**
+ * THIS CONTENT PROVIDES ALL THE AUTHENTICATION FUNCTIONS
+ * AND THE DATA OF THE LOGGED IN USER.
+ */
 export const PasswordContext = createContext();
+
 export const AuthConfig = ({ children }) => {
   // the currentUser contains the user info of the logged in user
   // if no user is logged in, it is null
@@ -9,8 +14,8 @@ export const AuthConfig = ({ children }) => {
   // (see <AuthConfig> in index.js)
   const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
 
-
-  const [error, setError] = useState(false)
+  // possible error to show during login...
+  const [error, setError] = useState(false);
 
   const login = async (loginEmail, loginPassword) => {
     try {
@@ -27,7 +32,6 @@ export const AuthConfig = ({ children }) => {
         setCurrentUser(res.data.data);
       }
     } catch (err) {
-      console.log("in")
       setError(err.response.data.message);
     }
   };
@@ -45,6 +49,7 @@ export const AuthConfig = ({ children }) => {
     }
   };
 
+  // update the local storage
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(currentUser));
   }, [currentUser]);

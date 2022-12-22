@@ -5,9 +5,12 @@ import TutoringCard from "./TutoringCard";
 
 
 /**
- * LOADING THE POST CARDS
+ * SHOWING A LIST OF POST CARDS GIVEN THE POSTS, WHETHER WE ARE FETCHING
+ * AND IF IT IS A TUTORCARD (OR A GROUP SESSION CARD)
  */
 const PostCards = ({ posts, fetching, is_tutorcard }) => {
+
+
   if (fetching) { // let the user know that we're fetching
     return <h2>The posts are loading...</h2>;
   }

@@ -2,13 +2,12 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useLocation } from "react-router-dom";
-import ProfileInfo from "../components/ProfileInfo"
+import ProfileInfo from "../components/ProfileInfo";
 import UpdatePicture from "../components/UpdatePicture";
-import ChangePassword from "../components/ChangePassword";
 
+/**
+ * COMPONENT FOR VIEWING AND EDITING MY OWN PROFILE.
+ */
 const MyProfile = () => {
   return (
     <div className="MyProfile">
@@ -16,14 +15,14 @@ const MyProfile = () => {
         <Row>
           <Col md="auto">
             <div className="ProfileInformation">
-              <ProfileInfo  /> {/* hier gebeuren de aanpassingen voor de profile, het gebeurt dus niet rechtstreeks in dit bestand */}
+              <ProfileInfo />
             </div>
           </Col>
 
           <Col md="auto">
             <Row>
               <div className="ProfilePicture">
-                <UpdatePicture/>
+                <UpdatePicture />
               </div>
             </Row>
           </Col>

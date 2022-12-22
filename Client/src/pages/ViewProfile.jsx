@@ -9,13 +9,16 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Card from "react-bootstrap/Card";
 
+/**
+ * COMPONENT FOR VIEWING THE PROFILE OF SOMEONE.
+ */
 const ViewProfile = () => {
 
   const location = useLocation();
-  const navigate = useNavigate();
   const userid = location.pathname.split("/")[2];
   const [user, setUser] = useState("");
 
+  // get the user
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -53,6 +56,7 @@ const ViewProfile = () => {
   let description = user.intro;
   let PhoneNumber = "0411929242";
 
+  // get the studies of the user
   useEffect(() => {
     const fetchData = async () => {
       try {

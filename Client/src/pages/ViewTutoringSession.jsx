@@ -16,57 +16,38 @@ import { ViewMap } from "../components/ViewMap";
 import { useContext } from "react";
 import { PasswordContext } from "../context/PasswordContext";
 
-import Modal from 'react-bootstrap/Modal';
+import Modal from "react-bootstrap/Modal";
 
-
+/**
+ * COMPONENT FOR VIEWING A TUTORING POST
+ */
 const ViewTutoringSession = () => {
-
-
   //contact popup
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-
-  const phonenumber = "+32 423 32 34 54"
-  const email = "Stoffel@hotmail.be"
-
-  function copyPhonenumber(){
+  const phonenumber = "+32 423 32 34 54";
+  function copyPhonenumber() {
     navigator.clipboard.writeText(phonenumber);
   }
-
-  
-  function copyEmail(){
-    navigator.clipboard.writeText(email);
+  function copyEmail() {
+    navigator.clipboard.writeText(user.email);
   }
-  //
-
-
-
-  //// delete popup
-
-
-  const [showDelete, setShowDelete] = useState(false);
-
-  const handleCloseDelete = () => setShowDelete(false);
-  const handleShowDelete = () => setShowDelete(true);
-
-
-  //
-
 
   const location = useLocation();
   const navigate = useNavigate();
-
   const postId = location.pathname.split("/")[2];
-
   const [post, setPost] = useState({});
-
   const [user, setUser] = useState({});
+
+  // delete popup
+  const [showDelete, setShowDelete] = useState(false);
+  const handleCloseDelete = () => setShowDelete(false);
+  const handleShowDelete = () => setShowDelete(true);
 
   const { currentUser } = useContext(PasswordContext);
 
+  // get the post from back-end
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -83,6 +64,7 @@ const ViewTutoringSession = () => {
     fetchData();
   }, [postId]);
 
+  // get the author of the post
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -101,16 +83,7 @@ const ViewTutoringSession = () => {
     }
   }, [post]);
 
-  // format date to dd/mm/yy using Regular Expressions
-  function formatDate(input) {
-    let date = input.match(/\d+/g),
-      day = date[2],
-      month = date[1],
-      year = date[0].substring(2); // get only two digits
-
-    return day + "/" + month + "/" + year;
-  }
-
+  // delete from back-end
   const deletePost = async () => {
     try {
       await axios({
@@ -118,15 +91,16 @@ const ViewTutoringSession = () => {
         withCredentials: true,
         url: `http://localhost:8800/tutoringposts/${post.id}`,
       });
-      navigate("/tutoringposts")
+      navigate("/tutoringposts");
     } catch (err) {
       console.log(err.response.data.message);
     }
-  }
+  };
 
   return (
     <div className="ViewTutoringPost">
       <Container>
+        {/* Practical information */}
         <Row className="justify-content-md-center">
           <Col md="auto">
             <Row className="justify-content-md-center">
@@ -141,6 +115,8 @@ const ViewTutoringSession = () => {
               </div>
             </Row>
 
+            {/* Description of the post */}
+
             <Row className="justify-content-md-center">
               <Col md="">
                 <div className="TutoringPostDescription">
@@ -150,6 +126,8 @@ const ViewTutoringSession = () => {
               </Col>
             </Row>
           </Col>
+
+          {/* Organisator information */}
 
           <Col md="auto">
             <div className="TutorInfo">
@@ -179,23 +157,29 @@ const ViewTutoringSession = () => {
           </Col>
         </Row>
 
+        {/* The map */}
+
         <Row className="justify-content-md-center">
           <ViewMap post_id={post.id} />
         </Row>
 
         <Row className="justify-content-md-center">
-        <Col>
-          <Button onClick={handleShow}>Contact Tutor</Button>
-        </Col>
+          <Col>
+            <Button onClick={handleShow}>Contact Tutor</Button>
+          </Col>
         </Row>
+
+        {/* The reviews: creating and viewing */}
 
         <Row className="justify-content-md-center">
           <Col md="auto">
-          {(post.uid !== currentUser.id) ? 
-            <div className="create-review">
-              <CreateReview id={postId} type={reviewTypes.Post} />
-            </div>
-          : ""}
+            {post.uid !== currentUser.id ? (
+              <div className="create-review">
+                <CreateReview id={postId} type={reviewTypes.Post} />
+              </div>
+            ) : (
+              ""
+            )}
             <div className="reviews-list">
               <ViewReviews id={postId} />
             </div>
@@ -203,42 +187,38 @@ const ViewTutoringSession = () => {
         </Row>
       </Container>
 
-
-
-
-
-
-
+      {/* Contact the organisator */}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Contact information of the tutor</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        
-        
-        <p>
-          His/Her phonenumber is : {phonenumber}
-        </p>
-        <Button variant="secondary" onClick={copyPhonenumber}>
-        Copy phonenumber
-        </Button>
-        
-        <p>        <br/>
-          His/her Email adress is : {email}
-        </p>
-        <Button variant="secondary" onClick={copyEmail}>
-        Copy email
-        </Button>
+          <p>His/Her phonenumber is : {phonenumber}</p>
+          <Button variant="secondary" onClick={copyPhonenumber}>
+            Copy phonenumber
+          </Button>
 
+          <p>
+            {" "}
+            <br />
+            His/her Email adress is : {user.email}
+          </p>
+          <Button variant="secondary" onClick={copyEmail}>
+            Copy email
+          </Button>
         </Modal.Body>
       </Modal>
+
+      {/* Delete warning popup */}
 
       <Modal show={showDelete} onHide={handleCloseDelete}>
         <Modal.Header closeButton>
           <Modal.Title>Deleting Post</Modal.Title>
         </Modal.Header>
-        <Modal.Body>You are deleting your post! Are you sure you want to do this, this action can not be undone.</Modal.Body>
+        <Modal.Body>
+          You are deleting your post! Are you sure you want to do this, this action can not be undone.
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseDelete}>
             Cancel
@@ -248,7 +228,6 @@ const ViewTutoringSession = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
     </div>
   );
 };

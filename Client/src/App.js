@@ -4,7 +4,6 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import CreateTutoringSession from "./pages/CreateTutoringSession";
 import ViewTutoringSession from "./pages/ViewTutoringSession";
-import ViewSummaries from "./pages/ViewSummaries";
 import Footer from "./components/Footer";
 import Trademark from "./components/Trademark";
 import Navigationbar from "./components/Navigationbar";
@@ -41,6 +40,7 @@ function Layout2() {
   );
 }
 
+// ALL PATHS AND CORRESPONDING ELEMENTS
 const router = createBrowserRouter([
   {
     path: "/",
@@ -73,10 +73,6 @@ const router = createBrowserRouter([
       {
         path: "/profile/:firstname",
         element: <MyProfile />,
-      },
-      {
-        path: "/summaries",
-        element: <ViewSummaries />,
       },
       {
         path: "/tutoringPosts",

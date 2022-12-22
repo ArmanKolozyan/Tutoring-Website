@@ -6,7 +6,7 @@ import GroupSessionInfo from "../components/GroupSessionInfo";
 import TutorInfo from "../components/TutorCard";
 import GroupSessionDescription from "../components/GroupSessionDescription";
 import Button from "react-bootstrap/Button";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
@@ -15,46 +15,43 @@ import { PasswordContext } from "../context/PasswordContext";
 import { atcb_action, atcb_init } from "add-to-calendar-button";
 import "add-to-calendar-button/assets/css/atcb.css";
 
+/**
+ * COMPONENT FOR VIEWING A GROUP SESSION
+ */
 const ViewGroupSession = () => {
   //contact popup
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   const phonenumber = "+32 423 32 34 54";
-
   function copyPhonenumber() {
     navigator.clipboard.writeText(phonenumber);
   }
-
   function copyEmail() {
     navigator.clipboard.writeText(user.email);
   }
-  //
 
   const location = useLocation();
   const navigate = useNavigate();
   const postId = location.pathname.split("/")[2];
-
   const [post, setPost] = useState({});
-
   const [user, setUser] = useState({});
 
   const { currentUser } = useContext(PasswordContext);
 
-  //// delete popup
+  // delete popup
   const [showDelete, setShowDelete] = useState(false);
 
-  const [signUp, setSignUp] = useState(false);
+  const [signUp, setSignUp] = useState(false); // register for the event
 
   const handleCloseDelete = () => setShowDelete(false);
   const handleShowDelete = () => setShowDelete(true);
 
-  const [action, setAction] = useState(false);
-  const [count, setCount] = useState("");
-  const [updatedBackEnd, setUpdatedBackEnd] = useState(false);
+  const [action, setAction] = useState(false); // pressed on 'register' => update the back-end
+  const [count, setCount] = useState(""); // amount of students that have already registered
+  const [updatedBackEnd, setUpdatedBackEnd] = useState(false); // back-end is updated, so we can ask the back-end for new registrations number
 
+  // get the group post
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -73,6 +70,7 @@ const ViewGroupSession = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      // get the author
       try {
         const res = await axios({
           method: "get",
@@ -83,6 +81,7 @@ const ViewGroupSession = () => {
       } catch (err) {
         console.log(err.response.data.message);
       }
+      // check whether current user is signed up for this event
       try {
         const res = await axios({
           method: "get",
@@ -103,6 +102,7 @@ const ViewGroupSession = () => {
     }
   }, [post, signUp]);
 
+  // get number of registrations for this event
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -125,16 +125,8 @@ const ViewGroupSession = () => {
     }
   }, [post, signUp, updatedBackEnd]);
 
-  // format date to dd/mm/yy using Regular Expressions
-  function formatDate(input) {
-    let date = input.match(/\d+/g),
-      day = date[2],
-      month = date[1],
-      year = date[0].substring(2); // get only two digits
-
-    return day + "/" + month + "/" + year;
-  }
-
+  // format the date of the event to a format
+  // that is supported by the calendars
   function formatDateForCalendar(input) {
     let date = input.match(/\d+/g),
       day = date[2],
@@ -144,6 +136,7 @@ const ViewGroupSession = () => {
     return year + "-" + month + "-" + day;
   }
 
+  // delete from back-end
   const deletePost = async () => {
     try {
       await axios({
@@ -157,6 +150,7 @@ const ViewGroupSession = () => {
     }
   };
 
+  // update the registration state of the current user for the event
   useEffect(() => {
     const updateSignUp = () => {
       try {
@@ -180,27 +174,29 @@ const ViewGroupSession = () => {
     }
   }, [signUp, action]);
 
+  // for the add to calendar button
   useEffect(() => {
     atcb_init();
   }, []);
 
-
+  // for the add to calendar button
   const showCalendarOptions = () => {
     atcb_action({
       name: post.title,
       startDate: formatDateForCalendar(post.date_time),
-      startTime: post.date_time.slice(11,16),
-      endTime: post.date_time.slice(11,16),
-      options: ['Outlook.com', 'Google', 'Apple', 'Microsoft365'],
+      startTime: post.date_time.slice(11, 16),
+      endTime: post.date_time.slice(11, 16),
+      options: ["Outlook.com", "Google", "Apple", "Microsoft365"],
       location: post.location,
       timeZone: "Europe/Berlin",
       iCalFileName: "Reminder-Event",
     });
-  }
+  };
 
   return (
     <div className="ViewGroupPost">
       <Container>
+        {/* Practical information */}
         <Row className="justify-content-md-center">
           <Row className="justify-content-md-center">
             <Col md="auto">
@@ -224,19 +220,28 @@ const ViewGroupSession = () => {
               </div>
             </Row>
 
+            {/* Description of the event */}
+
             <Row className="justify-content-md-center">
-              <Col >
+              <Col>
                 <div className="GroupPostDescription">
                   <GroupSessionDescription description={post.description} />
                 </div>
               </Col>
             </Row>
+
+            {/* add to calendar button */}
             <Row className="justify-content-md-center">
-            <Col md="auto">
-              <Button onClick={showCalendarOptions} style={{"width": "20vw", "margin-bottom": "5vw"}}> Add to calendar </Button>
+              <Col md="auto">
+                <Button onClick={showCalendarOptions} style={{ width: "20vw", "margin-bottom": "5vw" }}>
+                  {" "}
+                  Add to calendar{" "}
+                </Button>
               </Col>
-              </Row>
+            </Row>
           </Col>
+
+          {/* Organisator information */}
 
           <Col md="auto">
             <div className="TutorInfo">
@@ -267,15 +272,17 @@ const ViewGroupSession = () => {
           </Col>
         </Row>
 
+        {/* Registering for the event */}
+
         <Row className="justify-content-md-center">
           <Col md="auto">
             <Button
               onClick={() => {
                 if (user.id === currentUser.id) {
-
+                  // you can't sign up for your own event
                 } else {
-                setAction(true);
-                setSignUp(!signUp);
+                  setAction(true);
+                  setSignUp(!signUp);
                 }
               }}
             >
@@ -289,6 +296,8 @@ const ViewGroupSession = () => {
           </Col>
         </Row>
       </Container>
+
+      {/* Contact the organisator */}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -310,6 +319,8 @@ const ViewGroupSession = () => {
           </Button>
         </Modal.Body>
       </Modal>
+
+      {/* Delete warning popup */}
 
       <Modal show={showDelete} onHide={handleCloseDelete}>
         <Modal.Header closeButton>
