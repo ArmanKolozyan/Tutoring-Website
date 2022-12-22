@@ -54,7 +54,6 @@ const ViewTutoringSessions = () => {
       }
     };
     if (searching === false) {
-      console.log("okeuu");
       fetchPosts();
     }
   }, [lastPostidx, searching]); // [] needs to be here so that it is only loaded when mounted, otherwise infinite loop

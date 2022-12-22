@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 
 const GroupCard = ({ post }) => {
   const [user, setUser] = useState({});
+  const [registrations, setRegistrations] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +27,29 @@ const GroupCard = ({ post }) => {
       fetchData();
     }
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios({
+          method: "get",
+          withCredentials: true,
+          url: `http://localhost:8800/groupposts/registrations/count`,
+          params: {
+            session_id: post.id,
+          },
+        });
+        setRegistrations(res.data.data);
+      } catch (err) {
+        console.log(err.response.data.message);
+      }
+    };
+    if (post) {
+      console.log(post);
+      fetchData();
+    }
+  }, [post]);
+
   return (
     <div className="post" key={post.id}>
       <link
@@ -39,28 +63,33 @@ const GroupCard = ({ post }) => {
             <Col>
               <Row className="justify-content-md-center">
                 <Link className="link" to={`/groupsession/${post.id}`}>
-                  <h1 style={{ color: "black", "overflow-wrap": "break-word"}}>{post.title}</h1>
+                  <h1 style={{ color: "black", "overflow-wrap": "break-word" }}>{post.title}</h1>
                 </Link>
               </Row>
 
               <Row className="justify-content-md-center">
-              <Col md="auto">
-                <div className="stars">
-                  <span className="fa fa-star checked"></span>
-                  <span className="fa fa-star checked"></span>
-                  <span className="fa fa-star checked"></span>
-                  <span className="fa fa-star"></span>
-                  <span className="fa fa-star"></span>
-                </div>
+                <Col md="auto">
+                  <div className="stars">
+                    <span className="fa fa-star checked"></span>
+                    <span className="fa fa-star checked"></span>
+                    <span className="fa fa-star checked"></span>
+                    <span className="fa fa-star"></span>
+                    <span className="fa fa-star"></span>
+                  </div>
                 </Col>
 
                 <Col>
-                <p> The price of this session is :  <span style={{ fontWeight: 'bold' }}> € {post.free ? 0 : post.price}</span> </p>
+                  <p>
+                    {" "}
+                    The price of this session is :{" "}
+                    <span style={{ fontWeight: "bold" }}> € {post.free ? 0 : post.price}</span>{" "}
+                  </p>
                 </Col>
 
                 <Col>
-                <p> Total registrations : </p>
-                <p><span style={{ fontWeight: 'bold' }}> {post.registrations}</span> </p>
+                  <p>
+                    Total registrations :<span style={{ fontWeight: "bold" }}> {registrations}</span>{" "}
+                  </p>
                 </Col>
               </Row>
 
@@ -78,11 +107,22 @@ const GroupCard = ({ post }) => {
             </Col>
 
             <Col md="auto">
-            {
-            user.img ?
-              <img style={{"margin-left": "auto", "max-width": "80%", display: "block", height: "auto", "border-radius": "50px" }} src={`../uploads/${user?.img}`} key={user.img} alt="" />
-            : ""
-            }
+              {user.img ? (
+                <img
+                  style={{
+                    "margin-left": "auto",
+                    "max-width": "80%",
+                    display: "block",
+                    height: "auto",
+                    "border-radius": "50px",
+                  }}
+                  src={`../uploads/${user?.img}`}
+                  key={user.img}
+                  alt=""
+                />
+              ) : (
+                ""
+              )}
             </Col>
           </Row>
         </Row>

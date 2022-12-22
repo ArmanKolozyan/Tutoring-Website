@@ -162,7 +162,7 @@ export const findGroupPosts = (req, res) => {
       checkLimits(),
     values,
     (err, data) => {
-      if (err) return console.log(err);
+      if (err) return res.status(500).json({ message: "Fetching the amount of posts failed.", data: [] });
       data_first = data;
     }
   );
@@ -240,6 +240,7 @@ export const registrationCount = (req, res) => {
         data: [],
       });
     }
+    console.log(data[0].amount)
     return res.status(200).json({ message: "", data: data[0].amount });
   });
 };

@@ -40,7 +40,6 @@ export const updateUser = (req, res) => {
     );
   };
 
-  console.log(req.user);
 
   const values = [
     req.body.firstName,
@@ -63,7 +62,7 @@ const clearImage = (filePath) => {
   const __dirname = path.resolve();
   filePath = path.join(__dirname, "../images/", filePath);
   fs.unlink(filePath, (err) => {
-    console.log(err);
+    res.status(500).json({ message: "Deleting the image with unsupported dimensions failed.", data: [] });
   });
 };
 
@@ -71,7 +70,6 @@ export const uploadImage = (req, res) => {
   if (typeof req.file !== "undefined") {
     const image = req.file.filename;
     const dimensions = imageSize("../client/public/uploads/" + image);
-    console.log(dimensions.width, dimensions.height);
     if (dimensions.width > 600 || dimensions.height > 300) {
       // check if image size too big
       const path = req.file.path; // too big => delete image

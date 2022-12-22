@@ -33,11 +33,7 @@ function Searchbar({ callback, start, end, setSearching, setTotalPosts}) {
             end: end,
           },
         });
-        console.log(res.data)
         callback(res.data.data.posts);
-        console.log("-")
-        console.log(res.data.data.amount);
-        console.log("-")
         setTotalPosts(res.data.data.amount);
       } catch (err) {
         console.log(err.response.data.message);
@@ -45,10 +41,8 @@ function Searchbar({ callback, start, end, setSearching, setTotalPosts}) {
     };
     {
       if (keyword === "" && course === "" && field === "" && orderBy === "" && freeTest === false) {
-        console.log("in")
         setSearching(false)
       } else {
-        console.log(keyword, course, field, orderBy, freeTest)
         setSearching(true)
         fetchPosts();
       }
