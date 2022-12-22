@@ -4,7 +4,7 @@ import React from "react"
 /**
  * DESCRIPTION SHOWN WHEN VIEWING A PARTICULAR TUTORING POST 
  */
-function TutoringSessionDescription(props) {
+function TutoringPostDescription(props) {
   let description = props.description;
 
 
@@ -16,4 +16,4 @@ function TutoringSessionDescription(props) {
   )
 }
 
-export default TutoringSessionDescription
+export default TutoringPostDescription

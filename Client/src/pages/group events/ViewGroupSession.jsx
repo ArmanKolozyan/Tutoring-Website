@@ -28,7 +28,7 @@ const ViewGroupSession = () => {
     navigator.clipboard.writeText(phonenumber);
   }
   function copyEmail() {
-    navigator.clipboard.writeText(user.email);
+    navigator.clipboard.writeText(user?.email);
   }
 
   const location = useLocation();
@@ -312,7 +312,7 @@ const ViewGroupSession = () => {
           <p>
             {" "}
             <br />
-            His/her Email adress is : {user.email}
+            His/her Email adress is : {user?.email}
           </p>
           <Button variant="secondary" onClick={copyEmail}>
             Copy email

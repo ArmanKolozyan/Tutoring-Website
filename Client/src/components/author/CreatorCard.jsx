@@ -64,7 +64,7 @@ function CreatorCard(props) {
         <ListGroup className="list-group-flush">
           <ListGroup.Item>{tutorText}</ListGroup.Item>
           <ListGroup.Item>Age: {tutorAge ? getAge(tutorAge) : ""}</ListGroup.Item>
-          <ListGroup.Item>Average Rating: {avgRating}</ListGroup.Item>
+          <ListGroup.Item>Average Rating: {avgRating===0 ? "/" : avgRating}</ListGroup.Item>
         </ListGroup>
         <Link to={profileLink} className="btn btn-primary">
           Visit Profile

@@ -7,7 +7,7 @@ import Searchbar from "../../components/searching/GroupSessionSearchbar";
 /**
  * COMPONENT FOR PAGINATING THE GROUP SESSIONS
  */
-const ViewTutoringSessions = () => {
+const ViewTutoringPosts = () => {
   const [fetching, setFetching] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
@@ -86,4 +86,4 @@ const ViewTutoringSessions = () => {
   );
 };
 
-export default ViewTutoringSessions;
+export default ViewTutoringPosts;

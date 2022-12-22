@@ -16,7 +16,7 @@ import getUserLocation from "../../components/map/GetUserLocation";
 /**
  * COMPONENT FOR CREATING A TUTORING POST
  */
-const CreateTutoringSession = () => {
+const CreateTutoringPost = () => {
   // if we are updating an exisiting post,
   // the state (the post itself) will be sent
   // when redirected to this page. (see VIEWTUTORINGPOST)
@@ -225,4 +225,4 @@ const CreateTutoringSession = () => {
   );
 };
 
-export default CreateTutoringSession;
+export default CreateTutoringPost;

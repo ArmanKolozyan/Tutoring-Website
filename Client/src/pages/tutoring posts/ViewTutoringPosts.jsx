@@ -2,12 +2,12 @@ import PostCards from "../../components/pagination/PostCards";
 import Separator from "../../components/pagination/Separator";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Searchbar from "../../components/searching/TutoringSessionSearchbar";
+import Searchbar from "../../components/searching/TutoringPostSearchbar";
 
 /**
  * COMPONENT FOR PAGINATING THE TUTORING POSTS
  */
-const ViewTutoringSessions = () => {
+const ViewTutoringPosts = () => {
   const [fetching, setFetching] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
@@ -86,4 +86,4 @@ const ViewTutoringSessions = () => {
   );
 };
 
-export default ViewTutoringSessions;
+export default ViewTutoringPosts;

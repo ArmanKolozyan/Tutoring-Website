@@ -2,8 +2,8 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Home from "./pages/main pages/Home";
 import Register from "./pages/main pages/Register";
 import Login from "./pages/main pages/Login";
-import CreateTutoringSession from "./pages/tutoring posts/CreateTutoringSession";
-import ViewTutoringSession from "./pages/tutoring posts/ViewTutoringSession";
+import CreateTutoringPost from "./pages/tutoring posts/CreateTutoringPost";
+import ViewTutoringPost from "./pages/tutoring posts/ViewTutoringPost";
 import Footer from "./components/Footer";
 import Trademark from "./components/Trademark";
 import Navigationbar from "./components/Navigationbar";
@@ -12,7 +12,7 @@ import MyProfile from "./pages/profile/MyProfile";
 import ViewProfile from "./pages/profile/ViewProfile";
 import CreateGroupSession from "./pages/group events/CreateGroupSession";
 import ViewGroupSession from "./pages/group events/ViewGroupSession";
-import ViewTutoringSessions from "./pages/tutoring posts/ViewTutoringSessions";
+import ViewTutoringPosts from "./pages/tutoring posts/ViewTutoringPosts";
 import ViewGroupSessions from "./pages/group events/ViewGroupSessions";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/createTutoringPost",
-        element: <CreateTutoringSession />,
+        element: <CreateTutoringPost />,
       },
       {
         path: "/createGroupPost",
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/tutoringPost/:id",
-        element: <ViewTutoringSession />,
+        element: <ViewTutoringPost />,
       },
       {
         path: "/groupPost/:id",
@@ -76,7 +76,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/tutoringPosts",
-        element: <ViewTutoringSessions />,
+        element: <ViewTutoringPosts />,
       },
       {
         path: "/groupPosts",

@@ -82,7 +82,7 @@ const TutoringCard = ({ post }) => {
                   <p> Average rating :</p>
                   <p>
                     {" "}
-                    <span style={{ fontWeight: "bold" }}> {avgRating}</span>{" "}
+                    <span style={{ fontWeight: "bold" }}> {avgRating===0 ? "/" : avgRating}</span>{" "}
                   </p>
                 </Col>
 

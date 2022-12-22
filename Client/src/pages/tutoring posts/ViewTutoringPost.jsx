@@ -2,9 +2,9 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import TutoringSessionInfo from "../../components/tutoring posts/TutoringSessionInfo";
+import TutoringPostInfo from "../../components/tutoring posts/TutoringPostInfo";
 import TutorInfo from "../../components/author/CreatorCard";
-import TutoringSessionDescription from "../../components/tutoring posts/TutoringSessionDescription";
+import TutoringPostDescription from "../../components/tutoring posts/TutoringPostDescription";
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -21,7 +21,7 @@ import Modal from "react-bootstrap/Modal";
 /**
  * COMPONENT FOR VIEWING A TUTORING POST
  */
-const ViewTutoringSession = () => {
+const ViewTutoringPost = () => {
   //contact popup
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -105,7 +105,7 @@ const ViewTutoringSession = () => {
           <Col md="auto">
             <Row className="justify-content-md-center">
               <div className="TutoringPostInfo">
-                <TutoringSessionInfo
+                <TutoringPostInfo
                   title={post.course}
                   faculty={post.field_of_study}
                   price={post.price}
@@ -121,7 +121,7 @@ const ViewTutoringSession = () => {
               <Col md="">
                 <div className="TutoringPostDescription">
                   <h6> Some words from the tutor: </h6>
-                  <TutoringSessionDescription description={post.description} />
+                  <TutoringPostDescription description={post.description} />
                 </div>
               </Col>
             </Row>
@@ -202,7 +202,7 @@ const ViewTutoringSession = () => {
           <p>
             {" "}
             <br />
-            His/her Email adress is : {user.email}
+            His/her Email adress is : {user?.email}
           </p>
           <Button variant="secondary" onClick={copyEmail}>
             Copy email
@@ -232,4 +232,4 @@ const ViewTutoringSession = () => {
   );
 };
 
-export default ViewTutoringSession;
+export default ViewTutoringPost;

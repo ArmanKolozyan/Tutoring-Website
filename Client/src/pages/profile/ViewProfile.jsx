@@ -47,14 +47,14 @@ const ViewProfile = () => {
     return day+'/'+month+'/'+year;
   }
 
-  let Name = user.firstname;
-  let SurName = user.lastname;
-  let Birthdate = user.birthDate;
-  let EmailAdress = user.email;
+  let name = user.firstname;
+  let surName = user.lastname;
+  let birthdate = user.birthDate;
+  let emailAdress = user.email;
   const [studies, setStudies] = useState([]); // must be initialised by an empty array! otherwise not possible to call 'map' 
-  let ProfilePicture = `../uploads/${user.img}`;
+  let profilePicture = `../uploads/${user.img}`;
   let description = user.intro;
-  let PhoneNumber = "0411929242";
+  let phoneNumber = "0411929242";
 
   // get the studies of the user
   useEffect(() => {
@@ -81,8 +81,8 @@ const ViewProfile = () => {
           <Col md="auto">
             <div className="PersonInfo">
               <Row className="justify-content-md-center">
-                <h5> {Name} </h5> <h6> {SurName} </h6>
-                <p>I was born on {Birthdate ? formatDate(Birthdate.slice(0,10)) : ""}.</p>
+                <h5> {name} </h5> <h6> {surName} </h6>
+                <p>I was born on {birthdate ? formatDate(birthdate.slice(0,10)) : ""}.</p>
               </Row>
 
 
@@ -96,12 +96,12 @@ const ViewProfile = () => {
                 <Form.Label>Contact Information:</Form.Label>
                 <Col md="auto">
                 <FloatingLabel label="Phonenumber">
-                    <Form.Control as="textarea" readOnly value={PhoneNumber} style={{"resize": "none"}} />
+                    <Form.Control as="textarea" readOnly value={phoneNumber} style={{"resize": "none"}} />
                   </FloatingLabel>
                 </Col>
                 <Col md="auto">
                   <FloatingLabel label="Email address">
-                    <Form.Control as="textarea" readOnly value={EmailAdress} style={{"resize": "none"}} />
+                    <Form.Control as="textarea" readOnly value={emailAdress} style={{"resize": "none"}} />
                   </FloatingLabel>
                 </Col>
               </Row>
@@ -112,7 +112,7 @@ const ViewProfile = () => {
           <Col md="auto">
             <div className="ProfilePicture">
               <Card style={{ width: "20rem", border: "0" }}>
-                <Card.Img variant="top" src={ProfilePicture} />
+                <Card.Img variant="top" src={profilePicture} />
                 <Card.Body></Card.Body>
               </Card>
             </div>

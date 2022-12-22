@@ -3,7 +3,7 @@ import React from "react"
 /**
  * INFORMATION ABOUT THE POST SHOWN WHEN VIEWING A PARTICULAR TUTORING POST
  */
-function TutoringSessionInfo(props) {
+function TutoringPostInfo(props) {
   let title = props.title;
   let faculty = props.faculty;
   let price = props.price;
@@ -31,4 +31,4 @@ function TutoringSessionInfo(props) {
   )
 }
 
-export default TutoringSessionInfo
+export default TutoringPostInfo
