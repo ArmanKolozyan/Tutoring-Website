@@ -1,7 +1,7 @@
 import React from "react";
 import Row from "react-bootstrap/Row";
 import { FaStar } from "react-icons/fa";
-import {colors} from "../constants.js"
+import {colors} from "../../constants.js"
 
 /**
  * COMPONENT FOR VIEWING A SINGLE REVIEW 

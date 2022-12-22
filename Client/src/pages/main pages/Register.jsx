@@ -6,9 +6,8 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.css";
-import "../style.scss";
-import { PasswordContext } from "../context/PasswordContext";
-import { useContext, useEffect } from "react";
+import "../../style.scss";
+import { useEffect } from "react";
 
 /**
  * COMPONENT FOR THE REGISTER PAGE

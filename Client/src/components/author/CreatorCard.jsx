@@ -7,11 +7,11 @@ import { useState, useEffect } from "react";
 
 
 /**
- * INFORMATION ABOUT THE TUTOR THAT IS SHOWN ON EACH POST OF THAT USER
+ * INFORMATION ABOUT THE CONTENT CREATOR THAT IS SHOWN NEXT TO EACH POST OF THAT USER
  * The props speak for speak for themselves
  * @returns 
  */
-function TutorInfo(props) {
+function CreatorCard(props) {
   let tutorName = props.tutorName;
   let tutorAge = props.tutorAge;
   let tutorText = props.tutorText;
@@ -74,4 +74,4 @@ function TutorInfo(props) {
   );
 }
 
-export default TutorInfo;
+export default CreatorCard;

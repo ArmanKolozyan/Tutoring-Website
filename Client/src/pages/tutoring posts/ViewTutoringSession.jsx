@@ -2,19 +2,19 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import TutoringSessionInfo from "../components/TutoringSessionInfo";
-import TutorInfo from "../components/TutorCard";
-import TutoringSessionDescription from "../components/TutoringSessionDescription";
+import TutoringSessionInfo from "../../components/tutoring posts/TutoringSessionInfo";
+import TutorInfo from "../../components/author/CreatorCard";
+import TutoringSessionDescription from "../../components/tutoring posts/TutoringSessionDescription";
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation, Link, useNavigate } from "react-router-dom";
-import CreateReview from "../components/CreateReview";
-import reviewTypes from "../components/reviewTypes";
-import ViewReviews from "../components/ViewReviews";
-import { ViewMap } from "../components/ViewMap";
+import CreateReview from "../../components/reviews/CreateReview";
+import reviewTypes from "../../components/reviews/ReviewTypes";
+import ViewReviews from "../../components/reviews/ViewReviews";
+import { ViewMap } from "../../components/map/ViewMap";
 import { useContext } from "react";
-import { PasswordContext } from "../context/PasswordContext";
+import { PasswordContext } from "../../context/PasswordContext";
 
 import Modal from "react-bootstrap/Modal";
 

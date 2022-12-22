@@ -5,8 +5,8 @@ import Col from "react-bootstrap/Col";
 import axios from "axios";
 import {useLocation } from "react-router-dom";
 import moment from "moment";
-import reviewTypes from "./reviewTypes";
-import {colors} from "../constants.js"
+import reviewTypes from "./ReviewTypes";
+import {colors} from "../../constants.js"
 
 /**
  * COMPONENT TO WRITE A REVIEW FOR A TUTORING POST

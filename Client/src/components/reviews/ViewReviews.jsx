@@ -1,11 +1,12 @@
-import Separator from "../components/Separator";
+import Separator from "../pagination/Separator";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ReviewsList from "./ReviewsList";
 
 /**
  * COMPONENT FOR VIEWING ALL THE REVIEWS OF A SINGLE POST
- * BY PROVIDING AS ARGUMENT THE ID OF THE BEST.
+ * BY PROVIDING AS ARGUMENT THE ID OF THE POST. THIS IS 
+ * IN OTHER WORDS A ReviewsList COMBINED WITH PAGINATION.
  */
 const ViewReviews = ({ id }) => {
   const [reviews, setReviews] = useState([]);

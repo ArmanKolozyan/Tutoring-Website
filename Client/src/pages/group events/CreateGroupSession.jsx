@@ -5,10 +5,8 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import "../style.scss";
+import "../../style.scss";
 import axios from "axios";
-import { PasswordContext } from "../context/PasswordContext";
-import { useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 /**

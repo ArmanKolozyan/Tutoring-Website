@@ -1,8 +1,8 @@
-import PostCards from "../components/PostCards";
-import Separator from "../components/Separator";
+import PostCards from "../../components/pagination/PostCards";
+import Separator from "../../components/pagination/Separator";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Searchbar from "../components/GroupSessionSearchbar";
+import Searchbar from "../../components/searching/GroupSessionSearchbar";
 
 /**
  * COMPONENT FOR PAGINATING THE GROUP SESSIONS

@@ -5,13 +5,13 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import "../style.scss";
+import "../../style.scss";
 import axios from "axios";
 import moment from "moment";
-import { TutorMap, mapRef, giveRegions } from "../components/TutorMap";
+import { TutorMap, mapRef, giveRegions } from "../../components/map/TutorMap";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import getUserLocation from "../components/GetUserLocation";
+import getUserLocation from "../../components/map/GetUserLocation";
 
 /**
  * COMPONENT FOR CREATING A TUTORING POST

@@ -2,8 +2,8 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ProfileInfo from "../components/ProfileInfo";
-import UpdatePicture from "../components/UpdatePicture";
+import ProfileInfo from "../../components/profile/ProfileInfo";
+import UpdatePicture from "../../components/profile/UpdatePicture";
 
 /**
  * COMPONENT FOR VIEWING AND EDITING MY OWN PROFILE.

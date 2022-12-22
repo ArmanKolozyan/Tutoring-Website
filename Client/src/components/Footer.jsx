@@ -5,7 +5,7 @@ import "../style.scss";
 
 
 /**
- * OUR FOOTER
+ * THE FOOTER COMPONENT
  * @returns 
  */
 const Footer = () => {

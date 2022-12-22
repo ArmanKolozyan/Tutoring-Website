@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import axios from "axios";
-import { PasswordContext } from "../context/PasswordContext";
+import { PasswordContext } from "../../context/PasswordContext";
 import { useContext } from "react";
 
 /**

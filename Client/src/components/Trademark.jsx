@@ -3,7 +3,7 @@ import Logo from "../images/Logo.png";
 
 
 /**
- * OUR LOGO
+ * THE LOGO OF THE WEBSITE
  */
 const Trademark = () => {
   return (

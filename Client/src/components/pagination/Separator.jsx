@@ -1,13 +1,6 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 
-/// COMPONENT FOR HANDLING THE PAGE NUMBERS FOR PAGINATION
-// Arguments:
-// nmbrPerPage => number of posts per page
-// totalNmbr => total number of posts
-// separateFunc => callback funtion that gets called when
-// the users presses on one of the pages
-
 /**
  * COMPONENT FOR HANDLING THE PAGE NUMBERS FOR PAGINATION
  * Arguments:

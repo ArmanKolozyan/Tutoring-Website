@@ -1,19 +1,19 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Home from "./pages/Home";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import CreateTutoringSession from "./pages/CreateTutoringSession";
-import ViewTutoringSession from "./pages/ViewTutoringSession";
+import Home from "./pages/main pages/Home";
+import Register from "./pages/main pages/Register";
+import Login from "./pages/main pages/Login";
+import CreateTutoringSession from "./pages/tutoring posts/CreateTutoringSession";
+import ViewTutoringSession from "./pages/tutoring posts/ViewTutoringSession";
 import Footer from "./components/Footer";
 import Trademark from "./components/Trademark";
 import Navigationbar from "./components/Navigationbar";
 import "./style.scss";
-import MyProfile from "./pages/MyProfile";
-import ViewProfile from "./pages/ViewProfile";
-import CreateGroupSession from "./pages/CreateGroupSession";
-import ViewGroupSession from "./pages/ViewGroupSession";
-import ViewTutoringSessions from "./pages/ViewTutoringSessions";
-import ViewGroupSessions from "./pages/ViewGroupSessions";
+import MyProfile from "./pages/profile/MyProfile";
+import ViewProfile from "./pages/profile/ViewProfile";
+import CreateGroupSession from "./pages/group events/CreateGroupSession";
+import ViewGroupSession from "./pages/group events/ViewGroupSession";
+import ViewTutoringSessions from "./pages/tutoring posts/ViewTutoringSessions";
+import ViewGroupSessions from "./pages/group events/ViewGroupSessions";
 import ScrollToTop from "./components/ScrollToTop";
 
 // Using an Outlet component of React to avoid

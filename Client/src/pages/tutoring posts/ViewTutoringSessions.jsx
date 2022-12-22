@@ -1,8 +1,8 @@
-import PostCards from "../components/PostCards";
-import Separator from "../components/Separator";
+import PostCards from "../../components/pagination/PostCards";
+import Separator from "../../components/pagination/Separator";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Searchbar from "../components/TutoringSessionSearchbar";
+import Searchbar from "../../components/searching/TutoringSessionSearchbar";
 
 /**
  * COMPONENT FOR PAGINATING THE TUTORING POSTS

@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Welcome from "../components/Welcome";
+import Welcome from "../../components/Welcome";
 
 /**
  * COMPONENT FOR THE HOME PAGE (contains the welcome screen)

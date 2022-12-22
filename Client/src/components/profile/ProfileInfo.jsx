@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import { PasswordContext } from "../context/PasswordContext";
+import { PasswordContext } from "../../context/PasswordContext";
 import { useContext } from "react";
 import Select from "react-select";
 import { useEffect } from "react";
