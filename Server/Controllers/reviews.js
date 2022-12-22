@@ -34,9 +34,10 @@ export const getSinglePostReviews = (req, res) => {
 
 export const getAverageRating = (req, res) => {
   const author_id = req.query.tutor_id;
-  const q = "SELECT AVG(rating) as average FROM post_reviews r JOIN users u ON r.authorid = u.id WHERE u.id = authorid ";
+  const q = "SELECT AVG(rating) as average FROM post_reviews r JOIN users u ON r.authorid = u.id WHERE r.authorid = ?";
 
-  db.query(q, [req.params.id], (err, data) => {
+  console.log(req.query)
+  db.query(q, [author_id], (err, data) => {
     if (err) return res.status(500).json({ message: "Fetching user rating failed.", data: [] })
     return res.status(200).json({ message: "", data: Math.round(data[0].average) });
   });

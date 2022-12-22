@@ -15,7 +15,6 @@ function TutorInfo(props) {
   const [avgRating, setAvgRating] = useState();
 
   useEffect(() => {
-    console.log("ressss")
     const fetchPosts = async () => {
       try {
         const res = await axios({
@@ -31,8 +30,10 @@ function TutorInfo(props) {
         console.log(err.response.data.message);
       }
     };
+    if (tutorID !== undefined) {
     fetchPosts();
-  }, []);
+    }
+  }, [tutorID]);
 
   function getAge(dateString) {
     var today = new Date();
