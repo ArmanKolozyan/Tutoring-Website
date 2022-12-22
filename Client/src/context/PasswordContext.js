@@ -10,6 +10,8 @@ export const AuthConfig = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
 
 
+  const [error, setError] = useState(false)
+
   const login = async (loginEmail, loginPassword) => {
     try {
       const res = await axios({
@@ -25,7 +27,8 @@ export const AuthConfig = ({ children }) => {
         setCurrentUser(res.data.data);
       }
     } catch (err) {
-      console.log(err.response.data.message);
+      console.log("in")
+      setError(err.response.data.message);
     }
   };
 
@@ -47,7 +50,7 @@ export const AuthConfig = ({ children }) => {
   }, [currentUser]);
 
   return (
-    <PasswordContext.Provider value={{ currentUser, setCurrentUser, login, logout }}>
+    <PasswordContext.Provider value={{ currentUser, setCurrentUser, login, logout, error }}>
       {children}
     </PasswordContext.Provider>
   );

@@ -7,6 +7,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.css";
 import "../style.scss";
+import { PasswordContext } from "../context/PasswordContext";
+import { useContext, useEffect } from "react";
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -15,6 +17,8 @@ const Register = () => {
   const [registerPassword, setRegisterPassword] = useState("");
   const [birthDate, setBirthDate] = useState("");
   // const [field, setField] = useState();
+  const { error } = useContext(PasswordContext);
+  const [showError, setShowError] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,6 +39,13 @@ const Register = () => {
       console.log(err.response.data.message);
     }
   };
+
+  useEffect(() => {
+    console.log(error)
+    if (error !== false) {
+    setShowError(true)
+    }
+}, [error]);
 
   return (
     <div className="RegisterForm">
@@ -65,8 +76,10 @@ const Register = () => {
             onChange={(e) => setRegisterPassword(e.target.value)}
           ></input>
           <button type="submit">Register</button>
-          <p>Possible error will be shown here!</p>
-          <span>Already have an account?</span>
+          {showError ? 
+        error
+        :
+        ""}          <span>Already have an account?</span>
           <Link className="linkStyle" to="/login">
             Login
           </Link>

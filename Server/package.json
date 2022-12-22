@@ -29,6 +29,7 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "redis": "^4.5.1",
-    "redis-server": "^1.2.2"
+    "redis-server": "^1.2.2",
+    "tld-extract": "^2.1.0"
   }
 }

@@ -11,6 +11,8 @@ const Login = () => {
 
   const { login } = useContext(PasswordContext);
   const { currentUser } = useContext(PasswordContext);
+  const { error } = useContext(PasswordContext);
+  const [showError, setShowError] = useState(false)
   const { logout } = useContext(PasswordContext);
   const navigate = useNavigate();
 
@@ -26,6 +28,13 @@ const Login = () => {
     e.preventDefault();
     login(loginEmail, loginPassword);
   };
+
+  useEffect(() => {
+    console.log(error)
+    if (error !== false) {
+    setShowError(true)
+    }
+}, [error]);
 
   return (
     <div className="auth">
@@ -44,7 +53,10 @@ const Login = () => {
           onChange={(e) => setLoginPassword(e.target.value)}
         />
         <button type="submit">Login</button>
-        <p>Possible error will be shown here!</p>
+        {showError ? 
+        error
+        :
+        ""}
         <span>Don't have an account?</span>
         <Link className="linkStyle" to="/register">
           Register
