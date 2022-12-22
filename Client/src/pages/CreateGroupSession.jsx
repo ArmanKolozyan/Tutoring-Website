@@ -32,7 +32,7 @@ const CreateGroupSession = () => {
   };
 
   const [title, setTitle] = useState(post?.title || "");
-  const [limited, setLimited] = useState(post?.limited || "1");
+  const [limited, setLimited] = useState(post?.limited || true);
   const [space, setSpace] = useState(post?.max_inscriptions || "");
   const [faculty, setFaculty] = useState(post?.faculty || "");
   const [course, setCourse] = useState(post?.course || "");
@@ -48,7 +48,6 @@ const CreateGroupSession = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       if (post) {
         const postId = await axios({
@@ -69,7 +68,7 @@ const CreateGroupSession = () => {
             location,
           },
         });
-        navigate(`/groupsession/${postId.data.data}`);
+        navigate(`/grouppost/${postId.data.data}`);
       } else {
         const postId = await axios({
           method: "post",
@@ -89,9 +88,11 @@ const CreateGroupSession = () => {
             location,
           },
         });
-        navigate(`/groupsession/${postId.data.data}`);
+        navigate(`/grouppost/${postId.data.data}`);
       }
     } catch (err) {
+      console.log(free)
+      console.log(limited)
       console.log(err.response.data.message);
     }
   };
@@ -135,13 +136,13 @@ const CreateGroupSession = () => {
   };
 
   return (
-    <div className="create-tutoring-session">
+    <div className="create-tutoring-post">
       <Form onSubmit={(event) => handleSubmit(event)}>
         <Row className="justify-content-md-center">
           <Col md="auto">
             <Row className="">
               <Col md="auto">
-                <h3>{post ? <h3> Edit group session </h3> : <h3> Create a new group session </h3>}</h3>
+                <h3>{post ? <h3> Edit group post </h3> : <h3> Create a new group post </h3>}</h3>
               </Col>
             </Row>
 
@@ -151,7 +152,7 @@ const CreateGroupSession = () => {
                   value={title}
                   type="text"
                   required
-                  placeholder="Session Title"
+                  placeholder="Post title"
                   onChange={(e) => setTitle(e.target.value)}
                 />
               </Col>
@@ -211,7 +212,7 @@ const CreateGroupSession = () => {
                 <Form.Check
                   checked={checkFree()}
                   type="checkbox"
-                  label="Free groupsession"
+                  label="Free grouppost"
                   className="checkbox"
                   onChange={(e) => setFree(e.target.checked)}
                 />
@@ -219,8 +220,8 @@ const CreateGroupSession = () => {
               <Col md="5">
                 <Form.Control
                   value={price}
-                  style={{ width: "20%" }}
                   required
+                  style={{ width: "20%" }}
                   onChange={(e) => setPrice(e.target.value)}
                   type="number"
                   placeholder="Price"
@@ -256,12 +257,12 @@ const CreateGroupSession = () => {
               />
             </Col>
 
-            <Form.Label>Session description</Form.Label>
+            <Form.Label>Post description</Form.Label>
             <Col md="auto">
               <Form.Control
                 value={desc}
                 as="textarea"
-                placeholder="Give a description of what this groupsession will be like"
+                placeholder="Give a description of what this grouppost will be like"
                 maxLength={573}
                 rows={5}
                 required

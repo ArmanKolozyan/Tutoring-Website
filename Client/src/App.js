@@ -51,19 +51,19 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/createTutoringSession",
+        path: "/createTutoringPost",
         element: <CreateTutoringSession />,
       },
       {
-        path: "/createGroupSession",
+        path: "/createGroupPost",
         element: <CreateGroupSession />,
       },
       {
-        path: "/tutoringSession/:id",
+        path: "/tutoringPost/:id",
         element: <ViewTutoringSession />,
       },
       {
-        path: "/groupSession/:id",
+        path: "/groupPost/:id",
         element: <ViewGroupSession />,
       },
       {
@@ -79,11 +79,11 @@ const router = createBrowserRouter([
         element: <ViewSummaries />,
       },
       {
-        path: "/tutoringsessions",
+        path: "/tutoringPosts",
         element: <ViewTutoringSessions />,
       },
       {
-        path: "/groupsessions",
+        path: "/groupPosts",
         element: <ViewGroupSessions/>,
       },
     ],

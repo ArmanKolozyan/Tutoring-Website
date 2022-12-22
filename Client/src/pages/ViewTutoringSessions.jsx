@@ -49,6 +49,7 @@ const ViewTutoringSessions = () => {
             end: lastPostidx,
           },
         });
+        console.log(res.data.data)
         setCurrentPosts(res.data.data);
         setFetching(false);
       } catch (err) {

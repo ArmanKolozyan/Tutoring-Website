@@ -36,7 +36,7 @@ const GroupCard = ({ post }) => {
           withCredentials: true,
           url: `http://localhost:8800/groupposts/registrations/count`,
           params: {
-            session_id: post.id,
+            post_id: post.id,
           },
         });
         setRegistrations(res.data.data);
@@ -62,7 +62,7 @@ const GroupCard = ({ post }) => {
           <Row className="justify-content-md-center">
             <Col>
               <Row className="justify-content-md-center">
-                <Link className="link" to={`/groupsession/${post.id}`}>
+                <Link className="link" to={`/grouppost/${post.id}`}>
                   <h1 style={{ color: "black", "overflow-wrap": "break-word" }}>{post.title}</h1>
                 </Link>
               </Row>
@@ -81,7 +81,7 @@ const GroupCard = ({ post }) => {
                 <Col>
                   <p>
                     {" "}
-                    The price of this session is :{" "}
+                    The price of this post is :{" "}
                     <span style={{ fontWeight: "bold" }}> € {post.free ? 0 : post.price}</span>{" "}
                   </p>
                 </Col>
@@ -99,7 +99,7 @@ const GroupCard = ({ post }) => {
 
               <Row>
                 <Col md="auto">
-                  <Link to={`/groupsession/${post.id}`} className="btn btn-primary">
+                  <Link to={`/grouppost/${post.id}`} className="btn btn-primary">
                     Visit Post
                   </Link>
                 </Col>

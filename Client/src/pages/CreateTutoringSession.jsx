@@ -80,7 +80,7 @@ const CreateTutoringSession = () => {
             regions: giveRegions(),
           },
         });
-        navigate(`/tutoringsession/${postId.data.data}`);
+        navigate(`/tutoringpost/${postId.data.data}`);
       } else {
         const postId = await axios({
           method: "post",
@@ -98,7 +98,7 @@ const CreateTutoringSession = () => {
             regions: giveRegions(),
           },
         });
-        navigate(`/tutoringsession/${postId.data.data}`);
+        navigate(`/tutoringpost/${postId.data.data}`);
       }
     } catch (err) {
       console.log(err.response.data.message);
@@ -106,12 +106,12 @@ const CreateTutoringSession = () => {
   };
 
   return (
-    <div className="create-tutoring-session">
+    <div className="create-tutoring-post">
       <Form onSubmit={(event) => handleSubmit(event)}>
         <Row className="justify-content-md-center">
           <Col md="auto">
             <Row className="">
-              <Col md="auto">{post ? <h3> Edit tutoring session </h3> : <h3> Create a new tutoring session </h3>}</Col>
+              <Col md="auto">{post ? <h3> Edit tutoring post </h3> : <h3> Create a new tutoring post </h3>}</Col>
             </Row>
             <Row className="">
               <Col md="auto">
@@ -141,7 +141,7 @@ const CreateTutoringSession = () => {
             </Row>
 
             <Row className="">
-              <Form.Label>Session information</Form.Label>
+              <Form.Label>Post information</Form.Label>
               <Col md="5">
                 <Form.Control
                   required
@@ -164,18 +164,18 @@ const CreateTutoringSession = () => {
                 <Form.Check
                   checked={checkFree()}
                   type="checkbox"
-                  label="Free Test-session"
+                  label="Free Test-post"
                   className="checkbox"
                   onChange={(e) => setTest(e.target.checked)}
                 />
               </Col>
             </Row>
-            <Form.Label>Session description</Form.Label>
+            <Form.Label>Post description</Form.Label>
 
             <Col md="auto">
               <Form.Control
                 as="textarea"
-                placeholder="Give a description of how to session will be given"
+                placeholder="Give a description on how the sessions will be given"
                 maxLength={573}
                 rows={5}
                 required

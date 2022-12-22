@@ -118,24 +118,24 @@ const ViewTutoringSession = () => {
         withCredentials: true,
         url: `http://localhost:8800/tutoringposts/${post.id}`,
       });
-      navigate("/tutoringsessions")
+      navigate("/tutoringposts")
     } catch (err) {
       console.log(err.response.data.message);
     }
   }
 
   return (
-    <div className="ViewTutoringSession">
+    <div className="ViewTutoringPost">
       <Container>
         <Row className="justify-content-md-center">
           <Col md="auto">
             <Row className="justify-content-md-center">
-              <div className="TutoringSessionInfo">
+              <div className="TutoringPostInfo">
                 <TutoringSessionInfo
-                  tutoringSessionName={post.course}
-                  tutoringSessionFac={post.field_of_study}
-                  tutoringSessionPrice={post.price}
-                  tutoringSessionFreeTrial={post.free_test === 1 ? true : false}
+                  tutoringPostName={post.course}
+                  tutoringPostFac={post.field_of_study}
+                  tutoringPostPrice={post.price}
+                  tutoringPostFreeTrial={post.free_test === 1 ? true : false}
                   experience={post.experience}
                 />
               </div>
@@ -143,7 +143,7 @@ const ViewTutoringSession = () => {
 
             <Row className="justify-content-md-center">
               <Col md="">
-                <div className="TutoringSessionDescription">
+                <div className="TutoringPostDescription">
                   <h6> Some words from the tutor: </h6>
                   <TutoringSessionDescription description={post.description} />
                 </div>
@@ -164,7 +164,7 @@ const ViewTutoringSession = () => {
               {currentUser.id === post.uid && (
                 <>
                   <div className="edit">
-                    <Link to={`/createtutoringsession?edit=${post.id}`} state={post} className="btn btn-secondary">
+                    <Link to={`/createtutoringpost?edit=${post.id}`} state={post} className="btn btn-secondary">
                       Edit Post
                     </Link>
                   </div>

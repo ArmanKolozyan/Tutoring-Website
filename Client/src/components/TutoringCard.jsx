@@ -38,7 +38,7 @@ const TutoringCard = ({ post }) => {
           <Row className="justify-content-md-center">
             <Col >
               <Row className="justify-content-md-center">
-                <Link className="link" to={`/tutoringsession/${post.id}`}>
+                <Link className="link" to={`/tutoringpost/${post.id}`}>
                   <h1 style={{ color: "black", "overflow-wrap": "break-word"}}>{post.course}</h1>
                 </Link>
               </Row>
@@ -74,7 +74,7 @@ const TutoringCard = ({ post }) => {
 
               <Row>
                 <Col md="auto">
-                  <Link to={`/tutoringsession/${post.id}`} className="btn btn-primary">
+                  <Link to={`/tutoringpost/${post.id}`} className="btn btn-primary">
                     Visit Post
                   </Link>
                 </Col>

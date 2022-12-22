@@ -13,15 +13,15 @@ function GroupSessionInfo(props) {
   let spotsTaken = props.spotsTaken;
 
 
-  let priceText = "the cost of participation in this groupsession is " + price;
+  let priceText = "the cost of participation in this group session is " + price;
   if (free) {
-    priceText = " part of this group session is free!";
+    priceText = " participation of this group session is free!";
   }
 
   let limitedpacestext = "Spots for this session are not limited.";
   let limitedspacetext2 = "";
   if (limited) {
-    limitedpacestext = "This is a groupsession with limited space, and";
+    limitedpacestext = "This is a group session with limited space, and";
     limitedspacetext2 = spotsTaken + " out of the " + space + " have been taken already!";
   }
 
@@ -42,7 +42,7 @@ function GroupSessionInfo(props) {
         {dateTime ? formatDate(dateTime) + " " + dateTime.slice(11,16) : ""}
       </p>
       <p>
-        <h6> The Target audience of this groupsession is:</h6>
+        <h6> The Target audience of this group session is:</h6>
         people from the {faculty} faculty, following the {course} course
       </p>
 

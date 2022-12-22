@@ -47,7 +47,7 @@ export const addGroupPost = (req, res) => {
   ];
 
   db.query(q, [values], (err, data) => {
-    if (err) return res.status(500).json({ message: "Inserting the given group post failed.", data: [] });
+    if (err) return console.log(err);
     const post_id = data.insertId;
     return res.status(200).json({ message: "", data: post_id });
   });
@@ -189,7 +189,7 @@ export const getGroupPostsAmount = (req, res) => {
 // REGISTRATIONS
 
 export const signUpForSession = (req, res) => {
-  const values = [req.body.student_id, req.body.session_id];
+  const values = [req.body.student_id, req.body.post_id];
 
   if (!req.body.signup) {
     const q = "DELETE FROM session_registrations WHERE `student_id` = ? AND `session_id` = ?";
@@ -213,7 +213,7 @@ export const signUpForSession = (req, res) => {
 };
 
 export const is_signedUp = (req, res) => {
-  const values = [req.query.student_id, req.query.session_id];
+  const values = [req.query.student_id, req.query.post_id];
 
   let q = "SELECT COUNT(student_id) AS amount FROM session_registrations WHERE student_id = ? AND session_id = ?";
 
@@ -229,11 +229,11 @@ export const is_signedUp = (req, res) => {
 };
 
 export const registrationCount = (req, res) => {
-  const session_id = req.query.session_id;
+  const post_id = req.query.post_id;
 
   let q = "SELECT COUNT(student_id) AS amount FROM session_registrations WHERE session_id = ?";
 
-  db.query(q, session_id, (err, data) => {
+  db.query(q, post_id, (err, data) => {
     if (err) {
       return res.status(500).json({
         message: "Fetching the count of registration for the given session failed.",

@@ -91,7 +91,7 @@ const ViewGroupSession = () => {
           url: `http://localhost:8800/groupposts/registrations/isSignedUp`,
           params: {
             student_id: currentUser.id,
-            session_id: post.id,
+            post_id: post.id,
           },
         });
         setSignUp(res.data.data);
@@ -112,7 +112,7 @@ const ViewGroupSession = () => {
           withCredentials: true,
           url: `http://localhost:8800/groupposts/registrations/count`,
           params: {
-            session_id: post.id,
+            post_id: post.id,
           },
         });
         setCount(res.data.data);
@@ -152,7 +152,7 @@ const ViewGroupSession = () => {
         withCredentials: true,
         url: `http://localhost:8800/groupposts/${post.id}`,
       });
-      navigate("/groupsessions");
+      navigate("/groupposts");
     } catch (err) {
       console.log(err.response.data.message);
     }
@@ -167,7 +167,7 @@ const ViewGroupSession = () => {
           url: "http://localhost:8800/groupposts/registrations",
           data: {
             student_id: currentUser.id,
-            session_id: post.id,
+            post_id: post.id,
             signup: signUp,
           },
         });
@@ -200,7 +200,7 @@ const ViewGroupSession = () => {
   }
 
   return (
-    <div className="ViewGroupSession">
+    <div className="ViewGroupPost">
       <Container>
         <Row className="justify-content-md-center">
           <Row className="justify-content-md-center">
@@ -210,7 +210,7 @@ const ViewGroupSession = () => {
           </Row>
           <Col md="auto">
             <Row className="justify-content-md-center">
-              <div className="GroupSessionInfo">
+              <div className="GroupPostInfo">
                 <GroupSessionInfo
                   limited={post.limited === 1 ? true : false}
                   space={post.max_inscriptions}
@@ -227,7 +227,7 @@ const ViewGroupSession = () => {
 
             <Row className="justify-content-md-center">
               <Col >
-                <div className="GroupSessionDescription">
+                <div className="GroupPostDescription">
                   <GroupSessionDescription description={post.description} />
                 </div>
               </Col>
@@ -253,7 +253,7 @@ const ViewGroupSession = () => {
               {currentUser.id === post.userid && (
                 <>
                   <div className="edit">
-                    <Link to={`/creategroupsession?edit=${post.id}`} state={post} className="btn btn-secondary">
+                    <Link to={`/creategrouppost?edit=${post.id}`} state={post} className="btn btn-secondary">
                       Edit Post
                     </Link>
                   </div>

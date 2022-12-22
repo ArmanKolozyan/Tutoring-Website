@@ -57,12 +57,12 @@ const TutoringCard = ({ post }) => {
         </div>
       </div>
       <div className="content">
-        <Link className="link" to={`/tutoringsession/${post.id}`}>
+        <Link className="link" to={`/tutoringpost/${post.id}`}>
           <h1 style={{ color: "black" }}>{post.course}</h1>
         </Link>
         <p>{post.description}</p>
         <div className="myButton">
-          <Link className="link" to={`/tutoringsession/${post.id}`}>
+          <Link className="link" to={`/tutoringpost/${post.id}`}>
             <button>Visit post</button>
           </Link>
         </div>

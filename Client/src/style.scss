@@ -294,9 +294,9 @@ $ourOrange: #fc3e03;
     }
   }
 
-  // TUTORING SESSION
+  // TUTORING POST
 
-  .create-tutoring-session {
+  .create-tutoring-post {
     background-color: $ourOrange;
     form {
       width: auto;
@@ -313,8 +313,8 @@ $ourOrange: #fc3e03;
     }
   }
 
-  .ViewTutoringSession {
-    .TutoringSessionInfo {
+  .ViewTutoringPost {
+    .TutoringPostInfo {
       max-width: 30rem;
     }
 
@@ -331,7 +331,7 @@ $ourOrange: #fc3e03;
       }
     }
 
-    .TutoringSessionDescription {
+    .TutoringPostDescription {
       textarea {
         margin-left: -2vh;
         height: 17rem;
@@ -425,10 +425,10 @@ $ourOrange: #fc3e03;
     }
   }
 
-  // GROUP SESSION
+  // GROUP POST
 
-  .ViewGroupSession {
-    .GroupSessionInfo {
+  .ViewGroupPost {
+    .GroupPostInfo {
       max-width: 30rem;
 
       .progress {
@@ -452,7 +452,7 @@ $ourOrange: #fc3e03;
       }
     }
 
-    .GroupSessionDescription {
+    .GroupPostDescription {
       textarea {
         height: 17rem;
         width: 100%;

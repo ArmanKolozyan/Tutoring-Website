@@ -12,13 +12,13 @@ const PostCards = ({ posts, fetching, is_tutorcard }) => {
   return (
     <ul className="list-group mb-4">
       {is_tutorcard
-        ? posts.map((post) => {
+        ? posts.map((post) =>
             (
               <li key={post.id} className="list-group-item">
                 <TutoringCard post={post} />
               </li>
-            );
-          })
+            )
+          )
         : posts.map((post) => (
             <li key={post.id} className="list-group-item">
               <GroupCard post={post} />
