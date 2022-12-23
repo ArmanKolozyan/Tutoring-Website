@@ -9,8 +9,8 @@ import { userRoutes } from "./Routes/userRoutes.js";
 import { tutoringPostRoutes } from "./Routes/tutoringPostRoutes.js";
 import { groupPostRoutes } from "./Routes/groupPostRoutes.js";
 import { reviewRoutes } from "./Routes/reviewRoutes.js";
-import { createClient } from 'redis';
-import connectRedis from 'connect-redis';
+import { createClient } from 'redis'; // not used anymore because teammates had issues getting it working on Windows
+import connectRedis from 'connect-redis'; // not used anymore because teammates had issues getting it working on Windows
 import dotenv from 'dotenv'
 import path from 'path';
 import {fileURLToPath} from 'url';
@@ -27,6 +27,12 @@ const app = express(); // to have web server
 dotenv.config()
 const SESSION_SECRET = process.env.SESSION_SECRET;
 
+
+//Configure redis 
+// const redisClient = createClient({ legacyMode: true});
+// redisClient.connect().catch(console.error);
+// const RedisStore = connectRedis(session);
+
 app.use(express.json()); // to send data to the database
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -37,6 +43,8 @@ app.use(
 );
 app.use(
   session({
+   // store: new RedisStore({ client: redisClient }),
+   // secret: SESSION_SECRET,
     secret: "secretcode",
     resave: false,
    saveUninitialized: false,

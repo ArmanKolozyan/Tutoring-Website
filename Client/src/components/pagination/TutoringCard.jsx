@@ -5,7 +5,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-
 /**
  * CARDS USED WHEN DISPLAYING POSTS ON MAIN TUTORING PAGE (UNDER THE SEARCH)
  */
@@ -57,7 +56,7 @@ const TutoringCard = ({ post }) => {
     if (post !== undefined) {
       fetchRating();
     }
-    console.log("hhalllo")
+    console.log("hhalllo");
   }, [post]);
 
   return (
@@ -82,7 +81,7 @@ const TutoringCard = ({ post }) => {
                   <p> Average rating :</p>
                   <p>
                     {" "}
-                    <span style={{ fontWeight: "bold" }}> {avgRating===0 ? "/" : avgRating}</span>{" "}
+                    <span style={{ fontWeight: "bold" }}> {avgRating === 0 ? "/" : avgRating}</span>{" "}
                   </p>
                 </Col>
 
@@ -104,7 +103,7 @@ const TutoringCard = ({ post }) => {
               </Row>
 
               <Row className="justify-content-md-center">
-                <p>{post.description}</p>
+                <p>{post.description.length > 80 ? post.description.substring(0, 80) + "..." : post.description} </p>
               </Row>
 
               <Row>

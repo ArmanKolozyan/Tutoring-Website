@@ -69,7 +69,7 @@ export const addGroupPost = (req, res) => {
     req.body.faculty,
     req.body.course,
     req.body.free,
-    req.body.price === "undefined" || req.body.space === "" ? 0 : req.body.price,
+    req.body.price === "undefined" || req.body.price === "" ? 0 : req.body.price,
     req.body.dateAndTime,
     req.body.desc,
     req.user.id,

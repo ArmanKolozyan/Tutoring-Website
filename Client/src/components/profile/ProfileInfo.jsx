@@ -160,7 +160,7 @@ function ProfileInfo() {
               as="textarea"
               value={intro}
               placeholder="Give a description of yourself that will be shown on your profilepage"
-              maxLength={573}
+              maxLength={1500}
               rows={5}
               required
               onChange={(e) => setIntro(e.target.value)}
@@ -175,7 +175,7 @@ function ProfileInfo() {
               as="textarea"
               defaultValue={shortIntro}
               placeholder="Give a description of yourself that will be shown on each post you create"
-              maxLength={200}
+              maxLength={100}
               rows={3}
               onChange={(e) => setShortIntro(e.target.value)}
               required

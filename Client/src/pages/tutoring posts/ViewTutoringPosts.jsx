@@ -23,9 +23,12 @@ const ViewTutoringPosts = () => {
           withCredentials: true,
           url: `http://localhost:8800/tutoringposts/amount`,
         });
+        console.log("ress")
+        console.log(res.data.data)
         setTotalPosts(res.data.data);
         setFetching(false);
       } catch (err) {
+        console.log("ress")
         console.log(err.response.data.message);
       }
     };

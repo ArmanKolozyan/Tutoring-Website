@@ -18,12 +18,18 @@ const Footer = () => {
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-0">
             <h6 class="text-uppercase">about us</h6>
             <hr />
-            <p>We are 3 students ...</p>
+            <p>ASA Tutoring wants to make it possible to achieve a perfect match between a tutor and a student. 
+            Moreover, we hope to facilitate and encourage studying with friends. </p>
           </div>
 
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-0">
             <h6 class="text-uppercase">Useful links</h6>
             <hr />
+            <p>
+              <a href="http://localhost:8800/doc" target="_blank"> 
+                Our API documentation 
+              </a>
+            </p>
             <p>
               <a href="https://www.vub.be/en" target="_blank">
                 VUB Website
@@ -37,11 +43,6 @@ const Footer = () => {
             <p>
               <a href="https://www.wikihow.com/Be-a-Good-Tutor" target="_blank">
                 Become a great tutor
-              </a>
-            </p>
-            <p>
-              <a href="http://localhost:8800/doc" target="_blank"> 
-                Our API documentation 
               </a>
             </p>
           </div>

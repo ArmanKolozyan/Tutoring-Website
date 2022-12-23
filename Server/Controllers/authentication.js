@@ -7,7 +7,7 @@ import {validationResult} from 'express-validator';
  * Registers the user given all the necessary information.
  */
 export const register = (req, res) => {
-  //CHECK EXISTING USER
+  //to check existing user
   const q = "SELECT * FROM users WHERE email = ?";
 
   // validation
@@ -27,7 +27,7 @@ export const register = (req, res) => {
     if (err) res.status(500).json({ message: "Something went wrong with registering the user.", data: [] });
     if (data.length) return res.status(409).json({ message: "The provided email already exists!", data: [] });
     console.log(domain)
-    if (domain !== "vub.be") return res.status(500).json({ message: "The provided email is not a vub email!", data: [] })
+    if (domain !== "vub.be") return res.status(500).json({ message: "The provided email is not a VUB email!", data: [] })
 
     const q1 = "INSERT INTO users(`firstname`, `lastname`, `email`,`password`, `birthDate`) VALUES (?)";
     bcrypt.genSalt(10, (err, salt) => {

@@ -51,7 +51,6 @@ export const groupPostRoutes = (app) => {
 
   app.get(
     "/groupposts/amount",
-    param("id").notEmpty().withMessage("id of the user cannot be empty "),
     getGroupPostsAmount
   );
 

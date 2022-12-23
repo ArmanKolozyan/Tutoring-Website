@@ -88,7 +88,7 @@ const GroupCard = ({ post }) => {
               </Row>
 
               <Row className="justify-content-md-center">
-                <p>{post.description}</p>
+                <p>{post.description.length > 80 ? post.description.substring(0, 80 + "...") : post.description} </p>
               </Row>
 
               <Row>

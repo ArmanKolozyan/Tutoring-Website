@@ -183,6 +183,7 @@ const ViewGroupSession = () => {
       startDate: formatDateForCalendar(post.date_time),
       startTime: post.date_time.slice(11, 16),
       endTime: post.date_time.slice(11, 16),
+      description: post.description,
       options: ["Outlook.com", "Google", "Apple", "Microsoft365"],
       location: post.location,
       timeZone: "Europe/Berlin",
@@ -273,23 +274,29 @@ const ViewGroupSession = () => {
 
         <Row className="justify-content-md-center">
           <Col md="auto">
-            <Button
-              onClick={() => {
-                if (user.id === currentUser.id) {
-                  // you can't sign up for your own event
-                  setCantRegisterForOwnEvent("You can't register for your own event.");
-                } else {
-                  setAction(true);
-                  setSignUp(!signUp);
-                }
-              }}
-            >
-              {" "}
-              {signUp ? "Unsubscribe for this study session" : "Sign up for this study session"}
-            </Button>
+            {post.limited === 1 ? (
+              <Button
+                onClick={() => {
+                  if (user.id === currentUser.id) {
+                    // you can't sign up for your own event
+                    setCantRegisterForOwnEvent("You can't register for your own event.");
+                  } else {
+                    setAction(true);
+                    setSignUp(!signUp);
+                  }
+                }}
+              >
+                {" "}
+                {signUp ? "Unsubscribe for this study session" : "Sign up for this study session"}
+              </Button>
+            ) : (
+              ""
+            )}
             <Row> {cantRegisterForOwnEvent}</Row>
           </Col>
-          <Col md="auto">OR</Col>
+          {post.limited === 1 ?
+          <Col md="auto">OR</Col> :
+          ""}
           <Col md="auto">
             <Button onClick={handleShow}>Contact Group session Organisator</Button>
           </Col>
@@ -303,10 +310,7 @@ const ViewGroupSession = () => {
           <Modal.Title>Contact information of the tutor</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>
-            <br />
-            His/her Email adress is : {user?.email}
-          </p>
+          <p>His/her Email adress is : {user?.email}</p>
           <Button variant="secondary" onClick={copyEmail}>
             Copy email
           </Button>
@@ -320,7 +324,7 @@ const ViewGroupSession = () => {
           <Modal.Title>Deleting Post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          You are deleting your post! Are you sure you want to do this, this action can not be undone.
+          You are deleting your post! Are you sure you want to do this? This action can not be undone.
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseDelete}>

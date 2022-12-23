@@ -34,7 +34,7 @@ const Navigationbar = () => {
           </Nav.Link>
           <Nav.Link href={currentUser ? "/tutoringposts" : "/login"}>
             {" "}
-            <Icon.PersonVideo3 size={20} /> Find tutors
+            <Icon.PersonVideo3 size={20} /> Find Tutors
           </Nav.Link>
 
           {currentUser ? ( // if user is logged in, show profile icon

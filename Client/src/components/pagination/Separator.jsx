@@ -11,8 +11,11 @@ import Button from "react-bootstrap/Button";
  */
 const Separator = ({ nmbrPerPage, totalNmbr, separateFunc }) => {
   const pages = [];
-
+  console.log("hiiii")
+  console.log(totalNmbr)
+  console.log(nmbrPerPage)
   for (let i = 1; i <= Math.ceil(totalNmbr / nmbrPerPage); i++) {
+    console.log(i)
     pages.push(i); // all the pages
   }
 

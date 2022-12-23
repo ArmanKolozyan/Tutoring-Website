@@ -191,7 +191,6 @@ const ViewTutoringPost = () => {
         </Modal.Header>
         <Modal.Body>
           <p>
-            <br />
             His/her Email adress is : {user?.email}
           </p>
           <Button variant="secondary" onClick={copyEmail}>
@@ -207,7 +206,7 @@ const ViewTutoringPost = () => {
           <Modal.Title>Deleting Post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          You are deleting your post! Are you sure you want to do this, this action can not be undone.
+          You are deleting your post! Are you sure you want to do this? This action can not be undone.
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseDelete}>

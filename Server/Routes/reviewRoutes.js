@@ -12,8 +12,8 @@ export const reviewRoutes = (app) => {
    * @apiName addPostReview
    * @apiGroup Reviews
    *
-   * @apiParam {Number} title Title of the post
-   * @apiParam {Number} description Description of the review
+   * @apiParam {String} title Title of the post
+   * @apiParam {String} description Description of the review
    * @apiParam {Number} nrOfStars Number of stars the user has given
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
@@ -40,8 +40,8 @@ export const reviewRoutes = (app) => {
    * @apiSuccess {String} result.message Message containing the return message (error)
    * @apiSuccess {Object} result.data data containing the return value
    * @apiSuccess {Number} result.data.id  id of the post
-   * @apiSuccess {Number} result.data.title Title of the post
-   * @apiSuccess {Number} result.data.description Description of the review
+   * @apiSuccess {String} result.data.title Title of the post
+   * @apiSuccess {String} result.data.description Description of the review
    * @apiSuccess {Number} result.data.nrOfStars Number of stars the user has given
    * @apiSuccess {Date} result.data.date Date and time of the written review
    * @apiSuccess {Number} result.data.authorid id of the author

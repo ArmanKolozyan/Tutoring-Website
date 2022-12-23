@@ -77,7 +77,7 @@ function Searchbar({ separate, callback, start, end, setSearching, setTotalPosts
             <ListGroup.Item>
               <Row className="justify-content-md-center">
                 <Col md="auto">
-                  <FloatingLabel controlId="FieldInput" label="Select a Field">
+                  <FloatingLabel controlId="FieldInput" label="Select a field">
                     <Form.Select onChange={(e) => setField(e.target.value)}>
                       <option value="">All</option>
                       <option value="Science and Bio-engineering Sciences">Science and Bio-engineering Sciences</option>

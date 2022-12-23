@@ -120,6 +120,8 @@ const ViewProfile = () => {
           </div>
           </Col>
         </Row>
+
+        
       </Container>
     </div>
   );
