@@ -28,9 +28,9 @@ export const groupPostRoutes = (app) => {
    * @apiSuccess {String} result.data.title Title of the event
    * @apiSuccess {Boolean} result.data.limited Whether the space is limited or not
    * @apiSuccess {String} result.data.space Maximum number of members the event can have.
-   * @apiSuccess {Number} result.data.faculty Faculty
-   * @apiSuccess {Number} result.data.course Course
-   * @apiSuccess {Number} result.data.free Is the event free?
+   * @apiSuccess {String} result.data.faculty Faculty
+   * @apiSuccess {String} result.data.course Course
+   * @apiSuccess {Boolean} result.data.free Is the event free?
    * @apiSuccess {Number} result.data.price What is the price of the event?
    * @apiSuccess {DateTime} result.data.dateAndTime When will the event take place (date and time), format: YYYY-MM-DD HH:MM:SS
    * @apiSuccess {String} result.data.desc Description of the event.
@@ -66,9 +66,9 @@ export const groupPostRoutes = (app) => {
    * @apiSuccess {String} result.data.title Title of the event
    * @apiSuccess {Boolean} result.data.limited Whether the space is limited or not
    * @apiSuccess {String} result.data.space Maximum number of members the event can have.
-   * @apiSuccess {Number} result.data.faculty Faculty
-   * @apiSuccess {Number} result.data.course Course
-   * @apiSuccess {Number} result.data.free Is the event free?
+   * @apiSuccess {String} result.data.faculty Faculty
+   * @apiSuccess {String} result.data.course Course
+   * @apiSuccess {Boolean} result.data.free Is the event free?
    * @apiSuccess {Number} result.data.price What is the price of the event?
    * @apiSuccess {DateTime} result.data.dateAndTime When will the event take place (date and time), format: YYYY-MM-DD HH:MM:SS
    * @apiSuccess {String} result.data.desc Description of the event.
@@ -85,9 +85,9 @@ export const groupPostRoutes = (app) => {
    * @apiParam {String} title Title of the event
    * @apiParam {Boolean} limited Whether the space is limited or not
    * @apiParam {String} space Maximum number of members the event can have.
-   * @apiParam {Number} faculty Faculty
-   * @apiParam {Number} course Course
-   * @apiParam {Number} free Is the event free?
+   * @apiParam {String} faculty Faculty
+   * @apiParam {String} course Course
+   * @apiParam {Bolean} free Is the event free?
    * @apiParam {Number} price What is the price of the event?
    * @apiParam {DateTime} dateAndTime When will the event take place (date and time), format: YYYY-MM-DD HH:MM:SS
    * @apiParam {String} desc Description of the event.
@@ -120,9 +120,9 @@ export const groupPostRoutes = (app) => {
    * @apiParam {String} title Title of the event
    * @apiParam {Boolean} limited Whether the space is limited or not
    * @apiParam {String} space Maximum number of members the event can have
-   * @apiParam {Number} faculty Faculty
-   * @apiParam {Number} course Course
-   * @apiParam {Number} free Is the event free?
+   * @apiParam {String} faculty Faculty
+   * @apiParam {String} course Course
+   * @apiParam {Boolean} free Is the event free?
    * @apiParam {Number} price What is the price of the event?
    * @apiParam {DateTime} dateAndTime When will the event take place (date and time), format: YYYY-MM-DD HH:MM:SS
    * @apiParam {String} desc Description of the event
@@ -182,9 +182,9 @@ export const groupPostRoutes = (app) => {
    * @apiSuccess {String} result.data.groupEvent.title Title of the event
    * @apiSuccess {Boolean} result.data.groupEvent.limited Whether the space is limited or not
    * @apiSuccess {String} result.data.groupEvent.space Maximum number of members the event can have.
-   * @apiSuccess {Number} result.data.groupEvent.faculty Faculty
-   * @apiSuccess {Number} result.data.groupEvent.course Course
-   * @apiSuccess {Number} result.data.groupEvent.free Is the event free?
+   * @apiSuccess {String} result.data.groupEvent.faculty Faculty
+   * @apiSuccess {String} result.data.groupEvent.course Course
+   * @apiSuccess {Boolean} result.data.groupEvent.free Is the event free?
    * @apiSuccess {Number} result.data.groupEvent.price What is the price of the event?
    * @apiSuccess {DateTime} result.data.groupEvent.dateAndTime When will the event take place (date and time), format: YYYY-MM-DD HH:MM:SS
    * @apiSuccess {String} result.data.groupEvent.desc Description of the event.
