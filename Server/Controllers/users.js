@@ -2,7 +2,7 @@ import { db } from "../db.js";
 import imageSize from "image-size";
 import fs from "fs";
 import path from "path";
-import {check, validationResult} from 'express-validator';
+import {validationResult} from 'express-validator';
 
 
 

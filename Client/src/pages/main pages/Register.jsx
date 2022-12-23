@@ -7,7 +7,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "bootstrap/dist/css/bootstrap.css";
 import "../../style.scss";
-import { useEffect } from "react";
+import { PasswordContext } from "../../context/PasswordContext";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 /**
  * COMPONENT FOR THE REGISTER PAGE
@@ -18,7 +21,25 @@ const Register = () => {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [birthDate, setBirthDate] = useState("");
+
   const [message, setMessage] = useState(""); // error message
+
+  const [successful, setSuccessful] = useState(false); // to automatically sign in when succesfully registered
+  const { login } = useContext(PasswordContext); // to automatically sign in when succesfully registered
+  const { currentUser } = useContext(PasswordContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (currentUser != null) {
+      navigate("/"); // navigate to home page after logging in
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (successful) {
+      login(registerEmail, registerPassword);
+    }
+  }, [successful]);
 
   // send the information to the back-end to create
   // an account
@@ -38,12 +59,11 @@ const Register = () => {
         },
         url: "http://localhost:8800/register",
       });
-      setMessage("You are registered!");
+      setSuccessful(true);
     } catch (err) {
       setMessage(err.response.data.message);
     }
   };
-
 
   return (
     // the form

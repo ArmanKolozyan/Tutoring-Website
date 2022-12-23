@@ -1,13 +1,28 @@
 import { db } from "../db.js";
+import { validationResult } from "express-validator";
 
+// adds the given review to the database
 export const addPostReview = (req, res) => {
 
   const q = "INSERT INTO post_reviews(`title`, `description`, `rating`, `date`, `authorid`, `postid`) VALUES (?)";
 
+    //validation that the user is logged in
+    if (typeof req.user === "undefined") {
+      return res.status(401).json({ message: "You have to first log in!", data: [] });
+    }
+
+    console.log
+  
+    // validation of provided information
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array().map((x) => x.msg), data: [] });
+    }
+
   const values = [
     req.body.title,
     req.body.description,
-    req.body.nrClickedStars,
+    req.body.nrOfStars,
     req.body.date,
     req.user.id,
     parseInt(req.body.id),

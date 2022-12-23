@@ -25,7 +25,7 @@ export const groupPostRoutes = (app) => {
    * @apiName groupsAmount
    * @apiGroup GroupPosts
    *
-   * @apiSuccess {Number} id NumberOfPosts id
+   * @apiSuccess {Number} id NumberOfPosts 
    *
    */
 

@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs"; // for hashing the password
 import { db } from "../db.js";
-import {check, validationResult} from 'express-validator';
+import {validationResult} from 'express-validator';
 
 
 /**

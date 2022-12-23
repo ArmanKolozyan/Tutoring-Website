@@ -22,7 +22,7 @@ const CreateReview = (props) => {
   const nrStars = 5;
   const stars = Array(nrStars).fill(0); // lijst van "nrStars" aantal elementen geïnitialiseerd met 0'en
   const [nrHoveredStars, setNrHoveredStars] = React.useState(undefined); // no star selection at the beginning
-  const [nrClickedStars, setClickedStars] = React.useState(0); // per default is de rating = 0
+  const [nrOfStars, setClickedStars] = React.useState(0); // per default is de rating = 0
   const [title, setTitle] = React.useState(0);
   const [description, setDescription] = React.useState(0);
 
@@ -50,7 +50,7 @@ const CreateReview = (props) => {
         data: {
           title,
           description,
-          nrClickedStars,
+          nrOfStars,
           date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
           id,
         },
@@ -81,7 +81,7 @@ const CreateReview = (props) => {
                   style={{
                     marginRight: 10,
                   }}
-                  color={(nrHoveredStars || nrClickedStars) > index ? colors.ourOrange : colors.ourBlue} // indien "index" groter is dan het aantal geselecteerde OF gegeven sterren => kleur de ster horende bij de index in het oranje
+                  color={(nrHoveredStars || nrOfStars) > index ? colors.ourOrange : colors.ourBlue} // indien "index" groter is dan het aantal geselecteerde OF gegeven sterren => kleur de ster horende bij de index in het oranje
                   onClick={() => handleMouseClick(index + 1)}
                   onMouseOver={() => handleMouseOver(index + 1)}
                   onMouseLeave={handleMouseLeave}

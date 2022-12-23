@@ -1,5 +1,5 @@
 import { db } from "../db.js";
-import { check, validationResult } from "express-validator";
+import { validationResult } from "express-validator";
 
 // get all group posts from the database
 export const getGroupPosts = (req, res) => {
