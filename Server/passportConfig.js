@@ -53,7 +53,7 @@ export const config = (passport) => {
       if (err) {
         return cb(err);
       }
-      return cb(null, user);
+      return cb(null, user[0]);
     });
   });
 };

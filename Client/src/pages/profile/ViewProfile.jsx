@@ -25,7 +25,7 @@ const ViewProfile = () => {
         const res = await axios({
           method: "get",
           withCredentials: true,
-          url: `http://localhost:8800/user/${userid}`,
+          url: `http://localhost:8800/users/${userid}`,
         });
         setUser(res.data.data);
       } catch (err) {

@@ -23,7 +23,7 @@ const TutoringCard = ({ post }) => {
         const res = await axios({
           method: "get",
           withCredentials: true,
-          url: `http://localhost:8800/user/${post.uid}`,
+          url: `http://localhost:8800/users/${post.uid}`,
         });
         setUser(res.data.data);
       } catch (err) {

@@ -75,7 +75,7 @@ const ViewGroupSession = () => {
         const res = await axios({
           method: "get",
           withCredentials: true,
-          url: `http://localhost:8800/user/${post.userid}`,
+          url: `http://localhost:8800/users/${post.userid}`,
         });
         setUser(res.data.data);
       } catch (err) {

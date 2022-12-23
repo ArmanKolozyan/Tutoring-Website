@@ -42,7 +42,7 @@ export const addGroupPost = (req, res) => {
     req.body.price,
     req.body.dateAndTime,
     req.body.desc,
-    req.user[0].id,
+    req.user.id,
     req.body.location,
   ];
 
@@ -69,7 +69,7 @@ export const updateGroupPost = (req, res) => {
     req.body.price,
     req.body.dateAndTime,
     req.body.desc,
-    req.user[0].id,
+    req.user.id,
     req.body.location,
     post_id,
   ];

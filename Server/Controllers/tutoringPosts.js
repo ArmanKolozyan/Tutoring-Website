@@ -43,7 +43,7 @@ export const addTutoringPost = (req, res) => {
     req.body.field,
     req.body.desc,
     req.body.date,
-    req.user[0].id,
+    req.user.id,
     req.body.exp,
     req.body.price,
     req.body.test,

@@ -12,7 +12,7 @@ import axios from "axios";
 
 
 /**
- * COMPONENT FOR THE LOGGED IN USER THAT VIEWS ITS PROFILE
+ * COMPONENT FOR THE LOGGED IN USER THAT VIEWS ITS PROFILE (CAN EDIT HIS INFORMATION)
  * @returns 
  */
 function ProfileInfo() {
@@ -24,6 +24,7 @@ function ProfileInfo() {
   const [intro, setIntro] = useState(currentUser.intro);
   const [shortIntro, setShortIntro] = useState(currentUser.shortIntro);
   const [studies, setStudies] = useState({});
+  const [message, setMessage] = useState("");
 
   const options = [
     {
@@ -58,8 +59,9 @@ function ProfileInfo() {
       currentUser.intro = intro;
       currentUser.shortIntro = shortIntro;
       localStorage.setItem("user", JSON.stringify(currentUser)); // make the update in the local storage (front-end)
+      setMessage("Your information is updated!");
     } catch (err) {
-      console.log(err);
+      setMessage(err.response.data.message);
     }
   };
 
@@ -189,6 +191,9 @@ function ProfileInfo() {
         <Row className="justify-content-md-center">
           <Col md="auto">
             <Button type="submit">Save Changes</Button>
+          </Col>
+          <Col md="auto">
+          {message.length !== 0 ? message : ""}
           </Col>
         </Row>
       </Form>

@@ -10,7 +10,7 @@ export const addPostReview = (req, res) => {
     req.body.description,
     req.body.nrClickedStars,
     req.body.date,
-    req.user[0].id,
+    req.user.id,
     parseInt(req.body.id),
   ];
 

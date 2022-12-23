@@ -5,7 +5,7 @@ import passport from "passport";
 import cookieParser from "cookie-parser"; // to parse cookies for authentication
 import session from "express-session";
 import { config } from "./passportConfig.js";
-import { authRoutes } from "./Routes/authRoutes.js";
+import { userRoutes } from "./Routes/userRoutes.js";
 import { tutoringPostRoutes } from "./Routes/tutoringPostRoutes.js";
 import { groupPostRoutes } from "./Routes/groupPostRoutes.js";
 import { reviewRoutes } from "./Routes/reviewRoutes.js";
@@ -56,7 +56,7 @@ config(passport);
 
 
 
-authRoutes(app, passport);
+userRoutes(app, passport);
 tutoringPostRoutes(app);
 groupPostRoutes(app);
 reviewRoutes(app);

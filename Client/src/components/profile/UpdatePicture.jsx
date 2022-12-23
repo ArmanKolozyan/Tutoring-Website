@@ -15,7 +15,7 @@ function UpdatePicture() {
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState();
   const [successMsg, setSuccessMsg] = useState("");
-  const [errMsg, setErrMsg] = useState("");
+  const [message, setMessage] = useState("");
 
   const { currentUser } = useContext(PasswordContext);
 
@@ -44,13 +44,14 @@ function UpdatePicture() {
       const res = await axios({
         method: "post",
         withCredentials: true,
-        url: `http://localhost:8800/profilePicture/${currentUser.id}`,
+        url: `http://localhost:8800/users/profilePicture/${currentUser.id}`,
         data: formData,
       });
       currentUser.img = res.data.data;
       localStorage.setItem("user", JSON.stringify(currentUser));
+      setMessage("Your image is updated!");
     } catch (err) {
-      console.log(err.response.data.message);
+      setMessage(err.response.data.message)
     }
   };
 
@@ -79,6 +80,9 @@ function UpdatePicture() {
                 <button className="btn" type="submit">
                   Submit
                 </button>
+              </Card.Text>
+              <Card.Text style={{"margin-top": "1vh"}}>
+                {message.length !== 0 ? message : ""}
               </Card.Text>
             </ListGroup.Item>
           </ListGroup>

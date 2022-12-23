@@ -18,8 +18,7 @@ const Register = () => {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [birthDate, setBirthDate] = useState("");
-  const [message, setMessage] = useState(); // error message
-  const [showMessage, setShowMessage] = useState(false);
+  const [message, setMessage] = useState(""); // error message
 
   // send the information to the back-end to create
   // an account
@@ -28,6 +27,7 @@ const Register = () => {
     try {
       await axios({
         method: "post",
+        headers: { "Content-Type": "application/json" },
         data: {
           firstName: firstName,
           lastName: lastName,
@@ -44,11 +44,6 @@ const Register = () => {
     }
   };
 
-  useEffect(() => {
-    if (message !== false) {
-      setShowMessage(true);
-    }
-  }, [message]);
 
   return (
     // the form
@@ -79,7 +74,7 @@ const Register = () => {
             onChange={(e) => setRegisterPassword(e.target.value)}
           ></input>
           <button type="submit">Register</button>
-          {showMessage ? message : ""} <span>Already have an account?</span>
+          {message.length !== 0 ? message : ""} <span>Already have an account?</span>
           <Link className="linkStyle" to="/login">
             Login
           </Link>
