@@ -211,8 +211,7 @@ const CreateTutoringPost = () => {
         <div className="row">
           <div className="col d-flex justify-content-center">
             <Button
-              className="btn btn-primary small"
-              style={{ width: "fit-content", height: "fit-content" }}
+              className="small-button"
               onClick={jumpToUserLocation}
             >
               Locate Me

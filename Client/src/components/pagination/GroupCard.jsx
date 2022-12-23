@@ -67,7 +67,7 @@ const GroupCard = ({ post }) => {
             <Col>
               <Row className="justify-content-md-center">
                 <Link className="link" to={`/grouppost/${post.id}`}>
-                  <h1 style={{ color: "black", "overflow-wrap": "break-word" }}>{post.title}</h1>
+                  <h1>{post.title}</h1>
                 </Link>
               </Row>
 
@@ -76,13 +76,13 @@ const GroupCard = ({ post }) => {
                   <p>
                     {" "}
                     The price for one session is :{" "}
-                    <span style={{ fontWeight: "bold" }}> € {post.free ? 0 : post.price}</span>{" "}
+                    <span className="bold"> € {post.free ? 0 : post.price}</span>{" "}
                   </p>
                 </Col>
 
                 <Col>
                   <p>
-                    Total registrations :<span style={{ fontWeight: "bold" }}> {registrations}</span>{" "}
+                    Total registrations :<span className="bold"> {registrations}</span>{" "}
                   </p>
                 </Col>
               </Row>
@@ -103,13 +103,6 @@ const GroupCard = ({ post }) => {
             <Col md="auto">
               {user.img ? (
                 <img
-                  style={{
-                    "margin-left": "auto",
-                    "max-width": "80%",
-                    display: "block",
-                    height: "auto",
-                    "border-radius": "50px",
-                  }}
                   src={`../uploads/${user?.img}`}
                   key={user.img}
                   alt=""

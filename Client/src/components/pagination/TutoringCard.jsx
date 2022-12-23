@@ -73,7 +73,7 @@ const TutoringCard = ({ post }) => {
             <Col>
               <Row className="justify-content-md-center">
                 <Link className="link" to={`/tutoringpost/${post.id}`}>
-                  <h1 style={{ color: "black", "overflow-wrap": "break-word" }}>{post.course}</h1>
+                  <h1 >{post.course}</h1>
                 </Link>
               </Row>
 
@@ -82,7 +82,7 @@ const TutoringCard = ({ post }) => {
                   <p> Average rating :</p>
                   <p>
                     {" "}
-                    <span style={{ fontWeight: "bold" }}> {avgRating===0 ? "/" : avgRating}</span>{" "}
+                    <span className="bold"> {avgRating===0 ? "/" : avgRating}</span>{" "}
                   </p>
                 </Col>
 
@@ -90,7 +90,7 @@ const TutoringCard = ({ post }) => {
                   <p> The price for one session is: </p>
                   <p>
                     {" "}
-                    <span style={{ fontWeight: "bold" }}> € {post.price}</span>{" "}
+                    <span className="bold"> € {post.price}</span>{" "}
                   </p>
                 </Col>
 
@@ -98,7 +98,7 @@ const TutoringCard = ({ post }) => {
                   <p> Years of experience :</p>
                   <p>
                     {" "}
-                    <span style={{ fontWeight: "bold" }}> {post.experience}</span>{" "}
+                    <span className="bold"> {post.experience}</span>{" "}
                   </p>
                 </Col>
               </Row>
@@ -119,13 +119,7 @@ const TutoringCard = ({ post }) => {
             <Col md="auto">
               {user.img ? (
                 <img
-                  style={{
-                    "margin-left": "auto",
-                    "max-width": "80%",
-                    display: "block",
-                    height: "auto",
-                    "border-radius": "50px",
-                  }}
+
                   src={`../uploads/${user?.img}`}
                   key={user.img}
                   alt=""

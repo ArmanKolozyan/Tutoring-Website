@@ -230,7 +230,7 @@ const ViewGroupSession = () => {
             {/* add to calendar button */}
             <Row className="justify-content-md-center">
               <Col md="auto">
-                <Button onClick={showCalendarOptions} style={{ width: "20vw", "margin-bottom": "5vw" }}>
+                <Button onClick={showCalendarOptions}>
                   {" "}
                   Add to calendar{" "}
                 </Button>
