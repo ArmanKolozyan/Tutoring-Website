@@ -23,19 +23,18 @@ export const groupPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Object[]} data.groupEvent List of group events.
-   * @apiSuccess {Number} groupEvent.id id of the event
-   * @apiSuccess {String} groupEvent.title Title of the event
-   * @apiSuccess {Boolean} groupEvent.limited Whether the space is limited or not
-   * @apiSuccess {String} groupEvent.space Maximum number of members the event can have.
-   * @apiSuccess {Number} groupEvent.faculty Faculty
-   * @apiSuccess {Number} groupEvent.course Course
-   * @apiSuccess {Number} groupEvent.free Is the event free?
-   * @apiSuccess {Number} groupEvent.price What is the price of the event?
-   * @apiSuccess {DateTime} groupEvent.dateAndTime When will the event take place (date and time), format: YYYY-MM-DD HH:MM:SS
-   * @apiSuccess {String} groupEvent.desc Description of the event.
-   * @apiSuccess {String} groupEvent.location Where will the event take place?
+   * @apiSuccess {Object[]} result.data Data containing the return value
+   * @apiSuccess {Number} data.id id of the event
+   * @apiSuccess {String} data.title Title of the event
+   * @apiSuccess {Boolean} data.limited Whether the space is limited or not
+   * @apiSuccess {String} data.space Maximum number of members the event can have.
+   * @apiSuccess {Number} data.faculty Faculty
+   * @apiSuccess {Number} data.course Course
+   * @apiSuccess {Number} data.free Is the event free?
+   * @apiSuccess {Number} data.price What is the price of the event?
+   * @apiSuccess {DateTime} data.dateAndTime When will the event take place (date and time), format: YYYY-MM-DD HH:MM:SS
+   * @apiSuccess {String} data.desc Description of the event.
+   * @apiSuccess {String} data.location Where will the event take place?
    */
   app.get("/groupposts", getGroupPosts);
 
@@ -134,7 +133,7 @@ export const groupPostRoutes = (app) => {
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
    * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Number} data Id of the updated post
+   * @apiSuccess {Number} data id of the updated post
    */
   app.put(
     "/groupposts/:id",
