@@ -48,6 +48,7 @@ const CreateGroupSession = () => {
   const [location, setLocation] = useState(post?.location || "");
   const [picture, setPicture] = useState("");
   const [dateWarning, setDateWarning] = useState("");
+  const [message, setMessage] = useState(""); // to display error messages
 
   // sending the data to back-end for update or insert
   const handleSubmit = async (e) => {
@@ -97,7 +98,7 @@ const CreateGroupSession = () => {
         navigate(`/grouppost/${postId.data.data}`);
       }
     } catch (err) {
-      console.log(err.response.data.message);
+      setMessage(err.response.data.message);
     }
   };
 
@@ -283,6 +284,9 @@ const CreateGroupSession = () => {
 
         <Row className="justify-content-md-center">
           <Button type="submit">Submit</Button>
+        </Row>
+        <Row className="justify-content-md-center">
+          {message.length > 0 ? message : ""}
         </Row>
       </Form>
     </div>

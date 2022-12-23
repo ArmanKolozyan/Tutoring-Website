@@ -1,7 +1,6 @@
 import { db } from "../db.js";
 
 export const addPostReview = (req, res) => {
-  // here we should check authentication
 
   const q = "INSERT INTO post_reviews(`title`, `description`, `rating`, `date`, `authorid`, `postid`) VALUES (?)";
 

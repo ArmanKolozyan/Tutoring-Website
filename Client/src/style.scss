@@ -106,7 +106,7 @@ $ourOrange: #fc3e03;
 
       .container {
         background-color: lighten($ourBlue, 0%);
-        border-bottom: 0.4vh solid $ourOrange; 
+        border-bottom: 0.4vh solid white; 
 
       }
       button {
@@ -284,7 +284,7 @@ $ourOrange: #fc3e03;
     hr {
       // code voor horizontale streep
       border-top: 0.4vh solid;
-      color: $ourOrange;
+      color: white;
       opacity: 1;
       margin: 0;
     }

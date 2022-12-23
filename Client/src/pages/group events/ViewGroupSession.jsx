@@ -50,6 +50,7 @@ const ViewGroupSession = () => {
   const [action, setAction] = useState(false); // pressed on 'register' => update the back-end
   const [count, setCount] = useState(""); // amount of students that have already registered
   const [updatedBackEnd, setUpdatedBackEnd] = useState(false); // back-end is updated, so we can ask the back-end for new registrations number
+  const [cantRegisterForOwnEvent, setCantRegisterForOwnEvent] = useState("");
 
   // get the group post
   useEffect(() => {
@@ -280,6 +281,7 @@ const ViewGroupSession = () => {
               onClick={() => {
                 if (user.id === currentUser.id) {
                   // you can't sign up for your own event
+                  setCantRegisterForOwnEvent("You can't register for your own event.");
                 } else {
                   setAction(true);
                   setSignUp(!signUp);
@@ -289,6 +291,7 @@ const ViewGroupSession = () => {
               {" "}
               {signUp ? "Unsubscribe for this study session" : "Sign up for this study session"}
             </Button>
+            <Row> {cantRegisterForOwnEvent}</Row>
           </Col>
           <Col md="auto">OR</Col>
           <Col md="auto">

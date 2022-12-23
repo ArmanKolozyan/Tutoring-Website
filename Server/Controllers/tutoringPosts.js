@@ -1,7 +1,7 @@
 import { db } from "../db.js";
 import { check, validationResult } from "express-validator";
 
-// get all tutoring posts
+// get all tutoring posts from the database
 export const getTutoringPosts = (req, res) => {
   let q = "SELECT * FROM tutoring_posts";
   const startIdx = req.query.start;
@@ -12,13 +12,7 @@ export const getTutoringPosts = (req, res) => {
     return res.status(401).json({ message: "You have to first log in!", data: [] });
   }
 
-  // validation of provided information
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ message: errors.array().map((x) => x.msg), data: [] });
-  }
-
-  // to prevent sql injection
+  // checks to prevent sql injection
   if (startIdx !== undefined && endIdx !== undefined && parseInt(startIdx) !== NaN && parseInt(endIdx) !== NaN) {
     q = `SELECT * FROM tutoring_posts LIMIT ${startIdx}, ${endIdx - startIdx}`;
   }
@@ -40,6 +34,12 @@ export const getSingleTutoringPost = (req, res) => {
     return res.status(401).json({ message: "You have to first log in!", data: [] });
   }
 
+  // validation of provided information
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ message: errors.array().map((x) => x.msg), data: [] });
+  }
+
   db.query(q, [req.params.id], (err, data) => {
     if (err) return res.status(500).json({ message: "Fetching the specified tutoring post failed.", data: [] });
 
@@ -49,8 +49,6 @@ export const getSingleTutoringPost = (req, res) => {
 
 // add a tutoring post
 export const addTutoringPost = (req, res) => {
-  // here we should check authentication
-
   const q =
     "INSERT INTO tutoring_posts(`course`, `field_of_study`, `description`, `date`, `uid`, `experience`, `price`, `free_test`) VALUES (?)";
 
@@ -133,6 +131,12 @@ export const updateTutoringPost = (req, res) => {
     return res.status(401).json({ message: "You have to first log in!", data: [] });
   }
 
+  // validation of provided information
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ message: errors.array().map((x) => x.msg), data: [] });
+  }
+
   const values = [
     req.body.course,
     req.body.field,
@@ -192,6 +196,12 @@ export const findTutoringPosts = (req, res) => {
     return res.status(401).json({ message: "You have to first log in!", data: [] });
   }
 
+  // validation of provided information
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ message: errors.array().map((x) => x.msg), data: [] });
+  }
+
   const checkOrder = () => {
     let order;
 
@@ -223,7 +233,7 @@ export const findTutoringPosts = (req, res) => {
   };
 
   const checkLimits = () => {
-    // to prevent SQL injection
+    // to prevent SQL injections
     if (startIdx !== undefined && endIdx !== undefined && parseInt(startIdx) !== NaN && parseInt(endIdx) !== NaN) {
       return `LIMIT ${startIdx}, ${endIdx - startIdx}`;
     } else {
@@ -255,6 +265,7 @@ export const findTutoringPosts = (req, res) => {
   });
 };
 
+// returns the total amount of tutoring posts (can be used to determine the number of pages for the pagination)
 export const getTutoringPostsAmount = (req, res) => {
   let q = "SELECT COUNT(id) AS amount FROM tutoring_posts";
 

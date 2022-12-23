@@ -130,8 +130,7 @@ export const userRoutes = (app, passport) => {
     fileFilter: fileFilter,
   });
 
-
-    /**
+  /**
    * @api {pgetut} /users Gives back the user with the provided id.
    * @apiName UpdateProfilePicture
    * @apiGroup Users

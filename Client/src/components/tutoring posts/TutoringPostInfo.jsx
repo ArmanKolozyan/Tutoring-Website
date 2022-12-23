@@ -25,7 +25,7 @@ function TutoringPostInfo(props) {
 
 
     <p>
-    The price of a tutoring post would be {price} euro's per hour, and there is {freeTrial} possiblity for a free trial of the tutoring session.
+    The price for one session is {price} euros per hour, and there is {freeTrial} possiblity for a free trial session.
     </p>
     </div>
   )

@@ -33,7 +33,4 @@ export const reviewRoutes = (app) => {
   app.get("/postReviewsRating/", getAverageRating);
 
   app.get("/postRatingAverage/", getAveragePostRating);
-  // app.post("/groupposts/", addgroupPost);
-  // app.delete("/posts/:id", deletegroupPost);
-  // app.put("/posts/:id", updategroupPost);
 };
