@@ -24,17 +24,17 @@ export const groupPostRoutes = (app) => {
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
    * @apiSuccess {Object[]} result.data Data containing the return value
-   * @apiSuccess {Number} data.id id of the event
-   * @apiSuccess {String} data.title Title of the event
-   * @apiSuccess {Boolean} data.limited Whether the space is limited or not
-   * @apiSuccess {String} data.space Maximum number of members the event can have.
-   * @apiSuccess {Number} data.faculty Faculty
-   * @apiSuccess {Number} data.course Course
-   * @apiSuccess {Number} data.free Is the event free?
-   * @apiSuccess {Number} data.price What is the price of the event?
-   * @apiSuccess {DateTime} data.dateAndTime When will the event take place (date and time), format: YYYY-MM-DD HH:MM:SS
-   * @apiSuccess {String} data.desc Description of the event.
-   * @apiSuccess {String} data.location Where will the event take place?
+   * @apiSuccess {Number} result.data.id id of the event
+   * @apiSuccess {String} result.data.title Title of the event
+   * @apiSuccess {Boolean} result.data.limited Whether the space is limited or not
+   * @apiSuccess {String} result.data.space Maximum number of members the event can have.
+   * @apiSuccess {Number} result.data.faculty Faculty
+   * @apiSuccess {Number} result.data.course Course
+   * @apiSuccess {Number} result.data.free Is the event free?
+   * @apiSuccess {Number} result.data.price What is the price of the event?
+   * @apiSuccess {DateTime} result.data.dateAndTime When will the event take place (date and time), format: YYYY-MM-DD HH:MM:SS
+   * @apiSuccess {String} result.data.desc Description of the event.
+   * @apiSuccess {String} result.data.location Where will the event take place?
    */
   app.get("/groupposts", getGroupPosts);
 
@@ -46,7 +46,7 @@ export const groupPostRoutes = (app) => {
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
    * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Number} data.amount Amount of group posts
+   * @apiSuccess {Number} result.data.amount Amount of group posts
    */
 
   app.get(
@@ -63,17 +63,17 @@ export const groupPostRoutes = (app) => {
    * @apiSuccess {Result[]} message-data Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
    * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Number} data.id id of the event
-   * @apiSuccess {String} data.title Title of the event
-   * @apiSuccess {Boolean} data.limited Whether the space is limited or not
-   * @apiSuccess {String} data.space Maximum number of members the event can have.
-   * @apiSuccess {Number} data.faculty Faculty
-   * @apiSuccess {Number} data.course Course
-   * @apiSuccess {Number} data.free Is the event free?
-   * @apiSuccess {Number} data.price What is the price of the event?
-   * @apiSuccess {DateTime} data.dateAndTime When will the event take place (date and time), format: YYYY-MM-DD HH:MM:SS
-   * @apiSuccess {String} data.desc Description of the event.
-   * @apiSuccess {String} data.location Where will the event take place?
+   * @apiSuccess {Number} result.data.id id of the event
+   * @apiSuccess {String} result.data.title Title of the event
+   * @apiSuccess {Boolean} result.data.limited Whether the space is limited or not
+   * @apiSuccess {String} result.data.space Maximum number of members the event can have.
+   * @apiSuccess {Number} result.data.faculty Faculty
+   * @apiSuccess {Number} result.data.course Course
+   * @apiSuccess {Number} result.data.free Is the event free?
+   * @apiSuccess {Number} result.data.price What is the price of the event?
+   * @apiSuccess {DateTime} result.data.dateAndTime When will the event take place (date and time), format: YYYY-MM-DD HH:MM:SS
+   * @apiSuccess {String} result.data.desc Description of the event.
+   * @apiSuccess {String} result.data.location Where will the event take place?
    *
    */
   app.get("/groupposts/:id", getSingleGroupPost);
@@ -97,7 +97,7 @@ export const groupPostRoutes = (app) => {
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
    * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Number} data.post_id Id of the inserted post
+   * @apiSuccess {Number} result.data.post_id Id of the inserted post
    */
   app.post(
     "/groupposts/",
@@ -180,7 +180,7 @@ export const groupPostRoutes = (app) => {
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
    * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Object[]} data.groupEvent List of group events.
+   * @apiSuccess {Object[]} result.data.groupEvent List of group events.
    * @apiSuccess {Number} groupEvent.id id of the event
    * @apiSuccess {String} groupEvent.title Title of the event
    * @apiSuccess {Boolean} groupEvent.limited Whether the space is limited or not
