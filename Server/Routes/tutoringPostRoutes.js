@@ -18,8 +18,7 @@ export const tutoringPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Object[]} data List of the posts.
+   * @apiSuccess {Object} result.data List of the posts
    * @apiSuccess {Number} result.data.id id of the post
    * @apiSuccess {String} result.data.course Course of the post
    * @apiSuccess {String} result.data.field Faculty of the post
@@ -27,7 +26,7 @@ export const tutoringPostRoutes = (app) => {
    * @apiSuccess {DATETIME} result.data.date Publishing date and time of the post
    * @apiSuccess {Number} result.data.exp Number of years experience the author has with teaching the course
    * @apiSuccess {Number} result.data.price What is the price of the event?
-   * @apiSuccess {Boolean} result.data.test Does the teacher offer a free test
+   * @apiSuccess {Boolean} result.data.test Does the teacher offer a free test?
    *
    */
   app.get("/tutoringposts", getTutoringPosts);
@@ -39,8 +38,7 @@ export const tutoringPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Number} result.data.amount Amount of posts
+   * @apiSuccess {Number} result.data Amount of posts
    */
   app.get("/tutoringposts/amount", getTutoringPostsAmount);
 
@@ -53,7 +51,7 @@ export const tutoringPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value
+   * @apiSuccess {Object} result.data data containing the return value
    * @apiSuccess {Number} result.data.id id of the post
    * @apiSuccess {String} result.data.course Course of the post
    * @apiSuccess {String} result.data.field Faculty of the post
@@ -61,8 +59,7 @@ export const tutoringPostRoutes = (app) => {
    * @apiSuccess {DATETIME} result.data.date Publishing date and time of the post
    * @apiSuccess {Number} result.data.exp Number of years experience the author has with teaching the course
    * @apiSuccess {Number} result.data.price What is the price of the event?
-   * @apiSuccess {Boolean} result.data.test Does the teacher offer a free test
-   * @apiSuccess {Boolean} test Does the teacher offer a free test
+   * @apiSuccess {Boolean} result.data Does the teacher offer a free test?
    */
   app.get(
     "/tutoringposts/:id",
@@ -81,12 +78,11 @@ export const tutoringPostRoutes = (app) => {
    * @apiParam {DATETIME} date Publishing date and time of the post
    * @apiParam {Number} exp Number of years experience the author has with teaching the course
    * @apiParam {Number} price What is the price of the event?
-   * @apiParam {Boolean} test Does the teacher offer a free test
+   * @apiParam {Boolean} test Does the teacher offer a free test?
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Number} result.data.post_id Id of the inserted post
+   * @apiSuccess {Number} result.data id of the inserted post
    */
   app.post(
     "/tutoringposts",
@@ -111,8 +107,7 @@ export const tutoringPostRoutes = (app) => {
    * 
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Object[]} data List of the regions.
+   * @apiSuccess {Object[]} result.data List of the regions
    * @apiSuccess {Number} result.data.id id of the region
    * @apiSuccess {Number} result.data.post_id id of the post
    * @apiSuccess {Number} result.data.latitude Latitiude of the circle
@@ -137,12 +132,11 @@ export const tutoringPostRoutes = (app) => {
    * @apiParam {DATETIME} date Publishing date and time of the post
    * @apiParam {Number} exp Number of years experience the author has with teaching the course
    * @apiParam {Number} price What is the price of the event?
-   * @apiParam {Number} test Does the teacher offer a free test
+   * @apiParam {Number} test Does the teacher offer a free test?
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Number} data id of the updated post
+   * @apiSuccess {Number} result.data id of the updated post
    */
   app.put(
     "/tutoringposts/:id",
@@ -167,7 +161,7 @@ export const tutoringPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value: here always empty   
+   * @apiSuccess {Object} result.data data containing the return value: here always empty   
    * */
   app.delete(
     "/tutoringposts/:id",
@@ -189,8 +183,7 @@ export const tutoringPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Object[]} data List of the posts.
+   * @apiSuccess {Object} result.data List of the posts
    * @apiSuccess {Number} result.data.id id of the post
    * @apiSuccess {String} result.data.course Course of the post
    * @apiSuccess {String} result.data.field Faculty of the post

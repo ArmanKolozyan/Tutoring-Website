@@ -23,7 +23,7 @@ export const groupPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object[]} result.data Data containing the return value
+   * @apiSuccess {Object[]} result.data data containing the return value
    * @apiSuccess {Number} result.data.id id of the event
    * @apiSuccess {String} result.data.title Title of the event
    * @apiSuccess {Boolean} result.data.limited Whether the space is limited or not
@@ -45,8 +45,8 @@ export const groupPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Number} result.data.amount Amount of group posts
+   * @apiSuccess {Object} result.data data containing the return value
+   * @apiSuccess {Number} result.data Amount of group posts
    */
 
   app.get(
@@ -62,7 +62,7 @@ export const groupPostRoutes = (app) => {
    *
    * @apiSuccess {Result[]} message-data Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value
+   * @apiSuccess {Object} result.data data containing the return value
    * @apiSuccess {Number} result.data.id id of the event
    * @apiSuccess {String} result.data.title Title of the event
    * @apiSuccess {Boolean} result.data.limited Whether the space is limited or not
@@ -96,8 +96,7 @@ export const groupPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Number} result.data.post_id Id of the inserted post
+   * @apiSuccess {Number} result.data id of the inserted post
    */
   app.post(
     "/groupposts/",
@@ -132,8 +131,7 @@ export const groupPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Number} data id of the updated post
+   * @apiSuccess {Number} result.data id of the updated post
    */
   app.put(
     "/groupposts/:id",
@@ -160,7 +158,7 @@ export const groupPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value: here always empty
+   * @apiSuccess {Object} result.data data containing the return value: here always empty
    */
   app.delete("/groupposts/:id", param("id").notEmpty().withMessage("id of the post cannot be empty "), deleteGroupPost);
 
@@ -179,19 +177,19 @@ export const groupPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value
+   * @apiSuccess {Object} result.data data containing the return value
    * @apiSuccess {Object[]} result.data.groupEvent List of group events.
-   * @apiSuccess {Number} groupEvent.id id of the event
-   * @apiSuccess {String} groupEvent.title Title of the event
-   * @apiSuccess {Boolean} groupEvent.limited Whether the space is limited or not
-   * @apiSuccess {String} groupEvent.space Maximum number of members the event can have.
-   * @apiSuccess {Number} groupEvent.faculty Faculty
-   * @apiSuccess {Number} groupEvent.course Course
-   * @apiSuccess {Number} groupEvent.free Is the event free?
-   * @apiSuccess {Number} groupEvent.price What is the price of the event?
-   * @apiSuccess {DateTime} groupEvent.dateAndTime When will the event take place (date and time), format: YYYY-MM-DD HH:MM:SS
-   * @apiSuccess {String} groupEvent.desc Description of the event.
-   * @apiSuccess {String} groupEvent.location Where will the event take place?
+   * @apiSuccess {Number} result.data.groupEvent.id id of the event
+   * @apiSuccess {String} result.data.groupEvent.title Title of the event
+   * @apiSuccess {Boolean} result.data.groupEvent.limited Whether the space is limited or not
+   * @apiSuccess {String} result.data.groupEvent.space Maximum number of members the event can have.
+   * @apiSuccess {Number} result.data.groupEvent.faculty Faculty
+   * @apiSuccess {Number} result.data.groupEvent.course Course
+   * @apiSuccess {Number} result.data.groupEvent.free Is the event free?
+   * @apiSuccess {Number} result.data.groupEvent.price What is the price of the event?
+   * @apiSuccess {DateTime} result.data.groupEvent.dateAndTime When will the event take place (date and time), format: YYYY-MM-DD HH:MM:SS
+   * @apiSuccess {String} result.data.groupEvent.desc Description of the event.
+   * @apiSuccess {String} result.data.groupEvent.location Where will the event take place?
    */
   app.get("/searchGroupPosts/", findGroupPosts);
 
@@ -205,7 +203,7 @@ export const groupPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value: here always empty
+   * @apiSuccess {Object} result.data data containing the return value: here always empty
    */
   app.post(
     "/groupposts/registrations",
@@ -226,7 +224,7 @@ export const groupPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value
+   * @apiSuccess {Object} result.data data containing the return value
    * @apiSuccess {Boolean} data Whether the student is signed up for the given event.
    */
   app.get(
@@ -247,8 +245,7 @@ export const groupPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data Data containing the return value
-   * @apiSuccess {Boolean} data Number of registrations
+   * @apiSuccess {Object} result.data Number of registrations
    */
   app.get(
     "/groupposts/registrations/count",

@@ -28,7 +28,7 @@ export const addPostReview = (req, res) => {
   db.query(q, [values], (err, data) => {
     if (err) return res.status(500).json({ message: "Inserting review failed.", data: [] });
 
-    return res.status(200).json({ message: "", data: data[0] });
+    return res.status(200).json({ message: "", data: [] });
   });
 };
 
