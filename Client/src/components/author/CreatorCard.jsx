@@ -27,7 +27,7 @@ function CreatorCard(props) {
         const res = await axios({
           method: "get",
           withCredentials: true,
-          url: "http://localhost:8800/postReviewsRating/",
+          url: "http://localhost:8800/userRatingAverage/",
           params: {
             tutor_id: tutorID,
           },

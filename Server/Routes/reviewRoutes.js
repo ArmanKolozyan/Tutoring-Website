@@ -1,4 +1,9 @@
-import { addPostReview, getSinglePostReviews, getAverageRating, getAveragePostRating } from "../Controllers/reviews.js";
+import {
+  addPostReview,
+  getSinglePostReviews,
+  getAverageUserRating,
+  getAveragePostRating,
+} from "../Controllers/reviews.js";
 import { check, param, query } from "express-validator";
 
 export const reviewRoutes = (app) => {
@@ -13,35 +18,56 @@ export const reviewRoutes = (app) => {
    * @apiParam {Number} nrOfStars Number of stars the user has given
    *
    */
-  app.post("/postReviews/",[
-    check("id").notEmpty().withMessage("title cannot be empty "),
-    check("title").notEmpty().withMessage("title cannot be empty "),
-    check("description").notEmpty().withMessage("choose whether the space is limited"),
-    check("nrOfStars").notEmpty().withMessage("faculty cannot be empty "),
-  ], addPostReview);
-
-
-    /**
-     * @api {get} /postReviews/:id Get reviews of the post with the given id
-     * @apiName getSinglePostReviews
-     * @apiGroup Reviews
-     *
-     * @apiParam {Number} id Post id
-     *
-     *
-     */
-    app.get("/postReviews/:id", getSinglePostReviews);
+  app.post(
+    "/postReviews/",
+    [
+      check("id").notEmpty().withMessage("id cannot be empty "),
+      check("title").notEmpty().withMessage("title cannot be empty "),
+      check("description").notEmpty().withMessage("description cannot be empty"),
+      check("nrOfStars").notEmpty().withMessage("nrOfStars cannot be empty "),
+    ],
+    addPostReview
+  );
 
   /**
-   * @api {get} /postReviewsRating/ Get average rating of the posts of the given author_id
-   * @apiName getAverageRating
+   * @api {get} /postReviews/:id Get reviews of the post with the given id
+   * @apiName getSinglePostReviews
    * @apiGroup Reviews
    *
-   * @apiParam {Number} id Author id
-   *
+   * @apiParam {Number} id Post id
    *
    */
-  app.get("/postReviewsRating/", getAverageRating);
+  app.get(
+    "/postReviews/:id",
+    param("id").notEmpty().withMessage("id of the post cannot be empty "),
+    getSinglePostReviews
+  );
 
-  app.get("/postRatingAverage/", getAveragePostRating);
+  /**
+   * @api {get} /userRatingAverage/ Get average rating of the posts of the given tutor_id
+   * @apiName getAverageUserRating
+   * @apiGroup Reviews
+   *
+   * @apiParam {Number} tutor_id Author id
+   *
+   */
+  app.get(
+    "/userRatingAverage/",
+    query("tutor_id").notEmpty().withMessage("id of the tutor cannot be empty "),
+    getAverageUserRating
+  );
+
+  /**
+   * @api {get} /postRatingAverage/ Get average rating of the post with the given id
+   * @apiName getAveragePostRating
+   * @apiGroup Reviews
+   *
+   * @apiParam {Number} post_id Post id
+   *
+   */
+  app.get(
+    "/postRatingAverage/",
+    query("post_id").notEmpty().withMessage("id of the tutor cannot be empty "),
+    getAveragePostRating
+  );
 };

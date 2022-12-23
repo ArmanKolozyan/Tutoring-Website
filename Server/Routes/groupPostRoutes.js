@@ -120,7 +120,7 @@ export const groupPostRoutes = (app) => {
    * @apiParam {Number} id id of the post
    *
    */
-  app.delete("/groupposts/:id", param("id").notEmpty().withMessage("id of the user cannot be empty "), deleteGroupPost);
+  app.delete("/groupposts/:id", param("id").notEmpty().withMessage("id of the post cannot be empty "), deleteGroupPost);
 
   /**
    * @api {get} /searchGroupPosts/ Search for group posts

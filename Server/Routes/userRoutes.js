@@ -8,8 +8,8 @@ export const userRoutes = (app, passport) => {
    * @api {post} /login Log in the user
    * @apiName login
    * @apiGroup Users
-   * @apiParam {String} email
-   *  @apiParam {String} password
+   * @apiParam {String} email Email that the user filled in
+   *  @apiParam {String} password Password that the user filled in
    */
 
   // login with a callback to be able to handle erros manually in our way
