@@ -54,7 +54,6 @@ const ViewProfile = () => {
   const [studies, setStudies] = useState([]); // must be initialised by an empty array! otherwise not possible to call 'map' 
   let profilePicture = `../uploads/${user.img}`;
   let description = user.intro;
-  let phoneNumber = "0411929242";
 
   // get the studies of the user
   useEffect(() => {
@@ -94,11 +93,6 @@ const ViewProfile = () => {
 
               <Row className="">
                 <Form.Label>Contact Information:</Form.Label>
-                <Col md="auto">
-                <FloatingLabel label="Phonenumber">
-                    <Form.Control as="textarea" readOnly value={phoneNumber} style={{"resize": "none"}} />
-                  </FloatingLabel>
-                </Col>
                 <Col md="auto">
                   <FloatingLabel label="Email address">
                     <Form.Control as="textarea" readOnly value={emailAdress} style={{"resize": "none"}} />

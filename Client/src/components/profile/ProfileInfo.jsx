@@ -118,11 +118,6 @@ function ProfileInfo() {
               <Form.Control type="date" defaultValue={birthdate} onChange={(e) => setBirthDate(e.target.value)} />
             </FloatingLabel>
           </Col>
-          <Col>
-            <FloatingLabel controlId="PhoneNumberInput" label="PhoneNumber">
-              <Form.Control type="text" pattern="\d*" maxlength="12" value={""} />
-            </FloatingLabel>
-          </Col>
         </Row>
 
         <Form.Label>

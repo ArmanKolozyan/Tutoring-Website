@@ -5,7 +5,7 @@ import path from "path";
 import {validationResult} from 'express-validator';
 
 
-
+// returns the user with the given id
 export const getSingleUser = (req, res) => {
   const q = "SELECT * FROM users WHERE id = ? ";
 
@@ -16,6 +16,7 @@ export const getSingleUser = (req, res) => {
   });
 };
 
+// updated the information of the user that is now logged in
 export const updateUser = (req, res) => {
   const q = `UPDATE users SET firstname = ?, lastname = ?, birthDate = ?, intro = ?, shortIntro = ? WHERE id = ?`;
 
@@ -36,7 +37,7 @@ export const updateUser = (req, res) => {
     const q1 = `DELETE FROM followed_fields WHERE uid = ?`;
     const q2 = "INSERT INTO followed_fields SET uid = ?, field = ?";
 
-    db.query(q1, [req.user.id], (err, data) => {
+    db.query(q1, [req.user.id], (err, data) => { // you can only update your own information
       if (err) return ({ message: "Updating the studies failed.", data: [] });
     });
 
@@ -98,6 +99,7 @@ export const UpdateProfilePicture = (req, res) => {
   }
 };
 
+// returns all the studies the user has taken
 export const getUserStudies = (req, res) => {
   const q = "SELECT `field` FROM followed_fields WHERE uid = ? ";
 

@@ -23,10 +23,6 @@ const ViewGroupSession = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const phonenumber = "+32 423 32 34 54";
-  function copyPhonenumber() {
-    navigator.clipboard.writeText(phonenumber);
-  }
   function copyEmail() {
     navigator.clipboard.writeText(user?.email);
   }
@@ -307,13 +303,7 @@ const ViewGroupSession = () => {
           <Modal.Title>Contact information of the tutor</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>His/Her phonenumber is : {phonenumber}</p>
-          <Button variant="secondary" onClick={copyPhonenumber}>
-            Copy phonenumber
-          </Button>
-
           <p>
-            {" "}
             <br />
             His/her Email adress is : {user?.email}
           </p>

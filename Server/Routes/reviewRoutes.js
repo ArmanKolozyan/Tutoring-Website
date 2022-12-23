@@ -36,7 +36,7 @@ export const reviewRoutes = (app) => {
    * @apiName getSinglePostReviews
    * @apiGroup Reviews
    *   
-   * @apiSuccess {Result[]} message-data Object containing (possibly empty) data and a (possibly empty) message
+   * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
    * @apiSuccess {Object} result.data data containing the return value
    * @apiSuccess {Number} result.data.id  id of the post
@@ -58,7 +58,7 @@ export const reviewRoutes = (app) => {
    * @apiName getAverageUserRating
    * @apiGroup Reviews
    *
-   * @apiSuccess {Result[]} message-data Object containing (possibly empty) data and a (possibly empty) message
+   * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
    * @apiSuccess {Number} result.data Average rating of the user
    *
@@ -76,7 +76,7 @@ export const reviewRoutes = (app) => {
    *
    * @apiParam {Number} post_id Post id
    *
-   * @apiSuccess {Result[]} message-data Object containing (possibly empty) data and a (possibly empty) message
+   * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
    * @apiSuccess {Number} result.data Average rating of the post
    */

@@ -60,7 +60,7 @@ export const groupPostRoutes = (app) => {
    * @apiName getGroupPost
    * @apiGroup GroupPosts
    *
-   * @apiSuccess {Result[]} message-data Object containing (possibly empty) data and a (possibly empty) message
+   * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
    * @apiSuccess {Object} result.data data containing the return value
    * @apiSuccess {Number} result.data.id id of the event
@@ -224,8 +224,7 @@ export const groupPostRoutes = (app) => {
    *
    * @apiSuccess {Object} result Object containing (possibly empty) data and a (possibly empty) message
    * @apiSuccess {String} result.message Message containing the return message (error)
-   * @apiSuccess {Object} result.data data containing the return value
-   * @apiSuccess {Boolean} data Whether the student is signed up for the given event.
+   * @apiSuccess {Boolean} result.data Whether the student is signed up for the given event.
    */
   app.get(
     "/groupposts/registrations/isSignedUp",
