@@ -32,7 +32,7 @@ function Searchbar({ separate, callback, start, end, setSearching, setTotalPosts
         const res = await axios({
           method: "get",
           withCredentials: true,
-          url: "http://localhost:8800/searchTutoringposts/",
+          url: "http://localhost:8800/tutoringpostsSearch",
           params: {
             keyword: keyword,
             course: course,

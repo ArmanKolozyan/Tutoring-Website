@@ -1,48 +1,129 @@
-import {addTutoringPost, getSingleTutoringPost, getTutoringPosts, getRegions, updateTutoringPost, deleteTutoringPost, findTutoringPosts, getTutoringPostsAmount} from "../Controllers/tutoringPosts.js"
+import {
+  addTutoringPost,
+  getSingleTutoringPost,
+  getTutoringPosts,
+  getRegions,
+  updateTutoringPost,
+  deleteTutoringPost,
+  findTutoringPosts,
+  getTutoringPostsAmount,
+} from "../Controllers/tutoringPosts.js";
+import { check, param, query } from "express-validator";
 
 export const tutoringPostRoutes = (app) => {
-    /**
+  /**
    * @api {get} /tutoringposts/ Get all tutoring posts
    * @apiName getTutoringPosts
    * @apiGroup TutoringPosts
    *
    */
-  app.get("/tutoringposts/", getTutoringPosts);
-      /**
-   * @api {get} /tutoringpostsAmount/ Get amount of tutoring posts
+  app.get("/tutoringposts", getTutoringPosts);
+
+  /**
+   * @api {get} /tutoringposts/smount Get amount of tutoring posts
    * @apiName getTutoringPostsAmount
    * @apiGroup TutoringPosts
    *
    */
-  app.get("/tutoringpostsAmount/", getTutoringPostsAmount);
-        /**
-   * @api {get} /tutoringpostsAmount/ Get tutoring post with the given id 
+  app.get("/tutoringposts/amount", getTutoringPostsAmount);
+
+  /**
+   * @api {get} /tutoringposts/amount Get tutoring post with the given id
    * @apiName getSingleTutoringPost
    * @apiGroup TutoringPosts
-   * 
+   *
    * @apiParam {Number} id Post id
    *
    */
-  app.get("/tutoringposts/:id", getSingleTutoringPost);
+  app.get(
+    "/tutoringposts/:id",
+    param("id").notEmpty().withMessage("id of the user cannot be empty "),
+    getSingleTutoringPost
+  );
 
-          /**
-   * @api {post} /tutoringposts/ Add tutoring post 
+  /**
+   * @api {post} /tutoringposts/ Add tutoring post
    * @apiName addTutoringPost
    * @apiGroup TutoringPosts
-   * 
-   * @apiParam {String} course Course of the post  
+   *
+   * @apiParam {String} course Course of the post
    * @apiParam {String} field Faculty of the post.
    * @apiParam {String} desc Description of the post.
    * @apiParam {DATETIME} date Publishing date and time of the post.
    * @apiParam {Number} exp Number of years experience the author has with teaching the course.
-   * @apiParam {Number} price What is the price of the event? 
-   * @apiParam {Number} test Does the teacher offer a free test 
+   * @apiParam {Number} price What is the price of the event?
+   * @apiParam {Number} test Does the teacher offer a free test
    *
    */
-  app.post("/tutoringposts/", addTutoringPost);
-  app.get("/tutoringpostRegion/:id", getRegions);
+  app.post(
+    "/tutoringposts",
+    [
+      check("course").notEmpty().withMessage("course cannot be empty "),
+      check("field").notEmpty().withMessage("field of study cannot be empty "),
+      check("desc").notEmpty().withMessage("description cannot be empty "),
+      check("exp").notEmpty().withMessage("years of experience cannot be empty "),
+      check("price").notEmpty().withMessage("price cannot be empty "),
+      check("test").notEmpty().withMessage("whether test session is available cannot be empty "),
+    ],
+    addTutoringPost
+  );
+
+  /**
+   * @api {get} /tutoringposts/regions Get tutoring post with the given id
+   * @apiName getRegions
+   * @apiGroup TutoringPosts
+   *
+   * @apiParam {Number} id Post id
+   *
+   */
+  app.get("/tutoringposts/regions/:id", param("id").notEmpty().withMessage("id of the user cannot be empty "), getRegions);
+
+
+    /**
+   * @api {put} /tutoringposts/ Add tutoring post
+   * @apiName addTutoringPost
+   * @apiGroup TutoringPosts
+   *
+   * @apiParam {String} course Course of the post
+   * @apiParam {String} field Faculty of the post.
+   * @apiParam {String} desc Description of the post.
+   * @apiParam {DATETIME} date Publishing date and time of the post.
+   * @apiParam {Number} exp Number of years experience the author has with teaching the course.
+   * @apiParam {Number} price What is the price of the event?
+   * @apiParam {Number} test Does the teacher offer a free test
+   *
+   */
   app.put("/tutoringposts/:id", updateTutoringPost);
-  app.delete("/tutoringposts/:id", deleteTutoringPost);
-  app.get("/searchTutoringPosts/", findTutoringPosts)
-  //app.put("/posts/:id", updateTutoringPost);
+
+      /**
+   * @api {delete} /tutoringposts/ Delete tutoring post
+   * @apiName deleteTutoringPost
+   * @apiGroup TutoringPosts
+   *
+   * @apiParam {String} course Course of the post
+   * @apiParam {String} field Faculty of the post.
+   * @apiParam {String} desc Description of the post.
+   * @apiParam {DATETIME} date Publishing date and time of the post.
+   * @apiParam {Number} exp Number of years experience the author has with teaching the course.
+   * @apiParam {Number} price What is the price of the event?
+   * @apiParam {Number} test Does the teacher offer a free test
+   *
+   */
+  app.delete("/tutoringposts/:id", param("id").notEmpty().withMessage("id of the user cannot be empty "), deleteTutoringPost);
+
+        /**
+   * @api {get} /tutoringpostsSearch/ Search for tutoring posts
+   * @apiName deleteTutoringPost
+   * @apiGroup TutoringPosts
+   *
+   * @apiParam {String} keyword Course of the post
+   * @apiParam {String} course Faculty of the post.
+   * @apiParam {String} field Description of the post.
+   * @apiParam {number} freeTest Publishing date and time of the post.
+   * @apiParam {Number} startIdx Number of years experience the author has with teaching the course.
+   * @apiParam {Number} endIdx What is the price of the event?
+   *
+   */
+
+  app.get("/tutoringpostsSearch", findTutoringPosts); // manual validation happens in findTutoringPosts
 };

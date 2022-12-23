@@ -21,7 +21,7 @@ const ViewTutoringPosts = () => {
         const res = await axios({
           method: "get",
           withCredentials: true,
-          url: `http://localhost:8800/tutoringpostsAmount/`,
+          url: `http://localhost:8800/tutoringposts/amount`,
         });
         setTotalPosts(res.data.data);
         setFetching(false);

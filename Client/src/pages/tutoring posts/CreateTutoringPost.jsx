@@ -33,6 +33,8 @@ const CreateTutoringPost = () => {
   const location = getUserLocation();
   const [regions, setRegions] = useState([]); // must be initialised by an empty array! otherwise not possible to call 'map'
 
+  const [message, setMessage] = useState("")
+
   // is there a free test session? 1 => true, otherwise 0
   const checkFree = () => {
     if (test == "1") {
@@ -59,7 +61,7 @@ const CreateTutoringPost = () => {
           const res = await axios({
             method: "get",
             withCredentials: true,
-            url: `http://localhost:8800/tutoringpostRegion/${post.id}`,
+            url: `http://localhost:8800/tutoringposts/regions/${post.id}`,
           });
           //let result = res.data.map(x => x.field);
           setRegions(res.data.data);
@@ -115,7 +117,7 @@ const CreateTutoringPost = () => {
         navigate(`/tutoringpost/${postId.data.data}`);
       }
     } catch (err) {
-      console.log(err.response.data.message);
+      setMessage(err.response.data.message);
     }
   };
 
@@ -219,6 +221,9 @@ const CreateTutoringPost = () => {
         </div>
         <Row className="justify-content-md-center">
           <Button type="submit">Submit</Button>
+        </Row>
+        <Row className="justify-content-md-center">
+          {message.length > 0 ? message : ""}
         </Row>
       </Form>
     </div>

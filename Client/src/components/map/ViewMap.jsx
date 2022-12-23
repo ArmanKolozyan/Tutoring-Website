@@ -25,7 +25,7 @@ export function ViewMap({ post_id }) {
           const res = await axios({
             method: "get",
             withCredentials: true,
-            url: `http://localhost:8800/tutoringpostRegion/${post_id}`,
+            url: `http://localhost:8800/tutoringposts/regions/${post_id}`,
           });
           setRegions(res.data.data);
         } catch (err) {

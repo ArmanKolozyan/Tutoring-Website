@@ -28,7 +28,7 @@ export const updateUser = (req, res) => {
 
 
   if (typeof req.user === 'undefined') {
-    return res.status(500).json({ message: "You have to first log in!", data: [] })
+    return res.status(401).json({ message: "You have to first log in!", data: [] })
   } 
 
 
