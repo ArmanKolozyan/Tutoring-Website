@@ -95,7 +95,7 @@ const ViewProfile = () => {
                 <Form.Label>Contact Information:</Form.Label>
                 <Col md="auto">
                   <FloatingLabel label="Email address">
-                    <Form.Control as="textarea" readOnly value={emailAdress} style={{"resize": "none"}} />
+                    <Form.Control className="disable-resize" as="textarea" readOnly value={emailAdress}/>
                   </FloatingLabel>
                 </Col>
               </Row>

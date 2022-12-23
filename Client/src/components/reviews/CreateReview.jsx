@@ -78,9 +78,6 @@ const CreateReview = (props) => {
                   key={index}
                   //size={0.05*screenHeight}
                   size={"5vh"}
-                  style={{
-                    marginRight: 10,
-                  }}
                   color={(nrHoveredStars || nrOfStars) > index ? colors.ourOrange : colors.ourBlue} // indien "index" groter is dan het aantal geselecteerde OF gegeven sterren => kleur de ster horende bij de index in het oranje
                   onClick={() => handleMouseClick(index + 1)}
                   onMouseOver={() => handleMouseOver(index + 1)}

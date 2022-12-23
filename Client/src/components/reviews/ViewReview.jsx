@@ -27,9 +27,6 @@ const ViewReview = ({review}) => {
               return (
                 <FaStar
                   key={index}
-                  style={{
-                    marginRight: 10,
-                  }}
                   color={review.rating > index ? colors.ourOrange : colors.ourBlue} // indien "index" groter is dan het aantal geselecteerde OF gegeven sterren => kleur de ster horende bij de index in het oranje
                 />
               );
